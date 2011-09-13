@@ -14,7 +14,7 @@ namespace IsoCountries
 		{
 			FileCounter++;
 			var file = "Example" + FileCounter + ".xlsx";
-			File.Copy("template.xlsx", file, true);
+			File.Copy("Templates\\Countries.xlsx", file, true);
 
 			using (var document = DocumentFactory.Open(file))
 				document.Process(countries);

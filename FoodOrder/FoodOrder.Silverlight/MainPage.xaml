@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="FoodOrder.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="411" d:DesignWidth="560" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Width" Value="200"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="White" Margin="10">
+        <StackPanel Orientation="Vertical">
+            <StackPanel>
+                <TextBlock Text="Customer" />
+                <TextBox Text="{Binding Customer, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Week" />
+                <TextBlock Text="{Binding FirstDate, StringFormat=d}" />
+                <TextBlock Text="{Binding LastDate, StringFormat=d}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Submited" />
+                <TextBlock Text="{Binding SubmissionDate, StringFormat=d}" />
+            </StackPanel>
+            <StackPanel>
+                <Button Command="{Binding RandomizeChoices}" Margin="10">Randomize choices</Button>
+                <Button Command="{Binding CreateDocument}" Margin="10">Create document</Button>
+            </StackPanel>
+            <StackPanel>
+                <sdk:DataGrid AutoGenerateColumns="False" DataContext="{Binding Menus}" ItemsSource="{Binding .}">
+                    <sdk:DataGrid.Columns>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Menu option" IsReadOnly="True"
+                                                Binding="{Binding MenuMark}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Monday" IsReadOnly="True"
+                                                Binding="{Binding MondayMenu}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Tuesday" IsReadOnly="True"
+                                                Binding="{Binding TuesdayMenu}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Wednesday" IsReadOnly="True" 
+                                                Binding="{Binding WednesdayMenu}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Thursday" IsReadOnly="True"
+                                                Binding="{Binding ThursdayMenu}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Friday" IsReadOnly="True" 
+                                                Binding="{Binding FridayMenu}"/>
+                    </sdk:DataGrid.Columns>
+                </sdk:DataGrid>
+            </StackPanel>
+            <StackPanel>
+                <sdk:DataGrid AutoGenerateColumns="False" DataContext="{Binding Choices}" ItemsSource="{Binding .}">
+                    <sdk:DataGrid.Columns>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Employee" IsReadOnly="True"
+                                                Binding="{Binding Employee}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Monday" IsReadOnly="True"
+                                                Binding="{Binding MondayChoice}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Tuesday" IsReadOnly="True" 
+                                                Binding="{Binding TuesdayChoice}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Wednesday" IsReadOnly="True" 
+                                                Binding="{Binding WednesdayChoice}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Thursday" IsReadOnly="True" 
+                                                Binding="{Binding ThursdayChoice}"/>
+                        <sdk:DataGridTextColumn CanUserResize="True" Header="Friday" IsReadOnly="True" 
+                                                Binding="{Binding FridayChoice}"/>
+                    </sdk:DataGrid.Columns>
+                </sdk:DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

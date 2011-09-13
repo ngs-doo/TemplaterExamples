@@ -10,7 +10,7 @@ namespace IsoCountries
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new frmCountries());
+			Application.Run(new MainForm());
 		}
 	}
 }

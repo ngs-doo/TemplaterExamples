@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRates", "ExchangeRates.csproj", "{6A4C98A9-F286-4903-9072-EF5B995E28AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Debug|x86.ActiveCfg = Debug|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Debug|x86.Build.0 = Debug|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Release|Any CPU.ActiveCfg = Release|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Release|x86.ActiveCfg = Release|x86
+		{6A4C98A9-F286-4903-9072-EF5B995E28AF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

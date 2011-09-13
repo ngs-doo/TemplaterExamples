@@ -1,0 +1,16 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="MainServiceSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:23197/MainService.asmx" binding="basicHttpBinding"
+                bindingConfiguration="MainServiceSoap" contract="RemoteService.MainServiceSoap"
+                name="MainServiceSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

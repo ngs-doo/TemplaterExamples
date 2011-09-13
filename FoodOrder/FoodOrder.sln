@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOrder.Web", "FoodOrder.Web\FoodOrder.Web.csproj", "{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOrder.Silverlight", "FoodOrder.Silverlight\FoodOrder.Silverlight.csproj", "{798C7619-61C3-4FC8-9C1C-5612356CD5B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE} = {91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{798C7619-61C3-4FC8-9C1C-5612356CD5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{798C7619-61C3-4FC8-9C1C-5612356CD5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{798C7619-61C3-4FC8-9C1C-5612356CD5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{798C7619-61C3-4FC8-9C1C-5612356CD5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B5E2C6-DDC4-4580-B6CC-3BF70283F8DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

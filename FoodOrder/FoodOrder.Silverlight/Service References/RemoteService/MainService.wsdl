@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://templater.info/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://templater.info/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://templater.info/">
+      <s:element name="GetEmployees">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEmployeesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmployeesResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMenus">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMenusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMenusResult" type="tns:ArrayOfWeeklyMenu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWeeklyMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WeeklyMenu" nillable="true" type="tns:WeeklyMenu" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WeeklyMenu">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MenuMark" type="tns:ChoiceEnum" />
+          <s:element minOccurs="0" maxOccurs="1" name="MondayMenu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TuesdayMenu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WednesdayMenu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThursdayMenu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FridayMenu" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ChoiceEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="A" />
+          <s:enumeration value="B" />
+          <s:enumeration value="C" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CreateReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="choices" type="tns:ArrayOfEmployeeMenu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEmployeeMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EmployeeMenu" nillable="true" type="tns:EmployeeMenu" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EmployeeMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Employee" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MondayChoice" type="tns:ChoiceEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="TuesdayChoice" type="tns:ChoiceEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="WednesdayChoice" type="tns:ChoiceEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThursdayChoice" type="tns:ChoiceEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="FridayChoice" type="tns:ChoiceEnum" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEmployeesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmployees" />
+  </wsdl:message>
+  <wsdl:message name="GetEmployeesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMenusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMenus" />
+  </wsdl:message>
+  <wsdl:message name="GetMenusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMenusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateReportSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateReport" />
+  </wsdl:message>
+  <wsdl:message name="CreateReportSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateReportResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MainServiceSoap">
+    <wsdl:operation name="GetEmployees">
+      <wsdl:input message="tns:GetEmployeesSoapIn" />
+      <wsdl:output message="tns:GetEmployeesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMenus">
+      <wsdl:input message="tns:GetMenusSoapIn" />
+      <wsdl:output message="tns:GetMenusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReport">
+      <wsdl:input message="tns:CreateReportSoapIn" />
+      <wsdl:output message="tns:CreateReportSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmployees">
+      <soap:operation soapAction="http://templater.info/GetEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMenus">
+      <soap:operation soapAction="http://templater.info/GetMenus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReport">
+      <soap:operation soapAction="http://templater.info/CreateReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmployees">
+      <soap12:operation soapAction="http://templater.info/GetEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMenus">
+      <soap12:operation soapAction="http://templater.info/GetMenus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReport">
+      <soap12:operation soapAction="http://templater.info/CreateReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainService">
+    <wsdl:port name="MainServiceSoap" binding="tns:MainServiceSoap">
+      <soap:address location="http://localhost:23197/MainService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MainServiceSoap12" binding="tns:MainServiceSoap12">
+      <soap12:address location="http://localhost:23197/MainService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
