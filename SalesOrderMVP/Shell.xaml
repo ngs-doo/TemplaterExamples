@@ -1,0 +1,151 @@
+﻿<Fluent:RibbonWindow x:Class="SalesOrderMVP.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+        xmlns:Commands="clr-namespace:SalesOrderMVP.Commands"
+        Title="{Binding Title}" Height="475" Width="597">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
+    </Window.Resources>
+    <DockPanel>
+        <Fluent:Ribbon DockPanel.Dock="Top" >
+            <Fluent:RibbonTabItem Header="Home">
+                <Fluent:RibbonGroupBox Header="Data">
+                    <Fluent:Button Header="New" Command="{x:Static Commands:GlobalCommands.New}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="New sales order" Width="300"
+                                              Text="Create new sales order. CrudController is attached to Data commands. New sales order will be added to grid and edit mode will be activated." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Edit" Command="{x:Static Commands:GlobalCommands.Edit}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Edit sales order" Width="300" 
+                                              Text="Edit current sales order. CrudController is attached to Data commands. Edit mode will be activated on currently selected sales order." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Delete" Command="{x:Static Commands:GlobalCommands.Delete}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Delete sales order" Width="300" 
+                                              Text="Delete selected sales order. CrudController is attached to Data commands. Repository will be immediately invoked and presenter will not enter into edit mode." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Navigation">
+                    <Fluent:Button Header="First" Command="{x:Static Commands:GlobalCommands.First}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Move to first" Width="300" 
+                                              Text="Select first sales order in grid. BrowseController is attached to Navigation commands. Move to first is available when first item is not selected and presenter is not in edit mode." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Previous" Command="{x:Static Commands:GlobalCommands.Previous}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Move to previous" Width="300"
+                                              Text="Select previous sales order in grid. BrowseController is attached to Navigation commands. Move to previous is available when previous item can be selected and presenter is not in edit mode." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Next" Command="{x:Static Commands:GlobalCommands.Next}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Move to next" Width="300"
+                                              Text="Select next sales order in grid. BrowseController is attached to Navigation commands. Move to next is available when next item can be selected and presenter is not in edit mode." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Last" Command="{x:Static Commands:GlobalCommands.Last}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Move to last" Width="300"
+                                              Text="Select last sales order in grid. BrowseController is attached to Navigation commands. Move to last is available when last item is not selected and presenter is not in edit mode." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Changes">
+                    <Fluent:Button Header="Save" Command="{x:Static Commands:GlobalCommands.Save}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Save changes" Width="300"
+                                              Text="Save changes to sqlite database. CrudController is attached to Changes commands. Changes can be saved when presenter is in edit mode. Edit mode will be deactivated." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Cancel" Command="{x:Static Commands:GlobalCommands.Cancel}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Cancel changes" Width="300" 
+                                              Text="Cancel changes to selected sales order. CrudController is attached to Changes commands. Changes made to selected sales order will be undone. If new sales order was beeing created it will be removed from the grid. Edit mode will be deactivated." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="View">
+                <Fluent:RibbonGroupBox Header="Templates">
+                    <Fluent:Button Header="Edit in Excel" Command="{x:Static Commands:GlobalCommands.EditGridTemplate}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Open template in Excel" Width="300"
+                                              Text="View or edit grid template. TemplaterController is attached to Templates commands. Grid template is created in Excel spreadsheet. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Edit in Word" Command="{x:Static Commands:GlobalCommands.EditItemTemplate}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Open template in Word" Width="300"
+                                              Text="View or edit template for sales order. TemplaterController is attached to Documents commands. Item template is created in Word document. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Document">
+                    <Fluent:Button Header="Show in Excel" Command="{x:Static Commands:GlobalCommands.ShowGridData}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Create excel document" Width="300" 
+                                              Text="Create document with all sales orders. TemplaterController is attached to Documents commands. Excel spreadsheet template will be populated with sales orders. Document will be opened using Process.Start." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Show in Word" Command="{x:Static Commands:GlobalCommands.ShowItemData}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Create word document" Width="300"
+                                              Text="Create document with selected sales orders. TemplaterController is attached to Templates commands. Word template will be populated with selected sales orders. Document will be opened using Process.Start." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Layout">
+                    <Fluent:Button Header="Switch to grid" Command="{x:Static Commands:GlobalCommands.ShowGridView}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Grid layout" Width="300" 
+                                              Text="Change visual layout to grid. LayoutController is attached to Layout commands. Grid view will be set as default view in presenter." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Switch to item" Command="{x:Static Commands:GlobalCommands.ShowItemView}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Item layout" Width="300" 
+                                              Text="Change visual layout to single sales order. LayoutController is attached to Layout commands. Item view will be set as default view in presenter." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage>
+                    <Fluent:BackstageTabControl x:Name="backstage">
+                        <Fluent:BackstageTabItem Header="About">
+                            <TextBlock Margin="10" FontSize="12" TextWrapping="Wrap">
+                                This is model-view-presenter example application.<LineBreak/>
+                                Model-view-presenter is a user interface design pattern.<LineBreak/>
+                                <LineBreak/>
+                                It consists of:<LineBreak/>
+                                * model - basically a domain model (POCO classes and repositories)<LineBreak/>
+                                * views - used to display data which the presenter provides<LineBreak/>
+                                * presenter - main orchestrator. View and model do not communicate directly, but rather
+                                  the view talks to the presenter and the presenter talks to the model<LineBreak/>
+                                <LineBreak/>
+                                This variant of MVP patterns further separates presenters responsibility into controllers<LineBreak/>
+                                * crud controller - for Create Read Update Delete commands<LineBreak/>
+                                * browse controller - for navigating the model<LineBreak/>
+                                * layout controller - for laying out views in specific format<LineBreak/>
+                                * template controller - for creating reports ouf of template documents<LineBreak/>
+                                <LineBreak/>
+                                Sales data is located in a SQLite database. Access to the data is available through the SalesOrderRepository<LineBreak/>
+                                Customers and products are located in XML and JSON files. They provide the data through their repositores (read-only access).<LineBreak/>
+                                Data is modeled by Domain-driven-design principles using aggregate roots.<LineBreak/>
+                                Reports are created from templates using the Templater reporting library.
+                                The templates can be edited by Word or Excel on the fly.
+                            </TextBlock>
+                        </Fluent:BackstageTabItem>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+        </Fluent:Ribbon>
+        <ContentPresenter Content="{Binding View}" />
+    </DockPanel>
+</Fluent:RibbonWindow>

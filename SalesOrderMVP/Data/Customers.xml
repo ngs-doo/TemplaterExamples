@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <Customers>
+    <Customer URI="NGS">
+      <Name>New Generation Software LTD</Name>
+      <Address>3 Main St.
+New York
+NY
+97203 USA</Address>
+    </Customer>
+    <Customer URI="GREAL">
+      <Name>Great Lakes Market</Name>
+      <Address>44 Baker Blvd.
+Eugene
+OR
+97403 USA</Address>
+    </Customer>
+    <Customer URI="HUNGC">
+      <Name>Hungry Coyote Store</Name>
+      <Address>City Center 31 Main St.
+Elgin
+OR
+97827 USA</Address>
+    </Customer>
+    <Customer URI="LAZYC">
+      <Name>Lazy C Store</Name>
+      <Address>64 Orchestra Terrace
+Walla Walla
+WA
+99362 USA</Address>
+    </Customer>
+    <Customer URI="LETSS">
+      <Name>Let's go N Shop</Name>
+      <Address>673 Polk St.
+San Francisco
+CA
+94117 USA</Address>
+    </Customer>
+  </Customers>
+</Data>
