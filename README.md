@@ -35,7 +35,7 @@ Within these folders are examples of creating reports from templates in .NET by 
 - Global exception handler
 - Busy animation example (on slow connections)
 
-**SalesOrderMVP** is a WPF Ribbon application demonstrating a simple CRUD built in Model-view-presenter style. It can produce spreadsheets with table and pivot for analysis. Templates are created from a sales order Word document for selected items with header and line items.
+**SalesOrderMVP** is a WPF Ribbon application demonstrating a simple CRUD built in Model-view-presenter style. It can produce spreadsheets with table and pivot for analysis. Documents are created from a sales order Word template for selected items.
 
 *Stuff to learn*:
 
