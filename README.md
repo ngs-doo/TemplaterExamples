@@ -4,38 +4,38 @@
 
 Within these folders are examples of creating reports from templates in .NET by using the Templater reporting library.
 
-**IsoCountries** - WinForms application with actions for downloading the CSV web resource. Creating simple spreadsheet document (.xlsx) from parsed values. 
+**IsoCountries** is a WinForms application with actions for downloading the CSV web resource and creating a simple spreadsheet document (.xlsx) from parsed values.
 
-*Stuff to learn*: 
+*Stuff to learn*:
 
 - Downloading data from the web with WebClient
 - Simple threading to keep GUI responsive
-- Parsing CSV with linq query
+- Parsing CSV with a LINQ query
 - Simple continuations
 
-**FoodOrder** - Silverlight 4 application with web service. Creating spreadsheet with stacked tables. Data is provided from Silverlight application. Value formatting using Templater keyword and Excel. 
+**FoodOrder** is a Silverlight 4 application with a web service. The web service creates a spreadsheet with stacked tables, with data being provided by the Silverlight application. This example shows value formatting by using native Excel formatting and formatting with Templater.
 
 *Stuff to learn*:
 
 - RelayCommand for Silverlight
-- Presenter as data context (MVP pattern)
-- Creating and providing temporary web resource on demand
-- Linq for simple data analysis
+- Presenter as data context (MVP/MVVM pattern)
+- Creating and providing a web resource on demand
+- LINQ for simple data analysis
 
-**ExchangeRates** - WinForms application for displaying currency rates for last 90 days. USD, CHF and GBP vs EUR. Spreadsheet with table and two charts (one native in Excel from table and other as picture from application).
+**ExchangeRates** is a WinForms application which downloads and displays currency rates. It can create a spreadsheet with the retrieved currency rates presented in three ways; a table, a native Excel graph and a picture exported from the application.
 
 *Stuff to learn*:
 
 - Repository for data access
-- Parse XML with linq
+- Parse XML with LINQ
 - ZedGraph library usage
 - Simple threading to keep GUI responsive
 - Custom user controls (GroupBox with focus)
 - Prefetching data (downloading data when idle)
 - Global exception handler
-- Please wait animation example (on slow connections)
+- Busy animation example (on slow connections)
 
-**SalesOrderMVP** - WPF Ribbon application with advanced templating features. Simple CRUD application built in Model-view-presenter style. Spreadsheet with table and pivot for analysis. Sales order Word document for selected items with header and line items. Property navigation using Templater.
+**SalesOrderMVP** is a WPF Ribbon application demonstrating a simple CRUD built in Model-view-presenter style. It can produce spreadsheets with table and pivot for analysis. Templates are created from a sales order Word document for selected items with header and line items.
 
 *Stuff to learn*:
 
@@ -49,6 +49,5 @@ Within these folders are examples of creating reports from templates in .NET by 
 - Passive views + layout controller
 - INotifyPropertyChanged with reflection (refactorable property names)
 - Hooking to Routed commands
-
 
 Additional [documentation] is available from the official webpage.
