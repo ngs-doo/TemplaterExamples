@@ -259,10 +259,15 @@ namespace FoodOrder.RemoteService {
         
         FoodOrder.RemoteService.GetMenusResponse EndGetMenus(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://templater.info/CreateReport", ReplyAction="*")]
-        System.IAsyncResult BeginCreateReport(FoodOrder.RemoteService.CreateReportRequest request, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://templater.info/CreateExcelReport", ReplyAction="*")]
+        System.IAsyncResult BeginCreateExcelReport(FoodOrder.RemoteService.CreateExcelReportRequest request, System.AsyncCallback callback, object asyncState);
         
-        FoodOrder.RemoteService.CreateReportResponse EndCreateReport(System.IAsyncResult result);
+        FoodOrder.RemoteService.CreateExcelReportResponse EndCreateExcelReport(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://templater.info/CreateWordReport", ReplyAction="*")]
+        System.IAsyncResult BeginCreateWordReport(FoodOrder.RemoteService.CreateWordReportRequest request, System.AsyncCallback callback, object asyncState);
+        
+        FoodOrder.RemoteService.CreateWordReportResponse EndCreateWordReport(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -391,15 +396,15 @@ namespace FoodOrder.RemoteService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CreateReportRequest {
+    public partial class CreateExcelReportRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateReport", Namespace="http://templater.info/", Order=0)]
-        public FoodOrder.RemoteService.CreateReportRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateExcelReport", Namespace="http://templater.info/", Order=0)]
+        public FoodOrder.RemoteService.CreateExcelReportRequestBody Body;
         
-        public CreateReportRequest() {
+        public CreateExcelReportRequest() {
         }
         
-        public CreateReportRequest(FoodOrder.RemoteService.CreateReportRequestBody Body) {
+        public CreateExcelReportRequest(FoodOrder.RemoteService.CreateExcelReportRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -408,7 +413,7 @@ namespace FoodOrder.RemoteService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://templater.info/")]
-    public partial class CreateReportRequestBody {
+    public partial class CreateExcelReportRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string customer;
@@ -416,10 +421,10 @@ namespace FoodOrder.RemoteService {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices;
         
-        public CreateReportRequestBody() {
+        public CreateExcelReportRequestBody() {
         }
         
-        public CreateReportRequestBody(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
+        public CreateExcelReportRequestBody(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
             this.customer = customer;
             this.choices = choices;
         }
@@ -429,15 +434,15 @@ namespace FoodOrder.RemoteService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CreateReportResponse {
+    public partial class CreateExcelReportResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateReportResponse", Namespace="http://templater.info/", Order=0)]
-        public FoodOrder.RemoteService.CreateReportResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateExcelReportResponse", Namespace="http://templater.info/", Order=0)]
+        public FoodOrder.RemoteService.CreateExcelReportResponseBody Body;
         
-        public CreateReportResponse() {
+        public CreateExcelReportResponse() {
         }
         
-        public CreateReportResponse(FoodOrder.RemoteService.CreateReportResponseBody Body) {
+        public CreateExcelReportResponse(FoodOrder.RemoteService.CreateExcelReportResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -446,16 +451,88 @@ namespace FoodOrder.RemoteService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://templater.info/")]
-    public partial class CreateReportResponseBody {
+    public partial class CreateExcelReportResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string CreateReportResult;
+        public string CreateExcelReportResult;
         
-        public CreateReportResponseBody() {
+        public CreateExcelReportResponseBody() {
         }
         
-        public CreateReportResponseBody(string CreateReportResult) {
-            this.CreateReportResult = CreateReportResult;
+        public CreateExcelReportResponseBody(string CreateExcelReportResult) {
+            this.CreateExcelReportResult = CreateExcelReportResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CreateWordReportRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateWordReport", Namespace="http://templater.info/", Order=0)]
+        public FoodOrder.RemoteService.CreateWordReportRequestBody Body;
+        
+        public CreateWordReportRequest() {
+        }
+        
+        public CreateWordReportRequest(FoodOrder.RemoteService.CreateWordReportRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://templater.info/")]
+    public partial class CreateWordReportRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string customer;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices;
+        
+        public CreateWordReportRequestBody() {
+        }
+        
+        public CreateWordReportRequestBody(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
+            this.customer = customer;
+            this.choices = choices;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class CreateWordReportResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateWordReportResponse", Namespace="http://templater.info/", Order=0)]
+        public FoodOrder.RemoteService.CreateWordReportResponseBody Body;
+        
+        public CreateWordReportResponse() {
+        }
+        
+        public CreateWordReportResponse(FoodOrder.RemoteService.CreateWordReportResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://templater.info/")]
+    public partial class CreateWordReportResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string CreateWordReportResult;
+        
+        public CreateWordReportResponseBody() {
+        }
+        
+        public CreateWordReportResponseBody(string CreateWordReportResult) {
+            this.CreateWordReportResult = CreateWordReportResult;
         }
     }
     
@@ -503,11 +580,30 @@ namespace FoodOrder.RemoteService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CreateReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CreateExcelReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public CreateReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public CreateExcelReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CreateWordReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CreateWordReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -536,11 +632,17 @@ namespace FoodOrder.RemoteService {
         
         private System.Threading.SendOrPostCallback onGetMenusCompletedDelegate;
         
-        private BeginOperationDelegate onBeginCreateReportDelegate;
+        private BeginOperationDelegate onBeginCreateExcelReportDelegate;
         
-        private EndOperationDelegate onEndCreateReportDelegate;
+        private EndOperationDelegate onEndCreateExcelReportDelegate;
         
-        private System.Threading.SendOrPostCallback onCreateReportCompletedDelegate;
+        private System.Threading.SendOrPostCallback onCreateExcelReportCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCreateWordReportDelegate;
+        
+        private EndOperationDelegate onEndCreateWordReportDelegate;
+        
+        private System.Threading.SendOrPostCallback onCreateWordReportCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -599,7 +701,9 @@ namespace FoodOrder.RemoteService {
         
         public event System.EventHandler<GetMenusCompletedEventArgs> GetMenusCompleted;
         
-        public event System.EventHandler<CreateReportCompletedEventArgs> CreateReportCompleted;
+        public event System.EventHandler<CreateExcelReportCompletedEventArgs> CreateExcelReportCompleted;
+        
+        public event System.EventHandler<CreateWordReportCompletedEventArgs> CreateWordReportCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -720,66 +824,129 @@ namespace FoodOrder.RemoteService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult FoodOrder.RemoteService.MainServiceSoap.BeginCreateReport(FoodOrder.RemoteService.CreateReportRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginCreateReport(request, callback, asyncState);
+        System.IAsyncResult FoodOrder.RemoteService.MainServiceSoap.BeginCreateExcelReport(FoodOrder.RemoteService.CreateExcelReportRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateExcelReport(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginCreateReport(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, System.AsyncCallback callback, object asyncState) {
-            FoodOrder.RemoteService.CreateReportRequest inValue = new FoodOrder.RemoteService.CreateReportRequest();
-            inValue.Body = new FoodOrder.RemoteService.CreateReportRequestBody();
+        private System.IAsyncResult BeginCreateExcelReport(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, System.AsyncCallback callback, object asyncState) {
+            FoodOrder.RemoteService.CreateExcelReportRequest inValue = new FoodOrder.RemoteService.CreateExcelReportRequest();
+            inValue.Body = new FoodOrder.RemoteService.CreateExcelReportRequestBody();
             inValue.Body.customer = customer;
             inValue.Body.choices = choices;
-            return ((FoodOrder.RemoteService.MainServiceSoap)(this)).BeginCreateReport(inValue, callback, asyncState);
+            return ((FoodOrder.RemoteService.MainServiceSoap)(this)).BeginCreateExcelReport(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        FoodOrder.RemoteService.CreateReportResponse FoodOrder.RemoteService.MainServiceSoap.EndCreateReport(System.IAsyncResult result) {
-            return base.Channel.EndCreateReport(result);
+        FoodOrder.RemoteService.CreateExcelReportResponse FoodOrder.RemoteService.MainServiceSoap.EndCreateExcelReport(System.IAsyncResult result) {
+            return base.Channel.EndCreateExcelReport(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private string EndCreateReport(System.IAsyncResult result) {
-            FoodOrder.RemoteService.CreateReportResponse retVal = ((FoodOrder.RemoteService.MainServiceSoap)(this)).EndCreateReport(result);
-            return retVal.Body.CreateReportResult;
+        private string EndCreateExcelReport(System.IAsyncResult result) {
+            FoodOrder.RemoteService.CreateExcelReportResponse retVal = ((FoodOrder.RemoteService.MainServiceSoap)(this)).EndCreateExcelReport(result);
+            return retVal.Body.CreateExcelReportResult;
         }
         
-        private System.IAsyncResult OnBeginCreateReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
+        private System.IAsyncResult OnBeginCreateExcelReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string customer = ((string)(inValues[0]));
             System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices = ((System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu>)(inValues[1]));
-            return this.BeginCreateReport(customer, choices, callback, asyncState);
+            return this.BeginCreateExcelReport(customer, choices, callback, asyncState);
         }
         
-        private object[] OnEndCreateReport(System.IAsyncResult result) {
-            string retVal = this.EndCreateReport(result);
+        private object[] OnEndCreateExcelReport(System.IAsyncResult result) {
+            string retVal = this.EndCreateExcelReport(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnCreateReportCompleted(object state) {
-            if ((this.CreateReportCompleted != null)) {
+        private void OnCreateExcelReportCompleted(object state) {
+            if ((this.CreateExcelReportCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.CreateReportCompleted(this, new CreateReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.CreateExcelReportCompleted(this, new CreateExcelReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void CreateReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
-            this.CreateReportAsync(customer, choices, null);
+        public void CreateExcelReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
+            this.CreateExcelReportAsync(customer, choices, null);
         }
         
-        public void CreateReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, object userState) {
-            if ((this.onBeginCreateReportDelegate == null)) {
-                this.onBeginCreateReportDelegate = new BeginOperationDelegate(this.OnBeginCreateReport);
+        public void CreateExcelReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, object userState) {
+            if ((this.onBeginCreateExcelReportDelegate == null)) {
+                this.onBeginCreateExcelReportDelegate = new BeginOperationDelegate(this.OnBeginCreateExcelReport);
             }
-            if ((this.onEndCreateReportDelegate == null)) {
-                this.onEndCreateReportDelegate = new EndOperationDelegate(this.OnEndCreateReport);
+            if ((this.onEndCreateExcelReportDelegate == null)) {
+                this.onEndCreateExcelReportDelegate = new EndOperationDelegate(this.OnEndCreateExcelReport);
             }
-            if ((this.onCreateReportCompletedDelegate == null)) {
-                this.onCreateReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateReportCompleted);
+            if ((this.onCreateExcelReportCompletedDelegate == null)) {
+                this.onCreateExcelReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateExcelReportCompleted);
             }
-            base.InvokeAsync(this.onBeginCreateReportDelegate, new object[] {
+            base.InvokeAsync(this.onBeginCreateExcelReportDelegate, new object[] {
                         customer,
-                        choices}, this.onEndCreateReportDelegate, this.onCreateReportCompletedDelegate, userState);
+                        choices}, this.onEndCreateExcelReportDelegate, this.onCreateExcelReportCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult FoodOrder.RemoteService.MainServiceSoap.BeginCreateWordReport(FoodOrder.RemoteService.CreateWordReportRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateWordReport(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginCreateWordReport(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, System.AsyncCallback callback, object asyncState) {
+            FoodOrder.RemoteService.CreateWordReportRequest inValue = new FoodOrder.RemoteService.CreateWordReportRequest();
+            inValue.Body = new FoodOrder.RemoteService.CreateWordReportRequestBody();
+            inValue.Body.customer = customer;
+            inValue.Body.choices = choices;
+            return ((FoodOrder.RemoteService.MainServiceSoap)(this)).BeginCreateWordReport(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        FoodOrder.RemoteService.CreateWordReportResponse FoodOrder.RemoteService.MainServiceSoap.EndCreateWordReport(System.IAsyncResult result) {
+            return base.Channel.EndCreateWordReport(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private string EndCreateWordReport(System.IAsyncResult result) {
+            FoodOrder.RemoteService.CreateWordReportResponse retVal = ((FoodOrder.RemoteService.MainServiceSoap)(this)).EndCreateWordReport(result);
+            return retVal.Body.CreateWordReportResult;
+        }
+        
+        private System.IAsyncResult OnBeginCreateWordReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string customer = ((string)(inValues[0]));
+            System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices = ((System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu>)(inValues[1]));
+            return this.BeginCreateWordReport(customer, choices, callback, asyncState);
+        }
+        
+        private object[] OnEndCreateWordReport(System.IAsyncResult result) {
+            string retVal = this.EndCreateWordReport(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCreateWordReportCompleted(object state) {
+            if ((this.CreateWordReportCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CreateWordReportCompleted(this, new CreateWordReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CreateWordReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices) {
+            this.CreateWordReportAsync(customer, choices, null);
+        }
+        
+        public void CreateWordReportAsync(string customer, System.Collections.ObjectModel.ObservableCollection<FoodOrder.RemoteService.EmployeeMenu> choices, object userState) {
+            if ((this.onBeginCreateWordReportDelegate == null)) {
+                this.onBeginCreateWordReportDelegate = new BeginOperationDelegate(this.OnBeginCreateWordReport);
+            }
+            if ((this.onEndCreateWordReportDelegate == null)) {
+                this.onEndCreateWordReportDelegate = new EndOperationDelegate(this.OnEndCreateWordReport);
+            }
+            if ((this.onCreateWordReportCompletedDelegate == null)) {
+                this.onCreateWordReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateWordReportCompleted);
+            }
+            base.InvokeAsync(this.onBeginCreateWordReportDelegate, new object[] {
+                        customer,
+                        choices}, this.onEndCreateWordReportDelegate, this.onCreateWordReportCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -884,16 +1051,29 @@ namespace FoodOrder.RemoteService {
                 return _result;
             }
             
-            public System.IAsyncResult BeginCreateReport(FoodOrder.RemoteService.CreateReportRequest request, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginCreateExcelReport(FoodOrder.RemoteService.CreateExcelReportRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("CreateReport", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("CreateExcelReport", _args, callback, asyncState);
                 return _result;
             }
             
-            public FoodOrder.RemoteService.CreateReportResponse EndCreateReport(System.IAsyncResult result) {
+            public FoodOrder.RemoteService.CreateExcelReportResponse EndCreateExcelReport(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                FoodOrder.RemoteService.CreateReportResponse _result = ((FoodOrder.RemoteService.CreateReportResponse)(base.EndInvoke("CreateReport", _args, result)));
+                FoodOrder.RemoteService.CreateExcelReportResponse _result = ((FoodOrder.RemoteService.CreateExcelReportResponse)(base.EndInvoke("CreateExcelReport", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginCreateWordReport(FoodOrder.RemoteService.CreateWordReportRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("CreateWordReport", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public FoodOrder.RemoteService.CreateWordReportResponse EndCreateWordReport(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                FoodOrder.RemoteService.CreateWordReportResponse _result = ((FoodOrder.RemoteService.CreateWordReportResponse)(base.EndInvoke("CreateWordReport", _args, result)));
                 return _result;
             }
         }

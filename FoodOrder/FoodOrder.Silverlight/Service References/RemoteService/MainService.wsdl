@@ -49,7 +49,7 @@
           <s:enumeration value="C" />
         </s:restriction>
       </s:simpleType>
-      <s:element name="CreateReport">
+      <s:element name="CreateExcelReport">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
@@ -72,10 +72,25 @@
           <s:element minOccurs="1" maxOccurs="1" name="FridayChoice" type="tns:ChoiceEnum" />
         </s:sequence>
       </s:complexType>
-      <s:element name="CreateReportResponse">
+      <s:element name="CreateExcelReportResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="CreateReportResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateExcelReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWordReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="choices" type="tns:ArrayOfEmployeeMenu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWordReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateWordReportResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -93,11 +108,17 @@
   <wsdl:message name="GetMenusSoapOut">
     <wsdl:part name="parameters" element="tns:GetMenusResponse" />
   </wsdl:message>
-  <wsdl:message name="CreateReportSoapIn">
-    <wsdl:part name="parameters" element="tns:CreateReport" />
+  <wsdl:message name="CreateExcelReportSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateExcelReport" />
   </wsdl:message>
-  <wsdl:message name="CreateReportSoapOut">
-    <wsdl:part name="parameters" element="tns:CreateReportResponse" />
+  <wsdl:message name="CreateExcelReportSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateExcelReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateWordReportSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWordReport" />
+  </wsdl:message>
+  <wsdl:message name="CreateWordReportSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWordReportResponse" />
   </wsdl:message>
   <wsdl:portType name="MainServiceSoap">
     <wsdl:operation name="GetEmployees">
@@ -108,9 +129,13 @@
       <wsdl:input message="tns:GetMenusSoapIn" />
       <wsdl:output message="tns:GetMenusSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="CreateReport">
-      <wsdl:input message="tns:CreateReportSoapIn" />
-      <wsdl:output message="tns:CreateReportSoapOut" />
+    <wsdl:operation name="CreateExcelReport">
+      <wsdl:input message="tns:CreateExcelReportSoapIn" />
+      <wsdl:output message="tns:CreateExcelReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWordReport">
+      <wsdl:input message="tns:CreateWordReportSoapIn" />
+      <wsdl:output message="tns:CreateWordReportSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
@@ -133,8 +158,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateReport">
-      <soap:operation soapAction="http://templater.info/CreateReport" style="document" />
+    <wsdl:operation name="CreateExcelReport">
+      <soap:operation soapAction="http://templater.info/CreateExcelReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWordReport">
+      <soap:operation soapAction="http://templater.info/CreateWordReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -163,8 +197,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateReport">
-      <soap12:operation soapAction="http://templater.info/CreateReport" style="document" />
+    <wsdl:operation name="CreateExcelReport">
+      <soap12:operation soapAction="http://templater.info/CreateExcelReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWordReport">
+      <soap12:operation soapAction="http://templater.info/CreateWordReport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

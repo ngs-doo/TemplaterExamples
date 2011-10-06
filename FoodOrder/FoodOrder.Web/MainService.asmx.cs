@@ -10,10 +10,10 @@ using NGS.Templater;
 
 namespace FoodOrder.Web
 {
+	[ScriptService]
+	[ToolboxItem(false)]
 	[WebService(Namespace = "http://templater.info/")]
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-	[ToolboxItem(false)]
-	[ScriptService]
 	public class MainService : WebService
 	{
 		private static WeeklyMenu[] WeeklyMenus;
@@ -73,7 +73,7 @@ namespace FoodOrder.Web
 			return data.OrderBy(_ => rnd.Next(0, 100)).Take(count).ToArray();
 		}
 
-		private static IEnumerable CalculateSummaries(EmployeeMenu[] choices)
+		private static IEnumerable CalculateExcelSummaries(EmployeeMenu[] choices)
 		{
 			return
 				(from ChoiceEnum option in Enum.GetValues(typeof(ChoiceEnum))
@@ -88,18 +88,71 @@ namespace FoodOrder.Web
 				 }).ToList();
 		}
 
-		[WebMethod]
-		public string CreateReport(string customer, EmployeeMenu[] choices)
+		private static IEnumerable CalculateWordSummaries(EmployeeMenu[] choices)
 		{
-			var newFile = GetPath("Documents\\Order-" + Path.GetRandomFileName() + ".xlsx");
-			File.Copy(GetPath("App_Data\\Order.xlsx"), newFile, true);
+			var fromDay = GetFirstDayOfNextWeek(DateTime.Today);
+			return
+				(from cnt in Enumerable.Range(0, 5)
+				 let day = fromDay.AddDays(cnt)
+				 select new
+				 {
+					 Day = day.DayOfWeek,
+					 Menu =
+						from menu in WeeklyMenus
+						select new
+						{
+							Name = menu.GetType().GetProperty(day.DayOfWeek + "Menu").GetValue(menu, null),
+							TotalOrders =
+								choices.Where(it => it.GetType().GetProperty(day.DayOfWeek + "Choice")
+														.GetValue(it, null).Equals(menu.MenuMark))
+								.Count()
+						}
+				 }).ToList();
+		}
+
+		[WebMethod]
+		public string CreateExcelReport(string customer, EmployeeMenu[] choices)
+		{
+			Action<ITemplateDocument> processDocument =
+				document =>
+				{
+					document.Process(WeeklyMenus);
+					document.Process(choices);
+					document.Process(CalculateExcelSummaries(choices));
+				};
+			return CreateReport(processDocument, customer, choices, ".xlsx");
+		}
+
+		[WebMethod]
+		public string CreateWordReport(string customer, EmployeeMenu[] choices)
+		{
+			Action<ITemplateDocument> processDocument =
+				document =>
+				{
+					document.Process(
+						choices
+						.Select(it => new
+						{
+							Employee = it.Employee,
+							Choices = new[] { it.MondayChoice, it.TuesdayChoice, it.ThursdayChoice, it.WednesdayChoice, it.FridayChoice }
+						}));
+					document.Process(CalculateWordSummaries(choices));
+				};
+			return CreateReport(processDocument, customer, choices, ".docx");
+		}
+
+		private static string CreateReport(
+			Action<ITemplateDocument> customProcessing,
+			string customer,
+			EmployeeMenu[] choices,
+			string ext)
+		{
+			var newFile = GetPath("Documents\\Order-" + Path.GetRandomFileName() + ext);
+			File.Copy(GetPath("App_Data\\Order" + ext), newFile, true);
 
 			using (var document = DocumentFactory.Open(newFile))
 			{
-				document.Process(WeeklyMenus);
-				document.Process(choices);
-				document.Process(CalculateSummaries(choices));
-
+				customProcessing(document);
 				// The order of processing tags does not need to match their position in the template
 				var nextMonday = GetFirstDayOfNextWeek(DateTime.Today);
 				document.Process(

@@ -37,7 +37,8 @@
             </StackPanel>
             <StackPanel>
                 <Button Command="{Binding RandomizeChoices}" Margin="10">Randomize choices</Button>
-                <Button Command="{Binding CreateDocument}" Margin="10">Create document</Button>
+                <Button Command="{Binding CreateExcel}" Margin="10">Create Excel document</Button>
+                <Button Command="{Binding CreateWord}" Margin="10">Create Word document</Button>
             </StackPanel>
             <StackPanel>
                 <sdk:DataGrid AutoGenerateColumns="False" DataContext="{Binding Menus}" ItemsSource="{Binding .}">

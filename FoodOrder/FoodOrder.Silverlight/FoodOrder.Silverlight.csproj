@@ -102,7 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Service References\RemoteService\FoodOrder.RemoteService.CreateReportResponse.datasource">
+    <None Include="Service References\RemoteService\FoodOrder.RemoteService.CreateExcelReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RemoteService\FoodOrder.RemoteService.CreateWordReportResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\RemoteService\FoodOrder.RemoteService.GetEmployeesResponse.datasource">

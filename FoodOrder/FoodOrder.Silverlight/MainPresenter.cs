@@ -18,7 +18,8 @@ namespace FoodOrder
 		public ObservableCollection<EmployeeMenu> Choices { get; private set; }
 
 		public ICommand RandomizeChoices { get; private set; }
-		public ICommand CreateDocument { get; private set; }
+		public ICommand CreateExcel { get; private set; }
+		public ICommand CreateWord { get; private set; }
 
 		public MainPresenter()
 		{
@@ -29,7 +30,8 @@ namespace FoodOrder
 			Choices = new ObservableCollection<EmployeeMenu>();
 			Menus = new ObservableCollection<WeeklyMenu>();
 			RandomizeChoices = new RelayCommand(RandomizeMenu);
-			CreateDocument = new RelayCommand(OpenDocument);
+			CreateExcel = new RelayCommand(OpenExcelDocument);
+			CreateWord = new RelayCommand(OpenWordDocument);
 			var service = new MainServiceSoapClient();
 			service.GetEmployeesCompleted += (s, ea) => PrepareMenu(ea.Result);
 			service.GetEmployeesAsync();
@@ -68,19 +70,28 @@ namespace FoodOrder
 			}
 		}
 
-		private void OpenDocument()
+		private void OpenExcelDocument()
 		{
 			var service = new MainServiceSoapClient();
-			var uri = service.Endpoint.Address.Uri;
-			Func<string, Uri> completeUri = s => new Uri(uri.ToString().Substring(0, uri.ToString().Length - uri.LocalPath.Length) + "/" + s.Replace("\\", "/"));
-			service.CreateReportCompleted += (s, ea) =>
-			{
-				if (HtmlPage.IsPopupWindowAllowed)
-					HtmlPage.PopupWindow(completeUri(ea.Result), "_blank", null);
-				else
-					HtmlPage.Window.Eval("window.open('" + completeUri(ea.Result) + "', '_blank', '', '')");
-			};
-			service.CreateReportAsync(Customer, Choices);
+			service.CreateExcelReportCompleted += (s, ea) => ShowDocument(service.Endpoint.Address.Uri, ea.Result);
+			service.CreateExcelReportAsync(Customer, Choices);
+		}
+
+		private void OpenWordDocument()
+		{
+			var service = new MainServiceSoapClient();
+			service.CreateWordReportCompleted += (s, ea) => ShowDocument(service.Endpoint.Address.Uri, ea.Result);
+			service.CreateWordReportAsync(Customer, Choices);
+		}
+
+		private static void ShowDocument(Uri uri, string result)
+		{
+			Func<string, Uri> completeUri =
+				s => new Uri(uri.ToString().Substring(0, uri.ToString().Length - uri.LocalPath.Length) + "/" + s.Replace("\\", "/"));
+			if (HtmlPage.IsPopupWindowAllowed)
+				HtmlPage.PopupWindow(completeUri(result), "_blank", null);
+			else
+				HtmlPage.Window.Eval("window.open('" + completeUri(result) + "', '_blank', '', '')");
 		}
 	}
 }
