@@ -141,6 +141,14 @@ namespace FoodOrder.Web
 			return CreateReport(processDocument, customer, choices, ".docx");
 		}
 
+		[WebMethod]
+		public string CreateCSVReport(string customer, EmployeeMenu[] choices)
+		{
+			Action<ITemplateDocument> processDocument =
+				document => document.Process(CalculateExcelSummaries(choices));
+			return CreateReport(processDocument, customer, choices, ".csv");
+		}
+
 		private static string CreateReport(
 			Action<ITemplateDocument> customProcessing,
 			string customer,

@@ -20,6 +20,7 @@ namespace FoodOrder
 		public ICommand RandomizeChoices { get; private set; }
 		public ICommand CreateExcel { get; private set; }
 		public ICommand CreateWord { get; private set; }
+		public ICommand CreateCSV { get; private set; }
 
 		public MainPresenter()
 		{
@@ -32,6 +33,7 @@ namespace FoodOrder
 			RandomizeChoices = new RelayCommand(RandomizeMenu);
 			CreateExcel = new RelayCommand(OpenExcelDocument);
 			CreateWord = new RelayCommand(OpenWordDocument);
+			CreateCSV = new RelayCommand(OpenCSVDocument);
 			var service = new MainServiceSoapClient();
 			service.GetEmployeesCompleted += (s, ea) => PrepareMenu(ea.Result);
 			service.GetEmployeesAsync();
@@ -82,6 +84,13 @@ namespace FoodOrder
 			var service = new MainServiceSoapClient();
 			service.CreateWordReportCompleted += (s, ea) => ShowDocument(service.Endpoint.Address.Uri, ea.Result);
 			service.CreateWordReportAsync(Customer, Choices);
+		}
+
+		private void OpenCSVDocument()
+		{
+			var service = new MainServiceSoapClient();
+			service.CreateCSVReportCompleted += (s, ea) => ShowDocument(service.Endpoint.Address.Uri, ea.Result);
+			service.CreateCSVReportAsync(Customer, Choices);
 		}
 
 		private static void ShowDocument(Uri uri, string result)
