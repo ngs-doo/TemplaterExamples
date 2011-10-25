@@ -21,6 +21,7 @@ namespace SalesOrderMVP.Controllers
 		public TemplaterController(
 			string gridTemplate,
 			string itemTemplate,
+			string txtTemplate,
 			IEnumerable data,
 			Func<IEnumerable> getSelectedData)
 		{
@@ -34,12 +35,20 @@ namespace SalesOrderMVP.Controllers
 					(s, ea) => Process.Start(itemTemplate)));
 			Bindings.Add(
 				new CommandBinding(
+					GlobalCommands.EditTxtTemplate,
+					(s, ea) => Process.Start(txtTemplate)));
+			Bindings.Add(
+				new CommandBinding(
 					GlobalCommands.ShowGridData,
 					(s, ea) => CreateReport(gridTemplate, data)));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.ShowItemData,
 					(s, ea) => CreateReport(itemTemplate, getSelectedData())));
+			Bindings.Add(
+				new CommandBinding(
+					GlobalCommands.ShowTxtData,
+					(s, ea) => CreateReport(txtTemplate, getSelectedData())));
 
 			App.Current.MainWindow.CommandBindings.AddRange(Bindings);
 		}

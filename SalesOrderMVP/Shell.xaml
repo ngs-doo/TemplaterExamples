@@ -85,6 +85,12 @@
                                               Text="View or edit template for sales order. TemplaterController is attached to Documents commands. Item template is created in Word document. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
                         </Fluent:Button.ToolTip>
                     </Fluent:Button>
+                    <Fluent:Button Header="Edit in text editor" Command="{x:Static Commands:GlobalCommands.EditTxtTemplate}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Open template in text editor" Width="300"
+                                              Text="View or edit template for sales order. TemplaterController is attached to Documents commands. Text template is created in text document. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>                    
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="Document">
                     <Fluent:Button Header="Show in Excel" Command="{x:Static Commands:GlobalCommands.ShowGridData}" >
@@ -99,6 +105,12 @@
                                               Text="Create document with selected sales orders. TemplaterController is attached to Templates commands. Word template will be populated with selected sales orders. Document will be opened using Process.Start." />
                         </Fluent:Button.ToolTip>
                     </Fluent:Button>
+                    <Fluent:Button Header="Show in text editor" Command="{x:Static Commands:GlobalCommands.ShowTxtData}" >
+                        <Fluent:Button.ToolTip>
+                            <Fluent:ScreenTip Title="Create text document" Width="300"
+                                              Text="Create document with selected sales orders. TemplaterController is attached to Templates commands. Text template will be populated with selected sales orders. Document will be opened using Process.Start." />
+                        </Fluent:Button.ToolTip>
+                    </Fluent:Button>                    
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="Layout">
                     <Fluent:Button Header="Switch to grid" Command="{x:Static Commands:GlobalCommands.ShowGridView}" >

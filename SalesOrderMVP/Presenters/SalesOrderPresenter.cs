@@ -42,6 +42,7 @@ namespace SalesOrderMVP.Presenters
 					new TemplaterController(
 						"Templates\\SalesOrderGrid.xlsx", 
 						"Templates\\SalesOrderItem.docx", 
+						"Templates\\SalesOrder.txt", 
 						ItemsCollection, 
 						() => GridView.dataGrid.SelectedItems),
 					new LayoutController(ChangeView, GridView, ItemView, GridView.dataGrid)
