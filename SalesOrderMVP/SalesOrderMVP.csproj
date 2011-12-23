@@ -39,8 +39,8 @@
     <Reference Include="Fluent">
       <HintPath>Libs\Fluent.dll</HintPath>
     </Reference>
-    <Reference Include="NGS.Templater.Standard">
-      <HintPath>Libs\NGS.Templater.Standard.dll</HintPath>
+    <Reference Include="NGS.Templater">
+      <HintPath>Libs\NGS.Templater.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

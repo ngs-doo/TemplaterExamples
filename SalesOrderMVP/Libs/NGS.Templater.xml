@@ -1,33 +1,30 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>NGS.Templater.Standard</name>
+        <name>NGS.Templater</name>
     </assembly>
     <members>
-        <member name="T:NGS.Templater.Configuration">
+        <member name="T:NGS.Templater.IDocumentFactory">
             <summary>
-            Public entry point.
+            Creates template document interface
             </summary>
         </member>
-        <member name="M:NGS.Templater.Configuration.Configure(System.String,System.String)">
+        <member name="M:NGS.Templater.IDocumentFactory.Open(System.String)">
             <summary>
-            Set license information.
+            Opens a document from the specified path.
+            Templater will recognize the appropriate document format from the file extension.
             </summary>
-            <param name="customer">License owner</param>
-            <param name="license">License key</param>
-            <returns>Document factory</returns>
+            <param name="path">Path to template document file; this file will be overwritten with the processed document</param>
+            <returns>Template document interface</returns>
         </member>
-        <member name="M:NGS.Templater.Configuration.Configure(System.String)">
+        <member name="M:NGS.Templater.IDocumentFactory.Open(System.IO.Stream,System.String)">
             <summary>
-            Specify custom license file (default is 'templater.lic').
+            Opens a document from the specified stream.
+            The extension string indicates the type of document in the stream.
             </summary>
-            <param name="path">Path to license file</param>
-            <returns>Document factory</returns>
-        </member>
-        <member name="P:NGS.Templater.Configuration.Factory">
-            <summary>
-            Create instance of document factory.
-            </summary>
+            <param name="stream">Stream containing the template document; this stream will be used to output the processed document</param>
+            <param name="extension">Template extension</param>
+            <returns>Template document interface</returns>
         </member>
         <member name="T:NGS.Templater.ITemplater">
             <summary>
@@ -54,11 +51,12 @@
         </member>
         <member name="M:NGS.Templater.ITemplater.Resize(System.String,System.Int32)">
             <summary>
-            Resize table by duplicating row which contains the specified tag.
+            Resize context which contains the specified tag.
+            Context can be row in a table, paragraph in a document or named group in a spreadsheet.
             </summary>
-            <param name="tag">Tag which specifies the row to be duplicated</param>
-            <param name="rows">Number of rows after resize operation; if the rows value is zero, the specified row is removed from the table.</param>
-            <returns>Table found and resized</returns>
+            <param name="tag">Tag which specifies the context to be duplicated</param>
+            <param name="count">Number of contexts after the resize operation; if the count value is zero, the specified context will be removed.</param>
+            <returns>Context found and resized</returns>
         </member>
         <member name="M:NGS.Templater.ITemplater.Clone(System.Int32)">
             <summary>
@@ -71,6 +69,31 @@
             <summary>
             Recognized tags in the document.
             Each tag is enumerated once.
+            </summary>
+        </member>
+        <member name="T:NGS.Templater.Configuration">
+            <summary>
+            Public entry point.
+            </summary>
+        </member>
+        <member name="M:NGS.Templater.Configuration.Configure(System.String,System.String)">
+            <summary>
+            Set license information.
+            </summary>
+            <param name="customer">License owner</param>
+            <param name="license">License key</param>
+            <returns>Document factory</returns>
+        </member>
+        <member name="M:NGS.Templater.Configuration.Configure(System.String)">
+            <summary>
+            Specify custom license file (default is 'templater.lic').
+            </summary>
+            <param name="path">Path to license file</param>
+            <returns>Document factory</returns>
+        </member>
+        <member name="P:NGS.Templater.Configuration.Factory">
+            <summary>
+            Create instance of document factory.
             </summary>
         </member>
         <member name="T:NGS.Templater.ITemplateDocument">
@@ -92,9 +115,14 @@
             Provides access to low level API.
             </summary>
         </member>
+        <member name="T:NGS.Templater.TemplaterHelper">
+            <summary>
+            Helper methods for ITemplater
+            </summary>
+        </member>
         <member name="M:NGS.Templater.TemplaterHelper.ReplaceAll(NGS.Templater.ITemplater,System.String,System.Object)">
             <summary>
-            Helper method for replacing all occurrences of the specified tag with the provided value. 
+            Helper method for replacing all occurrences of the specified tag with the provided value.
             </summary>
             <param name="templater">Templater which contains specified tags</param>
             <param name="tag">Tag to be replaced</param>
@@ -109,28 +137,6 @@
             <param name="tags">Tags to be checked</param>
             <param name="metadata">Metadata for which to search for</param>
             <returns>Metadata found at least once</returns>
-        </member>
-        <member name="T:NGS.Templater.IDocumentFactory">
-            <summary>
-            Creates template document interface
-            </summary>
-        </member>
-        <member name="M:NGS.Templater.IDocumentFactory.Open(System.String)">
-            <summary>
-            Opens a document from the specified path.
-            Templater will recognize the appropriate document format from the file extension.
-            </summary>
-            <param name="path">Path to template document file; this file will be overwritten with the processed document</param>
-            <returns>Template document interface</returns>
-        </member>
-        <member name="M:NGS.Templater.IDocumentFactory.Open(System.IO.Stream,System.String)">
-            <summary>
-            Opens a document from the specified stream.
-            The extension string indicates the type of document in the stream.
-            </summary>
-            <param name="stream">Stream containing the template document; this stream will be used to output the processed document</param>
-            <param name="extension">Template extension</param>
-            <returns>Template document interface</returns>
         </member>
     </members>
 </doc>
