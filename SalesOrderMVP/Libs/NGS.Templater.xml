@@ -38,7 +38,7 @@
             </summary>
             <param name="tag">Tag for which metadata is required</param>
             <param name="all">True returns metadata for all matching tags, false returns metadata for just the first one</param>
-            <returns>String array of tag metadata</returns>
+            <returns>String array of tag metadata. If tag is not found empty array will be returned</returns>
         </member>
         <member name="M:NGS.Templater.ITemplater.Replace(System.String,System.Object)">
             <summary>
@@ -78,7 +78,7 @@
         </member>
         <member name="M:NGS.Templater.Configuration.Configure(System.String,System.String)">
             <summary>
-            Set license information.
+            Create instance of document factory using provided license information.
             </summary>
             <param name="customer">License owner</param>
             <param name="license">License key</param>
@@ -86,7 +86,8 @@
         </member>
         <member name="M:NGS.Templater.Configuration.Configure(System.String)">
             <summary>
-            Specify custom license file (default is 'templater.lic').
+            Create instance of document factory using provided custom license file (default is 'templater.lic').
+            File can be embedded in assembly.
             </summary>
             <param name="path">Path to license file</param>
             <returns>Document factory</returns>
@@ -94,6 +95,8 @@
         <member name="P:NGS.Templater.Configuration.Factory">
             <summary>
             Create instance of document factory.
+            License will be checked from 'templater.lic' file.
+            File can be embedded in assembly.
             </summary>
         </member>
         <member name="T:NGS.Templater.ITemplateDocument">
@@ -109,6 +112,7 @@
             </summary>
             <typeparam name="T">Specific rules will be chosen based on this type</typeparam>
             <param name="data">Data for modifying tags</param>
+            <returns>Itself</returns>
         </member>
         <member name="P:NGS.Templater.ITemplateDocument.Templater">
             <summary>

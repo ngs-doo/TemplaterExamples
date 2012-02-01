@@ -73,12 +73,20 @@
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem Header="View">
                 <Fluent:RibbonGroupBox Header="Templates">
-                    <Fluent:Button Header="Edit in Excel" Command="{x:Static Commands:GlobalCommands.EditGridTemplate}" >
-                        <Fluent:Button.ToolTip>
-                            <Fluent:ScreenTip Title="Open template in Excel" Width="300"
+                    <Fluent:DropDownButton Header="Edit in Excel">
+                        <Fluent:Button Header="Grid" Command="{x:Static Commands:GlobalCommands.EditExcelGridTemplate}" >
+                            <Fluent:Button.ToolTip>
+                                <Fluent:ScreenTip Title="Open grid template in Excel" Width="300"
                                               Text="View or edit grid template. TemplaterController is attached to Templates commands. Grid template is created in Excel spreadsheet. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
-                        </Fluent:Button.ToolTip>
-                    </Fluent:Button>
+                            </Fluent:Button.ToolTip>
+                        </Fluent:Button>
+                        <Fluent:Button Header="Items" Command="{x:Static Commands:GlobalCommands.EditExcelItemTemplate}" >
+                            <Fluent:Button.ToolTip>
+                                <Fluent:ScreenTip Title="Open item template in Excel" Width="300"
+                                              Text="View or edit item template. TemplaterController is attached to Templates commands. Item template is created in Excel spreadsheet. Template will be opened using Process.Start. You can edit template as you wish and use [[Tags]] to place data." />
+                            </Fluent:Button.ToolTip>
+                        </Fluent:Button>
+                    </Fluent:DropDownButton> 
                     <Fluent:Button Header="Edit in Word" Command="{x:Static Commands:GlobalCommands.EditItemTemplate}" >
                         <Fluent:Button.ToolTip>
                             <Fluent:ScreenTip Title="Open template in Word" Width="300"
@@ -93,12 +101,20 @@
                     </Fluent:Button>                    
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="Document">
-                    <Fluent:Button Header="Show in Excel" Command="{x:Static Commands:GlobalCommands.ShowGridData}" >
-                        <Fluent:Button.ToolTip>
-                            <Fluent:ScreenTip Title="Create excel document" Width="300" 
-                                              Text="Create document with all sales orders. TemplaterController is attached to Documents commands. Excel spreadsheet template will be populated with sales orders. Document will be opened using Process.Start." />
-                        </Fluent:Button.ToolTip>
-                    </Fluent:Button>
+                    <Fluent:DropDownButton Header="Show in Excel">
+                        <Fluent:Button Header="Grid" Command="{x:Static Commands:GlobalCommands.ShowExcelGridData}" >
+                            <Fluent:Button.ToolTip>
+                                <Fluent:ScreenTip Title="Create excel grid document" Width="300" 
+                                                  Text="Create document with all sales orders. TemplaterController is attached to Documents commands. Excel spreadsheet template will be populated with sales orders. Document will be opened using Process.Start." />
+                            </Fluent:Button.ToolTip>
+                        </Fluent:Button>
+                        <Fluent:Button Header="Items" Command="{x:Static Commands:GlobalCommands.ShowExcelItemData}" >
+                            <Fluent:Button.ToolTip>
+                                <Fluent:ScreenTip Title="Create excel items document" Width="300" 
+                                                  Text="Create document with all sales orders. TemplaterController is attached to Documents commands. Excel spreadsheet template will be populated with sales orders. Document will be opened using Process.Start." />
+                            </Fluent:Button.ToolTip>
+                        </Fluent:Button>
+                    </Fluent:DropDownButton>
                     <Fluent:Button Header="Show in Word" Command="{x:Static Commands:GlobalCommands.ShowItemData}" >
                         <Fluent:Button.ToolTip>
                             <Fluent:ScreenTip Title="Create word document" Width="300"
@@ -145,10 +161,10 @@
                                 * crud controller - for Create Read Update Delete commands<LineBreak/>
                                 * browse controller - for navigating the model<LineBreak/>
                                 * layout controller - for laying out views in specific format<LineBreak/>
-                                * template controller - for creating reports ouf of template documents<LineBreak/>
+                                * template controller - for creating reports out of template documents<LineBreak/>
                                 <LineBreak/>
                                 Sales data is located in a SQLite database. Access to the data is available through the SalesOrderRepository<LineBreak/>
-                                Customers and products are located in XML and JSON files. They provide the data through their repositores (read-only access).<LineBreak/>
+                                Customers and products are located in XML and JSON files. They provide the data through their repositories (read-only access).<LineBreak/>
                                 Data is modeled by Domain-driven-design principles using aggregate roots.<LineBreak/>
                                 Reports are created from templates using the Templater reporting library.
                                 The templates can be edited by Word or Excel on the fly.

@@ -15,10 +15,12 @@ namespace SalesOrderMVP.Commands
 		public static RoutedUICommand Next = new RoutedUICommand();
 		public static RoutedUICommand Last = new RoutedUICommand();
 
-		public static RoutedUICommand EditGridTemplate = new RoutedUICommand();
+		public static RoutedUICommand EditExcelGridTemplate = new RoutedUICommand();
+		public static RoutedUICommand EditExcelItemTemplate = new RoutedUICommand();
 		public static RoutedUICommand EditItemTemplate = new RoutedUICommand();
 		public static RoutedUICommand EditTxtTemplate = new RoutedUICommand();
-		public static RoutedUICommand ShowGridData = new RoutedUICommand();
+		public static RoutedUICommand ShowExcelGridData = new RoutedUICommand();
+		public static RoutedUICommand ShowExcelItemData = new RoutedUICommand();
 		public static RoutedUICommand ShowItemData = new RoutedUICommand();
 		public static RoutedUICommand ShowTxtData = new RoutedUICommand();
 

@@ -34,16 +34,17 @@ namespace SalesOrderMVP.Presenters
 				{
 					new BrowseController(collectionView, ChangeCurrentItem, () => !EditableState),
 					new CrudController<SalesOrder>(
-						repository, 
+						repository,
 						collectionView,
-						() => CurrentItem, 
+						() => CurrentItem,
 						SetCurrent,
 						EditableStateChanged),
 					new TemplaterController(
-						"Templates\\SalesOrderGrid.xlsx", 
-						"Templates\\SalesOrderItem.docx", 
-						"Templates\\SalesOrder.txt", 
-						ItemsCollection, 
+						"Templates\\SalesOrderGrid.xlsx",
+						"Templates\\SalesOrderItem.xlsx",
+						"Templates\\SalesOrderItem.docx",
+						"Templates\\SalesOrder.txt",
+						ItemsCollection,
 						() => GridView.dataGrid.SelectedItems),
 					new LayoutController(ChangeView, GridView, ItemView, GridView.dataGrid)
 				});

@@ -19,7 +19,8 @@ namespace SalesOrderMVP.Controllers
 		private static int Counter;
 
 		public TemplaterController(
-			string gridTemplate,
+			string excelGridTemplate,
+			string excelItemTemplate,
 			string itemTemplate,
 			string txtTemplate,
 			IEnumerable data,
@@ -27,8 +28,12 @@ namespace SalesOrderMVP.Controllers
 		{
 			Bindings.Add(
 				new CommandBinding(
-					GlobalCommands.EditGridTemplate,
-					(s, ea) => Process.Start(gridTemplate)));
+					GlobalCommands.EditExcelGridTemplate,
+					(s, ea) => Process.Start(excelGridTemplate)));
+			Bindings.Add(
+				new CommandBinding(
+					GlobalCommands.EditExcelItemTemplate,
+					(s, ea) => Process.Start(excelItemTemplate)));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.EditItemTemplate,
@@ -39,8 +44,12 @@ namespace SalesOrderMVP.Controllers
 					(s, ea) => Process.Start(txtTemplate)));
 			Bindings.Add(
 				new CommandBinding(
-					GlobalCommands.ShowGridData,
-					(s, ea) => CreateReport(gridTemplate, data)));
+					GlobalCommands.ShowExcelGridData,
+					(s, ea) => CreateReport(excelGridTemplate, data)));
+			Bindings.Add(
+				new CommandBinding(
+					GlobalCommands.ShowExcelItemData,
+					(s, ea) => CreateReport(excelItemTemplate, getSelectedData())));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.ShowItemData,
