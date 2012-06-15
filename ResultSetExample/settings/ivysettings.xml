@@ -1,0 +1,15 @@
+<ivysettings>
+ <settings defaultResolver="local-chain" />
+ <resolvers>
+<ibiblio name="maven" root="http://mvnrepository.com/artifact/" m2compatible="true" />
+<ibiblio name="Templater Releases" root="http://templater.info/nexus/content/repositories/releases/" m2compatible="true" />
+<ibiblio name="repo1" root="http://repo1.maven.org/maven2/"  m2compatible="true" />
+
+<chain name="local-chain">
+<resolver ref="maven"/>
+<resolver ref="Templater Releases"/>
+<resolver ref="repo1"/>
+</chain>
+ </resolvers>
+
+</ivysettings>

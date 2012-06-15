@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>hr.ngs.templater.example</groupId>
+  <artifactId>DynamicResize</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>DynamicResize</name>
+  <url>http://maven.apache.org</url>
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <layout>default</layout>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>TemplaterReleases</id>
+      <name>Templater Releases</name>
+      <url>http://templater.info/nexus/content/repositories/releases/</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>hr.ngs.templater</groupId>
+      <artifactId>templater</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+
+  </dependencies>
+
+
+
+</project>
