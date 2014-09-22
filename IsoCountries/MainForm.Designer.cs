@@ -77,7 +77,7 @@
 			this.isoLink.Size = new System.Drawing.Size(205, 13);
 			this.isoLink.TabIndex = 1;
 			this.isoLink.TabStop = true;
-			this.isoLink.Text = "http://www.iso.org/iso/list-en1-semic-3.txt";
+			this.isoLink.Text = "http://templater.info/static/iso_3166_2_countries.csv";
 			this.isoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.isoLink_LinkClicked);
 			// 
 			// label1
