@@ -1,0 +1,11 @@
+<ivysettings>
+  <settings defaultResolver="local-chain" />
+  <resolvers>
+    <ibiblio name="maven" root="http://mvnrepository.com/artifact/" m2compatible="true" />
+    <ibiblio name="NGS Releases" root="http://ngs.hr/nexus/content/repositories/releases/" m2compatible="true" />
+    <chain name="local-chain">
+      <resolver ref="maven"/>
+      <resolver ref="NGS Releases"/>
+    </chain>
+  </resolvers>
+</ivysettings>
