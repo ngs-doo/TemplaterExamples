@@ -29,3 +29,7 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 */target/*
+
+build
+lib
+target
