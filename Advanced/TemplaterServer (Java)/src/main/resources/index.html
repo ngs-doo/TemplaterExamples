@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Templater Server Example</title>
+
+    <link href="static/bootstrap.min.css" rel="stylesheet">
+    <link href="static/style.css" rel="stylesheet">
+
+    <script src="static/jquery-1.11.2.min.js"></script>
+    <script src="static/ace.js" charset="utf-8"></script>
+    <script src="static/angular-1.2.23.min.js"></script>
+    <script src='static/ui-bootstrap-tpls-0.11.2.min.js'></script>
+    <script src="static/ui-ace-0.1.1.min.js"></script>
+
+    <script src='js/app.js'></script>
+</head>
+<body>
+<script type="application/javascript">
+    var templates = [${templates}];
+</script>
+<div class="container">
+    <div class="row ">
+        <h1>Templater Server Example</h1>
+    </div>
+
+    <div data-ng-app="templaterApp" data-ng-controller='templaterCtrl'>
+        <div data-ng-include="" src="'/TemplaterView.html'"></div>
+    </div>
+</div>
+</body>
+</html>

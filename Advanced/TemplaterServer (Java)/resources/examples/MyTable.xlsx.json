@@ -1,0 +1,32 @@
+{
+  "name": "Bon voyage",
+  "specialMenu": [
+    {
+      "name": "Jelacic steak",
+      "cost": "80 EUR",
+      "date": "16/05/2012"
+    },
+    {
+      "name": "Sea surprise",
+      "cost": "120 EUR",
+      "date": "18/05/2012"
+    }
+  ],
+  "dailyMenu": [
+    {
+      "name": "Chickago pizza",
+      "bonus": "Olives",
+      "cost": "38 EUR"
+    },
+    {
+      "name": "Cordon bleu",
+      "bonus": "French fries",
+      "cost": "45 EUR"
+    },
+    {
+      "name": "Beefsteak",
+      "bonus": "Salad, french fries",
+      "cost": "65 EUR"
+    }
+  ]
+}

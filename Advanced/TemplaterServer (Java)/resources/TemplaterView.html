@@ -1,0 +1,61 @@
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="upper">Demo</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>Put your JSON here:</h3>
+        <div data-ui-ace="aceOption" data-ng-model="jd"></div>
+        <div class="feat-box append-top">
+          <div>
+            <p>
+              <button class="btn btn-primary append-bottom" data-ng-click="beautifyJSON()">Beautify Json</button>
+              <button type="button" class="btn btn-primary btn-switch append-bottom"
+                      data-ng-class="{true: 'active', false: ''}[toPdf]"
+                      data-ng-click="pdfChange()">PDF
+                      conversion <span data-ng-class="{true: 'active', false: 'disabled'}[toPdf]">{{toPdfState}}</span>
+                </button> <small class="text-muted">(toggle for docx only)</small>
+            </p>
+          </div>
+          <div>
+            <p>
+              <form id="post_action" action="" method="post" target="_blank" accept-charset="UTF-8">
+                <input id="post_json" type="hidden" name="json">
+                <button type="button" class="btn btn-success btn-lg"
+                        data-ng-class="{true: '', false: 'hidden'}[selectedTemplate != '']"
+                        data-ng-click="processTemplate()">{{processButtonText}}
+                </button>
+              </form>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar sidebar-box col-sm-4">
+        <p><small>This templates have been found in the resources. Select one to load an example Json
+          for a given template.</small></p>
+        <h3 class="sidebar-title templates-title">Templates list</h3>
+        <div id="trs">
+          <ul class="list-unstyled list-template">
+            <li data-ng-repeat="template in templateList">
+              <p>
+                  <button class="btn btn-primary feat-btn feat-btn-lg"
+                          data-ng-class="{true: 'active', false: 'btn-default'}[selectedTemplate == template]"
+                          data-ng-click="selectTemplate(template)">
+                      <i class="fa fa-file-text"></i> {{template}}
+                  </button>
+                </p>
+            </li>
+          </ul>
+            <button class="btn btn-default btn-block btn-lg btn-success"
+                    data-ng-class="{true: '', false: 'disabled'}[selectedTemplate != '']"
+                    data-ng-click="getSelectedTemplate()">
+                {{getTemplateText}} <span class="btn-icon" data-ng-class="{true: '', false: 'hidden'}[selectedTemplate != '']"> <i class="fa fa-download"></i></span>
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

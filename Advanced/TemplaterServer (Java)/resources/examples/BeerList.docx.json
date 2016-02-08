@@ -1,0 +1,71 @@
+{
+  "user": {
+    "name": "Bob Barley",
+    "age": "42"
+  },
+  "beers": [
+    {
+      "name": "Rare Bourbon County Brand Stout",
+      "brewery": "Goose Island Beer Co.",
+      "type": "Stout",
+      "rating": 4.5,
+      "abv": 0.13
+    },
+    {
+      "name": "Ožujsko",
+      "brewery": "Zagrebačka Pivovara",
+      "type": "Euro Lager",
+      "rating": 1.5,
+      "abv": 0.0499
+    },
+    {
+      "name": "Vukovarsko",
+      "brewery": "Vukovarska pivovara",
+      "type": "Pale Lager",
+      "rating": 2.5,
+      "abv": 0.045
+    },
+    {
+      "name": "Pale Ale",
+      "brewery": "Zmajska Pivovara d.o.o.",
+      "type": "American Pale Ale",
+      "rating": 3.5,
+      "abv": 0.053
+    },
+    {
+      "name": "Porter",
+      "brewery": "Zmajska Pivovara d.o.o.",
+      "type": "Porter",
+      "rating": 3.5,
+      "abv": 0.065
+    },
+    {
+      "name": "APA",
+      "brewery": "Nova Runda",
+      "type": "American Pale Ale",
+      "rating": 3.0,
+      "abv": 0.053
+    },
+    {
+      "name": "Brale",
+      "brewery": "Nova Runda",
+      "type": "American Pale Ale",
+      "rating": 3.5,
+      "abv": 0.049
+    },
+    {
+      "name": "Double Barrel Hunahpu's",
+      "brewery": "Cigar City Brewing",
+      "type": "American imperial",
+      "rating": 4.5,
+      "abv": 0.115
+    },
+    {
+      "name": "Karlovačko Pivo",
+      "brewery": "Karlovačka Pivovara",
+      "type": "Pale Lager",
+      "rating": 2.0,
+      "abv": 0.05
+    }
+  ]
+}

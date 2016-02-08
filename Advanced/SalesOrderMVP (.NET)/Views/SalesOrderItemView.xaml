@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="SalesOrderMVP.Views.SalesOrderItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rep="clr-namespace:SalesOrderMVP.Repositories"
+             xmlns:cvr="clr-namespace:SalesOrderMVP.Views.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <rep:CustomerRepository x:Key="customers"/>
+            <rep:ProductRepository x:Key="products"/>
+            <cvr:InverseBooleanConverter x:Key="inverseBoolean" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+            <StackPanel>
+                <TextBlock Text="Date"  />
+                <DatePicker SelectedDate="{Binding Path=CurrentItem.Date}" 
+                            SelectedDateFormat="Short" 
+                            IsHitTestVisible="{Binding EditableState}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Customer"  />
+                <ComboBox ItemsSource="{Binding Data, Source={StaticResource customers}}" 
+                          DisplayMemberPath="Name"
+                          IsHitTestVisible="{Binding EditableState}"
+                          SelectedValue="{Binding Path=CurrentItem.Customer, Mode=TwoWay}" />
+            </StackPanel>
+            <Grid IsHitTestVisible="{Binding EditableState}">
+                <DataGrid CanUserAddRows="True" CanUserDeleteRows="True" Margin="3"                          
+                          DataContext="{Binding CurrentItem}"
+                          ItemsSource="{Binding Items}"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Product" Width="3*"
+                                                ItemsSource="{Binding Data, Source={StaticResource products}}" 
+                                                SelectedValueBinding="{Binding Product, Mode=TwoWay}"
+                                                DisplayMemberPath="Name" />
+                        <DataGridTextColumn Header="Quantity" Width="1*" Binding="{Binding Quantity}" />
+                        <DataGridTextColumn Header="Price" Width="1*" Binding="{Binding Path=Product.Price, Mode=OneWay}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

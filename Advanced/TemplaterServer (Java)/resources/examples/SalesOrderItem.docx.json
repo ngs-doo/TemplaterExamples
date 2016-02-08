@@ -1,0 +1,55 @@
+{
+	"customer": {
+		"name": "New Generation Software LTD",
+		"address": "3 Main St.New York NY 97203 USA"
+	},
+	"date": "2015-05-21",
+	"items": [
+		{
+			"product": {
+				"name": "Templater",
+				"price": 99.00,
+				"description": "Minimal reporting library"
+			},
+			"quantity": 10,
+			"cost": 990.00
+		},
+		{
+			"product": {
+				"name": "Hammer",
+				"price": 12.44,
+				"description": "Handy tool"
+			},
+			"quantity": 1000,
+			"cost": 12440.00
+		},
+		{
+			"product": {
+				"name": "Fridge",
+				"price": 4219.99,
+				"description": "Keeps the food cold"
+			},
+			"quantity": 1,
+			"cost": 4219.99
+		},
+		{
+			"product": {
+				"name": "Monitor",
+				"price": 99.99,
+				"description": "Universal display device"
+			},
+			"quantity": 5,
+			"cost": 499.95
+		},
+		{
+			"product": {
+				"name": "Chair",
+				"price": 7.23,
+				"description": "RESTful place"
+			},
+			"quantity": 100,
+			"cost": 723.00
+		}
+	],
+	"total": 18872.94
+}

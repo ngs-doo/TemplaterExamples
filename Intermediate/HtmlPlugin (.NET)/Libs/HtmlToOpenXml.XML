@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HtmlToOpenXml</name>
+    </assembly>
+    <members>
+        <member name="T:NotesFor.HtmlToOpenXml.ConverterUtility">
+            <summary>
+            Provides some utilies methods for translating Http attributes to OpenXml elements.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.FormatParagraphAlign(System.String)">
+            <summary>
+            Convert the Html text align attribute (horizontal alignement) to its corresponding OpenXml value.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.FormatVAlign(System.String)">
+            <summary>
+            Convert the Html vertical-align attribute to its corresponding OpenXml value.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.ConvertToFontSize(System.String)">
+            <summary>
+            Convert Html regular font-size to OpenXml font value (expressed in point).
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.ConvertToHighlightColor(System.Drawing.Color)">
+            <summary>
+            Convert an Html color to its hightlight color representation in OpenXml.
+            </summary>
+            <remarks>
+            As OpenXml supports a limited number of highlight colors, we will check whether the
+            Html color is near a known color. If no near color are satisfied, it will returns
+            HighlightColorValues.None.
+            </remarks>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.AreColorClose(System.Drawing.Color,System.Drawing.Color,System.Int32)">
+            <summary>
+            Check whether two colors are close (as a Magic Wand tool performs).
+            </summary>
+            <remarks>
+            This algorithm comes from the source code of Paint.Net, in FloodToolBase.cs, CheckColor method.
+            </remarks>
+            <param name="tolerance">From 0 to 100.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.DownloadData(System.Uri,NotesFor.HtmlToOpenXml.WebProxy)">
+            <summary>
+            Download some data located at the specified url.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.GetImagePartTypeForImageUrl(System.Uri)">
+            <summary>
+            Gets the OpenXml ImagePartType associated to an image.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.GetImageSize(System.IO.Stream)">
+            <summary>
+            Loads an image from a stream and grab its size.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ConverterUtility.ToHexString(System.Drawing.Color)">
+            <summary>
+            Convert a .Net Color to a hex string.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.HtmlEnumerator">
+            <summary>
+            Split an html piece of text and provide a way to enumerate its tags.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlEnumerator.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlEnumerator.MoveUntilMatch(System.String)">
+            <summary>
+            Use as MoveNext() but this function will stop once the current value is equals to tag.
+            </summary>
+            <param name="tag">The tag to stop on (Optional).</param>
+            <returns>
+            If tag is null, it returns true if the enumerator was successfully advanced to the next element; false
+            if the enumerator has passed the end of the collection.<br/>
+            If tag is not null, it returns false as long as the tag was not found.
+            </returns>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.StyleAttributes">
+            <summary>
+            Gets an attribute in the Style attribute of a Html tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.Attributes">
+            <summary>
+            Gets an attribute from a Html tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.IsCurrentHtmlTag">
+            <summary>
+            Gets whether the current element is an Html tag or not.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.IsSelfClosedTag">
+            <summary>
+            Gets whether the current element is an Html tag that is closed (example: &lt;td/&gt;).
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.CurrentTag">
+            <summary>
+            If <see cref="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.Current"/> property is a Html tag, it returns the name of that tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlEnumerator.Current">
+            <summary>
+            Gets the line or tag at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.HtmlConverter">
+            <summary>
+            Helper class to convert some Html text to OpenXml elements.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.HtmlConverter.paragraphs">
+            <summary>The list of paragraphs that will be returned.</summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.HtmlConverter.elements">
+            <summary>Holds the elements to append to the current paragraph.</summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.#ctor(DocumentFormat.OpenXml.Packaging.MainDocumentPart)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="mainPart">The mainDocumentPart of a document where to write the conversion to.</param>
+            <remarks>We preload some configuration from inside the document such as style, bookmarks,...</remarks>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.Parse(System.String)">
+            <summary>
+            Start the parse processing.
+            </summary>
+            <returns>Returns a list of parsed paragraph.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.RemoveEmptyParagraphs">
+            <summary>
+            Remove empty paragraph unless 2 tables are side by side.
+            These paragraph could be empty due to misformed html or spaces in the html source.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.AlternateProcessHtmlChunks(NotesFor.HtmlToOpenXml.HtmlEnumerator,System.String)">
+            <summary>
+            Save the actual list and restart with a new one.
+            Continue to process until we found endTag.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.AddParagraph(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Add a new paragraph, table, ... to the list of processed paragrahs. This method takes care of 
+            adding the new element to the current table if it exists.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.AddFootnoteReference(System.String)">
+            <summary>
+            Add a note to the FootNotes part and ensure it exists.
+            </summary>
+            <param name="description">The description of an acronym, abbreviation, some book references, ...</param>
+            <returns>Returns the id of the footnote reference.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.AddEndnoteReference(System.String)">
+            <summary>
+            Add a note to the Endnotes part and ensure it exists.
+            </summary>
+            <param name="description">The description of an acronym, abbreviation, some book references, ...</param>
+            <returns>Returns the id of the endnote reference.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.AddFigureCaption">
+            <summary>
+            Add a new figure caption to the document.
+            </summary>
+            <returns>Returns the id of the new figure caption.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.CompleteCurrentParagraph">
+            <summary>
+            Push the elements members to the current paragraph and reset the elements collection.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.RefreshStyles">
+            <summary>
+            Refresh the cache of styles presents in the document.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.EnsureCaptionStlye">
+            <summary>
+            Ensure the 'caption' style exists in the document.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.ProcessContainerAttributes(NotesFor.HtmlToOpenXml.HtmlEnumerator,System.Collections.Generic.IList{DocumentFormat.OpenXml.OpenXmlElement})">
+            <summary>
+            There is a few attributes shared by a large number of tags. This method will check them for a limited
+            number of tags (&lt;p&gt;, &lt;pre&gt;, &lt;div&gt;, &lt;span&gt; and &lt;body&gt;).
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlConverter.RaiseProvisionImage(NotesFor.HtmlToOpenXml.ProvisionImageEventArgs)">
+            <summary>
+            Raises the ProvisionImage event.
+            </summary>
+        </member>
+        <member name="E:NotesFor.HtmlToOpenXml.HtmlConverter.ProvisionImage">
+            <summary>
+            Occurs when an image tag was detected and you want to manage yourself the download of the data.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.AcronymPosition">
+            <summary>
+            Gets or sets where to render the acronym or abbreviation tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.ConsiderDivAsParagraph">
+            <summary>
+            Gets or sets whether the &lt;div&gt; tag should be processed as &lt;p&gt;. It depends whether you consider &lt;div&gt;
+            as part of the layout or as part of a text field.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.ExcludeLinkAnchor">
+            <summary>
+            Gets or sets whether anchor links are included or not in the conversion.
+            </summary>
+            <remarks>An anchor is a term used to define a hyperlink destination inside a document.
+            <see href="http://www.w3schools.com/HTML/html_links.asp"/>.
+            <br/>
+            It exists some predefined anchors used by Word such as _top to refer to the top of the document.
+            The anchor <i>#_top</i> is always accepted regardless this property value.
+            For others anchors like refering to your own bookmark or a title, add a 
+            <see cref="T:DocumentFormat.OpenXml.Wordprocessing.BookmarkStart"/> and 
+            <see cref="T:DocumentFormat.OpenXml.Wordprocessing.BookmarkEnd"/> elements
+            and set the value of href to <i>#&lt;name of your bookmark&gt;</i>.
+            </remarks>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.HtmlStyles">
+            <summary>
+            Gets the Html styles manager mapping to OpenXml style properties.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.ImageProcessing">
+            <summary>
+            Gets or sets how the &lt;img&gt; tag should be handled.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.BaseImageUrl">
+            <summary>
+            Gets or sets the base Uri used to automaticaly resolve relative images 
+            if used with ImageProcessing = AutomaticDownload.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.WebProxy">
+            <summary>
+            Gets or sets the proxy used to download images.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.TableCaptionPosition">
+            <summary>
+            Gets or sets where the Legend tag (&lt;caption&gt;) should be rendered (above or below the table).
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlConverter.RenderPreAsTable">
+            <summary>
+            Gets or sets whether the &lt;pre&gt; tag should be rendered as a table.
+            </summary>
+            <remarks>The table will contains only one cell.</remarks>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.AcronymPosition">
+            <summary>
+            Specifies the position of an acronym or abbreviation in the resulting conversion.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.AcronymPosition.PageEnd">
+            <summary>
+            Position at the end of the page.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.AcronymPosition.DocumentEnd">
+            <summary>
+            Position at the end of the document.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.ImageProcessing">
+            <summary>
+            Specifies how the &lt;img&gt; tag will be handled during the conversion.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.ImageProcessing.Ignore">
+            <summary>
+            Image tag are not processed.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.ImageProcessing.AutomaticDownload">
+            <summary>
+            The image will be downloaded using a classic <see cref="T:System.Net.WebClient"/>. The src attribute should
+            point on an absolute uri.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.ImageProcessing.ManualProvisioning">
+            <summary>
+            The image data will be provided by calling the <see cref="E:NotesFor.HtmlToOpenXml.HtmlConverter.ProvisionImage"/> event.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.ProvisionImageEventArgs">
+            <summary>
+            The event arguments used for a ProvisionImage event.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.ProvisionImageEventArgs.ImageUrl">
+            <summary>
+            Gets the value of the href tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.ProvisionImageEventArgs.Data">
+            <summary>
+            Gets the styles definition part located inside MainDocumentPart.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.ProvisionImageEventArgs.ImageExtension">
+            <summary>
+            Gets or sets the format of the image.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.ProvisionImageEventArgs.ImageSize">
+            <summary>
+            Gets or sets the width and height (in pixels) of the image as it should be displayed in the document.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.HtmlAttributeCollection">
+            <summary>
+            Represents the collection of attributes present in the current html tag.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.GetAsInt(System.String)">
+            <summary>
+            Gets an attribute representing an integer.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.GetAsColor(System.String)">
+            <summary>
+            Gets an attribute representing a color (named color, hexadecimal or hexadecimal 
+            without the preceding # character).
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.GetAsUnit(System.String)">
+            <summary>
+            Gets an attribute representing an unit: 120px, 10pt, 5em, 20%, ...
+            </summary>
+            <returns>If the attribute is misformed, the <see cref="P:NotesFor.HtmlToOpenXml.Unit.IsValid"/> property is set to false.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.GetAsMargin(System.String)">
+            <summary>
+            Gets an attribute representing the 4 unit sides.
+            </summary>
+            <returns>If the attribute is misformed, the <see cref="P:NotesFor.HtmlToOpenXml.Margin.IsValid"/> property is set to false.</returns>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.Count">
+            <summary>
+            Gets the number of attributes for this tag.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlAttributeCollection.Item(System.String)">
+            <summary>
+            Gets the named attribute.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.TableContext">
+            <summary>
+            Holds the tables in the order we discover them (to support nested tables).
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.TableContext.CellPosition">
+            <summary>
+            Gets or sets the position of the current processed cell in a table.
+            Origins is at the top left corner.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.TableContext.RowSpan">
+            <summary>
+            Gets the concurrent remaining row span foreach columns.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.Margin">
+            <summary>
+            Represents a Html Unit (ie: 120px, 10em, ...).
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.Margin.Parse(System.String)">
+            <summary>
+            Parse the margin style attribute.
+            </summary>
+            <remarks>
+            The margin property can have from one to four values.
+            <b>margin:25px 50px 75px 100px;</b>
+            top margin is 25px
+            right margin is 50px
+            bottom margin is 75px
+            left margin is 100px
+            
+            <b>margin:25px 50px 75px;</b>
+            top margin is 25px
+            right and left margins are 50px
+            bottom margin is 75px
+            
+            <b>margin:25px 50px;</b>
+            top and bottom margins are 25px
+            right and left margins are 50px
+            
+            <b>margin:25px;</b>
+            all four margins are 25px
+            </remarks>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Margin.Bottom">
+            <summary>
+            Gets the unit of the bottom side.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Margin.Left">
+            <summary>
+            Gets the unit of the left side.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Margin.Top">
+            <summary>
+            Gets the unit of the top side.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Margin.Right">
+            <summary>
+            Gets the unit of the right side.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection">
+            <summary>
+            Defines the styles to apply on OpenXml elements.
+            </summary>
+        </member>
+        <member name="F:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.tags">
+            <summary>Holds the tags to apply to the current OpenXml element.</summary>
+            <remarks>The key contains the name of the tag, the values contains a list of queued attributes of the same tag.</remarks>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.ApplyTags(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Apply all the current Html tag (Run properties) to the specified run.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.BeginTag(System.String,System.Collections.Generic.List{DocumentFormat.OpenXml.OpenXmlElement})">
+            <summary>
+            Add the specified tag to the list.
+            </summary>
+            <param name="name">The name of the tag.</param>
+            <param name="elements">The Run properties to apply to the next build run until the tag is popped out.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.BeginTag(System.String,DocumentFormat.OpenXml.OpenXmlElement[])">
+            <summary>
+            Add the specified tag to the list.
+            </summary>
+            <param name="name">The name of the tag.</param>
+            <param name="elements">The Run properties to apply to the next build run until the tag is popped out.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.MergeTag(System.String,System.Collections.Generic.List{DocumentFormat.OpenXml.OpenXmlElement})">
+            <summary>
+            Merge the properties with the tag of the previous level.
+            </summary>
+            <param name="name">The name of the tag.</param>
+            <param name="elements">The properties to apply to the next build run until the tag is popped out.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.MergeTag(System.String,DocumentFormat.OpenXml.OpenXmlElement[])">
+            <summary>
+            Merge the properties with the tag of the previous level.
+            </summary>
+            <param name="name">The name of the tag.</param>
+            <param name="elements">The properties to apply to the next build run until the tag is popped out.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlStyleCollection.EndTag(System.String)">
+            <summary>
+            Remove the specified tag from the list.
+            </summary>
+            <param name="name">The name of the tag.</param>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.TableStyleCollection.ApplyTags(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Apply all the current Html tag to the specified table cell.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.TableStyleCollection.ProcessCommonAttributes(NotesFor.HtmlToOpenXml.HtmlEnumerator,System.Collections.Generic.IList{DocumentFormat.OpenXml.OpenXmlElement})">
+            <summary>
+            Move inside the current tag related to table (td, thead, tr, ...) and converts some common
+            attributes to their OpenXml equivalence.
+            </summary>
+            <param name="styleAttributes">The collection of attributes where to store new discovered attributes.</param>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.WebProxy">
+            <summary>
+            Represents the configuration used to download some data such as the images.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.WebProxy.Credentials">
+            <summary>
+            Gets or sets the credentials to submit to the proxy server for authentication.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.WebProxy.Proxy">
+            <summary>
+            Gets or sets the proxy access.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.ImageHeader">
+            <summary>
+            Taken from http://stackoverflow.com/questions/111345/getting-image-dimensions-without-reading-the-entire-file/111349
+            Minor improvements including supporting unsigned 16-bit integers when decoding Jfif and added logic
+            to load the image using new Bitmap if reading the headers fails
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ImageHeader.GetDimensions(System.String)">
+            <summary>        
+            Gets the dimensions of an image.        
+            </summary>        
+            <param name="path">The path of the image to get the dimensions of.</param>        
+            <returns>The dimensions of the specified image.</returns>        
+            <exception cref="T:System.ArgumentException">The image was of an unrecognised format.</exception>        
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ImageHeader.KeepAspectRatio(System.Drawing.Size,System.Drawing.Size)">
+            <summary>
+            Resize an image keeping its aspect ratio.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ImageHeader.GetDimensions(System.IO.BinaryReader)">
+            <summary>        
+            Gets the dimensions of an image.        
+            </summary>        
+            <returns>The dimensions of the specified image.</returns>        
+            <exception cref="T:System.ArgumentException">The image was of an unrecognised format.</exception>            
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.Unit">
+            <summary>
+            Represents a Html Unit (ie: 120px, 10em, ...).
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Unit.Type">
+            <summary>
+            Gets the type of unit (pixel, percent, point, ...)
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.Unit.Value">
+            <summary>
+            Gets the value of this unit.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.HttpUtility">
+            <summary>
+            Helper class that can be found in System.Web.HttpUtility. This class allows us to avoid a reference to System.Web.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HttpUtility.HtmlDecode(System.String)">
+            <summary>
+            Converts a string that has been HTML-encoded for HTTP transmission into a decoded string.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HttpUtility.HtmlDecode(System.String,System.IO.TextWriter)">
+            <summary>
+            Converts a string that has been HTML-encoded into a decoded string, and sends
+            the decoded string to a System.IO.TextWriter output stream.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.RunStyleCollection.ApplyTags(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Apply all the current Html tag (Run properties) to the specified run.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.RunStyleCollection.ProcessCommonRunAttributes(NotesFor.HtmlToOpenXml.HtmlEnumerator,System.Collections.Generic.IList{DocumentFormat.OpenXml.OpenXmlElement})">
+            <summary>
+            Move inside the current tag related to table (td, thead, tr, ...) and converts some common
+            attributes to their OpenXml equivalence.
+            </summary>
+            <param name="styleAttributes">The collection of attributes where to store new discovered attributes.</param>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.RunStyleCollection.DefaultRunStyle">
+            <summary>
+            Gets the default StyleId to apply on the any new runs.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.OpenXmlExtension">
+            <summary>
+            Helper class that provide some extension methods to OpenXml SDK.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.OpenXmlExtension.FindNumberIDByFormat(DocumentFormat.OpenXml.Wordprocessing.Numbering,DocumentFormat.OpenXml.Wordprocessing.NumberFormatValues)">
+            <summary>
+            Finds the referencing ID of a numbering list matching a specified format.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.StyleEventArgs">
+            <summary>
+            The event arguments used for a StyleMissing event.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.StyleEventArgs.Name">
+            <summary>
+            Gets the invariant name of the style.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.StyleEventArgs.StyleDefinitionsPart">
+            <summary>
+            Gets the styles definition part located inside MainDocumentPart.
+            </summary>
+        </member>
+        <member name="T:NotesFor.HtmlToOpenXml.HtmlDocumentStyle">
+            <summary>
+            Defines the styles to apply on OpenXml elements.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.PrepareStyles(DocumentFormat.OpenXml.Packaging.MainDocumentPart)">
+            <summary>
+            Preload the styles in the document to match localized style name.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.GetStyle(System.String)">
+            <summary>
+            Helper method to obtain the StyleId of a named paragraph style (invariant or localized name).
+            </summary>
+            <param name="name">The name of the style to look for.</param>
+            <returns>If not found, returns the given name argument.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.GetStyle(System.String,System.Boolean)">
+            <summary>
+            Helper method to obtain the StyleId of a named style (invariant or localized name).
+            </summary>
+            <param name="name">The name of the style to look for.</param>
+            <param name="characterType">True to obtain the character version of the given style.</param>
+            <returns>If not found, returns the given name argument.</returns>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.DoesStyleExists(System.String)">
+            <summary>
+            Gets whether the given style exists in the document.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.AddStyle(System.String,DocumentFormat.OpenXml.Wordprocessing.Style)">
+            <summary>
+            Add a new style inside the document and refresh the style cache.
+            </summary>
+        </member>
+        <member name="E:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.StyleMissing">
+            <summary>
+            Occurs when a Style is missing in the MainDocumentPart but will be used during the conversion process.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.DefaultParagraphStyle">
+            <summary>
+            Gets the default StyleId to apply on the any new paragraph.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.HtmlDocumentStyle.DefaultStyle">
+            <summary>
+            Gets or sets the default paragraph style to apply on any new runs.
+            </summary>
+        </member>
+        <member name="M:NotesFor.HtmlToOpenXml.ParagraphStyleCollection.ApplyTags(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Apply all the current Html tag (Paragraph properties) to the specified paragrah.
+            </summary>
+        </member>
+        <member name="P:NotesFor.HtmlToOpenXml.ParagraphStyleCollection.DefaultParagraphStyle">
+            <summary>
+            Gets the default StyleId to apply on the any new paragraph.
+            </summary>
+        </member>
+    </members>
+</doc>

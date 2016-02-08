@@ -1,0 +1,23 @@
+{
+  "Name": "James Bond",
+  "Age": "40",
+  "Gun": {
+    "name": "Revolvers",
+    "type": "Colt",
+    "caliber": "45"
+  },
+  "Kills": [
+    {
+      "name": "Dr Evil",
+      "date": "1965-05-05"
+    },
+    {
+      "name": "Moneypenny",
+      "date": "1967-05-05"
+    },
+    {
+      "name": "Spectre",
+      "date": "1968-05-05"
+    }
+  ]
+}
