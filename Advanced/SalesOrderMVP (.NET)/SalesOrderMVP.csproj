@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -37,17 +38,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fluent">
-      <HintPath>Libs\Fluent.dll</HintPath>
+      <HintPath>..\..\packages\Fluent.Ribbon.3.6.1.236\lib\net40\Fluent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\packages\Fluent.Ribbon.3.6.1.236\lib\net40\Microsoft.Windows.Shell.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NGS.Templater">
-      <HintPath>Libs\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.2.1.5\lib\Net40\NGS.Templater.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>Libs\System.Data.SQLite.DLL</HintPath>
+      <HintPath>Libs\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\packages\Fluent.Ribbon.3.6.1.236\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -135,11 +146,13 @@
     <None Include="Data\Products.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Readme.md" />
     <None Include="Templates\SalesOrderItem.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,1 +1,2 @@
-Integrating Templater into small applications
+### Integrating Templater into small applications
+

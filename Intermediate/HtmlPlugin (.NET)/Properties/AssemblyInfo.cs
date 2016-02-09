@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("HtmlPlugin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("N.G.S.")]
+[assembly: AssemblyCompany("templater.info")]
 [assembly: AssemblyProduct("HtmlPlugin")]
-[assembly: AssemblyCopyright("Copyright © N.G.S 2015")]
+[assembly: AssemblyCopyright("Public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

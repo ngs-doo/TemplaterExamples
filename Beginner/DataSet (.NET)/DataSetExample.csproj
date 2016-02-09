@@ -35,7 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>.\Libs\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.2.1.5\lib\Net40\NGS.Templater.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +51,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Readme.md" />
     <None Include="SampleLetter.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

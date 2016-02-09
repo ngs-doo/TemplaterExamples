@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{172BA03B-8863-4724-B22D-0DFD205CCF46}</ProjectGuid>
+    <ProjectGuid>{0F002123-D175-4741-8CCF-09FE09BDD98D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SimpleSpreadsheet</RootNamespace>
@@ -35,7 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>Libs\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.2.1.5\lib\Net35\NGS.Templater.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +53,10 @@
     <None Include="MySpreadsheet.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

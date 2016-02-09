@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ExternalLinks")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("N.G.S.")]
+[assembly: AssemblyCompany("templater.info")]
 [assembly: AssemblyProduct("ExternalLinks")]
-[assembly: AssemblyCopyright("Copyright © N.G.S. 2015")]
+[assembly: AssemblyCopyright("public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

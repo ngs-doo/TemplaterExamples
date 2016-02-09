@@ -4,9 +4,6 @@
         xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
         xmlns:Commands="clr-namespace:SalesOrderMVP.Commands"
         Title="{Binding Title}" Height="475" Width="597">
-    <Window.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
-    </Window.Resources>
     <DockPanel>
         <Fluent:Ribbon DockPanel.Dock="Top" >
             <Fluent:RibbonTabItem Header="Home">

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Labels")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("N.G.S.")]
+[assembly: AssemblyCompany("templater.info")]
 [assembly: AssemblyProduct("Labels")]
-[assembly: AssemblyCopyright("Copyright © N.G.S. 2014")]
+[assembly: AssemblyCopyright("Public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

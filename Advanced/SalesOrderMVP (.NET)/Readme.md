@@ -1,12 +1,16 @@
-##SalesOrderMVP
+## Sales Order MVP
 
 Small WPF desktop application for managing sales orders.
+
+### Excel template
 
 For SalesOrderItem.xlsx several features are shown:
 
  * cell merging - Templater will adjusted merged cells when their context changes
  * cell styles - fonts, colors, direction, etc are preserved while document is processed
  * nesting - table is nested inside named range
+
+### Word template
 
 For SalesOrderItem.docx several features are shown:
 

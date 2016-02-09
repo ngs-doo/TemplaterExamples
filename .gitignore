@@ -30,6 +30,8 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 */target/*
 
+packages
 build
 lib
 target
+.idea

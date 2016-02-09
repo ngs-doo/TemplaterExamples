@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DataSetExample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("N.G.S.")]
+[assembly: AssemblyCompany("templater.info")]
 [assembly: AssemblyProduct("DataSetExample")]
-[assembly: AssemblyCopyright("Copyright © N.G.S. 2014")]
+[assembly: AssemblyCopyright("public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
