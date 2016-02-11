@@ -14,7 +14,7 @@ enum SupportedType {
     public final String description;
     public final String extension;
 
-    private SupportedType(final String description) {
+    SupportedType(final String description) {
         this.description = description;
         this.extension = name().toLowerCase(Locale.ENGLISH);
     }

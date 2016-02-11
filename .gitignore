@@ -20,6 +20,7 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.iml
 [Bb]in
 [Dd]ebug*/
 *.lib
@@ -28,9 +29,9 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-*/target/*
 
 packages
+target
 build
 lib
 target

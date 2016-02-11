@@ -1,18 +1,74 @@
-##Templater Server
+## Templater Server
 
-Example of running a templating processes on a small server with a preset templates, as demonstrated [on the demo page](/demo).
+Example of running a templating processes on a small server with a preset templates, as demonstrated [on the demo page](http://templater.info/demo).
 
-to run call
+Start the server from within IDE or by running
 
-    run-example.{sh|bat}
+    java -jar templater-server.jar
 
 And open your browser to `localhost:7778`
 
 Templates reside in `resources/templates`.
 Each of them has a respectable json example in `resources/examples`.
 
-`curl` from a command line for an example with
+### Examples
 
-    curl -X POST -d @resources/examples/BenchTemplate.xlsx.json http://localhost:7778/process?template=BenchTemplate.xlsx --header "Content-Type:application/json"
+Examples are showing specific features of Templater
 
-Or replace `BenchTemplate.xlsx` with some other template
+#### Beer list
+
+Navigation through fields with `.` operator.
+
+Single row is used for duplicating collection. Specific cell can span multiple rows and have different style within.
+Row cells maintain their style, such as font, alignment and various others.
+
+Numbers are converted into string with toString method (as shown in `[[beers.rating]]`).
+Numbers can be formatted and localized with **:format(pattern)**. `format(pattern)` is built-in plugin for formatting various data types.
+
+#### Benchmarks
+
+Low level API has `clone` method, which is used to duplicate entire document (in this case a single sheet) and isolate it (each instance of `ITemplater` has it's own set of tags).
+`clone` can be used through special metadata, as shown in the example.
+
+Templater will duplicate objects through clone and readjust used formulas to new sheet. In the example, formulas are updated to reflect table/named range duplication.
+
+Graphs are built off populated tables.
+Pushdown will move tables to appropriate position.
+
+#### Links
+
+Anchors are also analyzed for tags. This allows custom parts of the link to be populated with Templater.
+
+Pictures in cells are duplicated to each new row.
+
+#### Groceries
+
+Dynamic resize works on Object[][] or List<List<Object>> types.
+
+#### Label
+
+Templater is build so that templates can be designed with Word/Excel. 
+This means utilizing various their features for layout, such as multiple columns in Word.
+Table can be defined without border, so it doesn't look like table, but behaves as one.
+
+#### Dynamic data types
+
+Built-in processors for map/collections allow for working with dynamic types (even without reflection).
+It's also possible to combine several processors on a single object.
+
+#### Table pushdown
+
+During processing in non trivial Excel documents, cells are often moved around.
+Special rules exists for tables, named ranges, merge cells, formulas and various other objects.
+Templater will rewrite formulas, ranges for data sources so they are still valid after tables/ranges have been resized.
+Depending on the context, objects such as merge cells and ranges can be stretched or moved.
+
+#### Sales order cloning
+
+Row context can span multiple rows/columns.
+Since context can be nested, this allows for very complex document layouts.
+
+#### Scorecard
+
+Nested contexts can also be used in Excel. Named range can act as user-defined context.
+While tags will be analyzed during resize, values will be not. In this case processing of document in multiple stages.

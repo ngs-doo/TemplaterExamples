@@ -1,117 +1,91 @@
 package hr.ngs.templater;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.dslplatform.json.DslJson;
+import com.dslplatform.json.JsonStreamReader;
 
 import java.io.*;
 import java.util.Formatter;
-import java.util.Map;
 
 public class TemplaterJson {
-    public static void main(final String[] args) throws IOException {
-        if (args.length == 0) {
-            outputHelp(System.out);
-            System.exit(0);
-        }
+	public static void main(final String[] args) throws IOException {
+		int exitCode;
+		if (args.length == 0) {
+			outputHelp(System.out);
+			exitCode = 0;
+		} else if (args.length > 3) {
+			System.err.println("Too many arguments (" + args.length + ")!");
+			System.err.println();
+			outputHelp(System.err);
+			exitCode = 1;
+		} else {
+			try {
+				exitCode = process(
+						args[0],
+						args.length > 1 ? args[1] : null,
+						args.length > 2 ? args[2] : null);
+			} catch (Throwable t) {
+				System.err.println("An error occurred while processing:");
+				t.printStackTrace();
+				exitCode = 2;
+			}
+		}
+		System.exit(exitCode);
+	}
 
-        if (args.length > 3) {
-            System.err.println("Too many arguments (" + args.length + ")!");
-            System.err.println();
-            outputHelp(System.err);
-            System.exit(1);
-        }
+	public static int process(String templatePath, String dataPath, String outputPath) throws IOException {
+		// Prepare the input template stream, check extension
+		SupportedType st = SupportedType.getByFilename(templatePath);
+		if (st == null) {
+			System.err.println("Unsupported extension: " + templatePath);
+			return 2;
+		}
 
-        try {
-            process(
-                args[0],
-                args.length > 1 ? args[1] : null,
-                args.length > 2 ? args[2] : null);
-            System.exit(0);
-        }
-        catch (final Throwable t) {
-            System.err.println("An error occurred while processing:");
-            t.printStackTrace();
-            System.exit(2);
-        }
-    }
+		InputStream templateStream = new FileInputStream(templatePath);
 
-    public static void process(
-            final String templatePath,
-            final String dataPath,
-            final String outputPath) throws IOException {
+		// Prepare the input data stream (file or stdin)
+		InputStream dataStream = dataPath == null ? System.in : new FileInputStream(dataPath);
 
-        // Prepare the input template stream, check extension
-        final String extension;
-        final InputStream templateStream;
-        {
-            final SupportedType st = SupportedType.getByFilename(templatePath);
-            if (st == null) {
-                System.err.println("Unsupported extension: " + templatePath);
-                System.exit(2);
-            }
+		// Prepare the output stream (file or stdout)
+		OutputStream outputStream = outputPath == null ? System.out : new FileOutputStream(outputPath);
 
-            extension = st.extension;
-            templateStream = new FileInputStream(templatePath);
-        }
+		process(st.extension, templateStream, dataStream, outputStream);
+		return 0;
+	}
 
-        // Prepare the input data stream (file or stdin)
-        final InputStream dataStream = dataPath == null
-                ? System.in
-                : new FileInputStream(dataPath);
+	private static Object readData(InputStream dataStream) throws IOException {
+		JsonStreamReader<Object> reader = new JsonStreamReader<Object>(dataStream, new byte[4096], null);
+		reader.getNextToken();
+		return DslJson.deserializeObject(reader);
+	}
 
-        // Prepare the output stream (file or stdout)
-        final OutputStream outputStream = outputPath == null
-                ? System.out
-                : new FileOutputStream(outputPath);
+	public static void process(
+			String extension,
+			InputStream templateStream,
+			InputStream dataStream,
+			OutputStream outputStream) throws IOException {
 
-        process(extension, templateStream, dataStream, outputStream);
-    }
+		Object data = readData(dataStream);
 
-    protected static Object readData(final InputStream dataStream) throws IOException {
-        final BufferedInputStream bis = new BufferedInputStream(dataStream);
-        bis.mark(1);
-        final int ch0 = bis.read();
-        bis.reset();
+		ITemplateDocument tpl = Configuration.factory().open(templateStream, extension, outputStream);
+		tpl.process(data);
+		tpl.flush();
+	}
 
-        final Reader dataReader = new InputStreamReader(bis, "UTF-8");
-        final Gson gson = new GsonBuilder().create();
+	private static void outputHelp(final PrintStream ps) {
+		StringBuilder sb = new StringBuilder();
+		Formatter fmt = new Formatter(sb);
+		fmt.format("Example usage:%n" +
+				"\tjava -jar templater-json.jar [template.ext] [data.json] [output.ext]%n" +
+				"\ttemplate.ext: path to the template file (eg. document.docx)%n" +
+				"\tdata.json:    path to a file containing a JSON object or an array of JSON objects%n" +
+				"\toutput.ext:   output path where the processed report is to be placed (eg. result.docx)%n%n" +
+				"Alternatively, you can use omit the [data.json] and [output.ext] arguments to read from stdin and write to stdout%n" +
+				"\tjava -jar templater-json.jar [template.ext] < [data.json] > [output.ext]%n%n" +
+				"Supported extensions are:%n");
 
-        if (ch0 == '{') return gson.fromJson(dataReader, Map.class);
-        if (ch0 == '[') return gson.fromJson(dataReader, Map[].class);
-
-        throw new IOException("JSON stream must start with either '{' or '[', but encountered: '" + ch0 + "'");
-    }
-
-    public static void process(
-            final String extension,
-            final InputStream templateStream,
-            final InputStream dataStream,
-            final OutputStream outputStream) throws IOException {
-
-        final ITemplateDocument tpl = Configuration.factory()
-                .open(templateStream, extension, outputStream);
-
-        final Object data = readData(dataStream);
-        tpl.process(data);
-        tpl.flush();
-    }
-
-    private static void outputHelp(final PrintStream ps) {
-        final StringBuilder sb = new StringBuilder();
-        final Formatter fmt = new Formatter(sb);
-        fmt.format("Example usage:%n" +
-                "\tjava -jar templater-json.jar [template.ext] [data.json] [output.ext]%n" +
-                "\ttemplate.ext: path to the template file%n" +
-                "\tdata.json:    path to a file containing a JSON object or an array of JSON objects%n" +
-                "\toutput.ext:   output path where the processed report is to be placed%n%n" +
-                "Alternatively, you can use omit the [data.json] and [output.ext] arguments to read from stdin and write to stdout%n" +
-                "\tjava -jar templater-json.jar [template.ext] < [data.json] > [output.ext]%n%n" +
-                "Supported extensions are:%n");
-
-        for (final SupportedType st : SupportedType.values()) {
-            fmt.format("\t%-4s - %s%n", st.extension, st.description);
-        }
-
-        ps.print(sb);
-    }
+		for (SupportedType st : SupportedType.values()) {
+			fmt.format("\t%-4s - %s%n", st.extension, st.description);
+		}
+		ps.print(sb);
+	}
 }

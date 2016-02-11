@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hr.ngs.templater.examples</groupId>
+    <artifactId>parent-example</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <url>https://github.com/ngs-doo/TemplaterExamples</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>Beginner/ListExample (Java)</module>
+        <module>Beginner/MapExample (Java)</module>
+        <module>Beginner/DynamicResize (Java)</module>
+        <module>Beginner/NamedRange (Java)</module>
+        <module>Beginner/PushDownExample (Java)</module>
+        <module>Intermediate/ResultSetExample (Java)</module>
+        <module>Intermediate/TemplaterJson (Java)</module>
+        <module>Advanced/TemplaterServer (Java)</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>map-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>list-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>dynamic-resize</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>named-range-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>pushdown-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>resultset-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater</groupId>
+            <artifactId>templater-json</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+</project>

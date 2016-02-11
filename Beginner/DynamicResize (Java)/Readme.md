@@ -1,10 +1,16 @@
-##Dynamic table expanding feature
+## Dynamic resize feature
 
-Shows how to add a dynamic table. Special type: String[][] is used
+While most usage of Templater involves table with predefined columns, so that only rows are created,
+sometimes for unknown number of columns, it's useful to expand table both horizontally and vertically.
 
-Dynamic table addition works by defining an empty template that contains a table and a tag.
+While styling will be more limited in that case, table style will still be respected.
 
-That tag is later replaced by a Java array, in this case a 2D String array.
-Previous versions of Templater required the expand keyword, now it can be removed and it will just work as expected.
+### Special type - String[][]
 
-Streams can be used for input/output. In this example output is first stored in byte array stream and later saved to docx document.
+Dynamic resize works on low level API by detecting special data type: String[][] and first resizing table to appropriate size
+and then populating cell contents with provided data.
+
+### Streaming
+
+Streams can be used for input/output. 
+Output stream will be populated on `ITemplaterDocument.flush()` method.

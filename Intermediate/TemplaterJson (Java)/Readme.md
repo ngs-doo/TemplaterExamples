@@ -1,4 +1,4 @@
-##TemplaterJson
+##Templater Json
 
 Command line tool for feeding JSON to Templater.
 
@@ -8,3 +8,4 @@ If only 1 argument is specified it will assume console input and output to suppo
 
 Example usage:
 java -jar templater-json.jar benchmark-template.xlsx < benchmark-data.json > benchmark-output.xlsx
+java -jar templater-json.jar beers-template.docx beers-data.json beers-output.docx

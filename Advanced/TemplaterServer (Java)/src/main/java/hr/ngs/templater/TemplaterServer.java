@@ -18,10 +18,18 @@ public class TemplaterServer extends NanoHTTPD {
 	static final String TEMPLATES_FOLDER = "/templates/";
 	static final String DRIVE_PATH = "resources";
 
+	static final File rootPath;
+
 	private static final byte[] index;
 
 	static {
-		String[] files = new File(DRIVE_PATH, TEMPLATES_FOLDER).list();
+		File path = new File(DRIVE_PATH);
+		if (!path.exists()) {
+			path = new File(new File("Advanced", "TemplaterServer (Java)"), DRIVE_PATH);
+		}
+		rootPath = path;
+		File templates = new File(rootPath, TEMPLATES_FOLDER);
+		String[] files = templates.list();
 		Arrays.sort(files);
 		InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
 		String html;
@@ -79,12 +87,12 @@ public class TemplaterServer extends NanoHTTPD {
 	private boolean driveContains(String uri) {
 		if (driveMap.containsKey(uri)) return true;
 
-		File path = new File(DRIVE_PATH, uri);
-		if (!path.exists()) return false;
+		File path = new File(rootPath, uri);
+		if (!path.exists() || !path.getAbsolutePath().startsWith(rootPath.getAbsolutePath())) return false;
 
 		try {
 			InputStream is = new FileInputStream(path);
-			driveMap.put(path.getPath().substring(DRIVE_PATH.length()).replace(File.separator, "/"), readStream(is));
+			driveMap.put(path.getAbsolutePath().substring(rootPath.getAbsolutePath().length()).replace(File.separator, "/"), readStream(is));
 			return true;
 		} catch (IOException e) {
 			return false;

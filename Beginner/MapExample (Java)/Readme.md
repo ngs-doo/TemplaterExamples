@@ -1,9 +1,16 @@
-##MapExample
+## Map Example
 
 Using more dynamic data types. Navigating through Java method calls.
 
-Templater recognizes Map as a special types, with it's own set of rules.
+### Data type processor - for Map
 
-If Map is used, all tags matching keys in provided Map will be replaced.
+Templater recognizes Map as a special type, with it's own set of rules. 
+Collection of Map has its own processor which is different from Iterable processor.
+While object processor uses reflection to read properties, Map processor uses keys and values.
 
-By navigating to entrySet method we can invoke collection behavior (context duplication).
+### Method navigation
+
+Since Map can be viewed as a collection, by navigating through entrySet method collection behavior can be invoked - context duplication.
+While Templater doesn't recognize Joda Time, it does Date, so often Joda Time method for toDate conversion can be used.
+Most of the time, simple toString on Joda Time object provides expected behavior.
+Since bean standard is not supported, only `getKey` method can be used to access key value of the pair.  
