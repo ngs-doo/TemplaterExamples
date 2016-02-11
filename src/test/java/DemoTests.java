@@ -70,6 +70,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testFormulas() throws Exception {
+		FormulaExample.main(null);
+	}
+
+	@Test
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
 	}
