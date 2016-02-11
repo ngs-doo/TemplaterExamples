@@ -24,6 +24,6 @@ in which case it's best to copy paste desired region into new document which wil
 
 ### ResultSet processor
 
-Alongsize object procesor, Iterable processor, Map processor, Templater has built-in ResultSet processor which does resizing in chunks.
+Alongside object procesor, Iterable processor, Map processor, Templater has built-in ResultSet processor which does resizing in chunks.
 Iterable processor works by calling single resize call, following by processing of each item.
 ResultSet processor works by loading chunks of data in memory, resizing the region, processing loaded items and repeating the process untill all ResultSet is processed.

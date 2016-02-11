@@ -20,6 +20,8 @@
         <module>Beginner/DynamicResize (Java)</module>
         <module>Beginner/NamedRange (Java)</module>
         <module>Beginner/PushDownExample (Java)</module>
+        <module>Intermediate/CollapseRegion (Java)</module>
+        <module>Intermediate/BoolOverride (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
         <module>Intermediate/TemplaterJson (Java)</module>
         <module>Advanced/TemplaterServer (Java)</module>
@@ -60,6 +62,21 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>resultset-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>bool-override-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>collapse-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>bool-override-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

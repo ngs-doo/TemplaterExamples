@@ -55,6 +55,16 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testCollapse() throws Exception {
+		CollapseExample.main(null);
+	}
+
+	@Test
+	public void testPlugin() throws Exception {
+		BoolExample.main(null);
+	}
+
+	@Test
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
 	}
