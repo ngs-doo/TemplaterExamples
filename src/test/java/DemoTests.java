@@ -60,8 +60,13 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testPlugin() throws Exception {
+	public void testOverride() throws Exception {
 		BoolExample.main(null);
+	}
+
+	@Test
+	public void testLimits() throws Exception {
+		LimitsExample.main(null);
 	}
 
 	@Test
