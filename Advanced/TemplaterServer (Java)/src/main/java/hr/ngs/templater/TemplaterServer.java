@@ -28,8 +28,7 @@ public class TemplaterServer extends NanoHTTPD {
 			path = new File(new File("Advanced", "TemplaterServer (Java)"), DRIVE_PATH);
 		}
 		rootPath = path;
-		File templates = new File(rootPath, TEMPLATES_FOLDER);
-		String[] files = templates.list();
+		String[] files = new File(rootPath, TEMPLATES_FOLDER).list();
 		Arrays.sort(files);
 		InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
 		String html;
@@ -39,12 +38,17 @@ public class TemplaterServer extends NanoHTTPD {
 			throw new RuntimeException(e);
 		}
 		StringBuilder response = new StringBuilder();
+
+		String listItemHtml = "<li><p>" +
+				"<button class=\"btn btn-primary feat-btn feat-btn-lg\" data-template=\"{{template}}\">" +
+				"<i class=\"fa fa-file-text\" ></i> {{template}}" +
+				"</button>" +
+				"</p></li>";
+
 		for (String file : files) {
-			response.append("'");
-			response.append(file);
-			response.append("',");
+			response.append(listItemHtml.replace("{{template}}", file));
 		}
-		response.setLength(response.length() - 1);
+
 		index = html.replace("${templates}", response.toString()).getBytes(UTF8);
 	}
 
@@ -77,11 +81,10 @@ public class TemplaterServer extends NanoHTTPD {
 	@Override
 	public Response serve(IHTTPSession session) {
 		String uri = session.getUri();
-
-		return "/".equals(uri) ? new Response(Response.Status.OK, MIME_HTML, new ByteArrayInputStream(index))
+		return "/".equals(uri) ? newChunkedResponse(Response.Status.OK, MIME_HTML, new ByteArrayInputStream(index))
 				: uri.startsWith(PROCESS_PATH) ? processTemplaterResponse(session)
 				: driveContains(uri) ? createResponse(uri, driveMap.get(uri))
-				: new Response(Response.Status.NOT_FOUND, MIME_PLAINTEXT, "URL not found!");
+				: newFixedLengthResponse(Response.Status.NOT_FOUND, MIME_PLAINTEXT, "URL not found!");
 	}
 
 	private boolean driveContains(String uri) {
@@ -107,17 +110,17 @@ public class TemplaterServer extends NanoHTTPD {
 	 */
 	private Response processTemplaterResponse(final IHTTPSession session) {
 		final Map<String, String> params = session.getParms();
-
-		final String toPdfParam = params.get("toPdf");
-		final boolean toPdf = "true".equals(toPdfParam);
-
-		final String templateName = params.get("template");
-		final String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
-
-		if (templateName == null || !driveContains(templaterTemplatePath))
-			return new Response(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Missing template name or template not found.");
 		try {
 			session.parseBody(params);
+			final boolean toPdf = "true".equals(params.get("toPdf"));
+			final String templateName = params.get("template");
+			final String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
+
+			if (templateName == null)
+				return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Missing template name.");
+			if (!driveContains(templaterTemplatePath))
+				return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Template not found.");
+
 			String ext = getExtension(templateName);
 			String name = templateName.substring(0, templateName.length() - ext.length() - 1);
 
@@ -125,23 +128,23 @@ public class TemplaterServer extends NanoHTTPD {
 			byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(params.get("json")), ext);
 			byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext) : templaterResultBytes;
 			if (resultBytes == null)
-				return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "Failed creating report");
+				return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "Failed creating report");
 
-			Response response = createResponse(ext, resultBytes);
+			Response response = createResponse(toPdf ? "pdf" : ext, resultBytes);
 			response.addHeader("Accept-Ranges", "bytes");
 			response.addHeader("Content-Disposition", "attachment;filename=" + name + "." + (toPdf ? "pdf" : ext));
 			return response;
 		} catch (final ParseException e) {
-			return new Response(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, e.getMessage());
+			return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, e.getMessage());
 		} catch (final IOException e) {
 			e.printStackTrace();
-			return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.getMessage());
+			return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.getMessage());
 		} catch (final ResponseException e) {
 			e.printStackTrace();
-			return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.getMessage());
+			return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.getMessage());
 		} catch (final InterruptedException e) {
 			e.printStackTrace();
-			return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.toString());
+			return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, e.toString());
 		}
 	}
 
@@ -230,7 +233,7 @@ public class TemplaterServer extends NanoHTTPD {
 			mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 		else if (resourcePath.endsWith("pdf")) mime = "application/pdf";
 		else mime = MIME_PLAINTEXT;
-		return new Response(Response.Status.OK, mime, new ByteArrayInputStream(content));
+		return newChunkedResponse(Response.Status.OK, mime, new ByteArrayInputStream(content));
 	}
 
 	public static void main(final String[] args) {
