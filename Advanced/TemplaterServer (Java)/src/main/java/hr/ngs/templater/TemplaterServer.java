@@ -18,18 +18,10 @@ public class TemplaterServer extends NanoHTTPD {
 	static final String TEMPLATES_FOLDER = "/templates/";
 	static final String DRIVE_PATH = "resources";
 
-	static final File rootPath;
-
 	private static final byte[] index;
 
 	static {
-		File path = new File(DRIVE_PATH);
-		if (!path.exists()) {
-			path = new File(new File("Advanced", "TemplaterServer (Java)"), DRIVE_PATH);
-		}
-		rootPath = path;
-		File templates = new File(rootPath, TEMPLATES_FOLDER);
-		String[] files = templates.list();
+		String[] files = new File(DRIVE_PATH, TEMPLATES_FOLDER).list();
 		Arrays.sort(files);
 		InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
 		String html;
@@ -39,12 +31,17 @@ public class TemplaterServer extends NanoHTTPD {
 			throw new RuntimeException(e);
 		}
 		StringBuilder response = new StringBuilder();
+
+		String listItemHtml = "<li><p>" +
+				"<button class=\"btn btn-primary feat-btn feat-btn-lg\" data-template=\"{{template}}\">" +
+				"<i class=\"fa fa-file-text\" ></i> {{template}}" +
+				"</button>" +
+				"</p></li>";
+
 		for (String file : files) {
-			response.append("'");
-			response.append(file);
-			response.append("',");
+			response.append(listItemHtml.replace("{{template}}", file));
 		}
-		response.setLength(response.length() - 1);
+
 		index = html.replace("${templates}", response.toString()).getBytes(UTF8);
 	}
 
@@ -87,12 +84,12 @@ public class TemplaterServer extends NanoHTTPD {
 	private boolean driveContains(String uri) {
 		if (driveMap.containsKey(uri)) return true;
 
-		File path = new File(rootPath, uri);
-		if (!path.exists() || !path.getAbsolutePath().startsWith(rootPath.getAbsolutePath())) return false;
+		File path = new File(DRIVE_PATH, uri);
+		if (!path.exists()) return false;
 
 		try {
 			InputStream is = new FileInputStream(path);
-			driveMap.put(path.getAbsolutePath().substring(rootPath.getAbsolutePath().length()).replace(File.separator, "/"), readStream(is));
+			driveMap.put(path.getPath().substring(DRIVE_PATH.length()).replace(File.separator, "/"), readStream(is));
 			return true;
 		} catch (IOException e) {
 			return false;
@@ -107,17 +104,17 @@ public class TemplaterServer extends NanoHTTPD {
 	 */
 	private Response processTemplaterResponse(final IHTTPSession session) {
 		final Map<String, String> params = session.getParms();
-
-		final String toPdfParam = params.get("toPdf");
-		final boolean toPdf = "true".equals(toPdfParam);
-
-		final String templateName = params.get("template");
-		final String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
-
-		if (templateName == null || !driveContains(templaterTemplatePath))
-			return new Response(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Missing template name or template not found.");
 		try {
 			session.parseBody(params);
+			final boolean toPdf = "true".equals(params.get("toPdf"));
+			final String templateName = params.get("template");
+			final String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
+
+			if (templateName == null)
+				return new Response(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Missing template name.");
+			if (!driveContains(templaterTemplatePath))
+				return new Response(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Template not found.");
+
 			String ext = getExtension(templateName);
 			String name = templateName.substring(0, templateName.length() - ext.length() - 1);
 
@@ -127,7 +124,7 @@ public class TemplaterServer extends NanoHTTPD {
 			if (resultBytes == null)
 				return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "Failed creating report");
 
-			Response response = createResponse(ext, resultBytes);
+			Response response = createResponse(toPdf ? "pdf" : ext, resultBytes);
 			response.addHeader("Accept-Ranges", "bytes");
 			response.addHeader("Content-Disposition", "attachment;filename=" + name + "." + (toPdf ? "pdf" : ext));
 			return response;
