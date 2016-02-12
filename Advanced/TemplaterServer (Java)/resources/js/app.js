@@ -85,7 +85,7 @@ $(function () {
         aceEditor.setValue($editor.html(), -1);
         $editor.hide();
         $('#ace-editor').show();
-        $('#loading').visibility('hidden');
+        $('#loading-ace').css('visibility', 'hidden');
       }
     };
     var t = document.getElementsByTagName('script')[0]
