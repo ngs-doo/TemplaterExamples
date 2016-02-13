@@ -52,7 +52,7 @@ public class TemplaterServer extends NanoHTTPD {
 		index = html.replace("${templates}", response.toString()).getBytes(UTF8);
 	}
 
-	private final Map<String, byte[]> driveMap = new HashMap<String, byte[]>();
+	private final Map<String, byte[]> driveMap = new HashMap<>();
 
 	public TemplaterServer() throws IOException {
 		super(PORT);
@@ -95,7 +95,8 @@ public class TemplaterServer extends NanoHTTPD {
 
 		try {
 			InputStream is = new FileInputStream(path);
-			driveMap.put(path.getAbsolutePath().substring(rootPath.getAbsolutePath().length()).replace(File.separator, "/"), readStream(is));
+			String address = path.getAbsolutePath().substring(rootPath.getAbsolutePath().length()).replace(File.separator, "/");
+			driveMap.put(address, readStream(is));
 			return true;
 		} catch (IOException e) {
 			return false;
@@ -112,16 +113,16 @@ public class TemplaterServer extends NanoHTTPD {
 		final Map<String, String> params = session.getParms();
 		try {
 			session.parseBody(params);
-			final boolean toPdf = "true".equals(params.get("toPdf"));
-			final String templateName = params.get("template");
-			final String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
+			String templateName = params.get("template");
+			String templaterTemplatePath = TEMPLATES_FOLDER + templateName;
 
-			if (templateName == null)
+			if (templateName == null || templateName.length() == 0)
 				return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Missing template name.");
 			if (!driveContains(templaterTemplatePath))
 				return newFixedLengthResponse(Response.Status.BAD_REQUEST, MIME_PLAINTEXT, "Template not found.");
 
 			String ext = getExtension(templateName);
+			boolean toPdf = "true".equals(params.get("toPdf")) && "docx".equals(ext);
 			String name = templateName.substring(0, templateName.length() - ext.length() - 1);
 
 			byte[] templaterBytes = driveMap.get(templaterTemplatePath);
@@ -201,7 +202,7 @@ public class TemplaterServer extends NanoHTTPD {
 
 	private static Object parseJson(final String postData) throws ParseException {
 		if (postData == null) return null;
-		final JsonReader<Object> reader = new JsonReader<Object>(postData.getBytes(UTF8), null);
+		final JsonReader<Object> reader = new JsonReader<>(postData.getBytes(UTF8), null);
 		try {
 			reader.getNextToken();
 			return DslJson.deserializeObject(reader);

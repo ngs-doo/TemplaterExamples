@@ -9,12 +9,13 @@ $(function () {
   var $downloadTemplate = $('#download-template');
   var $form = $('#post_action');
   var baseUrl = '';
-  var convertToPdf = true;
+  var convertToPdf = false;
   var activeTemplate = null;
   var aceEditor = null;
 
   function updateProcessTemplateText() {
-    var extension = convertToPdf ? 'pdf' : activeTemplate.substr(activeTemplate.lastIndexOf('.') + 1);
+    var extension = activeTemplate.substr(activeTemplate.lastIndexOf('.') + 1);
+    if (convertToPdf && extension == 'docx') extension = 'pdf';
     $processTemplate.html('Create ' + extension + ' document with ' + activeTemplate);
   }
 

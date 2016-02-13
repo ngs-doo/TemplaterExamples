@@ -1,0 +1,41 @@
+[
+  {
+    "paybackYears": 15,
+    "ucCheck": true,
+    "ucCheckResponse": null,
+    "applicant": {
+      "name": "John Doe",
+      "from": {
+        "name": "IBM",
+        "fromYear": 2011,
+        "fromMonth": 11
+      },
+      "fromUntil": null
+    }
+  },
+  {
+    "paybackYears": 10,
+    "ucCheck": false,
+    "ucCheckResponse": "Applicant not reliable",
+    "applicant": {
+      "name": "John Doe",
+      "fromUntil": {
+        "name": "Google",
+        "fromYear": 2012,
+        "fromMonth": 11,
+        "untilYear": 2014,
+        "untilMonth": 5
+      },
+      "from": null
+    },
+    "coApplicant": {
+      "name": "John Doe",
+      "fromUntil": null,
+      "from": {
+        "name": "Apple",
+        "fromYear": 2014,
+        "fromMonth": 12
+      }
+    }
+  }
+]

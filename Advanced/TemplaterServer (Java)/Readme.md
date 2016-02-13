@@ -35,6 +35,19 @@ Templater will duplicate objects through clone and readjust used formulas to new
 Graphs are built off populated tables.
 Pushdown will move tables to appropriate position.
 
+#### Charts
+
+Excel charts can be created based on data source (either table or range).
+Charts in Word are just embedded Excels.
+
+#### Collapse
+
+Regions of text can be removed with :collapse metadata (which just calls built-in plugin).
+Default implementation will collapse region of document if null, empty or true value is provided.
+
+In this example, :clone is required, since two elements are being sent for processing and Templater doesn't cope with it otherwise.
+While :collapse will remove tags, processor will still continue trying to replace the missing tags, so empty values will end up on the next context.
+
 #### Links
 
 Anchors are also analyzed for tags. This allows custom parts of the link to be populated with Templater.
@@ -71,4 +84,5 @@ Since context can be nested, this allows for very complex document layouts.
 #### Scorecard
 
 Nested contexts can also be used in Excel. Named range can act as user-defined context.
-While tags will be analyzed during resize, values will be not. In this case processing of document in multiple stages.
+While tags will be analyzed during resize, values will not. 
+In that case processing of document in multiple stages is required.
