@@ -20,7 +20,7 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testJsonBear() throws Exception {
+	public void testJsonBeer() throws Exception {
 		InputStream json = DemoTests.class.getResourceAsStream("/beers-data.json");
 		InputStream template = DemoTests.class.getResourceAsStream("/beers-template.docx");
 		File tmp = File.createTempFile("beers", ".docx");
