@@ -1,0 +1,66 @@
+{
+  "groups":[
+    {
+      "name": "Fighters",
+      "description": "Characters from fighting games",
+      "person":442,
+      "targetPercentage":0.23,
+      "category":0.1,
+      "items":[
+        {
+          "name": "Johnny Cage",
+          "person": 647,
+          "targetPercentage" : 0.533,
+          "category": 0.44
+        },
+        {
+          "name": "Sub-zero",
+          "person": 1122,
+          "targetPercentage" : 0.234,
+          "category": 0.655
+        }
+      ]
+    },
+    {
+      "name": "Actors",
+      "description": "Movie actors",
+      "person":663,
+      "targetPercentage":0.66,
+      "category":0.2,
+      "items":[
+        {
+          "name": "Robert De Niro",
+          "person": 12,
+          "targetPercentage" : 0.88,
+          "category": 0.77
+        },
+        {
+          "name": "Clint Eastwood",
+          "person": 543,
+          "targetPercentage" : 0.87,
+          "category": 0.78
+        },
+        {
+          "name": "Tom Hanks",
+          "person": 884,
+          "targetPercentage" : 0.45,
+          "category": 0.34
+        }
+      ]
+    }
+  ],
+  "total":[
+    {
+      "name":"Fighters",
+      "person":1234
+    },
+    {
+      "name":"Actors",
+      "person":2233
+    },
+    {
+      "name":"Random",
+      "person":5551
+    }
+  ]
+}
