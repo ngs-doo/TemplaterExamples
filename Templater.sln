@@ -37,7 +37,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartExample", "Intermediat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advanced\DoubleProcessing (.NET)\DoubleProcessing.csproj", "{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
+EndProject
 Global
+	GlobalSection(DslPlatformSolutionProperties) = preSolution
+		Php.Name = Php
+		Php.Target = Php
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -227,6 +233,16 @@ Global
 		{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}.Release|x86.ActiveCfg = Release|x86
 		{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}.Release|x86.Build.0 = Release|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Debug|x86.ActiveCfg = Debug|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Debug|x86.Build.0 = Debug|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|Any CPU.ActiveCfg = Release|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|x86.ActiveCfg = Release|x86
+		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
