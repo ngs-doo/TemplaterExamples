@@ -21,6 +21,7 @@ public class TemplaterServer extends NanoHTTPD {
 	static final File rootPath;
 
 	private static final byte[] index;
+	private static final byte[] indexDefault;
 
 	static {
 		File path = new File(DRIVE_PATH);
@@ -49,7 +50,16 @@ public class TemplaterServer extends NanoHTTPD {
 			response.append(listItemHtml.replace("{{template}}", file));
 		}
 
-		index = html.replace("${templates}", response.toString()).getBytes(UTF8);
+		String indexContent = html.replace("${templates}", response.toString());
+		index = indexContent.getBytes(UTF8);
+
+		try {
+			String defaultHtml = new String(readStream(TemplaterServer.class.getResourceAsStream("/default.html")), UTF8);
+			indexDefault = defaultHtml.replace("${content}", indexContent).getBytes(UTF8);
+			;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private final Map<String, byte[]> driveMap = new HashMap<>();
@@ -81,7 +91,7 @@ public class TemplaterServer extends NanoHTTPD {
 	@Override
 	public Response serve(IHTTPSession session) {
 		String uri = session.getUri();
-		return "/".equals(uri) ? newChunkedResponse(Response.Status.OK, MIME_HTML, new ByteArrayInputStream(index))
+		return "/".equals(uri) || "/content".equals(uri) ? newChunkedResponse(Response.Status.OK, MIME_HTML, new ByteArrayInputStream("/".equals(uri) ? indexDefault : index))
 				: uri.startsWith(PROCESS_PATH) ? processTemplaterResponse(session)
 				: driveContains(uri) ? createResponse(uri, driveMap.get(uri))
 				: newFixedLengthResponse(Response.Status.NOT_FOUND, MIME_PLAINTEXT, "URL not found!");

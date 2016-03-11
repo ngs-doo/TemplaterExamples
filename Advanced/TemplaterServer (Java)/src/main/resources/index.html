@@ -1,88 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Templater Server Example</title>
-    <link href="static/bootstrap-custom.min.css" rel="stylesheet">
-    <script src='js/app.js'></script>
-
-    <style type="text/css" media="screen">
-        .ace_editor {
-            height: 400px;
-        }
-        .text_editor {
-            height : 400px;
-            width: 100%;
-            font-size: 10px;
-            font-family: monospace;
-        }
-        .feat-box {
-            margin-top: 20px;
-        }
-        .append-bottom {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-
-<body>
 <div class="container">
-    <div class="row ">
-        <h1>Templater Server Example</h1>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="upper">Demo</h1>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <h3>Put your JSON here:</h3>
 
-    <div class="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="upper">Demo</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-8">
-                    <h3>Put your JSON here:</h3>
-                    <div id="loading-ace" class="text-muted">
-                        <svg width='16px' height='16px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ring"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke-dasharray="160 85" stroke="#777777" fill="none" stroke-width="20"><animateTransform attributeName="transform" type="rotate" values="0 50 50;180 50 50;360 50 50;" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" begin="0s"></animateTransform></circle></svg>
-                        <span id="loading-text">Loading Ace editor...</span>
-                    </div>
-                    <form id="post_action" action="/process?test=argh" method="post" accept-charset="UTF-8">
-                        <div class="ace_editor" id="ace-editor" style="display:none"></div>
-                        <textarea class="text_editor" id="template-editor" name="json"></textarea>
-                        <div class="feat-box append-top">
-                            <div>
-                                <p>
-                                    <button id="beautify-json" type="button" class="btn btn-primary append-bottom">Beautify JSON</button>
-                                    <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf">
-                                        PDF conversion <span class="active" style="display:none">ON</span><span class="disabled">OFF</span>
-                                    </button> <small class="text-muted">(toggle for docx only)</small>
-                                    <input type="hidden" name="toPdf" value="false" />
-                                    <input type="hidden" name="template" value="" />
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <button id="process-template" type="submit" class="btn btn-success btn-lg"></button>
-                                </p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="sidebar sidebar-box col-sm-4">
-                    <p><small>Selecting a template will load accompanying JSON.</small></p>
-                    <h3 class="sidebar-title templates-title">Templates list</h3>
-                    <div id="trs">
-                        <ul class="list-unstyled list-template" id="template-list">
-                            ${templates}
-                        </ul>
-                        <a href="#" class="btn btn-default btn-block btn-lg btn-success" id="download-template">
-                            Download <span class="has-active-template"></span>
-                            <span class="btn-icon"> <i class="fa fa-download"></i></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <div id="loading-ace" class="text-muted">
+        <svg width='16px' height='16px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+             preserveAspectRatio="xMidYMid" class="uil-ring">
+          <rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
+          <circle cx="50" cy="50" r="40" stroke-dasharray="160 85" stroke="#777777" fill="none"
+                  stroke-width="20">
+            <animateTransform attributeName="transform" type="rotate" values="0 50 50;180 50 50;360 50 50;"
+                              keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite"
+                              begin="0s"></animateTransform>
+          </circle>
+        </svg>
+        <span id="loading-text">Loading Ace editor...</span>
+      </div>
+      <form id="post_action" action="/process" method="post" accept-charset="UTF-8">
+        <div class="ace_editor" id="ace-editor" style="display:none"></div>
+        <textarea class="text_editor" id="template-editor" name="json"></textarea>
+
+        <div class="feat-box append-top">
+          <div>
+            <p>
+              <button id="beautify-json" type="button" class="btn btn-primary append-bottom">Beautify
+                JSON
+              </button>
+              <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf">
+                PDF conversion <span class="active" style="display:none">ON</span><span
+                class="disabled">OFF</span>
+              </button>
+              <small class="text-muted">(toggle for docx only)</small>
+              <input type="hidden" name="toPdf" value="false"/>
+              <input type="hidden" name="template" value=""/>
+            </p>
+          </div>
+          <div>
+            <p>
+              <button id="process-template" type="submit" class="btn btn-success btn-lg"></button>
+            </p>
+          </div>
         </div>
+      </form>
     </div>
+    <div class="sidebar sidebar-box col-sm-4">
+      <p>
+        <small>Selecting a template will load accompanying JSON.</small>
+      </p>
+      <h3 class="sidebar-title templates-title">Templates list</h3>
 
+      <div id="trs">
+        <ul class="list-unstyled list-template" id="template-list">
+          ${templates}
+        </ul>
+        <a href="#" class="btn btn-default btn-block btn-lg btn-success" id="download-template">
+          Download <span class="has-active-template"></span>
+          <span class="btn-icon"> <i class="fa fa-download"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
-</body>
-</html>
