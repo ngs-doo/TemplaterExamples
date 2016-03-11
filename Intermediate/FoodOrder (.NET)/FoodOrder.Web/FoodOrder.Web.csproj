@@ -16,6 +16,8 @@
     <UseIISExpress>false</UseIISExpress>
     <SilverlightApplicationList>{798C7619-61C3-4FC8-9C1C-5612356CD5B7}|..\FoodOrder\FoodOrder.csproj|ClientBin|False</SilverlightApplicationList>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\TemplaterExamples\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +39,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\..\packages\Templater.2.1.5\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\..\packages\Templater.2.2.1\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -122,6 +124,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
