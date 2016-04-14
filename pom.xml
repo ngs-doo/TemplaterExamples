@@ -24,6 +24,7 @@
         <module>Intermediate/BoolOverride (Java)</module>
         <module>Intermediate/LimitPlugins (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
+        <module>Intermediate/DocxImport (Java)</module>
         <module>Intermediate/Formulas (Java)</module>
         <module>Intermediate/TemplaterJson (Java)</module>
         <module>Advanced/TemplaterServer (Java)</module>
@@ -84,6 +85,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>bool-override-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>docx-import-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

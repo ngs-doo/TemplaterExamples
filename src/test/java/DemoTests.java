@@ -65,6 +65,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testImport() throws Exception {
+		ImportExample.main(null);
+	}
+
+	@Test
 	public void testLimits() throws Exception {
 		LimitsExample.main(null);
 	}
