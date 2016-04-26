@@ -22,7 +22,7 @@ public class NamedRangeExample {
 						new BigDecimal((g + 1) + (c + 1) * 0.01));
 			}
 
-			betaGroups[g] = new BetaGroup("Group " + g, betaClauses);
+			betaGroups[g] = new BetaGroup("Group " + (g + 1), betaClauses);
 		}
 
 		return new Scorecard(
