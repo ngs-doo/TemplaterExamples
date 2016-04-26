@@ -55,6 +55,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testPivot() throws Exception {
+		PivotExample.main(null);
+	}
+
+	@Test
 	public void testCollapse() throws Exception {
 		CollapseExample.main(null);
 	}

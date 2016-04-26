@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hr.ngs.templater.examples</groupId>
-    <artifactId>parent-example</artifactId>
+    <artifactId>templater-examples</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
@@ -20,6 +20,7 @@
         <module>Beginner/DynamicResize (Java)</module>
         <module>Beginner/NamedRange (Java)</module>
         <module>Beginner/PushDownExample (Java)</module>
+        <module>Beginner/PivotExample (Java)</module>
         <module>Intermediate/CollapseRegion (Java)</module>
         <module>Intermediate/BoolOverride (Java)</module>
         <module>Intermediate/LimitPlugins (Java)</module>
@@ -60,6 +61,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>pushdown-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>pivot-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
