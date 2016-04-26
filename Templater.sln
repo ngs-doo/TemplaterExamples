@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules (.NET)\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion (.NET)", "Beginner\ToFormulaConversion (.NET)\ToFormulaConversion.csproj", "{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}"
+EndProject
 Global
 	GlobalSection(DslPlatformSolutionProperties) = preSolution
 		Php.Name = Php
@@ -243,6 +245,16 @@ Global
 		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|Mixed Platforms.Build.0 = Release|x86
 		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|x86.ActiveCfg = Release|x86
 		{D28B79F8-206A-43B0-BAE4-B3402A5162DD}.Release|x86.Build.0 = Release|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Debug|x86.ActiveCfg = Debug|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Debug|x86.Build.0 = Debug|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Release|Any CPU.ActiveCfg = Release|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Release|x86.ActiveCfg = Release|x86
+		{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
