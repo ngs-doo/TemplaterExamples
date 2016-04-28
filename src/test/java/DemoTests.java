@@ -70,6 +70,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testShared() throws Exception {
+		SharedCollectionExample.main(null);
+	}
+
+	@Test
 	public void testImport() throws Exception {
 		ImportExample.main(null);
 	}
