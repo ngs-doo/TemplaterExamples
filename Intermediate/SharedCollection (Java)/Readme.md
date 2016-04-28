@@ -9,6 +9,8 @@ When Templater opens up document, it will scan every tag and place it in a queue
 **replace(tag, value)** will only work on the first item in that queue.
 New **replace(tag, index, value)** work on any item in the queue.
 
-*Node*: this works since tables have different tags. If both tables had the same tags, Templater would behave differently.
+Previously if similar document wanted to be processed, Templater could do it out of the box only if you had two different property names (pointing to the same collection).
+
+*Note*: this works since tables have different tags. If both tables had the same tags, Templater would behave differently.
 It would replace/resize only the first table. If both tables need to be replaced, this can be done with a workaround,
 by adding **:repeat** metadata to one of the tags.
