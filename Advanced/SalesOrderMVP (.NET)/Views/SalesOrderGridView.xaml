@@ -17,6 +17,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date, StringFormat=d}" />
                     <DataGridTextColumn Header="Customer" Width="2*" Binding="{Binding Path=Customer.Name}" />
+                    <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}" />
                     <DataGridTextColumn Header="Total" Width="1*" Binding="{Binding Total}" />
                 </DataGrid.Columns>
             </DataGrid>

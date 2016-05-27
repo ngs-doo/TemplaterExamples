@@ -37,6 +37,12 @@
                           IsHitTestVisible="{Binding EditableState}"
                           SelectedValue="{Binding Path=CurrentItem.Customer, Mode=TwoWay}" />
             </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Status"  />
+                <TextBox Text="{Binding Path=CurrentItem.Status}" 
+                         Width="120"
+                         IsHitTestVisible="{Binding EditableState}" />
+            </StackPanel>
             <Grid IsHitTestVisible="{Binding EditableState}">
                 <DataGrid CanUserAddRows="True" CanUserDeleteRows="True" Margin="3"                          
                           DataContext="{Binding CurrentItem}"

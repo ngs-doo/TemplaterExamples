@@ -10,6 +10,7 @@ namespace SalesOrderMVP.Models
 		public string URI { get { return ID.ToString(); } }
 		public DateTime Date { get; set; }
 		public Customer Customer { get; set; }
+		public string Status { get; set; }
 
 		public ObservableCollection<SalesOrderLine> Items { get; private set; }
 

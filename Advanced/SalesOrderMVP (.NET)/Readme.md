@@ -18,5 +18,6 @@ For SalesOrderItem.docx several features are shown:
  * header/footer - tags can be placed in headers/footers (although in this example they are hidden at the end
  * formatting - date/number formatting
  * style - rows in table maintain their style as they are duplicated
+ * watermark - document status is displayed as watermark (currently :all metadata is required, since watermark exists in few different document parts)
 
 Both documents are non trivial to design which shows the value in separating template design from data population.

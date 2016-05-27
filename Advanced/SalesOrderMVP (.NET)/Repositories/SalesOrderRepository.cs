@@ -17,7 +17,7 @@ namespace SalesOrderMVP.Repositories
 				{
 					conn.Open();
 					var comOrder = conn.CreateCommand();
-					comOrder.CommandText = "SELECT ID, Date, CustomerURI, CustomerName, CustomerAddress FROM SalesOrder ORDER BY ID";
+					comOrder.CommandText = "SELECT ID, Date, CustomerURI, CustomerName, CustomerAddress, Status FROM SalesOrder ORDER BY ID";
 					var orderReader = comOrder.ExecuteReader();
 					var comItems = conn.CreateCommand();
 					comItems.CommandText = "SELECT SalesOrderID, ProductName, Price, Quantity FROM SalesOrderLine ORDER BY SalesOrderID, ItemIndex";
@@ -32,8 +32,9 @@ namespace SalesOrderMVP.Repositories
 							{
 								URI = orderReader.GetString(2),
 								Name = orderReader.GetString(3),
-								Address = orderReader.GetString(4)
-							}
+								Address = orderReader.GetString(4),
+							},
+							Status = orderReader.GetString(5)
 						};
 						do
 						{
@@ -61,6 +62,7 @@ namespace SalesOrderMVP.Repositories
 			comHead.Parameters.Add("@Customer", DbType.String);
 			comHead.Parameters.Add("@Name", DbType.String);
 			comHead.Parameters.Add("@Address", DbType.String);
+			comHead.Parameters.Add("@Status", DbType.String);
 			comItem.CommandText = "INSERT INTO SalesOrderLine VALUES(@ID, @Index, @Product, @Price, @Quantity)";
 			comItem.Parameters.Clear();
 			comItem.Parameters.Add("@ID", DbType.Guid);
@@ -76,6 +78,7 @@ namespace SalesOrderMVP.Repositories
 				comHead.Parameters["@Customer"].Value = head.Customer.URI;
 				comHead.Parameters["@Name"].Value = head.Customer.Name;
 				comHead.Parameters["@Address"].Value = head.Customer.Address;
+				comHead.Parameters["@Status"].Value = head.Status;
 				comHead.ExecuteNonQuery();
 				for (int i = 0; i < head.Items.Count; i++)
 				{
@@ -105,13 +108,13 @@ namespace SalesOrderMVP.Repositories
 				comItem.Transaction = tran;
 				if (insert != null)
 				{
-					comHead.CommandText = "INSERT INTO SalesOrder VALUES(@ID, @Date, @Customer, @Name, @Address)";
+					comHead.CommandText = "INSERT INTO SalesOrder VALUES(@ID, @Date, @Customer, @Name, @Address, @Status)";
 					InsertOrUpdate(comHead, comItem, insert);
 				}
 				if (update != null)
 				{
 					comHead.CommandText = @"
-UPDATE SalesOrder SET Date = @Date, CustomerURI = @Customer, CustomerName = @Name, CustomerAddress = @Address WHERE ID = @ID;
+UPDATE SalesOrder SET Date = @Date, CustomerURI = @Customer, CustomerName = @Name, CustomerAddress = @Address, Status = @Status WHERE ID = @ID;
 DELETE FROM SalesOrderLine WHERE SalesOrderID = @ID";
 					InsertOrUpdate(comHead, comItem, update);
 				}

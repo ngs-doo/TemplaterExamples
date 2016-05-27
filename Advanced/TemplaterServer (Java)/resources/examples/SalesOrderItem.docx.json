@@ -4,6 +4,7 @@
 		"address": "3 Main St.New York NY 97203 USA"
 	},
 	"date": "2015-05-21",
+	"status": "PAID",
 	"items": [
 		{
 			"product": {

@@ -1,6 +1,6 @@
 ## Links
 
-Using Word hyperlinks. 
+Using Word hyperlinks. WordArt as tags.
 
 Pictures will be replicated as rows are replicated. 
 Using collection of dynamic (Dictionary) structure.
@@ -16,3 +16,7 @@ Except regular text, Templater also analyzes some other document elements, such 
 ### Dynamic data structures
 
 Built-in support for IDictionary data type allows usage of dynamic objects. Combining IEnumerable and IDictionary data types is also possible, as shown in this example.
+
+### WordArt support
+
+WordArt can be used for tag definition. It will be replaced as any other regular tag.
