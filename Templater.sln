@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOrderMVP", "Advanced\SalesOrderMVP (.NET)\SalesOrderMVP.csproj", "{65F6DB34-39CD-4748-944E-D770971BAFDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRates", "Intermediate\ExchangeRates (.NET)\ExchangeRates.csproj", "{6A4C98A9-F286-4903-9072-EF5B995E28AF}"
@@ -39,13 +41,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules (.NET)\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion (.NET)", "Beginner\ToFormulaConversion (.NET)\ToFormulaConversion.csproj", "{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion", "Beginner\ToFormulaConversion (.NET)\ToFormulaConversion.csproj", "{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}"
 EndProject
 Global
-	GlobalSection(DslPlatformSolutionProperties) = preSolution
-		Php.Name = Php
-		Php.Target = Php
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
