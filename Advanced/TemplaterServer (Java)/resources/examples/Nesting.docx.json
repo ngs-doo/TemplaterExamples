@@ -1,0 +1,139 @@
+[
+  {
+    "name": "Steve Wozniak",
+    "jobs": [
+      {
+        "companyName": "Apple",
+        "projects": [
+          {
+            "name": "Apple I",
+            "tasks": [
+              {
+                "description": "Design the hardware"
+              },
+              {
+                "description": "Design the software"
+              },
+              {
+                "description": "Implement the software"
+              }
+            ]
+          },
+          {
+            "name": "Apple II",
+            "tasks": [
+              {
+                "description": "Design everything"
+              },
+              {
+                "description": "Implement everything"
+              }
+            ]
+          }
+        ],
+        "coworkers": [
+          {
+            "name": "Steve Jobs",
+            "title": "Employee #0",
+            "impression": "he likes electronics\nand he also plays pranks"
+          },
+          {
+            "name": "Andy Hertzfeld",
+            "title": "Mr.",
+            "impression": "Mr. nice guy"
+          }
+        ]
+      },
+      {
+        "companyName": "Hewlett-Packard",
+        "projects": [
+          {
+            "name": "Mainframe development",
+            "tasks": [
+              {
+                "description": "R&D"
+              },
+              {
+                "description": "Bureaucracy"
+              }
+            ]
+          }
+        ],
+        "coworkers": [
+          {
+            "name": "Lots of people",
+            "title": "Employees",
+            "impression": "Finding their place in the world"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alan Kay",
+    "jobs": [
+      {
+        "companyName": "Walt Disney Imagineering",
+        "projects": [
+          {
+            "name": "Disney Fellow",
+            "tasks": [
+              {
+                "description": "Mentor"
+              },
+              {
+                "description": "Teach"
+              }
+            ]
+          }
+        ],
+        "coworkers": [
+          {
+            "name": "Mickey mouse",
+            "title": "Founder",
+            "impression": "Will never enter public domain"
+          }
+        ]
+      },
+      {
+        "companyName": "Xerox PARC",
+        "projects": [
+          {
+            "name": "Smalltalk",
+            "tasks": [
+              {
+                "description": "R&D"
+              },
+              {
+                "description": "Documentation"
+              }
+            ]
+          },
+          {
+            "name": "Dynabook concept",
+            "tasks": [
+              {
+                "description": "Research"
+              },
+              {
+                "description": "Development"
+              }
+            ]
+          }
+        ],
+        "coworkers": [
+          {
+            "name": "Douglas Engelbart",
+            "title": "Internet pioneer",
+            "impression": "excellent interaction with computer"
+          },
+          {
+            "name": "Charles Thacker",
+            "title": "Designer",
+            "impression": "very good understanding of the mouse"
+          }
+        ]
+      }
+    ]
+  }
+]
