@@ -50,6 +50,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testHtmlExcel() throws Exception {
+		HtmlExample.main(null);
+	}
+
+	@Test
 	public void testPushdown() throws Exception {
 		TableExample.main(null);
 	}

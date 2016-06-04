@@ -8,7 +8,7 @@ Using *XElement* to paste raw XML into Templater.
 
 ### Special data type - XElement
 
-Templater supports XElement and collection of XElements as raw input for Word. This means it will be injected into Word as-is instead of first translated into string value (or some special value such as Image).
+Templater supports XElement and collection of XElements as raw input. This means it will be injected into Word as-is instead of first translated into string value (or some special value such as Image).
 This allows customization such as dynamically specifying color of text element, inserting list or various other ones supported as simple XML insert.
 
 ### Plugin example

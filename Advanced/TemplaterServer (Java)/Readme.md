@@ -53,6 +53,14 @@ While :collapse will remove tags, processor will still continue trying to replac
 Anchors are also analyzed for tags. This allows custom parts of the link to be populated with Templater.
 
 Pictures in cells are duplicated to each new row.
+WordArts are also recognized by Templater.
+
+#### Formulas
+
+Templater will rewrite formulas when cells are duplicated or moved around.
+
+Since Excel doesn't allow defining tag within formula, Templater has an "alternative way" to convert tag into formula.
+Tags which start with [[equals]] are converted into formula at the end of processing.
 
 #### Groceries
 
@@ -69,6 +77,11 @@ Table can be defined without border, so it doesn't look like table, but behaves 
 Built-in processors for map/collections allow for working with dynamic types (even without reflection).
 It's also possible to combine several processors on a single object.
 
+#### Nesting
+
+Collections can be nested in other collections. This allows usage of Templater for very complex documents.
+Lists can be embedded within Tables.
+
 #### Table pushdown
 
 During processing in non trivial Excel documents, cells are often moved around.
@@ -80,6 +93,8 @@ Depending on the context, objects such as merge cells and ranges can be stretche
 
 Row context can span multiple rows/columns.
 Since context can be nested, this allows for very complex document layouts.
+Text based watermark is supported.
+Currently it requires usage of :all metadata, since watermark is repeated multiple times in different document parts.
 
 #### Scorecard
 
