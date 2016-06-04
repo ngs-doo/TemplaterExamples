@@ -24,6 +24,7 @@
         <module>Beginner/ExcelLinks (Java)</module>
         <module>Intermediate/CollapseRegion (Java)</module>
         <module>Intermediate/BoolOverride (Java)</module>
+        <module>Intermediate/HtmlToExcel (Java)</module>
         <module>Intermediate/SharedCollection (Java)</module>
         <module>Intermediate/LimitPlugins (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
@@ -88,6 +89,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>bool-override-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>html-excel-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
