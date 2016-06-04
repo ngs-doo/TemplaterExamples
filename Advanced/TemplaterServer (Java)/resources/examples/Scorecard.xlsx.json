@@ -7,7 +7,7 @@
       "name": "Group 1",
       "clauses": [
         {
-          "description": "[[group_2]::group_2_clause_1]",
+          "description": "[[group_2]:group_2_clause_1]",
           "clause": "This is group 2, clause 1",
           "beta": 2.01
         }
@@ -17,12 +17,12 @@
       "name": "Group 2",
       "clauses": [
         {
-          "description": "[[group_3]::group_3_clause_1]",
+          "description": "[[group_3]:group_3_clause_1]",
           "clause": "This is group 3, clause 1",
           "beta": 3.01
         },
         {
-          "description": "[[group_3]::group_3_clause_2]",
+          "description": "[[group_3]:group_3_clause_2]",
           "clause": "This is group 3, clause 2",
           "beta": 3.02
         }
@@ -32,17 +32,17 @@
       "name": "Group 3",
       "clauses": [
         {
-          "description": "[[group_4]::group_4_clause_1]",
+          "description": "[[group_4]:group_4_clause_1]",
           "clause": "This is group 4, clause 1",
           "beta": 4.01
         },
         {
-          "description": "[[group_4]::group_4_clause_2]",
+          "description": "[[group_4]:group_4_clause_2]",
           "clause": "This is group 4, clause 2",
           "beta": 4.02
         },
         {
-          "description": "[[group_4]::group_4_clause_3]",
+          "description": "[[group_4]:group_4_clause_3]",
           "clause": "This is group 4, clause 3",
           "beta": 4.03
         }
@@ -52,22 +52,22 @@
       "name": "Group 4",
       "clauses": [
         {
-          "description": "[[group_5]::group_5_clause_1]",
+          "description": "[[group_5]:group_5_clause_1]",
           "clause": "This is group 5, clause 1",
           "beta": 5.01
         },
         {
-          "description": "[[group_5]::group_5_clause_2]",
+          "description": "[[group_5]:group_5_clause_2]",
           "clause": "This is group 5, clause 2",
           "beta": 5.02
         },
         {
-          "description": "[[group_5]::group_5_clause_3]",
+          "description": "[[group_5]:group_5_clause_3]",
           "clause": "This is group 5, clause 3",
           "beta": 5.03
         },
         {
-          "description": "[[group_5]::group_5_clause_4]",
+          "description": "[[group_5]:group_5_clause_4]",
           "clause": "This is group 5, clause 4",
           "beta": 5.04
         }
@@ -77,27 +77,27 @@
       "name": "Group 5",
       "clauses": [
         {
-          "description": "[[group_6]::group_6_clause_1]",
+          "description": "[[group_6]:group_6_clause_1]",
           "clause": "This is group 6, clause 1",
           "beta": 6.01
         },
         {
-          "description": "[[group_6]::group_6_clause_2]",
+          "description": "[[group_6]:group_6_clause_2]",
           "clause": "This is group 6, clause 2",
           "beta": 6.02
         },
         {
-          "description": "[[group_6]::group_6_clause_3]",
+          "description": "[[group_6]:group_6_clause_3]",
           "clause": "This is group 6, clause 3",
           "beta": 6.03
         },
         {
-          "description": "[[group_6]::group_6_clause_4]",
+          "description": "[[group_6]:group_6_clause_4]",
           "clause": "This is group 6, clause 4",
           "beta": 6.04
         },
         {
-          "description": "[[group_6]::group_6_clause_5]",
+          "description": "[[group_6]:group_6_clause_5]",
           "clause": "This is group 6, clause 5",
           "beta": 6.05
         }
@@ -107,32 +107,32 @@
       "name": "Group 6",
       "clauses": [
         {
-          "description": "[[group_7]::group_7_clause_1]",
+          "description": "[[group_7]:group_7_clause_1]",
           "clause": "This is group 7, clause 1",
           "beta": 7.01
         },
         {
-          "description": "[[group_7]::group_7_clause_2]",
+          "description": "[[group_7]:group_7_clause_2]",
           "clause": "This is group 7, clause 2",
           "beta": 7.02
         },
         {
-          "description": "[[group_7]::group_7_clause_3]",
+          "description": "[[group_7]:group_7_clause_3]",
           "clause": "This is group 7, clause 3",
           "beta": 7.03
         },
         {
-          "description": "[[group_7]::group_7_clause_4]",
+          "description": "[[group_7]:group_7_clause_4]",
           "clause": "This is group 7, clause 4",
           "beta": 7.04
         },
         {
-          "description": "[[group_7]::group_7_clause_5]",
+          "description": "[[group_7]:group_7_clause_5]",
           "clause": "This is group 7, clause 5",
           "beta": 7.05
         },
         {
-          "description": "[[group_7]::group_7_clause_6]",
+          "description": "[[group_7]:group_7_clause_6]",
           "clause": "This is group 7, clause 6",
           "beta": 7.06
         }
@@ -142,37 +142,37 @@
       "name": "Group 7",
       "clauses": [
         {
-          "description": "[[group_8]::group_8_clause_1]",
+          "description": "[[group_8]:group_8_clause_1]",
           "clause": "This is group 8, clause 1",
           "beta": 8.01
         },
         {
-          "description": "[[group_8]::group_8_clause_2]",
+          "description": "[[group_8]:group_8_clause_2]",
           "clause": "This is group 8, clause 2",
           "beta": 8.02
         },
         {
-          "description": "[[group_8]::group_8_clause_3]",
+          "description": "[[group_8]:group_8_clause_3]",
           "clause": "This is group 8, clause 3",
           "beta": 8.03
         },
         {
-          "description": "[[group_8]::group_8_clause_4]",
+          "description": "[[group_8]:group_8_clause_4]",
           "clause": "This is group 8, clause 4",
           "beta": 8.04
         },
         {
-          "description": "[[group_8]::group_8_clause_5]",
+          "description": "[[group_8]:group_8_clause_5]",
           "clause": "This is group 8, clause 5",
           "beta": 8.05
         },
         {
-          "description": "[[group_8]::group_8_clause_6]",
+          "description": "[[group_8]:group_8_clause_6]",
           "clause": "This is group 8, clause 6",
           "beta": 8.06
         },
         {
-          "description": "[[group_8]::group_8_clause_7]",
+          "description": "[[group_8]:group_8_clause_7]",
           "clause": "This is group 8, clause 7",
           "beta": 8.07
         }
@@ -182,42 +182,42 @@
       "name": "Group 8",
       "clauses": [
         {
-          "description": "[[group_9]::group_9_clause_1]",
+          "description": "[[group_9]:group_9_clause_1]",
           "clause": "This is group 9, clause 1",
           "beta": 9.01
         },
         {
-          "description": "[[group_9]::group_9_clause_2]",
+          "description": "[[group_9]:group_9_clause_2]",
           "clause": "This is group 9, clause 2",
           "beta": 9.02
         },
         {
-          "description": "[[group_9]::group_9_clause_3]",
+          "description": "[[group_9]:group_9_clause_3]",
           "clause": "This is group 9, clause 3",
           "beta": 9.03
         },
         {
-          "description": "[[group_9]::group_9_clause_4]",
+          "description": "[[group_9]:group_9_clause_4]",
           "clause": "This is group 9, clause 4",
           "beta": 9.04
         },
         {
-          "description": "[[group_9]::group_9_clause_5]",
+          "description": "[[group_9]:group_9_clause_5]",
           "clause": "This is group 9, clause 5",
           "beta": 9.05
         },
         {
-          "description": "[[group_9]::group_9_clause_6]",
+          "description": "[[group_9]:group_9_clause_6]",
           "clause": "This is group 9, clause 6",
           "beta": 9.06
         },
         {
-          "description": "[[group_9]::group_9_clause_7]",
+          "description": "[[group_9]:group_9_clause_7]",
           "clause": "This is group 9, clause 7",
           "beta": 9.07
         },
         {
-          "description": "[[group_9]::group_9_clause_8]",
+          "description": "[[group_9]:group_9_clause_8]",
           "clause": "This is group 9, clause 8",
           "beta": 9.08
         }
@@ -227,47 +227,47 @@
       "name": "Group 9",
       "clauses": [
         {
-          "description": "[[group_10]::group_10_clause_1]",
+          "description": "[[group_10]:group_10_clause_1]",
           "clause": "This is group 10, clause 1",
           "beta": 10.01
         },
         {
-          "description": "[[group_10]::group_10_clause_2]",
+          "description": "[[group_10]:group_10_clause_2]",
           "clause": "This is group 10, clause 2",
           "beta": 10.02
         },
         {
-          "description": "[[group_10]::group_10_clause_3]",
+          "description": "[[group_10]:group_10_clause_3]",
           "clause": "This is group 10, clause 3",
           "beta": 10.03
         },
         {
-          "description": "[[group_10]::group_10_clause_4]",
+          "description": "[[group_10]:group_10_clause_4]",
           "clause": "This is group 10, clause 4",
           "beta": 10.04
         },
         {
-          "description": "[[group_10]::group_10_clause_5]",
+          "description": "[[group_10]:group_10_clause_5]",
           "clause": "This is group 10, clause 5",
           "beta": 10.05
         },
         {
-          "description": "[[group_10]::group_10_clause_6]",
+          "description": "[[group_10]:group_10_clause_6]",
           "clause": "This is group 10, clause 6",
           "beta": 10.06
         },
         {
-          "description": "[[group_10]::group_10_clause_7]",
+          "description": "[[group_10]:group_10_clause_7]",
           "clause": "This is group 10, clause 7",
           "beta": 10.07
         },
         {
-          "description": "[[group_10]::group_10_clause_8]",
+          "description": "[[group_10]:group_10_clause_8]",
           "clause": "This is group 10, clause 8",
           "beta": 10.08
         },
         {
-          "description": "[[group_10]::group_10_clause_9]",
+          "description": "[[group_10]:group_10_clause_9]",
           "clause": "This is group 10, clause 9",
           "beta": 10.09
         }
@@ -277,52 +277,52 @@
       "name": "Group 10",
       "clauses": [
         {
-          "description": "[[group_11]::group_11_clause_1]",
+          "description": "[[group_11]:group_11_clause_1]",
           "clause": "This is group 11, clause 1",
           "beta": 11.01
         },
         {
-          "description": "[[group_11]::group_11_clause_2]",
+          "description": "[[group_11]:group_11_clause_2]",
           "clause": "This is group 11, clause 2",
           "beta": 11.02
         },
         {
-          "description": "[[group_11]::group_11_clause_3]",
+          "description": "[[group_11]:group_11_clause_3]",
           "clause": "This is group 11, clause 3",
           "beta": 11.03
         },
         {
-          "description": "[[group_11]::group_11_clause_4]",
+          "description": "[[group_11]:group_11_clause_4]",
           "clause": "This is group 11, clause 4",
           "beta": 11.04
         },
         {
-          "description": "[[group_11]::group_11_clause_5]",
+          "description": "[[group_11]:group_11_clause_5]",
           "clause": "This is group 11, clause 5",
           "beta": 11.05
         },
         {
-          "description": "[[group_11]::group_11_clause_6]",
+          "description": "[[group_11]:group_11_clause_6]",
           "clause": "This is group 11, clause 6",
           "beta": 11.06
         },
         {
-          "description": "[[group_11]::group_11_clause_7]",
+          "description": "[[group_11]:group_11_clause_7]",
           "clause": "This is group 11, clause 7",
           "beta": 11.07
         },
         {
-          "description": "[[group_11]::group_11_clause_8]",
+          "description": "[[group_11]:group_11_clause_8]",
           "clause": "This is group 11, clause 8",
           "beta": 11.08
         },
         {
-          "description": "[[group_11]::group_11_clause_9]",
+          "description": "[[group_11]:group_11_clause_9]",
           "clause": "This is group 11, clause 9",
           "beta": 11.09
         },
         {
-          "description": "[[group_11]::group_11_clause_10]",
+          "description": "[[group_11]:group_11_clause_10]",
           "clause": "This is group 11, clause 10",
           "beta": 11.1
         }
@@ -332,57 +332,57 @@
       "name": "Group 11",
       "clauses": [
         {
-          "description": "[[group_12]::group_12_clause_1]",
+          "description": "[[group_12]:group_12_clause_1]",
           "clause": "This is group 12, clause 1",
           "beta": 12.01
         },
         {
-          "description": "[[group_12]::group_12_clause_2]",
+          "description": "[[group_12]:group_12_clause_2]",
           "clause": "This is group 12, clause 2",
           "beta": 12.02
         },
         {
-          "description": "[[group_12]::group_12_clause_3]",
+          "description": "[[group_12]:group_12_clause_3]",
           "clause": "This is group 12, clause 3",
           "beta": 12.03
         },
         {
-          "description": "[[group_12]::group_12_clause_4]",
+          "description": "[[group_12]:group_12_clause_4]",
           "clause": "This is group 12, clause 4",
           "beta": 12.04
         },
         {
-          "description": "[[group_12]::group_12_clause_5]",
+          "description": "[[group_12]:group_12_clause_5]",
           "clause": "This is group 12, clause 5",
           "beta": 12.05
         },
         {
-          "description": "[[group_12]::group_12_clause_6]",
+          "description": "[[group_12]:group_12_clause_6]",
           "clause": "This is group 12, clause 6",
           "beta": 12.06
         },
         {
-          "description": "[[group_12]::group_12_clause_7]",
+          "description": "[[group_12]:group_12_clause_7]",
           "clause": "This is group 12, clause 7",
           "beta": 12.07
         },
         {
-          "description": "[[group_12]::group_12_clause_8]",
+          "description": "[[group_12]:group_12_clause_8]",
           "clause": "This is group 12, clause 8",
           "beta": 12.08
         },
         {
-          "description": "[[group_12]::group_12_clause_9]",
+          "description": "[[group_12]:group_12_clause_9]",
           "clause": "This is group 12, clause 9",
           "beta": 12.09
         },
         {
-          "description": "[[group_12]::group_12_clause_10]",
+          "description": "[[group_12]:group_12_clause_10]",
           "clause": "This is group 12, clause 10",
           "beta": 12.1
         },
         {
-          "description": "[[group_12]::group_12_clause_11]",
+          "description": "[[group_12]:group_12_clause_11]",
           "clause": "This is group 12, clause 11",
           "beta": 12.11
         }
@@ -392,62 +392,62 @@
       "name": "Group 12",
       "clauses": [
         {
-          "description": "[[group_13]::group_13_clause_1]",
+          "description": "[[group_13]:group_13_clause_1]",
           "clause": "This is group 13, clause 1",
           "beta": 13.01
         },
         {
-          "description": "[[group_13]::group_13_clause_2]",
+          "description": "[[group_13]:group_13_clause_2]",
           "clause": "This is group 13, clause 2",
           "beta": 13.02
         },
         {
-          "description": "[[group_13]::group_13_clause_3]",
+          "description": "[[group_13]:group_13_clause_3]",
           "clause": "This is group 13, clause 3",
           "beta": 13.03
         },
         {
-          "description": "[[group_13]::group_13_clause_4]",
+          "description": "[[group_13]:group_13_clause_4]",
           "clause": "This is group 13, clause 4",
           "beta": 13.04
         },
         {
-          "description": "[[group_13]::group_13_clause_5]",
+          "description": "[[group_13]:group_13_clause_5]",
           "clause": "This is group 13, clause 5",
           "beta": 13.05
         },
         {
-          "description": "[[group_13]::group_13_clause_6]",
+          "description": "[[group_13]:group_13_clause_6]",
           "clause": "This is group 13, clause 6",
           "beta": 13.06
         },
         {
-          "description": "[[group_13]::group_13_clause_7]",
+          "description": "[[group_13]:group_13_clause_7]",
           "clause": "This is group 13, clause 7",
           "beta": 13.07
         },
         {
-          "description": "[[group_13]::group_13_clause_8]",
+          "description": "[[group_13]:group_13_clause_8]",
           "clause": "This is group 13, clause 8",
           "beta": 13.08
         },
         {
-          "description": "[[group_13]::group_13_clause_9]",
+          "description": "[[group_13]:group_13_clause_9]",
           "clause": "This is group 13, clause 9",
           "beta": 13.09
         },
         {
-          "description": "[[group_13]::group_13_clause_10]",
+          "description": "[[group_13]:group_13_clause_10]",
           "clause": "This is group 13, clause 10",
           "beta": 13.1
         },
         {
-          "description": "[[group_13]::group_13_clause_11]",
+          "description": "[[group_13]:group_13_clause_11]",
           "clause": "This is group 13, clause 11",
           "beta": 13.11
         },
         {
-          "description": "[[group_13]::group_13_clause_12]",
+          "description": "[[group_13]:group_13_clause_12]",
           "clause": "This is group 13, clause 12",
           "beta": 13.12
         }
@@ -457,67 +457,67 @@
       "name": "Group 13",
       "clauses": [
         {
-          "description": "[[group_14]::group_14_clause_1]",
+          "description": "[[group_14]:group_14_clause_1]",
           "clause": "This is group 14, clause 1",
           "beta": 14.01
         },
         {
-          "description": "[[group_14]::group_14_clause_2]",
+          "description": "[[group_14]:group_14_clause_2]",
           "clause": "This is group 14, clause 2",
           "beta": 14.02
         },
         {
-          "description": "[[group_14]::group_14_clause_3]",
+          "description": "[[group_14]:group_14_clause_3]",
           "clause": "This is group 14, clause 3",
           "beta": 14.03
         },
         {
-          "description": "[[group_14]::group_14_clause_4]",
+          "description": "[[group_14]:group_14_clause_4]",
           "clause": "This is group 14, clause 4",
           "beta": 14.04
         },
         {
-          "description": "[[group_14]::group_14_clause_5]",
+          "description": "[[group_14]:group_14_clause_5]",
           "clause": "This is group 14, clause 5",
           "beta": 14.05
         },
         {
-          "description": "[[group_14]::group_14_clause_6]",
+          "description": "[[group_14]:group_14_clause_6]",
           "clause": "This is group 14, clause 6",
           "beta": 14.06
         },
         {
-          "description": "[[group_14]::group_14_clause_7]",
+          "description": "[[group_14]:group_14_clause_7]",
           "clause": "This is group 14, clause 7",
           "beta": 14.07
         },
         {
-          "description": "[[group_14]::group_14_clause_8]",
+          "description": "[[group_14]:group_14_clause_8]",
           "clause": "This is group 14, clause 8",
           "beta": 14.08
         },
         {
-          "description": "[[group_14]::group_14_clause_9]",
+          "description": "[[group_14]:group_14_clause_9]",
           "clause": "This is group 14, clause 9",
           "beta": 14.09
         },
         {
-          "description": "[[group_14]::group_14_clause_10]",
+          "description": "[[group_14]:group_14_clause_10]",
           "clause": "This is group 14, clause 10",
           "beta": 14.1
         },
         {
-          "description": "[[group_14]::group_14_clause_11]",
+          "description": "[[group_14]:group_14_clause_11]",
           "clause": "This is group 14, clause 11",
           "beta": 14.11
         },
         {
-          "description": "[[group_14]::group_14_clause_12]",
+          "description": "[[group_14]:group_14_clause_12]",
           "clause": "This is group 14, clause 12",
           "beta": 14.12
         },
         {
-          "description": "[[group_14]::group_14_clause_13]",
+          "description": "[[group_14]:group_14_clause_13]",
           "clause": "This is group 14, clause 13",
           "beta": 14.13
         }
@@ -527,72 +527,72 @@
       "name": "Group 14",
       "clauses": [
         {
-          "description": "[[group_15]::group_15_clause_1]",
+          "description": "[[group_15]:group_15_clause_1]",
           "clause": "This is group 15, clause 1",
           "beta": 15.01
         },
         {
-          "description": "[[group_15]::group_15_clause_2]",
+          "description": "[[group_15]:group_15_clause_2]",
           "clause": "This is group 15, clause 2",
           "beta": 15.02
         },
         {
-          "description": "[[group_15]::group_15_clause_3]",
+          "description": "[[group_15]:group_15_clause_3]",
           "clause": "This is group 15, clause 3",
           "beta": 15.03
         },
         {
-          "description": "[[group_15]::group_15_clause_4]",
+          "description": "[[group_15]:group_15_clause_4]",
           "clause": "This is group 15, clause 4",
           "beta": 15.04
         },
         {
-          "description": "[[group_15]::group_15_clause_5]",
+          "description": "[[group_15]:group_15_clause_5]",
           "clause": "This is group 15, clause 5",
           "beta": 15.05
         },
         {
-          "description": "[[group_15]::group_15_clause_6]",
+          "description": "[[group_15]:group_15_clause_6]",
           "clause": "This is group 15, clause 6",
           "beta": 15.06
         },
         {
-          "description": "[[group_15]::group_15_clause_7]",
+          "description": "[[group_15]:group_15_clause_7]",
           "clause": "This is group 15, clause 7",
           "beta": 15.07
         },
         {
-          "description": "[[group_15]::group_15_clause_8]",
+          "description": "[[group_15]:group_15_clause_8]",
           "clause": "This is group 15, clause 8",
           "beta": 15.08
         },
         {
-          "description": "[[group_15]::group_15_clause_9]",
+          "description": "[[group_15]:group_15_clause_9]",
           "clause": "This is group 15, clause 9",
           "beta": 15.09
         },
         {
-          "description": "[[group_15]::group_15_clause_10]",
+          "description": "[[group_15]:group_15_clause_10]",
           "clause": "This is group 15, clause 10",
           "beta": 15.1
         },
         {
-          "description": "[[group_15]::group_15_clause_11]",
+          "description": "[[group_15]:group_15_clause_11]",
           "clause": "This is group 15, clause 11",
           "beta": 15.11
         },
         {
-          "description": "[[group_15]::group_15_clause_12]",
+          "description": "[[group_15]:group_15_clause_12]",
           "clause": "This is group 15, clause 12",
           "beta": 15.12
         },
         {
-          "description": "[[group_15]::group_15_clause_13]",
+          "description": "[[group_15]:group_15_clause_13]",
           "clause": "This is group 15, clause 13",
           "beta": 15.13
         },
         {
-          "description": "[[group_15]::group_15_clause_14]",
+          "description": "[[group_15]:group_15_clause_14]",
           "clause": "This is group 15, clause 14",
           "beta": 15.14
         }
@@ -602,77 +602,77 @@
       "name": "Group 15",
       "clauses": [
         {
-          "description": "[[group_16]::group_16_clause_1]",
+          "description": "[[group_16]:group_16_clause_1]",
           "clause": "This is group 16, clause 1",
           "beta": 16.01
         },
         {
-          "description": "[[group_16]::group_16_clause_2]",
+          "description": "[[group_16]:group_16_clause_2]",
           "clause": "This is group 16, clause 2",
           "beta": 16.02
         },
         {
-          "description": "[[group_16]::group_16_clause_3]",
+          "description": "[[group_16]:group_16_clause_3]",
           "clause": "This is group 16, clause 3",
           "beta": 16.03
         },
         {
-          "description": "[[group_16]::group_16_clause_4]",
+          "description": "[[group_16]:group_16_clause_4]",
           "clause": "This is group 16, clause 4",
           "beta": 16.04
         },
         {
-          "description": "[[group_16]::group_16_clause_5]",
+          "description": "[[group_16]:group_16_clause_5]",
           "clause": "This is group 16, clause 5",
           "beta": 16.05
         },
         {
-          "description": "[[group_16]::group_16_clause_6]",
+          "description": "[[group_16]:group_16_clause_6]",
           "clause": "This is group 16, clause 6",
           "beta": 16.06
         },
         {
-          "description": "[[group_16]::group_16_clause_7]",
+          "description": "[[group_16]:group_16_clause_7]",
           "clause": "This is group 16, clause 7",
           "beta": 16.07
         },
         {
-          "description": "[[group_16]::group_16_clause_8]",
+          "description": "[[group_16]:group_16_clause_8]",
           "clause": "This is group 16, clause 8",
           "beta": 16.08
         },
         {
-          "description": "[[group_16]::group_16_clause_9]",
+          "description": "[[group_16]:group_16_clause_9]",
           "clause": "This is group 16, clause 9",
           "beta": 16.09
         },
         {
-          "description": "[[group_16]::group_16_clause_10]",
+          "description": "[[group_16]:group_16_clause_10]",
           "clause": "This is group 16, clause 10",
           "beta": 16.1
         },
         {
-          "description": "[[group_16]::group_16_clause_11]",
+          "description": "[[group_16]:group_16_clause_11]",
           "clause": "This is group 16, clause 11",
           "beta": 16.11
         },
         {
-          "description": "[[group_16]::group_16_clause_12]",
+          "description": "[[group_16]:group_16_clause_12]",
           "clause": "This is group 16, clause 12",
           "beta": 16.12
         },
         {
-          "description": "[[group_16]::group_16_clause_13]",
+          "description": "[[group_16]:group_16_clause_13]",
           "clause": "This is group 16, clause 13",
           "beta": 16.13
         },
         {
-          "description": "[[group_16]::group_16_clause_14]",
+          "description": "[[group_16]:group_16_clause_14]",
           "clause": "This is group 16, clause 14",
           "beta": 16.14
         },
         {
-          "description": "[[group_16]::group_16_clause_15]",
+          "description": "[[group_16]:group_16_clause_15]",
           "clause": "This is group 16, clause 15",
           "beta": 16.15
         }
@@ -682,82 +682,82 @@
       "name": "Group 16",
       "clauses": [
         {
-          "description": "[[group_17]::group_17_clause_1]",
+          "description": "[[group_17]:group_17_clause_1]",
           "clause": "This is group 17, clause 1",
           "beta": 17.01
         },
         {
-          "description": "[[group_17]::group_17_clause_2]",
+          "description": "[[group_17]:group_17_clause_2]",
           "clause": "This is group 17, clause 2",
           "beta": 17.02
         },
         {
-          "description": "[[group_17]::group_17_clause_3]",
+          "description": "[[group_17]:group_17_clause_3]",
           "clause": "This is group 17, clause 3",
           "beta": 17.03
         },
         {
-          "description": "[[group_17]::group_17_clause_4]",
+          "description": "[[group_17]:group_17_clause_4]",
           "clause": "This is group 17, clause 4",
           "beta": 17.04
         },
         {
-          "description": "[[group_17]::group_17_clause_5]",
+          "description": "[[group_17]:group_17_clause_5]",
           "clause": "This is group 17, clause 5",
           "beta": 17.05
         },
         {
-          "description": "[[group_17]::group_17_clause_6]",
+          "description": "[[group_17]:group_17_clause_6]",
           "clause": "This is group 17, clause 6",
           "beta": 17.06
         },
         {
-          "description": "[[group_17]::group_17_clause_7]",
+          "description": "[[group_17]:group_17_clause_7]",
           "clause": "This is group 17, clause 7",
           "beta": 17.07
         },
         {
-          "description": "[[group_17]::group_17_clause_8]",
+          "description": "[[group_17]:group_17_clause_8]",
           "clause": "This is group 17, clause 8",
           "beta": 17.08
         },
         {
-          "description": "[[group_17]::group_17_clause_9]",
+          "description": "[[group_17]:group_17_clause_9]",
           "clause": "This is group 17, clause 9",
           "beta": 17.09
         },
         {
-          "description": "[[group_17]::group_17_clause_10]",
+          "description": "[[group_17]:group_17_clause_10]",
           "clause": "This is group 17, clause 10",
           "beta": 17.1
         },
         {
-          "description": "[[group_17]::group_17_clause_11]",
+          "description": "[[group_17]:group_17_clause_11]",
           "clause": "This is group 17, clause 11",
           "beta": 17.11
         },
         {
-          "description": "[[group_17]::group_17_clause_12]",
+          "description": "[[group_17]:group_17_clause_12]",
           "clause": "This is group 17, clause 12",
           "beta": 17.12
         },
         {
-          "description": "[[group_17]::group_17_clause_13]",
+          "description": "[[group_17]:group_17_clause_13]",
           "clause": "This is group 17, clause 13",
           "beta": 17.13
         },
         {
-          "description": "[[group_17]::group_17_clause_14]",
+          "description": "[[group_17]:group_17_clause_14]",
           "clause": "This is group 17, clause 14",
           "beta": 17.14
         },
         {
-          "description": "[[group_17]::group_17_clause_15]",
+          "description": "[[group_17]:group_17_clause_15]",
           "clause": "This is group 17, clause 15",
           "beta": 17.15
         },
         {
-          "description": "[[group_17]::group_17_clause_16]",
+          "description": "[[group_17]:group_17_clause_16]",
           "clause": "This is group 17, clause 16",
           "beta": 17.16
         }
@@ -767,87 +767,87 @@
       "name": "Group 17",
       "clauses": [
         {
-          "description": "[[group_18]::group_18_clause_1]",
+          "description": "[[group_18]:group_18_clause_1]",
           "clause": "This is group 18, clause 1",
           "beta": 18.01
         },
         {
-          "description": "[[group_18]::group_18_clause_2]",
+          "description": "[[group_18]:group_18_clause_2]",
           "clause": "This is group 18, clause 2",
           "beta": 18.02
         },
         {
-          "description": "[[group_18]::group_18_clause_3]",
+          "description": "[[group_18]:group_18_clause_3]",
           "clause": "This is group 18, clause 3",
           "beta": 18.03
         },
         {
-          "description": "[[group_18]::group_18_clause_4]",
+          "description": "[[group_18]:group_18_clause_4]",
           "clause": "This is group 18, clause 4",
           "beta": 18.04
         },
         {
-          "description": "[[group_18]::group_18_clause_5]",
+          "description": "[[group_18]:group_18_clause_5]",
           "clause": "This is group 18, clause 5",
           "beta": 18.05
         },
         {
-          "description": "[[group_18]::group_18_clause_6]",
+          "description": "[[group_18]:group_18_clause_6]",
           "clause": "This is group 18, clause 6",
           "beta": 18.06
         },
         {
-          "description": "[[group_18]::group_18_clause_7]",
+          "description": "[[group_18]:group_18_clause_7]",
           "clause": "This is group 18, clause 7",
           "beta": 18.07
         },
         {
-          "description": "[[group_18]::group_18_clause_8]",
+          "description": "[[group_18]:group_18_clause_8]",
           "clause": "This is group 18, clause 8",
           "beta": 18.08
         },
         {
-          "description": "[[group_18]::group_18_clause_9]",
+          "description": "[[group_18]:group_18_clause_9]",
           "clause": "This is group 18, clause 9",
           "beta": 18.09
         },
         {
-          "description": "[[group_18]::group_18_clause_10]",
+          "description": "[[group_18]:group_18_clause_10]",
           "clause": "This is group 18, clause 10",
           "beta": 18.1
         },
         {
-          "description": "[[group_18]::group_18_clause_11]",
+          "description": "[[group_18]:group_18_clause_11]",
           "clause": "This is group 18, clause 11",
           "beta": 18.11
         },
         {
-          "description": "[[group_18]::group_18_clause_12]",
+          "description": "[[group_18]:group_18_clause_12]",
           "clause": "This is group 18, clause 12",
           "beta": 18.12
         },
         {
-          "description": "[[group_18]::group_18_clause_13]",
+          "description": "[[group_18]:group_18_clause_13]",
           "clause": "This is group 18, clause 13",
           "beta": 18.13
         },
         {
-          "description": "[[group_18]::group_18_clause_14]",
+          "description": "[[group_18]:group_18_clause_14]",
           "clause": "This is group 18, clause 14",
           "beta": 18.14
         },
         {
-          "description": "[[group_18]::group_18_clause_15]",
+          "description": "[[group_18]:group_18_clause_15]",
           "clause": "This is group 18, clause 15",
           "beta": 18.15
         },
         {
-          "description": "[[group_18]::group_18_clause_16]",
+          "description": "[[group_18]:group_18_clause_16]",
           "clause": "This is group 18, clause 16",
           "beta": 18.16
         },
         {
-          "description": "[[group_18]::group_18_clause_17]",
+          "description": "[[group_18]:group_18_clause_17]",
           "clause": "This is group 18, clause 17",
           "beta": 18.17
         }
@@ -857,92 +857,92 @@
       "name": "Group 18",
       "clauses": [
         {
-          "description": "[[group_19]::group_19_clause_1]",
+          "description": "[[group_19]:group_19_clause_1]",
           "clause": "This is group 19, clause 1",
           "beta": 19.01
         },
         {
-          "description": "[[group_19]::group_19_clause_2]",
+          "description": "[[group_19]:group_19_clause_2]",
           "clause": "This is group 19, clause 2",
           "beta": 19.02
         },
         {
-          "description": "[[group_19]::group_19_clause_3]",
+          "description": "[[group_19]:group_19_clause_3]",
           "clause": "This is group 19, clause 3",
           "beta": 19.03
         },
         {
-          "description": "[[group_19]::group_19_clause_4]",
+          "description": "[[group_19]:group_19_clause_4]",
           "clause": "This is group 19, clause 4",
           "beta": 19.04
         },
         {
-          "description": "[[group_19]::group_19_clause_5]",
+          "description": "[[group_19]:group_19_clause_5]",
           "clause": "This is group 19, clause 5",
           "beta": 19.05
         },
         {
-          "description": "[[group_19]::group_19_clause_6]",
+          "description": "[[group_19]:group_19_clause_6]",
           "clause": "This is group 19, clause 6",
           "beta": 19.06
         },
         {
-          "description": "[[group_19]::group_19_clause_7]",
+          "description": "[[group_19]:group_19_clause_7]",
           "clause": "This is group 19, clause 7",
           "beta": 19.07
         },
         {
-          "description": "[[group_19]::group_19_clause_8]",
+          "description": "[[group_19]:group_19_clause_8]",
           "clause": "This is group 19, clause 8",
           "beta": 19.08
         },
         {
-          "description": "[[group_19]::group_19_clause_9]",
+          "description": "[[group_19]:group_19_clause_9]",
           "clause": "This is group 19, clause 9",
           "beta": 19.09
         },
         {
-          "description": "[[group_19]::group_19_clause_10]",
+          "description": "[[group_19]:group_19_clause_10]",
           "clause": "This is group 19, clause 10",
           "beta": 19.1
         },
         {
-          "description": "[[group_19]::group_19_clause_11]",
+          "description": "[[group_19]:group_19_clause_11]",
           "clause": "This is group 19, clause 11",
           "beta": 19.11
         },
         {
-          "description": "[[group_19]::group_19_clause_12]",
+          "description": "[[group_19]:group_19_clause_12]",
           "clause": "This is group 19, clause 12",
           "beta": 19.12
         },
         {
-          "description": "[[group_19]::group_19_clause_13]",
+          "description": "[[group_19]:group_19_clause_13]",
           "clause": "This is group 19, clause 13",
           "beta": 19.13
         },
         {
-          "description": "[[group_19]::group_19_clause_14]",
+          "description": "[[group_19]:group_19_clause_14]",
           "clause": "This is group 19, clause 14",
           "beta": 19.14
         },
         {
-          "description": "[[group_19]::group_19_clause_15]",
+          "description": "[[group_19]:group_19_clause_15]",
           "clause": "This is group 19, clause 15",
           "beta": 19.15
         },
         {
-          "description": "[[group_19]::group_19_clause_16]",
+          "description": "[[group_19]:group_19_clause_16]",
           "clause": "This is group 19, clause 16",
           "beta": 19.16
         },
         {
-          "description": "[[group_19]::group_19_clause_17]",
+          "description": "[[group_19]:group_19_clause_17]",
           "clause": "This is group 19, clause 17",
           "beta": 19.17
         },
         {
-          "description": "[[group_19]::group_19_clause_18]",
+          "description": "[[group_19]:group_19_clause_18]",
           "clause": "This is group 19, clause 18",
           "beta": 19.18
         }
@@ -952,97 +952,97 @@
       "name": "Group 19",
       "clauses": [
         {
-          "description": "[[group_20]::group_20_clause_1]",
+          "description": "[[group_20]:group_20_clause_1]",
           "clause": "This is group 20, clause 1",
           "beta": 20.01
         },
         {
-          "description": "[[group_20]::group_20_clause_2]",
+          "description": "[[group_20]:group_20_clause_2]",
           "clause": "This is group 20, clause 2",
           "beta": 20.02
         },
         {
-          "description": "[[group_20]::group_20_clause_3]",
+          "description": "[[group_20]:group_20_clause_3]",
           "clause": "This is group 20, clause 3",
           "beta": 20.03
         },
         {
-          "description": "[[group_20]::group_20_clause_4]",
+          "description": "[[group_20]:group_20_clause_4]",
           "clause": "This is group 20, clause 4",
           "beta": 20.04
         },
         {
-          "description": "[[group_20]::group_20_clause_5]",
+          "description": "[[group_20]:group_20_clause_5]",
           "clause": "This is group 20, clause 5",
           "beta": 20.05
         },
         {
-          "description": "[[group_20]::group_20_clause_6]",
+          "description": "[[group_20]:group_20_clause_6]",
           "clause": "This is group 20, clause 6",
           "beta": 20.06
         },
         {
-          "description": "[[group_20]::group_20_clause_7]",
+          "description": "[[group_20]:group_20_clause_7]",
           "clause": "This is group 20, clause 7",
           "beta": 20.07
         },
         {
-          "description": "[[group_20]::group_20_clause_8]",
+          "description": "[[group_20]:group_20_clause_8]",
           "clause": "This is group 20, clause 8",
           "beta": 20.08
         },
         {
-          "description": "[[group_20]::group_20_clause_9]",
+          "description": "[[group_20]:group_20_clause_9]",
           "clause": "This is group 20, clause 9",
           "beta": 20.09
         },
         {
-          "description": "[[group_20]::group_20_clause_10]",
+          "description": "[[group_20]:group_20_clause_10]",
           "clause": "This is group 20, clause 10",
           "beta": 20.1
         },
         {
-          "description": "[[group_20]::group_20_clause_11]",
+          "description": "[[group_20]:group_20_clause_11]",
           "clause": "This is group 20, clause 11",
           "beta": 20.11
         },
         {
-          "description": "[[group_20]::group_20_clause_12]",
+          "description": "[[group_20]:group_20_clause_12]",
           "clause": "This is group 20, clause 12",
           "beta": 20.12
         },
         {
-          "description": "[[group_20]::group_20_clause_13]",
+          "description": "[[group_20]:group_20_clause_13]",
           "clause": "This is group 20, clause 13",
           "beta": 20.13
         },
         {
-          "description": "[[group_20]::group_20_clause_14]",
+          "description": "[[group_20]:group_20_clause_14]",
           "clause": "This is group 20, clause 14",
           "beta": 20.14
         },
         {
-          "description": "[[group_20]::group_20_clause_15]",
+          "description": "[[group_20]:group_20_clause_15]",
           "clause": "This is group 20, clause 15",
           "beta": 20.15
         },
         {
-          "description": "[[group_20]::group_20_clause_16]",
+          "description": "[[group_20]:group_20_clause_16]",
           "clause": "This is group 20, clause 16",
           "beta": 20.16
         },
         {
-          "description": "[[group_20]::group_20_clause_17]",
+          "description": "[[group_20]:group_20_clause_17]",
           "clause": "This is group 20, clause 17",
           "beta": 20.17
         },
         {
-          "description": "[[group_20]::group_20_clause_18]",
+          "description": "[[group_20]:group_20_clause_18]",
           "clause": "This is group 20, clause 18",
           "beta": 20.18
         },
         {
-          "description": "[[group_20]::group_20_clause_19]",
+          "description": "[[group_20]:group_20_clause_19]",
           "clause": "This is group 20, clause 19",
           "beta": 20.19
         }
@@ -1052,102 +1052,102 @@
       "name": "Group 20",
       "clauses": [
         {
-          "description": "[[group_21]::group_21_clause_1]",
+          "description": "[[group_21]:group_21_clause_1]",
           "clause": "This is group 21, clause 1",
           "beta": 21.01
         },
         {
-          "description": "[[group_21]::group_21_clause_2]",
+          "description": "[[group_21]:group_21_clause_2]",
           "clause": "This is group 21, clause 2",
           "beta": 21.02
         },
         {
-          "description": "[[group_21]::group_21_clause_3]",
+          "description": "[[group_21]:group_21_clause_3]",
           "clause": "This is group 21, clause 3",
           "beta": 21.03
         },
         {
-          "description": "[[group_21]::group_21_clause_4]",
+          "description": "[[group_21]:group_21_clause_4]",
           "clause": "This is group 21, clause 4",
           "beta": 21.04
         },
         {
-          "description": "[[group_21]::group_21_clause_5]",
+          "description": "[[group_21]:group_21_clause_5]",
           "clause": "This is group 21, clause 5",
           "beta": 21.05
         },
         {
-          "description": "[[group_21]::group_21_clause_6]",
+          "description": "[[group_21]:group_21_clause_6]",
           "clause": "This is group 21, clause 6",
           "beta": 21.06
         },
         {
-          "description": "[[group_21]::group_21_clause_7]",
+          "description": "[[group_21]:group_21_clause_7]",
           "clause": "This is group 21, clause 7",
           "beta": 21.07
         },
         {
-          "description": "[[group_21]::group_21_clause_8]",
+          "description": "[[group_21]:group_21_clause_8]",
           "clause": "This is group 21, clause 8",
           "beta": 21.08
         },
         {
-          "description": "[[group_21]::group_21_clause_9]",
+          "description": "[[group_21]:group_21_clause_9]",
           "clause": "This is group 21, clause 9",
           "beta": 21.09
         },
         {
-          "description": "[[group_21]::group_21_clause_10]",
+          "description": "[[group_21]:group_21_clause_10]",
           "clause": "This is group 21, clause 10",
           "beta": 21.1
         },
         {
-          "description": "[[group_21]::group_21_clause_11]",
+          "description": "[[group_21]:group_21_clause_11]",
           "clause": "This is group 21, clause 11",
           "beta": 21.11
         },
         {
-          "description": "[[group_21]::group_21_clause_12]",
+          "description": "[[group_21]:group_21_clause_12]",
           "clause": "This is group 21, clause 12",
           "beta": 21.12
         },
         {
-          "description": "[[group_21]::group_21_clause_13]",
+          "description": "[[group_21]:group_21_clause_13]",
           "clause": "This is group 21, clause 13",
           "beta": 21.13
         },
         {
-          "description": "[[group_21]::group_21_clause_14]",
+          "description": "[[group_21]:group_21_clause_14]",
           "clause": "This is group 21, clause 14",
           "beta": 21.14
         },
         {
-          "description": "[[group_21]::group_21_clause_15]",
+          "description": "[[group_21]:group_21_clause_15]",
           "clause": "This is group 21, clause 15",
           "beta": 21.15
         },
         {
-          "description": "[[group_21]::group_21_clause_16]",
+          "description": "[[group_21]:group_21_clause_16]",
           "clause": "This is group 21, clause 16",
           "beta": 21.16
         },
         {
-          "description": "[[group_21]::group_21_clause_17]",
+          "description": "[[group_21]:group_21_clause_17]",
           "clause": "This is group 21, clause 17",
           "beta": 21.17
         },
         {
-          "description": "[[group_21]::group_21_clause_18]",
+          "description": "[[group_21]:group_21_clause_18]",
           "clause": "This is group 21, clause 18",
           "beta": 21.18
         },
         {
-          "description": "[[group_21]::group_21_clause_19]",
+          "description": "[[group_21]:group_21_clause_19]",
           "clause": "This is group 21, clause 19",
           "beta": 21.19
         },
         {
-          "description": "[[group_21]::group_21_clause_20]",
+          "description": "[[group_21]:group_21_clause_20]",
           "clause": "This is group 21, clause 20",
           "beta": 21.2
         }

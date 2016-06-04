@@ -19,6 +19,15 @@ function initApp()
     $processTemplate.html('Create ' + extension + ' document with ' + activeTemplate);
   }
 
+  function escapeString(strVal) {
+    var i = 0;
+    while ((i = strVal.indexOf("&", i)) != -1) {
+      strVal = strVal.substring(0, i) + "&amp;" + strVal.substring(i + 1);
+      i = i + 5;
+    }
+    return strVal;
+  }
+
   function beautifyJson() {
     try {
       var json = $.parseJSON(aceEditor ? aceEditor.getValue() : $editor.html());
@@ -65,7 +74,7 @@ function initApp()
 
   $form.on('submit', function() {
     // textarea is not synced, update before submit
-    $editor.html(aceEditor.getSession().getValue());
+    if (aceEditor != null) $editor.html(escapeString(aceEditor.getSession().getValue()));
   });
 
   // select first template as active on initial load

@@ -136,7 +136,8 @@ public class TemplaterServer extends NanoHTTPD {
 			String name = templateName.substring(0, templateName.length() - ext.length() - 1);
 
 			byte[] templaterBytes = driveMap.get(templaterTemplatePath);
-			byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(params.get("json")), ext);
+			String json = params.containsKey("json") ? params.get("json") : params.get("postData");
+			byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(json), ext);
 			byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext) : templaterResultBytes;
 			if (resultBytes == null)
 				return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "Failed creating report");
