@@ -21,3 +21,8 @@ Templater will adjust conditional formatting (move it around, duplicate or resiz
 ### Password protection
 
 Sheet1 is password protected with: "templater"
+
+### Excel view mode
+
+This excel is running in view formulas mode (to show that formula expressions are rewritten).
+In this mode dates are formatted as numbers (although they are properly formatted when clicked on).
