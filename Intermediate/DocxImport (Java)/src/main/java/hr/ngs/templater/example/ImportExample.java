@@ -1,13 +1,12 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -19,16 +18,40 @@ public class ImportExample {
 		FileOutputStream fos = new FileOutputStream(tmp);
 		Element docx = extractDocumentBody();
 		NodeList paragraphs = docx.getElementsByTagName("w:p");
-		Element[] elements = new Element[paragraphs.getLength()];
-		for (int i = 0; i < elements.length; i++) {
-			elements[i] = (Element) paragraphs.item(i);
+		ArrayList<Element> elements = new ArrayList<Element>(paragraphs.getLength());
+		for (int i = 0; i < paragraphs.getLength(); i++) {
+			Element par = (Element) paragraphs.item(i);
+			if (!hasIdReference(par)) {
+				elements.add(par);
+			}
 		}
 		IDocumentFactory factory = Configuration.factory();
 		ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
-		tpl.templater().replace("imported_document", elements);
+		tpl.templater().replace("imported_document", elements.toArray(new Element[0]));
 		tpl.flush();
 		fos.close();
 		java.awt.Desktop.getDesktop().open(tmp);
+	}
+
+	private static boolean hasIdReference(Node node) {
+		NamedNodeMap attributes = node.getAttributes();
+		if (attributes != null) {
+			for (int i = 0; i < attributes.getLength(); i++) {
+				if ("r:id".equals(attributes.item(i).getNodeName())
+						|| "r:embed".equals(attributes.item(i).getNodeName())) {
+					return true;
+				}
+			}
+		}
+		NodeList children = node.getChildNodes();
+		if (children != null) {
+			for (int i = 0; i < children.getLength(); i++) {
+				if (hasIdReference(children.item(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private static Element extractDocumentBody() throws Exception {
@@ -41,7 +64,7 @@ public class ImportExample {
 		} while (!"word/document.xml".equals(document.getName()));
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		byte[] bytesIn = new byte[8192];
-		int read = 0;
+		int read;
 		while ((read = zip.read(bytesIn)) != -1) {
 			bos.write(bytesIn, 0, read);
 		}
