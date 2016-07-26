@@ -13,3 +13,8 @@ To inject column names from DataTable, **:header** metadata must be used; otherw
 ### Standard processing
 
 Templater has built-in processor for DataTable, which *knows* how to process DataTable. In that case more style formatting can be applied on the document.
+
+### merge-nulls metadata
+
+One of the internal metadata (meaning it can't be implemented as a simple plugin) is **merge-nulls**.
+It can be used for merging cells when they contain null value.

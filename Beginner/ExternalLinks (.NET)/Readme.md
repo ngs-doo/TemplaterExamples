@@ -20,3 +20,8 @@ Built-in support for IDictionary data type allows usage of dynamic objects. Comb
 ### WordArt support
 
 WordArt can be used for tag definition. It will be replaced as any other regular tag.
+
+### Footnotes and endnotes
+
+Footnote and endnotes are supported since v2.4.0
+Templater can replace multiple tags even when they are on seemingly different places such as footnotes since their definition is within the duplicating context.

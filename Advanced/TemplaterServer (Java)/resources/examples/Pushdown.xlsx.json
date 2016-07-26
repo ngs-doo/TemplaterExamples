@@ -28,5 +28,13 @@
       "bonus": "Salad, french fries",
       "cost": "65 EUR"
     }
+  ],
+  "dynamicResize": [
+    ["First title", "Merged cells due to null", null],
+    ["Item 1", 100, null],
+    ["Item 2", "text", null],
+    ["Second title", "Cells 1", "Cells 2"],
+    ["Item 3", 200, 300],
+    ["Item 4", "abc", "def"]
   ]
 }

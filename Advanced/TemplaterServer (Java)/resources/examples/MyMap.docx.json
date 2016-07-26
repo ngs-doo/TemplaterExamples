@@ -1,23 +1,44 @@
-{
-  "Name": "James Bond",
-  "Age": "40",
-  "Gun": {
-    "name": "Revolvers",
-    "type": "Colt",
-    "caliber": "45"
+[
+  {
+    "Name": "James Bond",
+    "Age": "40",
+    "Gun": {
+      "name": "Revolvers",
+      "type": "Colt",
+      "caliber": "45"
+    },
+    "Kills": [
+      {
+        "name": "Dr Evil",
+        "date": "1965-05-07"
+      },
+      {
+        "name": "Moneypenny",
+        "date": "1967-03-05"
+      },
+      {
+        "name": "Spectre",
+        "date": "1968-05-05"
+      }
+    ]
   },
-  "Kills": [
-    {
-      "name": "Dr Evil",
-      "date": "1965-05-05"
+  {
+    "Name": "Austin Powers",
+    "Age": "32",
+    "Gun": {
+      "name": "Awesomeness",
+      "type": "Personality",
+      "caliber": "69"
     },
-    {
-      "name": "Moneypenny",
-      "date": "1967-05-05"
-    },
-    {
-      "name": "Spectre",
-      "date": "1968-05-05"
-    }
-  ]
-}
+    "Kills": [
+      {
+        "name": "Mini-me",
+        "date": "1972-04-07"
+      },
+      {
+        "name": "Fat Bastard",
+        "date": "1977-02-23"
+      }
+    ]
+  }
+]

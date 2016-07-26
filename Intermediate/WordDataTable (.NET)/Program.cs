@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -56,9 +57,27 @@ namespace WordDataTable
 			for (int i = 0; i < 100; i++)
 				dt.Rows.Add("a" + i, "b" + i, "c" + i);
 			var factory = Configuration.Builder.Include(Top10Rows).Include<DataTable>(Limit10Table).Build();
+			var dynamicResize = new object[7, 3]{
+				{"a", "b", "c"},
+				{"a", null, "c"},
+				{"a", "b", null},
+				{null, "b", "c"},
+				{"a", null, null},
+				{null, null, null},
+				{"a", "b", "c"},
+			};
+			var map = new Dictionary<string, object>[] {
+				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3","c"}},
+				new Dictionary<string, object>{{"1", "a"}, {"2",null},{"3","c"}},
+				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3",null}},
+				new Dictionary<string, object>{{"1", null}, {"2","b"},{"3","c"}},
+				new Dictionary<string, object>{{"1", "a"}, {"2",null},{"3",null}},
+				new Dictionary<string, object>{{"1", null}, {"2",null},{"3",null}},
+				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3","c"}},
+			};
 			using (var doc = factory.Open("out.docx"))
 			{
-				doc.Process(new { Table1 = dt, Table2 = dt });
+				doc.Process(new { Table1 = dt, Table2 = dt, DynamicResize = dynamicResize, Nulls = map });
 			}
 			Process.Start("out.docx");
 		}

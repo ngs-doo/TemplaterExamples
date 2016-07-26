@@ -35,3 +35,8 @@ instead of iterable processor as it is done in this case.
 Iterable processor works by matching tags with properties and calls low level `resize` API. 
 After that each item in the collection will be sent to the most appropriate processor (in this case object processor). 
 Replicated context for each item will have it's own identity, which allows Templater to replace multiple tags of same name within the context.
+
+### Footnotes and endnotes
+
+Templater recognizes tags in footnotes and endnotes and will maintain context during replacement.
+This means if tag is repeated multiple time, or only within the note, it will behave as expected.

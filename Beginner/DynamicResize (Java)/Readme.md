@@ -14,3 +14,8 @@ and then populating cell contents with provided data.
 
 Streams can be used for input/output. 
 Output stream will be populated on `ITemplaterDocument.flush()` method.
+
+### Special keywords (merge-nulls)
+
+Dynamic resize support few special keywords. **merge-nulls** is one of those.
+It can be used for merging cells which contain null values.

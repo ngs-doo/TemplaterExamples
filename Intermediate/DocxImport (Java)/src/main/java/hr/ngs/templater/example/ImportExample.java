@@ -38,7 +38,8 @@ public class ImportExample {
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				if ("r:id".equals(attributes.item(i).getNodeName())
-						|| "r:embed".equals(attributes.item(i).getNodeName())) {
+						|| "r:embed".equals(attributes.item(i).getNodeName())
+						|| "w:id".equals(attributes.item(i).getNodeName())) {
 					return true;
 				}
 			}

@@ -18,3 +18,7 @@ Since image is processed as special data type by low level API, this means it's 
 ### Document layout - page breaks
 
 Document layout will be respected during resizing. In practice this means that *header on each page* table feature can be used when appropriate. When resizing entire document, existing page break is used if available, otherwise new page break is added. For resizing only part of the document, page breaks are not injected.  
+
+### Page numbering
+
+Page numbers can be easily implemented by using Word feature for page numbering (insert -> page numbers)
