@@ -10,3 +10,8 @@ Collapse plugin checks if provided value is null or empty and in which case it i
 ### Bean standard support
 
 Bean standard is not supported which makes templates little less readable.
+
+### Custom collapse plugin
+
+Builtin collapse is just a plugin which can be registered from the outside.
+Here a plugin collapseIf(Value) is shown which will do the collapse only if the property has specific value.

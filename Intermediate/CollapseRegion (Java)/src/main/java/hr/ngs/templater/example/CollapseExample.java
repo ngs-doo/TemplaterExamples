@@ -12,7 +12,7 @@ public class CollapseExample {
 		Application application1 =
 				new Application()
 						.setPaybackYears(20)
-						.setUcCheck(true).setUcCheckResponse("")
+						.setUcCheck(true).setUcCheckResponse("Ok")
 						.setApplicant(new Applicant("first applicant").setFrom("Google", 2012, 11));
 		Application application2 =
 				new Application()
@@ -23,7 +23,21 @@ public class CollapseExample {
 						.setCoApplicant(new Applicant("second co-applicant").setFromUntil("IBM", 2014, 11, 2015, 12));
 		InputStream templateStream = CollapseExample.class.getResourceAsStream("/Collapse.docx");
 		FileOutputStream fos = new FileOutputStream(tmp);
-		ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
+		ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
+			@Override
+			public boolean handle(Object value, String metadata, String path, ITemplater templater) {
+				if (value != null && value instanceof String && metadata.startsWith("collapseIf(")) {
+					//Extract the matching expression
+					String expression = metadata.substring("collapseIf(".length(), metadata.length() - 1);
+					if (value.equals(expression)) {
+						//remove the context around the specific property
+						templater.resize(new String[]{path}, 0);
+						return true;
+					}
+				}
+				return false;
+			}
+		}).build().open(templateStream, "docx", fos);
 		tpl.process(Arrays.asList(application1, application2));
 		tpl.flush();
 		fos.close();
