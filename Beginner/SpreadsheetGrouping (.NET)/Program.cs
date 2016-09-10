@@ -5,7 +5,7 @@ using NGS.Templater;
 
 namespace SpreadsheetGrouping
 {
-	class Program
+	public class Program
 	{
 		class Info
 		{
@@ -21,7 +21,7 @@ namespace SpreadsheetGrouping
 				public int Total { get { return A + B; } }
 			}
 		}
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var inputFile = "Grouping.xlsx";
 			var outputFile = "Result.xlsx";

@@ -7,9 +7,9 @@ using NGS.Templater;
 
 namespace DoubleProcessing
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var ms = new MemoryStream();
 			var bytes = File.ReadAllBytes("ResizeWithNesting.xlsx");
@@ -38,9 +38,9 @@ namespace DoubleProcessing
 			using (var doc = Configuration.Factory.Open(ms, "xlsx"))
 				doc.Process(complex);
 
-			File.WriteAllBytes("out.xlsx", ms.ToArray());
+			File.WriteAllBytes("DoubleProcessing.xlsx", ms.ToArray());
 
-			Process.Start("out.xlsx");
+			Process.Start("DoubleProcessing.xlsx");
 		}
 
 		class Person

@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Labels
 {
-	class Program
+	public class Program
 	{
 		class Address
 		{
@@ -12,7 +12,7 @@ namespace Labels
 			public string Line;
 			public string PostCode;
 		}
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var addresses = new List<Address>();
 			for (int i = 0; i < 100; i++)

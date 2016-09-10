@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace IsoCountries
 {
-	static class Program
+	static public class Program
 	{
 		[STAThread]
 		static void Main()

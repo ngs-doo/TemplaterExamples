@@ -6,9 +6,9 @@ using NGS.Templater;
 
 namespace ExternalLinks
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var favorites = new List<Dictionary<string, object>>();
 			favorites.Add(new Dictionary<string, object> { 
@@ -38,10 +38,10 @@ namespace ExternalLinks
 				{"email_address", "history@world.com" },
 				{"email_subject", "WWI" },
 			});
-			File.Copy("Links.docx", "Out.docx", true);
-			using (var doc = Configuration.Factory.Open("Out.docx"))
+			File.Copy("Links.docx", "ExternalLinks.docx", true);
+			using (var doc = Configuration.Factory.Open("ExternalLinks.docx"))
 				doc.Process(favorites);
-			Process.Start("Out.docx");
+			Process.Start("ExternalLinks.docx");
 		}
 	}
 }

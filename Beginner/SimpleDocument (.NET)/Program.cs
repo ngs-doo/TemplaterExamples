@@ -3,9 +3,9 @@ using NGS.Templater;
 
 namespace SimpleDocument
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var myFile = "MyDocument.docx";
 			var data = new { Tag = "an example" };

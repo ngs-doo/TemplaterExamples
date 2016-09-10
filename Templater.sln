@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOrderMVP", "Advanced\SalesOrderMVP (.NET)\SalesOrderMVP.csproj", "{65F6DB34-39CD-4748-944E-D770971BAFDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRates", "Intermediate\ExchangeRates (.NET)\ExchangeRates.csproj", "{6A4C98A9-F286-4903-9072-EF5B995E28AF}"
@@ -45,7 +43,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion", "Begi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListsAndTables", "Intermediate\ListsAndTables (.NET)\ListsAndTables.csproj", "{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunAll", "RunAll\RunAll.csproj", "{372658B9-0835-4B5F-98DA-E27405E1E0E4}"
+EndProject
 Global
+	GlobalSection(DslPlatformSolutionProperties) = preSolution
+		Php.Name = Php
+		Php.Target = Php
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -265,6 +269,16 @@ Global
 		{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}.Release|x86.ActiveCfg = Release|x86
 		{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}.Release|x86.Build.0 = Release|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Debug|x86.ActiveCfg = Debug|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Debug|x86.Build.0 = Debug|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Release|Any CPU.ActiveCfg = Release|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Release|Mixed Platforms.Build.0 = Release|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Release|x86.ActiveCfg = Release|x86
+		{372658B9-0835-4B5F-98DA-E27405E1E0E4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using NGS.Templater;
 
-namespace ProcessingPlugin
+namespace QuestionnairePlugin
 {
-	class Program
+	public class Program
 	{
 		class Questionnaire
 		{
@@ -67,7 +67,7 @@ namespace ProcessingPlugin
 			return value;
 		}
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var quest = new Questionnaire { Title = "When to write a Templater plugin?" };
 			quest.Add(
@@ -96,13 +96,13 @@ namespace ProcessingPlugin
 				.Build();
 
 			using (var input = new FileStream("questions.docx", FileMode.Open))
-			using (var output = new FileStream("result.docx", FileMode.Create))
+			using (var output = new FileStream("questionnaire.docx", FileMode.Create))
 			using (var doc = factory.Open(input, output, "docx"))
 			{
 				doc.Process(new { Date = DateTime.Now, Q = quest });
 			}
 
-			Process.Start("result.docx");
+			Process.Start("questionnaire.docx");
 		}
 	}
 }

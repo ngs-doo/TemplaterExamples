@@ -9,7 +9,7 @@ using NotesFor.HtmlToOpenXml;
 
 namespace HtmlPlugin
 {
-	class Program
+	public class Program
 	{
 		private static readonly HtmlConverter Converter =
 			new HtmlConverter(
@@ -40,11 +40,11 @@ namespace HtmlPlugin
 			return value;
 		}
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			File.Copy("template.docx", "out.docx", true);
+			File.Copy("template.docx", "HtmlPlugin.docx", true);
 			var factory = Configuration.Builder.Include(SimpleHtmlConverter).Include(ComplexHtmlConverter).Build();
-			using (var doc = factory.Open("out.docx"))
+			using (var doc = factory.Open("HtmlPlugin.docx"))
 			{
 				doc.Process(new
 				{
@@ -65,7 +65,7 @@ some <strong>text</strong> in <font color=""red"">red!</font>
 </html>"
 				});
 			}
-			Process.Start("out.docx");
+			Process.Start("HtmlPlugin.docx");
 		}
 	}
 }

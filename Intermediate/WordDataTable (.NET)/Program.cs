@@ -8,7 +8,7 @@ using NGS.Templater;
 
 namespace WordDataTable
 {
-	class Program
+	public class Program
 	{
 		static object Top10Rows(object argument, string metadata)
 		{
@@ -47,9 +47,9 @@ namespace WordDataTable
 			return false;
 		}
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			File.Copy("Tables.docx", "out.docx", true);
+			File.Copy("Tables.docx", "WordDataTable.docx", true);
 			var dt = new DataTable();
 			dt.Columns.Add("Col1");
 			dt.Columns.Add("Col2");
@@ -75,11 +75,11 @@ namespace WordDataTable
 				new Dictionary<string, object>{{"1", null}, {"2",null},{"3",null}},
 				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3","c"}},
 			};
-			using (var doc = factory.Open("out.docx"))
+			using (var doc = factory.Open("WordDataTable.docx"))
 			{
 				doc.Process(new { Table1 = dt, Table2 = dt, DynamicResize = dynamicResize, Nulls = map });
 			}
-			Process.Start("out.docx");
+			Process.Start("WordDataTable.docx");
 		}
 	}
 }

@@ -3,9 +3,9 @@ using System.IO;
 
 namespace ExcelContextRules
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			File.Copy("flattening.xlsx", "flattening-out.xlsx", true);
 			var data =

@@ -6,7 +6,7 @@ using NGS.Templater;
 
 namespace ListsAndTables
 {
-	class Program
+	public class Program
 	{
 		class Person
 		{
@@ -41,9 +41,9 @@ namespace ListsAndTables
 				return Image.FromFile(argument.ToString());
 			return argument;
 		}
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			File.Copy("Nesting.docx", "out.docx", true);
+			File.Copy("Nesting.docx", "listsAndTables.docx", true);
 			var woz = new Person
 			{
 				Name = "Steve Wozniak",
@@ -165,11 +165,11 @@ namespace ListsAndTables
 			};
 			var people = new List<Person>(new[] { woz, kay });
 			var factory = Configuration.Builder.Include(LoadImage).Build();
-			using (var doc = factory.Open("out.docx"))
+			using (var doc = factory.Open("listsAndTables.docx"))
 			{
 				doc.Process(people);
 			}
-			Process.Start("out.docx");
+			Process.Start("listsAndTables.docx");
 		}
 	}
 }

@@ -5,11 +5,11 @@ using NGS.Templater;
 
 namespace ChartExample
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			File.Copy("Charts.docx", "out.docx", true);
+			File.Copy("Charts.docx", "ChartExample.docx", true);
 			var pie1 = new Dictionary<string, object>[3];
 			pie1[0] = new Dictionary<string, object>() { { "name", "Top" }, { "value", 11.2m } };
 			pie1[1] = new Dictionary<string, object>() { { "name", "Middle" }, { "value", 1.2m } };
@@ -26,13 +26,13 @@ namespace ChartExample
 			lines2[0] = new Dictionary<string, object> { { "category", "nice" }, { "ser1", 122 }, { "ser2", 5 }, { "ser3", 20 } };
 			lines2[1] = new Dictionary<string, object> { { "category", "cute" }, { "ser1", 212 }, { "ser2", 15 }, { "ser3", 2 } };
 
-			using (var doc = Configuration.Factory.Open("out.docx"))
+			using (var doc = Configuration.Factory.Open("ChartExample.docx"))
 			{
 				doc.Process(new[] {
 					new{ tag = "first page", pie = pie1, lines = lines1 },
 					new{ tag = "second page", pie = pie2, lines = lines2 }});
 			}
-			Process.Start("out.docx");
+			Process.Start("ChartExample.docx");
 		}
 	}
 }

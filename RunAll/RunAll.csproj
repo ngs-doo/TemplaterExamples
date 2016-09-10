@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{372658B9-0835-4B5F-98DA-E27405E1E0E4}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RunAll</RootNamespace>
+    <AssemblyName>RunAll</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\TemplaterExamples\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Advanced\DoubleProcessing %28.NET%29\DoubleProcessing.csproj">
+      <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
+      <Name>DoubleProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\DataSet %28.NET%29\DataSetExample.csproj">
+      <Project>{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}</Project>
+      <Name>DataSetExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\ExternalLinks %28.NET%29\ExternalLinks.csproj">
+      <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
+      <Name>ExternalLinks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\Labels %28.NET%29\Labels.csproj">
+      <Project>{25A57D63-D463-4090-817A-A967C2107CBF}</Project>
+      <Name>Labels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\MailMerge %28.NET%29\MailMerge.csproj">
+      <Project>{C15803E4-2567-4CFE-AF78-7D1341A4214F}</Project>
+      <Name>MailMerge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\SimpleDocument %28.NET%29\SimpleDocument.csproj">
+      <Project>{172BA03B-8863-4724-B22D-0DFD205CCF46}</Project>
+      <Name>SimpleDocument</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\SimpleSpreadsheet %28.NET%29\SimpleSpreadsheet.csproj">
+      <Project>{0F002123-D175-4741-8CCF-09FE09BDD98D}</Project>
+      <Name>SimpleSpreadsheet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\SpreadsheetGrouping %28.NET%29\SpreadsheetGrouping.csproj">
+      <Project>{172BA03B-8863-4724-B22D-0DFD225CCF46}</Project>
+      <Name>SpreadsheetGrouping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\ToFormulaConversion %28.NET%29\ToFormulaConversion.csproj">
+      <Project>{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}</Project>
+      <Name>ToFormulaConversion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\ChartExample %28.NET%29\ChartExample.csproj">
+      <Project>{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}</Project>
+      <Name>ChartExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\ExcelContextRules %28.NET%29\ExcelContextRules.csproj">
+      <Project>{D28B79F8-206A-43B0-BAE4-B3402A5162DD}</Project>
+      <Name>ExcelContextRules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\HtmlPlugin %28.NET%29\HtmlPlugin.csproj">
+      <Project>{3DED053C-9B71-4CD7-BEA2-1CA9963D9C78}</Project>
+      <Name>HtmlPlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\ListsAndTables %28.NET%29\ListsAndTables.csproj">
+      <Project>{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}</Project>
+      <Name>ListsAndTables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\QuestionnairePlugin %28.NET%29\QuestionnairePlugin.csproj">
+      <Project>{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}</Project>
+      <Name>QuestionnairePlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\WordDataTable %28.NET%29\WordDataTable.csproj">
+      <Project>{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}</Project>
+      <Name>WordDataTable</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

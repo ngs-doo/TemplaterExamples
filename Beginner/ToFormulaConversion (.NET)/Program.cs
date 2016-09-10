@@ -2,19 +2,19 @@
 using System.IO;
 using NGS.Templater;
 
-namespace ChartExample
+namespace ToFormulaConversion
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			File.Copy("SimpleConversion.xlsx", "out.xlsx", true);
+			File.Copy("SimpleConversion.xlsx", "formula.xlsx", true);
 
-			using (var doc = Configuration.Factory.Open("out.xlsx"))
+			using (var doc = Configuration.Factory.Open("formula.xlsx"))
 			{
 				doc.Process(new { aa = 100, bb = 22.2m });
 			}
-			Process.Start("out.xlsx");
+			Process.Start("formula.xlsx");
 		}
 	}
 }

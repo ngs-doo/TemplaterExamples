@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using NGS.Templater;
 
-namespace SimpleDocument
+namespace SimpleSpreadsheet
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var myFile = "MySpreadsheet.xlsx";
 			var data = new

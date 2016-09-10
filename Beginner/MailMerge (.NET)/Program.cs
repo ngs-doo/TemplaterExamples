@@ -6,9 +6,9 @@ using NGS.Templater;
 
 namespace MailMerge
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var csv = File.ReadAllLines("data.csv");
 			var data =
@@ -17,12 +17,12 @@ namespace MailMerge
 				 let img = File.Exists(values[2]) ? Image.FromFile(values[2]) : null
 				 select new { Name = values[0], date = values[1], signature = img })
 				.ToList();
-			File.Copy("letter.docx", "result.docx", true);
-			using (var doc = Configuration.Factory.Open("result.docx"))
+			File.Copy("letter.docx", "merge.docx", true);
+			using (var doc = Configuration.Factory.Open("merge.docx"))
 			{
 				doc.Process(data);
 			}
-			Process.Start("result.docx");
+			Process.Start("merge.docx");
 		}
 	}
 }

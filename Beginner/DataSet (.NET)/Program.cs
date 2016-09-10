@@ -5,9 +5,9 @@ using System.IO;
 
 namespace DataSetExample
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var dt1 = new DataTable();
 			dt1.Columns.Add("Id", typeof(int));
