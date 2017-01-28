@@ -1,11 +1,15 @@
 package hr.ngs.templater.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
 	private int paybackYears;
 	private Boolean ucCheck;
 	private String ucCheckResponse;
 	private Applicant applicant;
 	private Applicant coApplicant;
+	private List<Loan> loans = new ArrayList<Loan>();
 
 	public int getPaybackYears() {
 		return paybackYears;
@@ -50,5 +54,9 @@ public class Application {
 	public Application setCoApplicant(Applicant coApplicant) {
 		this.coApplicant = coApplicant;
 		return this;
+	}
+
+	public List<Loan> getLoans() {
+		return loans;
 	}
 }

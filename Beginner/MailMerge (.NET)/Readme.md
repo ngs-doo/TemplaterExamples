@@ -22,3 +22,8 @@ Document layout will be respected during resizing. In practice this means that *
 ### Page numbering
 
 Page numbers can be easily implemented by using Word feature for page numbering (insert -> page numbers)
+
+### Low level replace API plugins
+
+Plugins can be registered which will be invoked on every low level Replace call. This can be used to implement custom conversions without the need for custom metadata.
+In this case custom type is used to implement picture conversion behavior (without providing Image data type).

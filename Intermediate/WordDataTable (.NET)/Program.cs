@@ -47,6 +47,39 @@ namespace WordDataTable
 			return false;
 		}
 
+		static bool CollapseNonEmpty(object value, string metadata, string property, ITemplater templater)
+		{
+			if (metadata == "collapseNonEmpty" || metadata == "collapseEmpty")
+			{
+				var dt = value as DataTable;
+				if (dt == null) return false;
+				var isEmpty = dt.Rows.Count == 0;
+				//loop until all tags with the same name are processed
+				do
+				{
+					var md = templater.GetMetadata(property, false);
+					var collapseOnEmpty = md.Contains("collapseEmpty");
+					var collapseNonEmpty = md.Contains("collapseNonEmpty");
+					if (isEmpty)
+					{
+						if (collapseOnEmpty)
+							templater.Resize(property, 0);
+						else
+							templater.Replace(property, "");
+					}
+					else
+					{
+						if (collapseNonEmpty)
+							templater.Resize(property, 0);
+						else
+							templater.Replace(property, "");
+					}
+				} while (templater.Tags.Contains(property));
+				return true;
+			}
+			return false;
+		}
+
 		public static void Main(string[] args)
 		{
 			File.Copy("Tables.docx", "WordDataTable.docx", true);
@@ -56,7 +89,17 @@ namespace WordDataTable
 			dt.Columns.Add("Col3");
 			for (int i = 0; i < 100; i++)
 				dt.Rows.Add("a" + i, "b" + i, "c" + i);
-			var factory = Configuration.Builder.Include(Top10Rows).Include<DataTable>(Limit10Table).Build();
+			var dt4 = new DataTable();
+			dt4.Columns.Add("Name");
+			dt4.Columns.Add("Description");
+			//for (int i = 0; i < 10; i++)
+			//dt4.Rows.Add("Name" + i, "Description" + i);
+			var factory =
+				Configuration.Builder
+				.Include(Top10Rows)
+				.Include<DataTable>(Limit10Table)
+				.Include(CollapseNonEmpty)
+				.Build();
 			var dynamicResize = new object[7, 3]{
 				{"a", "b", "c"},
 				{"a", null, "c"},
@@ -77,7 +120,15 @@ namespace WordDataTable
 			};
 			using (var doc = factory.Open("WordDataTable.docx"))
 			{
-				doc.Process(new { Table1 = dt, Table2 = dt, DynamicResize = dynamicResize, Nulls = map });
+				doc.Process(
+					new
+					{
+						Table1 = dt,
+						Table2 = dt,
+						DynamicResize = dynamicResize,
+						Nulls = map,
+						Table4 = dt4
+					});
 			}
 			Process.Start("WordDataTable.docx");
 		}

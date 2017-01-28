@@ -18,3 +18,11 @@ Templater has built-in processor for DataTable, which *knows* how to process Dat
 
 One of the internal metadata (meaning it can't be implemented as a simple plugin) is **merge-nulls**.
 It can be used for merging cells when they contain null value.
+
+### Section support + custom handler for removing sections
+
+Templater uses document structure to infer beginning/end of the replicating context.
+Along the table/list/page/whole document as of v2.5 Templater supports sections. When all specified tags are inside a section that range will be used as a context.
+Example shows how to display special table when there are no rows (since default behavior is just to remove the template row - and leave the header).
+Appropriate section will be removed based on the custom metadata and the appropriate handler.
+Handler will iterate through all tags with the same name and either invoke collapse of that region or hide the tag.

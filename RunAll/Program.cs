@@ -19,10 +19,11 @@
 			ChartExample.Program.Main(args);
 			QuestionnairePlugin.Program.Main(args);
 			//TemplaterWeb // web app. run manually
+			SpreadsheetGrouping.Program.Main(args);
 			ExcelContextRules.Program.Main(args);
 			ToFormulaConversion.Program.Main(args);
 			DoubleProcessing.Program.Main(args);
-			///SalesOrderMVP standalone desktop app. run manually
+			//SalesOrderMVP standalone desktop app. run manually
 		}
 	}
 }

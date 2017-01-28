@@ -43,4 +43,16 @@ Builtin plugin **:format(pattern)** is used for invoking special .ToString(patte
 Since .NET supports type reification, empty collection can be analyzed and changed accordingly without additional metadata. In this example relationship with 0 elements causes tables to be reduced to 0 rows.
 
 Sometimes the requirements ask for complete removal of table in that case - which can be done using **:collapse** metadata.
- 
+
+### Coloring
+
+Templater doesn't have coloring API, but to implement coloring you can drop down to XML format and send in appropriate XML.
+In this case to specify background color for a cell, Word uses properties such as:
+
+    <w:tc>
+      <w:tcPr>
+        <w:shd w:val="clear" w:color="auto" w:fill="COLOR" />
+      </w:tcPr>
+    </w:tc>
+
+As of v2.5 Templater can use merge-xml metadata as instruction to merge provided XML to the surrounding context. This way we can "append" color to the appropriate place.
