@@ -100,6 +100,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testPictures() throws Exception {
+		PicturesExample.main(null);
+	}
+
+	@Test
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
 	}

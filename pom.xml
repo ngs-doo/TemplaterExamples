@@ -30,6 +30,7 @@
         <module>Intermediate/ResultSetExample (Java)</module>
         <module>Intermediate/DocxImport (Java)</module>
         <module>Intermediate/Formulas (Java)</module>
+        <module>Intermediate/Pictures (Java)</module>
         <module>Intermediate/TemplaterJson (Java)</module>
         <module>Advanced/TemplaterServer (Java)</module>
     </modules>
@@ -119,6 +120,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>formula-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>pictures-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
