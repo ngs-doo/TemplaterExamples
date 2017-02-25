@@ -44,7 +44,8 @@ public class PicturesExample {
 					BufferedImage scaledBI = new BufferedImage(maxWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
 					Graphics2D g = scaledBI.createGraphics();
 					g.setComposite(AlphaComposite.Src);
-					g.drawImage(image, 0, 0, maxWidth, scaledHeight, null);
+					Image smoothImage = image.getScaledInstance(maxWidth, scaledHeight, Image.SCALE_SMOOTH);
+					g.drawImage(smoothImage, 0, 0, maxWidth, scaledHeight, null);
 					g.dispose();
 					return scaledBI;
 				}
