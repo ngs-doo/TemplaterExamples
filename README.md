@@ -53,3 +53,17 @@ Low level resize(tags, count) API is used for duplicating part of the document. 
 ## Extensibility
 
 Templater has several extensibility points. Various plugins are embedded into library, while others can be registered during library initialization.
+
+## FAQ
+
+ ***Q***: How can I inject text with special color/bolding instead of plain (or pre-formatted) text into Templater?  
+ ***A***: You need to use XML to inject rich text into document (and format it appropriatelly to the target document format).
+
+ ***Q***: Documents created with Templater are reported as corrupted. What does that mean and how to fix it?  
+ ***A***: Corrupted document usually means that resulting document does not abide to the specification. This can be for various of reasons. Sometimes it's due to faulty input (eg Word does not support all characters ... so you need to handle what to do about special characters such as unicode 26 using low level API plugin). Sometimes it's due to bugs/missing features in Templater in which case you should report it back so we can fix the bug.
+
+ ***Q***: Can I convert docx/xlsx to PDF?  
+ ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do PDF conversion via it. Almost all non MS solution have some pixel perfect issues :(
+
+ ***Q***: Is this just a fancy mail-merge library?  
+ ***A***: Not at all. Templater can create really complex documents, but you might need to have good knowledge of Word/Excel to create such complex documents.

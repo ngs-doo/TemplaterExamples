@@ -25,6 +25,8 @@ on class such as
 
 navigation is used, while with relationship top level names are used (as in this example)
 
+As of v2.5.2 multi-level relationships are supported (eg. master-detail-child) and resizing support has been improved (better context detection).
+
 ### Tag repeating
 
 Templater has several rules for repeating tags:

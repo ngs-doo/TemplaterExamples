@@ -16,3 +16,8 @@ This can be controlled through System.getProperties with 'templater:dpi' setting
     System.getProperties.setProperty("templater:dpi", "72")
 
 will use the old behavior.
+
+Also as of v.2.5.2 ImageInputStream can be used to inject images.
+When Image is sent to Templater it will be saved as PNG into resulting document (and will be missing some metadata since it is not preserved in Image type).
+To preserve image format and DPI info (and various other metadata) ImageInputStream can be used instead of Image.
+Java can have some issues when ImageInputStream is created from input stream directly, so sometimes it's better to create it from file directly (or first save it to file with approprate extension first).
