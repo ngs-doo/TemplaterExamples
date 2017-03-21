@@ -14,3 +14,7 @@ Previously if similar document wanted to be processed, Templater could do it out
 *Note*: this works since tables have different tags. If both tables had the same tags, Templater would behave differently.
 It would replace/resize only the first table. If both tables need to be replaced, this can be done with a workaround,
 by adding **:repeat** metadata to one of the tags.
+
+### Image and DPI
+
+ImageInputStream will be inserted into the document using original file format and DPI info

@@ -2,6 +2,7 @@ package hr.ngs.templater.example;
 
 import hr.ngs.templater.*;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -64,6 +65,17 @@ public class SharedCollectionExample {
 		patients.add(new Patient("Bruce Lee",
 				Arrays.asList(new History("Claw cut", 1), new History("Bruising", 0)),
 				Arrays.asList(new Medicine("Vitamins", 4, 8, 365), new Medicine("Fiber", 6, 8, 365))));
+
+		InputStream is = SharedCollectionExample.class.getResourceAsStream("/java.jpg");
+		File tmpPath = File.createTempFile("picture", "jpg");
+		FileOutputStream tmpFos = new FileOutputStream(tmpPath);
+		byte[] buf = new byte[4096];
+		int read;
+		while ((read = is.read(buf)) != -1) {
+			tmpFos.write(buf, 0, read);
+		}
+		tmpFos.close();
+		data.put("imageWithDPI", ImageIO.createImageInputStream(tmpPath));
 
 		tpl.process(data);
 		tpl.flush();
