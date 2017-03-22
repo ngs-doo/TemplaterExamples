@@ -39,18 +39,25 @@ public class PicturesExample {
 
 		@Override
 		public Object format(Object value, String metadata) {
-			if (metadata.startsWith("maxWidth(") && value instanceof BufferedImage) {
+			if (metadata.startsWith("maxSize(") && value instanceof BufferedImage) {
 				//http://www.asknumbers.com/CentimetersToPointsConversion.aspx
-				int maxWidth = Integer.parseInt(metadata.substring("maxWidth(".length(), metadata.length() - 1)) * 28;
+				String[] parts = metadata.substring("maxSize(".length(), metadata.length() - 1).split(",");
+				int maxWidth = Integer.parseInt(parts[0].trim()) * 28;
+				int maxHeight = Integer.parseInt(parts[parts.length - 1].trim()) * 28;
 				BufferedImage image = (BufferedImage) value;
 				int width = image.getWidth();
-				if (width > 0 && maxWidth > 0 && width > maxWidth) {
-					int scaledHeight = image.getHeight() * maxWidth / width;
-					BufferedImage scaledBI = new BufferedImage(maxWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+				int height = image.getHeight();
+				if (width > 0 && maxWidth > 0 && width > maxWidth || height > 0 && maxHeight > 0 && height > maxHeight) {
+					double widthScale = 1.0 * width / maxWidth;
+					double heightScale = 1.0 * height / maxHeight;
+					double scale = Math.max(widthScale, heightScale);
+					int scaledHeight = (int)(image.getHeight() / scale);
+					int scaledWidth = (int)(image.getWidth() / scale);
+					BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
 					Graphics2D g = scaledBI.createGraphics();
 					g.setComposite(AlphaComposite.Src);
-					Image smoothImage = image.getScaledInstance(maxWidth, scaledHeight, Image.SCALE_SMOOTH);
-					g.drawImage(smoothImage, 0, 0, maxWidth, scaledHeight, null);
+					Image smoothImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+					g.drawImage(smoothImage, 0, 0, scaledWidth, scaledHeight, null);
 					g.dispose();
 					return scaledBI;
 				}
@@ -73,8 +80,10 @@ public class PicturesExample {
 
 		@Override
 		public Object format(Object value, String metadata) {
-			if (metadata.startsWith("maxWidth(") && value instanceof File) {
-				int maxWidth = Integer.parseInt(metadata.substring("maxWidth(".length(), metadata.length() - 1));
+			if (metadata.startsWith("maxSize(") && value instanceof File) {
+				String[] parts = metadata.substring("maxSize(".length(), metadata.length() - 1).split(",");
+				int maxWidthCm = Integer.parseInt(parts[0].trim());
+				int maxHeightCm = Integer.parseInt(parts[parts.length - 1].trim());
 				File file = (File) value;
 				try {
 					ImageInputStream image = ImageIO.createImageInputStream(file);
@@ -83,14 +92,18 @@ public class PicturesExample {
 						ImageReader reader = readers.next();
 						reader.setInput(image);
 						int width = reader.getWidth(reader.getMinIndex());
+						int height = reader.getHeight(reader.getMinIndex());
 						IIOMetadata readMetadata = reader.getImageMetadata(0);
 						IIOMetadataNode stdTree = (IIOMetadataNode) readMetadata.getAsTree("javax_imageio_1.0");
 						IIOMetadataNode dimension = (IIOMetadataNode) stdTree.getElementsByTagName("Dimension").item(0);
 						double horDpi = getPixelSizeMM(dimension, "HorizontalPixelSize");
 						double verDpi = getPixelSizeMM(dimension, "VerticalPixelSize");
 						double actualWidth = width / horDpi * 2.54;
-						if (width > 0 && maxWidth > 0 && actualWidth > maxWidth) {
-							double scale = actualWidth / maxWidth;
+						double actualHeight = height / verDpi * 2.54;
+						if (width > 0 && maxWidthCm > 0 && actualWidth > maxWidthCm || height > 0 && maxHeightCm > 0 && actualHeight > maxHeightCm) {
+							double widthScale = 1.0 * actualWidth / maxWidthCm;
+							double heightScale = 1.0 * actualHeight / maxHeightCm;
+							double scale = Math.max(widthScale, heightScale);
 							//let's change the DPI so image fits
 							ImageWriter writer = ImageIO.getImageWriter(reader);
 							BufferedImage bufImg = ImageIO.read(file);
