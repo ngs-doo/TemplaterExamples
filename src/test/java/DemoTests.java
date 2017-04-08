@@ -108,4 +108,9 @@ public class DemoTests {
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
 	}
+
+	@Test
+	public void testSheets() throws Exception {
+		SheetReportExample.main(null);
+	}
 }
