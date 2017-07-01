@@ -12,7 +12,7 @@ Additional [documentation] is available from the official webpage.
 
 Templater works by analyzing provided docx/xlsx document for **tags**. Tags are snippets of text written in either **[[tag]]** or **{{tag}}** format. Tags can have metadata which can be used for various customization purposes, such as formatting.
 
-When tags are placed in resizable part of the document Templater can repeat that part of the document when collection is provided as input. An example of this is a row in a table, list, page, sheet or entire document.
+When tags are placed in a resizable part of the document Templater will repeat that part of the document if collection is provided as input. An example of this is a row in a table, list, page, sheet or the entire document.
 
 Templater doesn't have it's own editor, but rather uses documents prepaired in Word/Excel/some other editor. While this works great in most cases, this means Templater must infer intention from the structure of the document/tags, which doesn't contain any Templater specific extension.
 
@@ -20,6 +20,8 @@ Templater has minimal API for interaction:
 
  * high level *process* method
  * low level *replace*, *resize* and *clone*
+
+and a builder API for customization.
 
 Usage of Templater mostly consists from passing existing model to high level API.
 
@@ -49,6 +51,7 @@ Low level resize(tags, count) API is used for duplicating part of the document. 
  * row/column styles - if possible styles will be maintained during horizontal or vertical resizing (horizontal resizing requires **horizontal-resize** metadata)
  * pushdown/pushright - elements bellow/right of tags area will be moved according to builtin rules
  * merge cells/named ranges/tables influence push rules by extending the affected region
+ * XML binding - custom XML will be changed/updated when bound in Word
   
 ## Extensibility
 
@@ -63,7 +66,7 @@ Templater has several extensibility points. Various plugins are embedded into li
  ***A***: Corrupted document usually means that resulting document does not abide to the specification. This can be for various of reasons. Sometimes it's due to faulty input (eg Word does not support all characters ... so you need to handle what to do about special characters such as unicode 26 using low level API plugin). Sometimes it's due to bugs/missing features in Templater in which case you should report it back so we can fix the bug.
 
  ***Q***: Can I convert docx/xlsx to PDF?  
- ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do PDF conversion via it. Almost all non MS solution have some pixel perfect issues :(
+ ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do [PDF conversion via it](Advanced/TemplaterServer%20(Java)/src/main/java/hr/ngs/templater/TemplaterServer.java#L178). Almost all non MS solution have some pixel perfect issues :(
 
  ***Q***: Is this just a fancy mail-merge library?  
- ***A***: Not at all. Templater can create really complex documents, but you might need to have good knowledge of Word/Excel to create such complex documents.
+ ***A***: Not at all. Templater can create really complex documents, but you might need to have a good knowledge of Word/Excel to create such complex documents.

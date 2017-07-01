@@ -41,3 +41,8 @@ Various processors are registered, for types such as:
  * ...
 
 When new data type needs to be registered, or custom processing on specific data type is required plugin can be registered as in this example
+
+#### Custom tag parser
+
+Since v2.7.0 Templater allows for tag regex customization. Default tag regex includes only few special characters so if we want to expand (or restrict) a format of the tag we can provide a new format during setup.
+Here a format of char or dot is used.

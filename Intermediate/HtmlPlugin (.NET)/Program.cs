@@ -43,7 +43,10 @@ namespace HtmlPlugin
 		public static void Main(string[] args)
 		{
 			File.Copy("template.docx", "HtmlPlugin.docx", true);
-			var factory = Configuration.Builder.Include(SimpleHtmlConverter).Include(ComplexHtmlConverter).Build();
+			var factory = Configuration.Builder
+				.Include(SimpleHtmlConverter)//include custom plugins
+				.Include(ComplexHtmlConverter)
+				.Build();
 			using (var doc = factory.Open("HtmlPlugin.docx"))
 			{
 				doc.Process(new

@@ -4,4 +4,9 @@ Charts in Word are actually spreadsheet files embedded within the zip.
 
 During analysis Templater will drill down into embedded xlsx file for tags. 
 They will be available through low level API as if they were defined in Word.
- 
+
+### Repeating collections
+
+Since v2.7.0 Templater will process multiple collections with same tags.
+Since there is a single [[tag]] in the top level of the document this will invoke the resize page rules of the Templater and thus on processing the first collection it will copy all the elements,
+while the second resizes will not pass along the [[tag]] element which will invoke just the resize of the objects.

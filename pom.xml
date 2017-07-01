@@ -33,6 +33,7 @@
         <module>Intermediate/Pictures (Java)</module>
         <module>Intermediate/TemplaterJson (Java)</module>
         <module>Advanced/SheetReport (Java)</module>
+        <module>Advanced/XmlBinding (Java)</module>
         <module>Advanced/TemplaterServer (Java)</module>
     </modules>
 
@@ -136,6 +137,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>sheet-report-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>xml-binding-example</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

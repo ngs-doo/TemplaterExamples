@@ -11,9 +11,7 @@ New **replace(tag, index, value)** work on any item in the queue.
 
 Previously if similar document wanted to be processed, Templater could do it out of the box only if you had two different property names (pointing to the same collection).
 
-*Note*: this works since tables have different tags. If both tables had the same tags, Templater would behave differently.
-It would replace/resize only the first table. If both tables need to be replaced, this can be done with a workaround,
-by adding **:repeat** metadata to one of the tags.
+*Note*: up until v2.7.0 Templater would behave differently if same tags were used in both tables. Since v2.7.0 Templater supports collections which are repeated in parts of the document out of the box. No need for **:repeat**, additional property or some other workaround.
 
 ### Image and DPI
 

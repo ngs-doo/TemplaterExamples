@@ -93,6 +93,7 @@ namespace QuestionnairePlugin
 				Configuration.Builder
 				.Include<Questionnaire>(ProcessQuestionnaire)
 				.Include(FormatDate)
+				.WithMatcher(@"[\w\.]+")
 				.Build();
 
 			using (var input = new FileStream("questions.docx", FileMode.Open))

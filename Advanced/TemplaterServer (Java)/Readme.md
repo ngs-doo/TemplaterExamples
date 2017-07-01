@@ -35,10 +35,14 @@ Templater will duplicate objects through clone and readjust used formulas to new
 Graphs are built off populated tables.
 Pushdown will move tables to appropriate position.
 
+Tags are also supported in sheet names.
+
 #### Charts
 
 Excel charts can be created based on data source (either table or range).
 Charts in Word are just embedded Excels.
+
+Collection can be shared across other resizeable objects and will be processed accordingly.
 
 #### Collapse
 
