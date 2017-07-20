@@ -26,3 +26,7 @@ Along the table/list/page/whole document as of v2.5 Templater supports sections.
 Example shows how to display special table when there are no rows (since default behavior is just to remove the template row - and leave the header).
 Appropriate section will be removed based on the custom metadata and the appropriate handler.
 Handler will iterate through all tags with the same name and either invoke collapse of that region or hide the tag.
+
+### Combining multiple features
+
+For complex documents it's often required to combine multiple features, such as in this case dynamic resize with a static part of the table.

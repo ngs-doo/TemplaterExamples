@@ -10,15 +10,15 @@
     "Kills": [
       {
         "name": "Dr Evil",
-        "date": "1965-05-07"
+        "metadata": [["In 1965", "Cute cat"]]
       },
       {
         "name": "Moneypenny",
-        "date": "1967-03-05"
+        "metadata": [["Recently", "Heartbreaking"]]
       },
       {
         "name": "Spectre",
-        "date": "1968-05-05"
+        "metadata": [["2014", "Talks too much"]]
       }
     ]
   },
@@ -33,11 +33,11 @@
     "Kills": [
       {
         "name": "Mini-me",
-        "date": "1972-04-07"
+        "metadata": [["Year 1972", "Or not!?"]]
       },
       {
         "name": "Fat Bastard",
-        "date": "1977-02-23"
+        "metadata": [["Fake kill", "Eat to death"]]
       }
     ]
   }

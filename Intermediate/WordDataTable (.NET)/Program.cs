@@ -118,6 +118,15 @@ namespace WordDataTable
 				new Dictionary<string, object>{{"1", null}, {"2",null},{"3",null}},
 				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3","c"}},
 			};
+			var combined = new Combined
+			{
+				Beers = new[] 
+				{ 
+					new Beer { Name = "Heineken", Description = "Green and cold", Columns = new [,] { {"Light", "International"} }},
+					new Beer { Name = "Leila", Description = "Blueish", Columns = new [,] { {"Blue", "Domestic"} }}
+				},
+				Headers = new[,] { { "Bottle", "Where" } }
+			};
 			using (var doc = factory.Open("WordDataTable.docx"))
 			{
 				doc.Process(
@@ -127,10 +136,23 @@ namespace WordDataTable
 						Table2 = dt,
 						DynamicResize = dynamicResize,
 						Nulls = map,
-						Table4 = dt4
+						Table4 = dt4,
+						Combined = combined
 					});
 			}
 			Process.Start("WordDataTable.docx");
+		}
+
+		class Combined
+		{
+			public Beer[] Beers;
+			public string[,] Headers;
+		}
+		class Beer
+		{
+			public string Name;
+			public string Description;
+			public string[,] Columns;
 		}
 	}
 }
