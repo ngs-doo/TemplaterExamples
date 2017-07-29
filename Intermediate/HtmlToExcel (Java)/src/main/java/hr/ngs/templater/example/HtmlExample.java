@@ -88,8 +88,8 @@ public class HtmlExample {
 						}
 					}
 					return runs.toArray(new Element[0]);
-				} catch (Exception ignore) {
-					System.out.println(ignore);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 			}
 			return value;

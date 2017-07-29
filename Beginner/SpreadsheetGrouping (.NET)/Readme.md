@@ -24,3 +24,8 @@ When nested context is resized, outer context will change accordingly:
  * cells bellow will be moved - rules for outer ranges influence area which will be moved
 
 Resizing nested range in this example causes pushdown of all previously replicated regions. While this is transparent in this example, if elements were placed below special rules could be applied (depending if it's directly below, partly below or bellow to a side) 
+
+### Repeating collection workaround
+
+Before Templater v2.7.0 if same collection was due for processing multiple times, alternative property could be used to implement such use case.
+In new Templater versions this workaround is no longer required and same collection can be processed multiple times on different sheets.

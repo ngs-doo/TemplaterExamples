@@ -52,7 +52,15 @@ Low level resize(tags, count) API is used for duplicating part of the document. 
  * pushdown/pushright - elements bellow/right of tags area will be moved according to builtin rules
  * merge cells/named ranges/tables influence push rules by extending the affected region
  * XML binding - custom XML will be changed/updated when bound in Word
-  
+
+## Examples
+
+This repository contains various examples covering some of the features:
+
+ * [understanding basics](Beginner/README.md)
+ * [plugins and nontrivial documents](Intermediate/README.md)
+ * [complex examples](Advanced/README.md)
+
 ## Extensibility
 
 Templater has several extensibility points. Various plugins are embedded into library, while others can be registered during library initialization.
@@ -60,7 +68,7 @@ Templater has several extensibility points. Various plugins are embedded into li
 ## FAQ
 
  ***Q***: How can I inject text with special color/bolding instead of plain (or pre-formatted) text into Templater?  
- ***A***: You need to use XML to inject rich text into document (and format it appropriatelly to the target document format).
+ ***A***: You need to use XML to inject rich text into document (and format it appropriately to the target document format).
 
  ***Q***: Documents created with Templater are reported as corrupted. What does that mean and how to fix it?  
  ***A***: Corrupted document usually means that resulting document does not abide to the specification. This can be for various of reasons. Sometimes it's due to faulty input (eg Word does not support all characters ... so you need to handle what to do about special characters such as unicode 26 using low level API plugin). Sometimes it's due to bugs/missing features in Templater in which case you should report it back so we can fix the bug.

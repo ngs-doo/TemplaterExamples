@@ -75,6 +75,7 @@
     <Content Include="App_Data\Menus.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="clientaccesspolicy.xml" />
     <Content Include="FoodOrderPage.aspx" />
     <Content Include="FoodOrderPage.html" />
     <Content Include="Silverlight.js" />
