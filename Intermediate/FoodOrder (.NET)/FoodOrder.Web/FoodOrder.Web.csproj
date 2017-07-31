@@ -49,7 +49,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\..\packages\Templater.2.7.1\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\..\packages\Templater.2.7.2\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
