@@ -1,7 +1,8 @@
 package hr.ngs.templater;
 
 import com.dslplatform.json.DslJson;
-import com.dslplatform.json.JsonStreamReader;
+import com.dslplatform.json.JsonReader;
+import com.dslplatform.json.ObjectConverter;
 
 import java.io.*;
 import java.util.Formatter;
@@ -53,9 +54,10 @@ public class TemplaterJson {
 	}
 
 	private static Object readData(InputStream dataStream) throws IOException {
-		JsonStreamReader<Object> reader = new JsonStreamReader<Object>(dataStream, new byte[4096], null);
+		DslJson<Object> dslJson = new DslJson<Object>(new DslJson.Settings<Object>());
+		JsonReader<Object> reader = dslJson.newReader(dataStream, new byte[4096]);
 		reader.getNextToken();
-		return DslJson.deserializeObject(reader);
+		return ObjectConverter.deserializeObject(reader);
 	}
 
 	public static void process(

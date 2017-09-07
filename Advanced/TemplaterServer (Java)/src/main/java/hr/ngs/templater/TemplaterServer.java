@@ -63,6 +63,7 @@ public class TemplaterServer extends NanoHTTPD {
 	}
 
 	private final Map<String, byte[]> driveMap = new HashMap<>();
+	private static final DslJson<Object> dslJson = new DslJson<>();
 
 	public TemplaterServer() throws IOException {
 		super(PORT);
@@ -85,8 +86,8 @@ public class TemplaterServer extends NanoHTTPD {
 	/**
 	 * Define routes.
 	 *
-	 * @param session
-	 * @return
+	 * @param session http request
+	 * @return http response
 	 */
 	@Override
 	public Response serve(IHTTPSession session) {
@@ -116,7 +117,7 @@ public class TemplaterServer extends NanoHTTPD {
 	/**
 	 * Define response for template process request.
 	 *
-	 * @param session
+	 * @param session http request
 	 * @return Binary response
 	 */
 	private Response processTemplaterResponse(final IHTTPSession session) {
@@ -163,8 +164,8 @@ public class TemplaterServer extends NanoHTTPD {
 	/**
 	 * Converts previously made document to pdf.
 	 *
-	 * @param templateBytes
-	 * @return
+	 * @param templateBytes ooxml document
+	 * @return  document as pdf
 	 */
 	private static byte[] convertToPdf(final byte[] templateBytes, final String ext) throws IOException, InterruptedException {
 		final File tmpFile = File.createTempFile("templaterDocument", "." + ext);
@@ -213,10 +214,11 @@ public class TemplaterServer extends NanoHTTPD {
 
 	private static Object parseJson(final String postData) throws ParseException {
 		if (postData == null) return null;
-		final JsonReader<Object> reader = new JsonReader<>(postData.getBytes(UTF8), null);
+		final JsonReader<Object> reader = dslJson.newReader(postData.getBytes(UTF8));
 		try {
+
 			reader.getNextToken();
-			return DslJson.deserializeObject(reader);
+			return ObjectConverter.deserializeObject(reader);
 		} catch (IOException e) {
 			throw new ParseException(e.getMessage(), reader.getCurrentIndex());
 		}
@@ -225,8 +227,8 @@ public class TemplaterServer extends NanoHTTPD {
 	/**
 	 * Parses out an extension of a template.
 	 *
-	 * @param template
-	 * @return
+	 * @param template file name
+	 * @return extension
 	 */
 	private static String getExtension(final String template) throws ParseException {
 		int lastIndexOfDot = template.lastIndexOf('.');
