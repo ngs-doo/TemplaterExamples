@@ -77,12 +77,12 @@ public class TemplaterJson {
 		StringBuilder sb = new StringBuilder();
 		Formatter fmt = new Formatter(sb);
 		fmt.format("Example usage:%n" +
-				"\tjava -jar templater-json.jar [template.ext] [data.json] [output.ext]%n" +
+				"\tjava -jar templater-json.jar template.ext [data.json] [output.ext]%n" +
 				"\ttemplate.ext: path to the template file (eg. document.docx)%n" +
 				"\tdata.json:    path to a file containing a JSON object or an array of JSON objects%n" +
 				"\toutput.ext:   output path where the processed report is to be placed (eg. result.docx)%n%n" +
 				"Alternatively, you can use omit the [data.json] and [output.ext] arguments to read from stdin and write to stdout%n" +
-				"\tjava -jar templater-json.jar [template.ext] < [data.json] > [output.ext]%n%n" +
+				"\tjava -jar templater-json.jar template.ext < [data.json] > [output.ext]%n%n" +
 				"Supported extensions are:%n");
 
 		for (SupportedType st : SupportedType.values()) {

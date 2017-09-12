@@ -1,4 +1,4 @@
-## Templater Json
+## Templater JSON
 
 Command line tool for feeding JSON to Templater.
 
