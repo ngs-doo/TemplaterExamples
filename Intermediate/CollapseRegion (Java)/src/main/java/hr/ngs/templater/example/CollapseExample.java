@@ -79,7 +79,9 @@ public class CollapseExample {
 							}
 						}
 					} while (contains(templater.tags(), property));
-					return true;
+					//we want to stop further processing if list is empty
+					//otherwise we want to continue resizing list and processing it's elements
+					return list.isEmpty();
 				}
 				return false;
 			}

@@ -113,4 +113,9 @@ public class DemoTests {
 	public void testSheets() throws Exception {
 		SheetReportExample.main(null);
 	}
+
+	@Test
+	public void testBinding() throws Exception {
+		XmlBindingExample.main(null);
+	}
 }
