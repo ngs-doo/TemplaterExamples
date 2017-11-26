@@ -6,7 +6,7 @@ Start the server from within IDE or by running
 
     java -jar templater-server.jar
 
-And open your browser to `localhost:7778`
+And open your browser to `localhost:7777`
 
 Templates reside in `resources/templates`.
 Each of them has a respectable json example in `resources/examples`.
