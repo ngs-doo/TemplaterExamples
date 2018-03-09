@@ -36,3 +36,8 @@ In this case to specify background color for a cell, Word uses properties such a
     </w:tc>
 
 As of v2.5 Templater can use merge-xml metadata as instruction to merge provided XML to the surrounding context. This way we can "append" color to the appropriate place.
+
+### Verbalizing numbers
+
+A common use case is for providing number expressed as words.
+This feature can be easily implemented via external plugin which does tha appropriate conversion.

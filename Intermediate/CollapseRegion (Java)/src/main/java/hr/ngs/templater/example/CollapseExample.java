@@ -1,5 +1,8 @@
 package hr.ngs.templater.example;
 
+import com.ibm.icu.text.NumberFormat;
+import com.ibm.icu.text.RuleBasedNumberFormat;
+import com.ibm.icu.util.ULocale;
 import hr.ngs.templater.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,6 +44,7 @@ public class CollapseExample {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		final Charset utf8 = Charset.forName("UTF-8");
+		final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);
 		ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
 			@Override
 			public boolean handle(Object value, String metadata, String path, ITemplater templater) {
@@ -98,6 +102,15 @@ public class CollapseExample {
 					} catch (Exception e) {
 						return value;
 					}
+				}
+				return value;
+			}
+		}).include(new IDocumentFactoryBuilder.IFormatter() {
+			@Override
+			public Object format(Object value, String metadata) {
+				if ("verbalize".equals(metadata) && value instanceof BigDecimal) {
+					BigDecimal bd = (BigDecimal)value;
+					return formatter.format(bd);
 				}
 				return value;
 			}
