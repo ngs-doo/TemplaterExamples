@@ -14,9 +14,15 @@ The path to good looking reports is to create a good looking template.
 
 ### [Overriding builtin plugins](BoolOverride%20(Java)/Readme.md)
 
-How te register custom plugin instead of built-in one.
+How to register custom plugin instead of built-in one.
 
 [template](BoolOverride%20(Java)/src/main/resources/Bools.docx?raw=true) - [result](BoolOverride%20(Java)/result.docx?raw=true)
+
+### [Providing alternative values](AlternativeProperty%20(Java)/Readme.md)
+
+How to provide additional data to plugin which is not supported by Templater API.
+
+[template](AlternativeProperty%20(Java)/src/main/resources/Fields.docx?raw=true) - [result](AlternativeProperty%20(Java)/result.docx?raw=true)
 
 ### [Excel tables](IsoCountries%20(.NET)/Readme.md)
 
@@ -114,6 +120,10 @@ By combining various features, complex layouts can be created.
 
 [template](WordDataTable%20(.NET)/Tables.docx?raw=true) - [result](WordDataTable%20(.NET)/result.docx?raw=true)
 
-### [Passing JSON to templates](TemplaterJson%20(Java)/Readme.md)
+### [Passing JSON to templates in Java](TemplaterJson%20(Java)/Readme.md)
+
+Since Templater is very good at processing dynamic inputs, JSON can be passed in to populate specific templates.
+
+### [Passing JSON to templates in .NET](TemplaterJson%20(.NET)/Readme.md)
 
 Since Templater is very good at processing dynamic inputs, JSON can be passed in to populate specific templates.

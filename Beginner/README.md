@@ -14,6 +14,12 @@ Replacing tags in the spreadsheet.
 
 [template](SimpleSpreadsheet%20(.NET)/MySpreadsheet.xlsx?raw=true) - [result](SimpleSpreadsheet%20(.NET)/result.xlsx?raw=true)
 
+### [Inserting images](ImageExample%20(Java)/Readme.md)
+
+How to insert an image into the document.
+
+[template](ImageExample%20(Java)/src/main/resources/Picture.docx?raw=true) - [result](ImageExample%20(Java)/result.docx?raw=true)
+
 ### [License embedding](WebExample%20(.NET)/Readme.md)
 
 How to embed license file (templater.lic) into a web project.

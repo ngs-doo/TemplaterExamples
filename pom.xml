@@ -18,11 +18,13 @@
         <module>Beginner/ListExample (Java)</module>
         <module>Beginner/MapExample (Java)</module>
         <module>Beginner/DynamicResize (Java)</module>
+        <module>Beginner/ImageExample (Java)</module>
         <module>Beginner/NamedRange (Java)</module>
         <module>Beginner/PushDownExample (Java)</module>
         <module>Beginner/PivotExample (Java)</module>
         <module>Beginner/ExcelLinks (Java)</module>
         <module>Intermediate/CollapseRegion (Java)</module>
+        <module>Intermediate/AlternativeProperty (Java)</module>
         <module>Intermediate/BoolOverride (Java)</module>
         <module>Intermediate/HtmlToExcel (Java)</module>
         <module>Intermediate/SharedCollection (Java)</module>
