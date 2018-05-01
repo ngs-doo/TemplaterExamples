@@ -29,6 +29,7 @@ namespace DoubleProcessing
 				//this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
 				doc.Process(new { Person = person, formula = "[[equals]]" });
 			}
+			File.WriteAllBytes("DoubleProcessing.xlsx", ms.ToArray());
 			ms.Position = 0;
 
 			//now let's prepare our complex object for standard processing
