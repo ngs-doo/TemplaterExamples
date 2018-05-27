@@ -1,4 +1,4 @@
-## Word and DataTable
+## Word and tables
 
 How DataTable can be used in Word. Header metadata.
 
@@ -14,10 +14,10 @@ To inject column names from DataTable, **:header** metadata must be used; otherw
 
 Templater has built-in processor for DataTable, which *knows* how to process DataTable. In that case more style formatting can be applied on the document.
 
-### merge-nulls metadata
+### merge-nulls/span-nulls metadata
 
-One of the internal metadata (meaning it can't be implemented as a simple plugin) is **merge-nulls**.
-It can be used for merging cells when they contain null value.
+Specific internal metadata (meaning it can't be implemented as a simple plugin) are **merge-nulls** and **span-nulls**.
+They can be used for merging cells when they contain null value.
 
 ### Section support + custom handler for removing sections
 

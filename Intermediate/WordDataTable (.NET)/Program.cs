@@ -100,7 +100,7 @@ namespace WordDataTable
 				.Include<DataTable>(Limit10Table)
 				.Include(CollapseNonEmpty)
 				.Build();
-			var dynamicResize = new object[7, 3]{
+			var dynamicResize1 = new object[7, 3]{
 				{"a", "b", "c"},
 				{"a", null, "c"},
 				{"a", "b", null},
@@ -108,6 +108,15 @@ namespace WordDataTable
 				{"a", null, null},
 				{null, null, null},
 				{"a", "b", "c"},
+			};
+			var dynamicResize2 = new object[7, 3]{
+				{"a", "b", "c"},
+				{null, null, "c"},
+				{null, null, null},
+				{null, "b", "c"},
+				{"a", null, null},
+				{null, "b", null},
+				{"a", "b", null},
 			};
 			var map = new Dictionary<string, object>[] {
 				new Dictionary<string, object>{{"1", "a"}, {"2","b"},{"3","c"}},
@@ -134,7 +143,8 @@ namespace WordDataTable
 					{
 						Table1 = dt,
 						Table2 = dt,
-						DynamicResize = dynamicResize,
+						DynamicResize = dynamicResize1,
+						DynamicResizeAndMerge = dynamicResize2,
 						Nulls = map,
 						Table4 = dt4,
 						Combined = combined
