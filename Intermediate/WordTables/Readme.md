@@ -1,18 +1,18 @@
 ## Word and tables
 
-How DataTable can be used in Word. Header metadata.
+How DataTable/ResultSet can be used in Word. Header metadata.
 
-Two basic ways to use a single DataTable. When column count is unknown and when column count is known.
+Two basic ways to use a single DataTable/ResultSet. When column count is unknown and when column count is known.
 Templater will respect the width of the table. When column count is know detailed style can be applied to it.
 
 ### Dynamic resize
 
-DataTable can be used in dynamic resize way (sending DataTable to low level API). In this case table will be stretched to match rows and columns in provided DataTable.
-To inject column names from DataTable, **:header** metadata must be used; otherwise only data will be imported.
+DataTable/ResultSet can be used in dynamic resize way (sending them to low level API). In this case table will be stretched to match rows and columns in provided instance.
+To inject column names, **:header** metadata must be used; otherwise only data will be imported.
 
 ### Standard processing
 
-Templater has built-in processor for DataTable, which *knows* how to process DataTable. In that case more style formatting can be applied on the document.
+Templater has built-in processor for DataTable/ResultSet, which *knows* how to process them. In that case more style formatting can be applied on the document.
 
 ### merge-nulls/span-nulls metadata
 

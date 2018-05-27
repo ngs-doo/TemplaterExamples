@@ -114,11 +114,11 @@ Different parts of same collection can be used in different tables.
 
 [template](SharedCollection%20(Java)/src/main/resources/TwoTables.docx?raw=true) - [result](SharedCollection%20(Java)/result.docx?raw=true)
 
-### [Various ways to populate Word table](WordDataTable%20(.NET)/Readme.md)
+### [Various ways to populate Word table](WordTables/Readme.md)
 
 By combining various features, complex layouts can be created.
 
-[template](WordDataTable%20(.NET)/Tables.docx?raw=true) - [result](WordDataTable%20(.NET)/result.docx?raw=true)
+[template](WordTables/template/Tables.docx?raw=true) - [result](WordTables/result.docx?raw=true)
 
 ### [Passing JSON to templates in Java](TemplaterJson%20(Java)/Readme.md)
 

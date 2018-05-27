@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsoCountries", "Intermediat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnairePlugin", "Intermediate\QuestionnairePlugin (.NET)\QuestionnairePlugin.csproj", "{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordDataTable", "Intermediate\WordDataTable (.NET)\WordDataTable.csproj", "{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordTables", "Intermediate\WordTables\WordTables.csproj", "{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExample", "Beginner\DataSet (.NET)\DataSetExample.csproj", "{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}"
 EndProject

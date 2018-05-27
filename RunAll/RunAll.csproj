@@ -105,7 +105,7 @@
       <Project>{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}</Project>
       <Name>QuestionnairePlugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Intermediate\WordDataTable %28.NET%29\WordDataTable.csproj">
+    <ProjectReference Include="..\Intermediate\WordTables\WordTables.csproj">
       <Project>{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}</Project>
       <Name>WordDataTable</Name>
     </ProjectReference>

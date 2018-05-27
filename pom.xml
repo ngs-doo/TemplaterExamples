@@ -33,6 +33,7 @@
         <module>Intermediate/DocxImport (Java)</module>
         <module>Intermediate/Formulas (Java)</module>
         <module>Intermediate/Pictures (Java)</module>
+        <module>Intermediate/WordTables</module>
         <module>Intermediate/TemplaterJson (Java)</module>
         <module>Advanced/SheetReport (Java)</module>
         <module>Advanced/XmlBinding (Java)</module>
@@ -129,6 +130,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>pictures-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>word-tables-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

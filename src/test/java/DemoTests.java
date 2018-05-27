@@ -105,6 +105,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testTables() throws Exception {
+		WordTablesExample.main(null);
+	}
+
+	@Test
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
 	}

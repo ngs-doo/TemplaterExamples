@@ -82,7 +82,7 @@ namespace WordDataTable
 
 		public static void Main(string[] args)
 		{
-			File.Copy("Tables.docx", "WordDataTable.docx", true);
+			File.Copy("template/Tables.docx", "WordTables.docx", true);
 			var dt = new DataTable();
 			dt.Columns.Add("Col1");
 			dt.Columns.Add("Col2");
@@ -136,7 +136,7 @@ namespace WordDataTable
 				},
 				Headers = new[,] { { "Bottle", "Where" } }
 			};
-			using (var doc = factory.Open("WordDataTable.docx"))
+			using (var doc = factory.Open("WordTables.docx"))
 			{
 				doc.Process(
 					new
@@ -150,7 +150,7 @@ namespace WordDataTable
 						Combined = combined
 					});
 			}
-			Process.Start("WordDataTable.docx");
+			Process.Start("WordTables.docx");
 		}
 
 		class Combined
