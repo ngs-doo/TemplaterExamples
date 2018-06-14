@@ -25,3 +25,7 @@ WordArt can be used for tag definition. It will be replaced as any other regular
 
 Footnote and endnotes are supported since v2.4.0
 Templater can replace multiple tags even when they are on seemingly different places such as footnotes since their definition is within the duplicating context.
+
+### Simple links
+
+System.Uri will be converted to a link (with same text) from v2.9.1. Before it could be done in a way similar to hyperlink plugin in this example, which also can have different link text representation.
