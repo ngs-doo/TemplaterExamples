@@ -9,7 +9,7 @@
 			DataSetExample.Program.Main(args);
 			ListsAndTables.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
-			ExternalLinks.Program.Main(args);
+			WordLinks.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
 			Labels.Program.Main(args);
 			WordDataTable.Program.Main(args);

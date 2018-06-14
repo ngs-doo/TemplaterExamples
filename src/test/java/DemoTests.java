@@ -16,6 +16,16 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testSimpleWordExample() throws Exception {
+		SimpleWordExample.main(null);
+	}
+
+	@Test
+	public void testsimpleExcelExample() throws Exception {
+		SimpleExcelExample.main(null);
+	}
+
+	@Test
 	public void testJsonBench() throws Exception {
 		InputStream json = DemoTests.class.getResourceAsStream("/benchmark-data.json");
 		InputStream template = DemoTests.class.getResourceAsStream("/benchmark-template.xlsx");
@@ -66,8 +76,13 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testLinks() throws Exception {
-		LinksExample.main(null);
+	public void testExcelLinks() throws Exception {
+		ExcelLinksExample.main(null);
+	}
+
+	@Test
+	public void testWordLinks() throws Exception {
+		WordLinksExample.main(null);
 	}
 
 	@Test

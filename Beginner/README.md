@@ -2,17 +2,17 @@
 
 Introduction to basic features and processing rules.
 
-### [Simple document](SimpleDocument%20(.NET)/Readme.md)
+### [Simple document](SimpleDocument/Readme.md)
 
 Replacing a single tag in the document.
 
-[template](SimpleDocument%20(.NET)/MyDocument.docx?raw=true) - [result](SimpleDocument%20(.NET)/result.docx?raw=true)
+[template](SimpleDocument/template/MyDocument.docx?raw=true) - [result](SimpleDocument/result.docx?raw=true)
 
-### [Simple spreadsheet](SimpleSpreadsheet%20(.NET)/Readme.md)
+### [Simple spreadsheet](SimpleSpreadsheet/Readme.md)
 
 Replacing tags in the spreadsheet.
 
-[template](SimpleSpreadsheet%20(.NET)/MySpreadsheet.xlsx?raw=true) - [result](SimpleSpreadsheet%20(.NET)/result.xlsx?raw=true)
+[template](SimpleSpreadsheet/template/MySpreadsheet.xlsx?raw=true) - [result](SimpleSpreadsheet/result.xlsx?raw=true)
 
 ### [Inserting images](ImageExample%20(Java)/Readme.md)
 
@@ -68,11 +68,11 @@ Various Excel features are supported.
 
 [template](ExcelLinks%20(Java)/src/main/resources/Links.xlsx?raw=true) - [result](ExcelLinks%20(Java)/result.xlsx?raw=true)
 
-### [Special Word objects](ExternalLinks%20(.NET)/Readme.md)
+### [Special Word objects](WordLinks/Readme.md)
 
 Various Word features are supported.
 
-[template](ExternalLinks%20(.NET)/Links.docx?raw=true) - [result](ExternalLinks%20(.NET)/result.docx?raw=true)
+[template](WordLinks/template/Links.docx?raw=true) - [result](WordLinks/result.docx?raw=true)
 
 ### [Mail merge](MailMerge%20(.NET)/Readme.md)
 

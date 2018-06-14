@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ExternalLinks")]
+[assembly: AssemblyTitle("WordLinks")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("templater.info")]
-[assembly: AssemblyProduct("ExternalLinks")]
+[assembly: AssemblyProduct("WordLinks")]
 [assembly: AssemblyCopyright("public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

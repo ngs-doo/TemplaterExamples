@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using NGS.Templater;
 
 namespace SimpleSpreadsheet
@@ -8,7 +9,8 @@ namespace SimpleSpreadsheet
 	{
 		public static void Main(string[] args)
 		{
-			var myFile = "MySpreadsheet.xlsx";
+			File.Copy("MySpreadsheet.xlsx", "out.xlsx", true);
+
 			var data = new
 			{
 				Name = "Marry",
@@ -16,15 +18,12 @@ namespace SimpleSpreadsheet
 				Today = DateTime.Today
 			};
 
-			// Please rebuild your application before starting it
-			// to copy the original template into the output folder
-
-			using (var document = Configuration.Factory.Open(myFile))
+			using (var document = Configuration.Factory.Open("out.xlsx"))
 			{
 				document.Process(data);
 			}
 
-			Process.Start(myFile);
+			Process.Start("out.xlsx");
 		}
 	}
 }

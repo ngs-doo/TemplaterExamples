@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml.Linq;
 using NGS.Templater;
 
-namespace ExternalLinks
+namespace WordLinks
 {
 	public class Program
 	{
@@ -65,7 +65,7 @@ namespace ExternalLinks
 				{"email_address", "history@world.com" },
 				{"email_subject", "WWI" },
 			});
-			File.Copy("Links.docx", "ExternalLinks.docx", true);
+			File.Copy("template/Links.docx", "ExternalLinks.docx", true);
 			using (var doc = Configuration.Builder.Include(StringToUrl).Include(ToHyperlink).Build().Open("ExternalLinks.docx"))
 			{
 				doc.Process(favorites);

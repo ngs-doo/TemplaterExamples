@@ -15,6 +15,8 @@
     </properties>
 
     <modules>
+        <module>Beginner/SimpleDocument</module>
+        <module>Beginner/SimpleSpreadsheet</module>
         <module>Beginner/ListExample (Java)</module>
         <module>Beginner/MapExample (Java)</module>
         <module>Beginner/DynamicResize (Java)</module>
@@ -23,6 +25,7 @@
         <module>Beginner/PushDownExample (Java)</module>
         <module>Beginner/PivotExample (Java)</module>
         <module>Beginner/ExcelLinks (Java)</module>
+        <module>Beginner/WordLinks</module>
         <module>Intermediate/CollapseRegion (Java)</module>
         <module>Intermediate/AlternativeProperty (Java)</module>
         <module>Intermediate/BoolOverride (Java)</module>
@@ -49,6 +52,16 @@
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>simple-word-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>simple-excel-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
             <artifactId>map-example</artifactId>
             <version>1.0</version>
         </dependency>
@@ -65,6 +78,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>excel-links-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>word-links-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -153,4 +171,17 @@
             <version>1.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

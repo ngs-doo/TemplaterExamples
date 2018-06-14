@@ -57,9 +57,9 @@
       <Project>{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}</Project>
       <Name>DataSetExample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Beginner\ExternalLinks %28.NET%29\ExternalLinks.csproj">
+    <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
-      <Name>ExternalLinks</Name>
+      <Name>WordLinks</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beginner\Labels %28.NET%29\Labels.csproj">
       <Project>{25A57D63-D463-4090-817A-A967C2107CBF}</Project>
@@ -69,11 +69,11 @@
       <Project>{C15803E4-2567-4CFE-AF78-7D1341A4214F}</Project>
       <Name>MailMerge</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Beginner\SimpleDocument %28.NET%29\SimpleDocument.csproj">
+    <ProjectReference Include="..\Beginner\SimpleDocument\SimpleDocument.csproj">
       <Project>{172BA03B-8863-4724-B22D-0DFD205CCF46}</Project>
       <Name>SimpleDocument</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Beginner\SimpleSpreadsheet %28.NET%29\SimpleSpreadsheet.csproj">
+    <ProjectReference Include="..\Beginner\SimpleSpreadsheet\SimpleSpreadsheet.csproj">
       <Project>{0F002123-D175-4741-8CCF-09FE09BDD98D}</Project>
       <Name>SimpleSpreadsheet</Name>
     </ProjectReference>
@@ -107,7 +107,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Intermediate\WordTables\WordTables.csproj">
       <Project>{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}</Project>
-      <Name>WordDataTable</Name>
+      <Name>WordTables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

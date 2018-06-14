@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOrderMVP", "Advanced\SalesOrderMVP (.NET)\SalesOrderMVP.csproj", "{65F6DB34-39CD-4748-944E-D770971BAFDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRates", "Intermediate\ExchangeRates (.NET)\ExchangeRates.csproj", "{6A4C98A9-F286-4903-9072-EF5B995E28AF}"
@@ -21,15 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordTables", "Intermediate\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetExample", "Beginner\DataSet (.NET)\DataSetExample.csproj", "{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalLinks", "Beginner\ExternalLinks (.NET)\ExternalLinks.csproj", "{4C158D75-A416-460F-8F7B-57B0A4815C1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordLinks", "Beginner\WordLinks\WordLinks.csproj", "{4C158D75-A416-460F-8F7B-57B0A4815C1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labels", "Beginner\Labels (.NET)\Labels.csproj", "{25A57D63-D463-4090-817A-A967C2107CBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMerge", "Beginner\MailMerge (.NET)\MailMerge.csproj", "{C15803E4-2567-4CFE-AF78-7D1341A4214F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDocument", "Beginner\SimpleDocument (.NET)\SimpleDocument.csproj", "{172BA03B-8863-4724-B22D-0DFD205CCF46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDocument", "Beginner\SimpleDocument\SimpleDocument.csproj", "{172BA03B-8863-4724-B22D-0DFD205CCF46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSpreadsheet", "Beginner\SimpleSpreadsheet (.NET)\SimpleSpreadsheet.csproj", "{0F002123-D175-4741-8CCF-09FE09BDD98D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSpreadsheet", "Beginner\SimpleSpreadsheet\SimpleSpreadsheet.csproj", "{0F002123-D175-4741-8CCF-09FE09BDD98D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetGrouping", "Beginner\SpreadsheetGrouping (.NET)\SpreadsheetGrouping.csproj", "{172BA03B-8863-4724-B22D-0DFD225CCF46}"
 EndProject
@@ -50,6 +48,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterJson", "Intermediate\TemplaterJson (.NET)\TemplaterJson.csproj", "{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}"
 EndProject
 Global
+	GlobalSection(DslPlatformSolutionProperties) = preSolution
+		Php.Name = Php
+		Php.Target = Php
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms

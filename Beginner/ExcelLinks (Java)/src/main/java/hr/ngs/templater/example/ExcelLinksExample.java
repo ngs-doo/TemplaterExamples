@@ -6,10 +6,10 @@ import hr.ngs.templater.ITemplateDocument;
 import java.io.*;
 import java.util.*;
 
-public class LinksExample {
+public class ExcelLinksExample {
 
 	public static void main(final String[] args) throws Exception {
-		InputStream templateStream = LinksExample.class.getResourceAsStream("/Links.xlsx");
+		InputStream templateStream = ExcelLinksExample.class.getResourceAsStream("/Links.xlsx");
 		File tmp = File.createTempFile("link", ".xlsx");
 
 		List<Map<String, String>> favorites = new ArrayList<Map<String, String>>();
