@@ -33,12 +33,17 @@ public class CollapseExample {
 		application1.getLoans().add(new Loan("Big Bank", BigDecimal.valueOf(10000), Color.BLUE));
 		application1.getLoans().add(new Loan("Small Bank", BigDecimal.valueOf(2000), Color.GREEN));
 		Application application2 =
-				new Application()
+				new Application().hideLoans()
 						.setPaybackYears(15)
 						.setUcCheck(false)
 						.setUcCheckResponse("Not good enough")
 						.setApplicant(new Applicant("second applicant").setFrom("Apple", 2015, 12))
 						.setCoApplicant(new Applicant("second co-applicant").setFromUntil("IBM", 2014, 11, 2015, 12));
+		Application application3 =
+				new Application()
+						.setPaybackYears(10)
+						.setUcCheck(true).setUcCheckResponse("Ok")
+						.setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1));
 		InputStream templateStream = CollapseExample.class.getResourceAsStream("/Collapse.docx");
 		FileOutputStream fos = new FileOutputStream(tmp);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -115,7 +120,7 @@ public class CollapseExample {
 				return value;
 			}
 		}).build().open(templateStream, "docx", fos);
-		tpl.process(Arrays.asList(application1, application2));
+		tpl.process(Arrays.asList(application1, application2, application3));
 		tpl.flush();
 		fos.close();
 		Desktop.getDesktop().open(tmp);

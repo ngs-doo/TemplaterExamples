@@ -8,6 +8,12 @@ namespace ExternalLinks
 {
 	public class Program
 	{
+		private static object StringToUrl(object value, string metadata)
+		{
+			if (metadata == "url") return new Uri("http://" + value);
+			return value;
+		}
+
 		public static void Main(string[] args)
 		{
 			var favorites = new List<Dictionary<string, object>>();
@@ -39,8 +45,11 @@ namespace ExternalLinks
 				{"email_subject", "WWI" },
 			});
 			File.Copy("Links.docx", "ExternalLinks.docx", true);
-			using (var doc = Configuration.Factory.Open("ExternalLinks.docx"))
+			using (var doc = Configuration.Builder.Include(StringToUrl).Build().Open("ExternalLinks.docx"))
+			{
 				doc.Process(favorites);
+				doc.Process(new { urlType = new Uri("http://templater.info"), urlString = "templater.info" });
+			}
 			Process.Start("ExternalLinks.docx");
 		}
 	}

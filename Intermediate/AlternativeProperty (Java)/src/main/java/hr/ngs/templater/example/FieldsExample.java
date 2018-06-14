@@ -63,7 +63,7 @@ public class FieldsExample {
 		Desktop.getDesktop().open(tmp);
 	}
 
-	static void process(ITemplateDocument doc, Object value) {
+	private static void process(ITemplateDocument doc, Object value) {
 		try {
 			currentRoot.set(value);
 			doc.process(value);

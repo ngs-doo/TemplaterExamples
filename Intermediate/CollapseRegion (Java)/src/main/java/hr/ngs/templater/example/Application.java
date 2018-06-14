@@ -10,6 +10,7 @@ public class Application {
 	private Applicant applicant;
 	private Applicant coApplicant;
 	private List<Loan> loans = new ArrayList<Loan>();
+	private boolean hideLoans;
 
 	public int getPaybackYears() {
 		return paybackYears;
@@ -59,4 +60,15 @@ public class Application {
 	public List<Loan> getLoans() {
 		return loans;
 	}
+
+	public Application hideLoans() {
+		hideLoans = true;
+		return this;
+	}
+
+	public boolean getHideLoans() {
+		return hideLoans;
+	}
+
+	public int getLoansCount() { return loans.size(); }
 }

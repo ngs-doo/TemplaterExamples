@@ -9,6 +9,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DemoTests {
+
+	static {
+		//make sure some custom xml parser is not used
+		System.setProperty("templater:DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
+	}
+
 	@Test
 	public void testJsonBench() throws Exception {
 		InputStream json = DemoTests.class.getResourceAsStream("/benchmark-data.json");
