@@ -106,6 +106,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testWordChart() throws Exception {
+		WordChartExample.main(null);
+	}
+
+	@Test
 	public void testImport() throws Exception {
 		ImportExample.main(null);
 	}

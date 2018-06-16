@@ -9,7 +9,7 @@ namespace ChartExample
 	{
 		public static void Main(string[] args)
 		{
-			File.Copy("Charts.docx", "ChartExample.docx", true);
+			File.Copy("template/Charts.docx", "ChartExample.docx", true);
 			var pie1 = new Dictionary<string, object>[3];
 			pie1[0] = new Dictionary<string, object>() { { "name", "Top" }, { "value", 11.2m } };
 			pie1[1] = new Dictionary<string, object>() { { "name", "Middle" }, { "value", 1.2m } };
@@ -29,8 +29,8 @@ namespace ChartExample
 			using (var doc = Configuration.Factory.Open("ChartExample.docx"))
 			{
 				doc.Process(new[] {
-					new{ tag = "first page", pie = pie1, lines = lines1 },
-					new{ tag = "second page", pie = pie2, lines = lines2 }});
+					new { tag = "first page", pie = pie1, lines = lines1 },
+					new { tag = "second page", pie = pie2, lines = lines2 }});
 			}
 			Process.Start("ChartExample.docx");
 		}

@@ -78,11 +78,11 @@ Tweaking the result via formulas, named ranges and tables.
 
 [template](ExcelContextRules%20(.NET)/flattening.xlsx?raw=true) - [result](ExcelContextRules%20(.NET)/result.xlsx?raw=true)
 
-### [Charts in Word](ChartExample%20(.NET)/Readme.md)
+### [Charts in Word](ChartExample/Readme.md)
 
 Charts are embedded Excel files.
 
-[template](ChartExample%20(.NET)/Charts.docx?raw=true) - [result](ChartExample%20(.NET)/result.docx?raw=true)
+[template](ChartExample/template/Charts.docx?raw=true) - [result](ChartExample/result.docx?raw=true)
 
 ### [Formula rewriting](Formulas%20(Java)/Readme.md)
 

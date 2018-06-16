@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetGrouping", "Begi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterWeb", "Beginner\WebExample (.NET)\TemplaterWeb.csproj", "{23E06934-F41D-46DE-8845-DE2974C17588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartExample", "Intermediate\ChartExample (.NET)\ChartExample.csproj", "{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartExample", "Intermediate\ChartExample\ChartExample.csproj", "{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advanced\DoubleProcessing (.NET)\DoubleProcessing.csproj", "{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}"
 EndProject
