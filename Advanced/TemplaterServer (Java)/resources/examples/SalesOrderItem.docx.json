@@ -1,4 +1,4 @@
-{
+[{
 	"customer": {
 		"name": "New Generation Software LTD",
 		"address": "3 Main St.New York NY 97203 USA"
@@ -53,4 +53,42 @@
 		}
 	],
 	"total": 18872.94
-}
+},
+{
+	"customer": {
+		"name": "New Generation Software LTD",
+		"address": "Zagreb, Croatia"
+	},
+	"date": "2018-07-01",
+	"status": "CANCELED",
+	"items": [
+		{
+			"product": {
+				"name": "Other reporting library",
+				"price": 999.00,
+				"description": "Non-awesome library"
+			},
+			"quantity": 2,
+			"cost": 1998.00
+		},
+		{
+			"product": {
+				"name": "Fidget spinner",
+				"price": 10.05,
+				"description": "Spins around"
+			},
+			"quantity": 20,
+			"cost": 201.00
+		},
+		{
+			"product": {
+				"name": "The Expanse",
+				"price": 4000000.11,
+				"description": "SCI-FI series"
+			},
+			"quantity": 1,
+			"cost": 4000000.11
+		}
+	],
+	"total": 4002199.11
+}]

@@ -9,7 +9,7 @@ namespace SimpleSpreadsheet
 	{
 		public static void Main(string[] args)
 		{
-			File.Copy("MySpreadsheet.xlsx", "out.xlsx", true);
+			File.Copy("template/MySpreadsheet.xlsx", "out.xlsx", true);
 
 			var data = new
 			{

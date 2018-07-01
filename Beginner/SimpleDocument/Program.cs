@@ -8,7 +8,7 @@ namespace SimpleDocument
 	{
 		public static void Main(string[] args)
 		{
-			File.Copy("MyDocument.docx", "out.docx", true);
+			File.Copy("template/MyDocument.docx", "out.docx", true);
 			var data = new { Tag = "an example" };
 
 			using (var document = Configuration.Factory.Open("out.docx"))

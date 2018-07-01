@@ -70,7 +70,7 @@ public class WordLinksExample {
 		File tmp = File.createTempFile("link", ".docx");
 
 		List<Map<String, Object>> favorites = new ArrayList<Map<String, Object>>();
-		favorites.add(create("Egyptian pyramids", "2630 BC", "BBC", "http://www.bbc.co.uk/history/ancient/egyptians/", "Pyramids", "pyramids@egypt.com", "Pyramids"));
+		favorites.add(create("Egyptian pyramids", "2630 BC", "BBC", new URL("http://www.bbc.co.uk/history/ancient/egyptians/"), "Pyramids", "pyramids@egypt.com", "Pyramids"));
 		favorites.add(create("The Viking at Stamford Bridge", "1066-11-25", "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html", "Badass", "vikings@league.com", "Viking"));
 		favorites.add(create("World war I", "1914-6-28", "Wikipedia", "http://en.wikipedia.org/wiki/World_War_I", "Historians", "history@world.com", "WWI"));
 
