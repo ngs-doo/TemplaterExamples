@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPlugin", "Intermediate\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsoCountries", "Intermediate\IsoCountries (.NET)\IsoCountries.csproj", "{90F7EFF8-1728-4AEC-9F03-B2734BFC1542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnairePlugin", "Intermediate\QuestionnairePlugin (.NET)\QuestionnairePlugin.csproj", "{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnairePlugin", "Intermediate\QuestionnairePlugin\QuestionnairePlugin.csproj", "{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordTables", "Intermediate\WordTables\WordTables.csproj", "{E76E5BCF-D7C9-41AC-B29A-B1BF6F3166A8}"
 EndProject

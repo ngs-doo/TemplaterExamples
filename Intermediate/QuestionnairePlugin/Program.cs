@@ -96,7 +96,7 @@ namespace QuestionnairePlugin
 				.WithMatcher(@"[\w\.]+")
 				.Build();
 
-			using (var input = new FileStream("questions.docx", FileMode.Open))
+			using (var input = new FileStream("template/questions.docx", FileMode.Open))
 			using (var output = new FileStream("questionnaire.docx", FileMode.Create))
 			using (var doc = factory.Open(input, output, "docx"))
 			{

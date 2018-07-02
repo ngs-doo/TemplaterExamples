@@ -111,6 +111,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testQuestionnaire() throws Exception {
+		QuestionnaireExample.main(null);
+	}
+
+	@Test
 	public void testImport() throws Exception {
 		ImportExample.main(null);
 	}

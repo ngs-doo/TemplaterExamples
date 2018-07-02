@@ -105,7 +105,7 @@
       <Project>{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}</Project>
       <Name>ListsAndTables</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Intermediate\QuestionnairePlugin %28.NET%29\QuestionnairePlugin.csproj">
+    <ProjectReference Include="..\Intermediate\QuestionnairePlugin\QuestionnairePlugin.csproj">
       <Project>{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}</Project>
       <Name>QuestionnairePlugin</Name>
     </ProjectReference>

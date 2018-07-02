@@ -42,11 +42,11 @@ JVM version supports ResultSet. Context can span multiple rows.
 
 [template](ResultSetExample%20(Java)/src/main/resources/MyCoffeeTable.xlsx?raw=true) - [result](ResultSetExample%20(Java)/result.xlsx?raw=true)
 
-### [.NET plugin basics](QuestionnairePlugin%20(.NET)/Readme.md)
+### [Plugin basics](QuestionnairePlugin/Readme.md)
 
 Registering multiple plugins. Using unicode codes in documents.
 
-[template](QuestionnairePlugin%20(.NET)/questions.docx?raw=true) - [result](QuestionnairePlugin%20(.NET)/result.docx?raw=true)
+[template](QuestionnairePlugin/template/questions.docx?raw=true) - [result](QuestionnairePlugin/result.docx?raw=true)
 
 ### [Java plugin basics](LimitPlugins%20(Java)/Readme.md)
 

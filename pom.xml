@@ -32,6 +32,7 @@
         <module>Intermediate/HtmlToExcel (Java)</module>
         <module>Intermediate/SharedCollection (Java)</module>
         <module>Intermediate/ChartExample</module>
+        <module>Intermediate/QuestionnairePlugin</module>
         <module>Intermediate/LimitPlugins (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
         <module>Intermediate/DocxImport (Java)</module>
@@ -124,6 +125,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>word-chart-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>questionnaire-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
