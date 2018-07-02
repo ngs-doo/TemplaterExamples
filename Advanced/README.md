@@ -2,11 +2,11 @@
 
 Learning how to work around some limitations and use various advanced features.
 
-### [Report per sheet](SheetReport%20(Java)/Readme.md)
+### [Report per sheet](SheetReport/Readme.md)
 
 Tags are supported in sheet names. Easy to create report - per sheet(s).
 
-[template](SheetReport%20(Java)/src/main/resources/Report.xlsx?raw=true) - [result](SheetReport%20(Java)/result.xlsx?raw=true)
+[template](SheetReport/template/Report.xlsx?raw=true) - [result](SheetReport/result.xlsx?raw=true)
 
 ### [Multi-step processing](DoubleProcessing%20(.NET)/Readme.md)
 

@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterJson", "Intermedia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBinding", "Advanced\XmlBinding\XmlBinding.csproj", "{716992A2-B22C-463B-9D33-78CDDFB8973E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetReport", "Advanced\SheetReport\SheetReport.csproj", "{B3457322-FDDB-46AC-B445-2887C27BC723}"
+EndProject
 Global
 	GlobalSection(DslPlatformSolutionProperties) = preSolution
 		Php.Name = Php
@@ -303,6 +305,16 @@ Global
 		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|x86.ActiveCfg = Release|x86
 		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|x86.Build.0 = Release|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Debug|x86.ActiveCfg = Debug|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Debug|x86.Build.0 = Debug|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Release|Any CPU.ActiveCfg = Release|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Release|x86.ActiveCfg = Release|x86
+		{B3457322-FDDB-46AC-B445-2887C27BC723}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

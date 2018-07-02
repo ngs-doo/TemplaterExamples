@@ -53,6 +53,10 @@
       <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
       <Name>DoubleProcessing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Advanced\SheetReport\SheetReport.csproj">
+      <Project>{B3457322-FDDB-46AC-B445-2887C27BC723}</Project>
+      <Name>SheetReport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Advanced\XmlBinding\XmlBinding.csproj">
       <Project>{716992A2-B22C-463B-9D33-78CDDFB8973E}</Project>
       <Name>XmlBinding</Name>
