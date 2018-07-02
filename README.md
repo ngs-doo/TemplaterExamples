@@ -2,7 +2,7 @@
 
 # Reporting for JVM and .NET
 
-Templater is small reporting library with a minimal API.
+Templater is a reporting library with goal to be easily customizable by non-developers. Library has a minimal interface for providing data.
 
 These examples show various usages of the library.
 
