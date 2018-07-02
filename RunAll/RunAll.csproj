@@ -53,6 +53,10 @@
       <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
       <Name>DoubleProcessing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Advanced\XmlBinding\XmlBinding.csproj">
+      <Project>{716992A2-B22C-463B-9D33-78CDDFB8973E}</Project>
+      <Name>XmlBinding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\DataSet %28.NET%29\DataSetExample.csproj">
       <Project>{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}</Project>
       <Name>DataSetExample</Name>

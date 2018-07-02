@@ -23,6 +23,7 @@
 			ExcelContextRules.Program.Main(args);
 			ToFormulaConversion.Program.Main(args);
 			DoubleProcessing.Program.Main(args);
+			XmlBinding.Program.Main(args);
 			//SalesOrderMVP standalone desktop app. run manually
 		}
 	}

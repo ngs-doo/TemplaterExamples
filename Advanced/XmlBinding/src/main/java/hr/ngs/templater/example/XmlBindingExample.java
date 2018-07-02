@@ -34,13 +34,11 @@ public class XmlBindingExample {
 		FileOutputStream fos = new FileOutputStream(tmp);
 		ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
 
-		List<Item> items = new ArrayList<Item>();
-		items.add(new Item("Templater", "TPL", "Reporting library", 3, "How many"));
-		items.add(new Item("Computer", "COMP", "Hardware", 1, "Items"));
-		items.add(new Item("Planets", "PLN", "Big balls", 123567, "Very much"));
-		items.add(new Item("Stars", "STR", "Glowing things", 66554433, "Very many"));
-
-		tpl.process(items);
+		tpl.process(Arrays.asList(
+				new Item("Templater", "TPL", "Reporting library", 3, "How many"),
+				new Item("Computer", "COMP", "Hardware", 1, "Items"),
+				new Item("Planets", "PLN", "Big balls", 123567, "Very much"),
+				new Item("Stars", "STR", "Glowing things", 66554433, "Very many")));
 
 		tpl.flush();
 		fos.close();

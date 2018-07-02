@@ -14,11 +14,11 @@ Sometimes documents needs to be processed multiple times before final report can
 
 [template](DoubleProcessing%20(.NET)/ResizeWithNesting.xlsx?raw=true) - [result](DoubleProcessing%20(.NET)/result.xlsx?raw=true)
 
-### [XML binding](XmlBinding%20(Java)/Readme.md)
+### [XML binding](XmlBinding/Readme.md)
 
 Templater also integrates with Word XML binding feature, it will manage bound XML files.
 
-[template](XmlBinding%20(Java)/src/main/resources/Binding.docx?raw=true) - [result](XmlBinding%20(Java)/result.docx?raw=true)
+[template](XmlBinding/template/Binding.docx?raw=true) - [result](XmlBinding/result.docx?raw=true)
 
 ### [Simple sales order application](SalesOrderMVP%20(.NET)/Readme.md)
 

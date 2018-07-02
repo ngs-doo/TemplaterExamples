@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunAll", "RunAll\RunAll.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterJson", "Intermediate\TemplaterJson (.NET)\TemplaterJson.csproj", "{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBinding", "Advanced\XmlBinding\XmlBinding.csproj", "{716992A2-B22C-463B-9D33-78CDDFB8973E}"
+EndProject
 Global
 	GlobalSection(DslPlatformSolutionProperties) = preSolution
 		Php.Name = Php
@@ -291,6 +293,16 @@ Global
 		{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}.Release|x86.ActiveCfg = Release|x86
 		{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}.Release|x86.Build.0 = Release|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Debug|x86.ActiveCfg = Debug|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Debug|x86.Build.0 = Debug|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|Any CPU.ActiveCfg = Release|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|x86.ActiveCfg = Release|x86
+		{716992A2-B22C-463B-9D33-78CDDFB8973E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
