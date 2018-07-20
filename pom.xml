@@ -19,7 +19,7 @@
         <module>Beginner/SimpleSpreadsheet</module>
         <module>Beginner/ListExample (Java)</module>
         <module>Beginner/MapExample (Java)</module>
-        <module>Beginner/DynamicResize (Java)</module>
+        <module>Beginner/DynamicResize</module>
         <module>Beginner/ImageExample (Java)</module>
         <module>Beginner/NamedRange (Java)</module>
         <module>Beginner/PushDownExample (Java)</module>

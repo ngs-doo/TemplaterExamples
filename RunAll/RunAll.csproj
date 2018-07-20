@@ -65,6 +65,10 @@
       <Project>{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}</Project>
       <Name>DataSetExample</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\DynamicResize\DynamicResize.csproj">
+      <Project>{5CFBACF3-9DB6-4EE2-AAB4-503A64789C87}</Project>
+      <Name>DynamicResize</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
       <Name>WordLinks</Name>

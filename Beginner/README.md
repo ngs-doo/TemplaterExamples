@@ -98,11 +98,11 @@ Master-detail relationship in DataSet type. Injecting colors via XML type.
 
 [template](DataSet%20(.NET)/SampleLetter.docx?raw=true) - [result](DataSet%20(.NET)/result.docx?raw=true)
 
-### [Dynamic resize](DynamicResize%20(Java)/Readme.md)
+### [Dynamic resize](DynamicResize/Readme.md)
 
 When number of columns is unknown - two dimensional objects can be used.
 
-[template](DynamicResize%20(Java)/src/main/resources/GroceryList.docx?raw=true) - [result](DynamicResize%20(Java)/result.docx?raw=true)
+[template](DynamicResize/template/GroceryList.docx?raw=true) - [result](DynamicResize/result.docx?raw=true)
 
 ### [Conversion to formulas](ToFormulaConversion%20(.NET)/Readme.md)
 

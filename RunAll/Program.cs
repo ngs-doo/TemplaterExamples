@@ -8,6 +8,7 @@
 			SimpleSpreadsheet.Program.Main(args);
 			DataSetExample.Program.Main(args);
 			ListsAndTables.Program.Main(args);
+			DynamicResize.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
 			WordLinks.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
