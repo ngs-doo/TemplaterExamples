@@ -7,12 +7,14 @@
 			SimpleDocument.Program.Main(args);
 			SimpleSpreadsheet.Program.Main(args);
 			DataSetExample.Program.Main(args);
+			ImageExample.Program.Main(args);
+			Labels.Program.Main(args);
 			ListsAndTables.Program.Main(args);
 			DynamicResize.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
+			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
-			Labels.Program.Main(args);
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);
 			//FoodOrder // web app. run manually

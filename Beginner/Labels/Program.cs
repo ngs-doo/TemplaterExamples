@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace Labels
 {
@@ -14,6 +15,7 @@ namespace Labels
 		}
 		public static void Main(string[] args)
 		{
+			File.Copy("template/label.docx", "label.docx", true);
 			var addresses = new List<Address>();
 			for (int i = 0; i < 100; i++)
 				addresses.Add(new Address { FirstName = "name " + i, LastName = "surname " + i, Line = "line " + i, PostCode = "post " + i });

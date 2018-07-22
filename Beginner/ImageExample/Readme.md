@@ -4,5 +4,5 @@ The most simple way to insert an image into the document.
 
 ### Custom type detection
 
-Templater handles specific types in a special way. One of such types is a BufferedImage.
+Templater handles specific types in a special way. One of such types is a BufferedImage (Java) and Image (.NET).
 When buffered image is detected tag will be replaced with an appropriate image.

@@ -69,13 +69,21 @@
       <Project>{5CFBACF3-9DB6-4EE2-AAB4-503A64789C87}</Project>
       <Name>DynamicResize</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\ExcelLinks\ExcelLinks.csproj">
+      <Project>{DD15982D-1534-40F6-B30E-DAF691743961}</Project>
+      <Name>ExcelLinks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\ImageExample\ImageExample.csproj">
+      <Project>{B83F45F2-9F5F-4E33-B483-FB9C522C705C}</Project>
+      <Name>ImageExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\Labels\Labels.csproj">
+      <Project>{25A57D63-D463-4090-817A-A967C2107CBF}</Project>
+      <Name>Labels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
       <Name>WordLinks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Beginner\Labels %28.NET%29\Labels.csproj">
-      <Project>{25A57D63-D463-4090-817A-A967C2107CBF}</Project>
-      <Name>Labels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beginner\MailMerge %28.NET%29\MailMerge.csproj">
       <Project>{C15803E4-2567-4CFE-AF78-7D1341A4214F}</Project>

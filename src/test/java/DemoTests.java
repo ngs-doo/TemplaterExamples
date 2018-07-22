@@ -56,6 +56,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testLabels() throws Exception {
+		LabelsExample.main(null);
+	}
+
+	@Test
 	public void testDynamicResize() throws Exception {
 		DynamicResize.main(null);
 	}

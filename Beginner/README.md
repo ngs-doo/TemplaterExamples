@@ -14,11 +14,11 @@ Replacing tags in the spreadsheet.
 
 [template](SimpleSpreadsheet/template/MySpreadsheet.xlsx?raw=true) - [result](SimpleSpreadsheet/result.xlsx?raw=true)
 
-### [Inserting images](ImageExample%20(Java)/Readme.md)
+### [Inserting images](ImageExample/Readme.md)
 
 How to insert an image into the document.
 
-[template](ImageExample%20(Java)/src/main/resources/Picture.docx?raw=true) - [result](ImageExample%20(Java)/result.docx?raw=true)
+[template](ImageExample/template/Picture.docx?raw=true) - [result](ImageExample/result.docx?raw=true)
 
 ### [License embedding](WebExample%20(.NET)/Readme.md)
 
@@ -44,11 +44,11 @@ While simple scenario such as repeating of a table rows is supported, arbitrary 
 
 [template](ListExample%20(Java)/src/main/resources/MyList.docx?raw=true) - [result](ListExample%20(Java)/result.docx?raw=true)
 
-### [Labels](Labels%20(.NET)/Readme.md)
+### [Labels](Labels/Readme.md)
 
 Word features, such as columns, can be leveraged for layout.
 
-[template](Labels%20(.NET)/label.docx?raw=true) - [result](Labels%20(.NET)/result.docx?raw=true)
+[template](Labels/template/label.docx?raw=true) - [result](Labels/result.docx?raw=true)
 
 ### [Named range](NamedRange%20(Java)/Readme.md)
 
@@ -62,11 +62,11 @@ Context analysis will work across nested collections.
 
 [template](SpreadsheetGrouping%20(.NET)/Grouping.xlsx?raw=true) - [result](SpreadsheetGrouping%20(.NET)/result.xlsx?raw=true)
 
-### [Excel links](ExcelLinks%20(Java)/Readme.md)
+### [Excel links](ExcelLinks/Readme.md)
 
 Various Excel features are supported.
 
-[template](ExcelLinks%20(Java)/src/main/resources/Links.xlsx?raw=true) - [result](ExcelLinks%20(Java)/result.xlsx?raw=true)
+[template](ExcelLinks/template/Links.xlsx?raw=true) - [result](ExcelLinks/result.xlsx?raw=true)
 
 ### [Special Word objects](WordLinks/Readme.md)
 
