@@ -81,6 +81,10 @@
       <Project>{25A57D63-D463-4090-817A-A967C2107CBF}</Project>
       <Name>Labels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\ListExample\ListExample.csproj">
+      <Project>{64954981-39FE-409D-A07B-2A39E1C2D969}</Project>
+      <Name>ListExample</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
       <Name>WordLinks</Name>

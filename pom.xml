@@ -17,7 +17,7 @@
     <modules>
         <module>Beginner/SimpleDocument</module>
         <module>Beginner/SimpleSpreadsheet</module>
-        <module>Beginner/ListExample (Java)</module>
+        <module>Beginner/ListExample</module>
         <module>Beginner/MapExample (Java)</module>
         <module>Beginner/DynamicResize</module>
         <module>Beginner/ImageExample</module>

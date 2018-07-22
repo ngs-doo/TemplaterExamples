@@ -6,6 +6,7 @@
 		{
 			SimpleDocument.Program.Main(args);
 			SimpleSpreadsheet.Program.Main(args);
+			ListExample.Program.Main(args);
 			DataSetExample.Program.Main(args);
 			ImageExample.Program.Main(args);
 			Labels.Program.Main(args);
