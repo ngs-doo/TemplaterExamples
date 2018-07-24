@@ -23,6 +23,7 @@
         <module>Beginner/ImageExample</module>
         <module>Beginner/Labels</module>
         <module>Beginner/NamedRange (Java)</module>
+        <module>Beginner/MailMerge</module>
         <module>Beginner/PushDownExample (Java)</module>
         <module>Beginner/PivotExample (Java)</module>
         <module>Beginner/ExcelLinks</module>
@@ -81,6 +82,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>labels-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>mail-merge-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

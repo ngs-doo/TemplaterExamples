@@ -30,20 +30,21 @@ namespace MailMerge
 
 		public static void Main(string[] args)
 		{
-			var csv = File.ReadAllLines("data.csv");
+			var csv = File.ReadAllLines("template/data.csv");
 			var data =
 				(from line in csv.Skip(1)
 				 let values = line.Split(',')
-				 let img = File.Exists(values[2]) ? Image.FromFile(values[2]) : null
+				 let pic = "template/" + values[2]
+				 let img = File.Exists(pic) ? Image.FromFile(pic) : null
 				 select new
 				 {
 					 Name = values[0],
 					 date = values[1],
 					 signature = img,
-					 customSignature = new ImageReference(values[2])
+					 customSignature = new ImageReference(pic)
 				 })
 				.ToList();
-			File.Copy("letter.docx", "merge.docx", true);
+			File.Copy("template/letter.docx", "merge.docx", true);
 			using (var doc = Configuration.Builder.Include(ImageReferenceReplacer).Build().Open("merge.docx"))
 			{
 				doc.Process(data);

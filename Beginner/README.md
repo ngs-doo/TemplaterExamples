@@ -74,11 +74,11 @@ Various Word features are supported.
 
 [template](WordLinks/template/Links.docx?raw=true) - [result](WordLinks/result.docx?raw=true)
 
-### [Mail merge](MailMerge%20(.NET)/Readme.md)
+### [Mail merge](MailMerge/Readme.md)
 
 Inserting pictures via plugins allows for simple templates.
 
-[template](MailMerge%20(.NET)/letter.docx?raw=true) - [result](MailMerge%20(.NET)/result.docx?raw=true)
+[template](MailMerge/template/letter.docx?raw=true) - [result](MailMerge/result.docx?raw=true)
 
 ### [Pivots](PivotExample%20(Java)/Readme.md)
 

@@ -85,13 +85,13 @@
       <Project>{64954981-39FE-409D-A07B-2A39E1C2D969}</Project>
       <Name>ListExample</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\MailMerge\MailMerge.csproj">
+      <Project>{C15803E4-2567-4CFE-AF78-7D1341A4214F}</Project>
+      <Name>MailMerge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
       <Name>WordLinks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Beginner\MailMerge %28.NET%29\MailMerge.csproj">
-      <Project>{C15803E4-2567-4CFE-AF78-7D1341A4214F}</Project>
-      <Name>MailMerge</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beginner\SimpleDocument\SimpleDocument.csproj">
       <Project>{172BA03B-8863-4724-B22D-0DFD205CCF46}</Project>

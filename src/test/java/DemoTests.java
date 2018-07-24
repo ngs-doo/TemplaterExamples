@@ -71,6 +71,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testMailMerge() throws Exception {
+		MailMergeExample.main(null);
+	}
+
+	@Test
 	public void testHtmlExcel() throws Exception {
 		HtmlExample.main(null);
 	}

@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordLinks", "Beginner\WordL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labels", "Beginner\Labels\Labels.csproj", "{25A57D63-D463-4090-817A-A967C2107CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMerge", "Beginner\MailMerge (.NET)\MailMerge.csproj", "{C15803E4-2567-4CFE-AF78-7D1341A4214F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMerge", "Beginner\MailMerge\MailMerge.csproj", "{C15803E4-2567-4CFE-AF78-7D1341A4214F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDocument", "Beginner\SimpleDocument\SimpleDocument.csproj", "{172BA03B-8863-4724-B22D-0DFD205CCF46}"
 EndProject
