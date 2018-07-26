@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ListExample")]
+[assembly: AssemblyTitle("PushDownExample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("templater.info")]
-[assembly: AssemblyProduct("List")]
+[assembly: AssemblyProduct("Pushdown")]
 [assembly: AssemblyCopyright("Public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8a5cc290-477f-4fc8-9a5b-fe163867a67c")]
+[assembly: Guid("51d16a9c-8d65-4845-83a9-4ed32045957a")]
 
 // Version information for an assembly consists of the following four values:
 //

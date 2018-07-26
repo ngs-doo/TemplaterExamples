@@ -55,7 +55,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Readme.md" />
-    <None Include="SimpleConversion.xlsx">
+    <None Include="template\SimpleConversion.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

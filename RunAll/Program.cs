@@ -12,6 +12,9 @@
 			Labels.Program.Main(args);
 			ListsAndTables.Program.Main(args);
 			DynamicResize.Program.Main(args);
+			NamedRange.Program.Main(args);
+			PushDownExample.Program.Main(args);
+			ToFormulaConversion.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
 			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);
@@ -25,7 +28,6 @@
 			//TemplaterWeb // web app. run manually
 			SpreadsheetGrouping.Program.Main(args);
 			ExcelContextRules.Program.Main(args);
-			ToFormulaConversion.Program.Main(args);
 			DoubleProcessing.Program.Main(args);
 			SheetReport.Program.Main(args);
 			XmlBinding.Program.Main(args);

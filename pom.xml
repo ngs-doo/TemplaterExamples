@@ -22,12 +22,13 @@
         <module>Beginner/DynamicResize</module>
         <module>Beginner/ImageExample</module>
         <module>Beginner/Labels</module>
-        <module>Beginner/NamedRange (Java)</module>
+        <module>Beginner/NamedRange</module>
         <module>Beginner/MailMerge</module>
         <module>Beginner/PushDownExample (Java)</module>
         <module>Beginner/PivotExample (Java)</module>
         <module>Beginner/ExcelLinks</module>
         <module>Beginner/WordLinks</module>
+        <module>Beginner/ToFormulaConversion</module>
         <module>Intermediate/CollapseRegion (Java)</module>
         <module>Intermediate/AlternativeProperty (Java)</module>
         <module>Intermediate/BoolOverride (Java)</module>
@@ -76,6 +77,11 @@
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>image-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
             <artifactId>dynamic-resize</artifactId>
             <version>1.0</version>
         </dependency>
@@ -97,6 +103,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>word-links-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>formula-conversion-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

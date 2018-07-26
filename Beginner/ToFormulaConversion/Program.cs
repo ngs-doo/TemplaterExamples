@@ -8,7 +8,7 @@ namespace ToFormulaConversion
 	{
 		public static void Main(string[] args)
 		{
-			File.Copy("SimpleConversion.xlsx", "formula.xlsx", true);
+			File.Copy("template/SimpleConversion.xlsx", "formula.xlsx", true);
 
 			using (var doc = Configuration.Factory.Open("formula.xlsx"))
 			{

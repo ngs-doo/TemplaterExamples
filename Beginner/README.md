@@ -38,11 +38,11 @@ Templater is written in Scala and supports some Scala specific collections/types
 
 [template](BeerList%20(Scala)/src/main/resources/BeerList.docx?raw=true) - [result](BeerList%20(Scala)/result.docx?raw=true)
 
-### [Collections](ListExample%20(Java)/Readme.md)
+### [Collections](ListExample/Readme.md)
 
 While simple scenario such as repeating of a table rows is supported, arbitrary nesting is also supported - nesting collection inside a collection inside a collection...
 
-[template](ListExample%20(Java)/src/main/resources/MyList.docx?raw=true) - [result](ListExample%20(Java)/result.docx?raw=true)
+[template](ListExample/template/MyList.docx?raw=true) - [result](ListExample/result.docx?raw=true)
 
 ### [Labels](Labels/Readme.md)
 
@@ -50,11 +50,11 @@ Word features, such as columns, can be leveraged for layout.
 
 [template](Labels/template/label.docx?raw=true) - [result](Labels/result.docx?raw=true)
 
-### [Named range](NamedRange%20(Java)/Readme.md)
+### [Named range](NamedRange/Readme.md)
 
 In Excel, region fine tuning can be done via named ranges.
 
-[template](NamedRange%20(Java)/src/main/resources/Scorecard.xlsx?raw=true) - [result](NamedRange%20(Java)/result.xlsx?raw=true)
+[template](NamedRange/template/Scorecard.xlsx?raw=true) - [result](NamedRange/result.xlsx?raw=true)
 
 ### [Context detection](SpreadsheetGrouping%20(.NET)/Readme.md)
 
@@ -86,11 +86,11 @@ Integration with complex office features gets the most out of Templater.
 
 [template](PivotExample%20(Java)/src/main/resources/Pivot.xlsx?raw=true) - [result](PivotExample%20(Java)/result.xlsx?raw=true)
 
-### [Excel pushdown](PushDownExample%20(Java)/Readme.md)
+### [Excel pushdown](PushDownExample/Readme.md)
 
 When region extends, stuff needs to be moved around.
 
-[template](PushDownExample%20(Java)/src/main/resources/MyTable.xlsx?raw=true) - [result](PushDownExample%20(Java)/result.xlsx?raw=true)
+[template](PushDownExample/template/MyTable.xlsx?raw=true) - [result](PushDownExample/result.xlsx?raw=true)
 
 ### [.NET DataSet](DataSet%20(.NET)/Readme.md)
 
@@ -104,8 +104,8 @@ When number of columns is unknown - two dimensional objects can be used.
 
 [template](DynamicResize/template/GroceryList.docx?raw=true) - [result](DynamicResize/result.docx?raw=true)
 
-### [Conversion to formulas](ToFormulaConversion%20(.NET)/Readme.md)
+### [Conversion to formulas](ToFormulaConversion/Readme.md)
 
 Special tag **[[equals]]** is used to convert cells into formulas.
 
-[template](ToFormulaConversion%20(.NET)/SimpleConversion.xlsx?raw=true) - [result](ToFormulaConversion%20(.NET)/result.xlsx?raw=true)
+[template](ToFormulaConversion/template/SimpleConversion.xlsx?raw=true) - [result](ToFormulaConversion/result.xlsx?raw=true)

@@ -5,7 +5,7 @@
     <artifactId>labels-example</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>LabelsExample</name>
+    <name>Labels</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>

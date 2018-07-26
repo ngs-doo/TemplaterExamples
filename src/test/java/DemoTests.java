@@ -61,6 +61,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testImage() throws Exception {
+		ImageExample.main(null);
+	}
+
+	@Test
 	public void testDynamicResize() throws Exception {
 		DynamicResize.main(null);
 	}
@@ -73,6 +78,11 @@ public class DemoTests {
 	@Test
 	public void testMailMerge() throws Exception {
 		MailMergeExample.main(null);
+	}
+
+	@Test
+	public void testFormulaConversion() throws Exception {
+		FormulaConversionExample.main(null);
 	}
 
 	@Test

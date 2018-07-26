@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>hr.ngs.templater.example</groupId>
-    <artifactId>named-range-example</artifactId>
+    <artifactId>formula-conversion-example</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>NamedRange</name>
+    <name>To formula conversion</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>
@@ -31,5 +31,10 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>template</directory>
+            </resource>
+        </resources>
     </build>
 </project>
