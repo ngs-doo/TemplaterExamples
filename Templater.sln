@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunAll", "RunAll\RunAll.csproj", "{372658B9-0835-4B5F-98DA-E27405E1E0E4}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOrderMVP", "Advanced\SalesOrderMVP (.NET)\SalesOrderMVP.csproj", "{65F6DB34-39CD-4748-944E-D770971BAFDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRates", "Intermediate\ExchangeRates (.NET)\ExchangeRates.csproj", "{6A4C98A9-F286-4903-9072-EF5B995E28AF}"
@@ -42,8 +44,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion", "Beginner\ToFormulaConversion\ToFormulaConversion.csproj", "{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListsAndTables", "Intermediate\ListsAndTables (.NET)\ListsAndTables.csproj", "{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunAll", "RunAll\RunAll.csproj", "{372658B9-0835-4B5F-98DA-E27405E1E0E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterJson", "Intermediate\TemplaterJson (.NET)\TemplaterJson.csproj", "{2314AC0E-B6A8-4F8F-A73E-B132E34C97B8}"
 EndProject
