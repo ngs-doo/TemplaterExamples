@@ -56,11 +56,11 @@ In Excel, region fine tuning can be done via named ranges.
 
 [template](NamedRange/template/Scorecard.xlsx?raw=true) - [result](NamedRange/result.xlsx?raw=true)
 
-### [Context detection](SpreadsheetGrouping%20(.NET)/Readme.md)
+### [Context detection](SpreadsheetGrouping/Readme.md)
 
 Context analysis will work across nested collections.
 
-[template](SpreadsheetGrouping%20(.NET)/Grouping.xlsx?raw=true) - [result](SpreadsheetGrouping%20(.NET)/result.xlsx?raw=true)
+[template](SpreadsheetGrouping/template/Grouping.xlsx?raw=true) - [result](SpreadsheetGrouping/result.xlsx?raw=true)
 
 ### [Excel links](ExcelLinks/Readme.md)
 
@@ -80,11 +80,11 @@ Inserting pictures via plugins allows for simple templates.
 
 [template](MailMerge/template/letter.docx?raw=true) - [result](MailMerge/result.docx?raw=true)
 
-### [Pivots](PivotExample%20(Java)/Readme.md)
+### [Pivots](PivotExample/Readme.md)
 
 Integration with complex office features gets the most out of Templater.
 
-[template](PivotExample%20(Java)/src/main/resources/Pivot.xlsx?raw=true) - [result](PivotExample%20(Java)/result.xlsx?raw=true)
+[template](PivotExample/template/Pivot.xlsx?raw=true) - [result](PivotExample/result.xlsx?raw=true)
 
 ### [Excel pushdown](PushDownExample/Readme.md)
 

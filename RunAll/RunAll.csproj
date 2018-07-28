@@ -93,6 +93,10 @@
       <Project>{9104479D-955D-4928-B537-FCBBEAEBED35}</Project>
       <Name>NamedRange</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\PivotExample\PivotExample.csproj">
+      <Project>{5E14E075-127B-47D9-9D06-5FCBE60F5949}</Project>
+      <Name>PivotExample</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\PushDownExample\PushDownExample.csproj">
       <Project>{A379EB73-E072-46EC-B1DD-7D463C6E5EE2}</Project>
       <Name>PushDownExample</Name>
@@ -109,7 +113,7 @@
       <Project>{0F002123-D175-4741-8CCF-09FE09BDD98D}</Project>
       <Name>SimpleSpreadsheet</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Beginner\SpreadsheetGrouping %28.NET%29\SpreadsheetGrouping.csproj">
+    <ProjectReference Include="..\Beginner\SpreadsheetGrouping\SpreadsheetGrouping.csproj">
       <Project>{172BA03B-8863-4724-B22D-0DFD225CCF46}</Project>
       <Name>SpreadsheetGrouping</Name>
     </ProjectReference>

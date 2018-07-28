@@ -24,8 +24,9 @@
         <module>Beginner/Labels</module>
         <module>Beginner/NamedRange</module>
         <module>Beginner/MailMerge</module>
-        <module>Beginner/PushDownExample (Java)</module>
-        <module>Beginner/PivotExample (Java)</module>
+        <module>Beginner/PushDownExample</module>
+        <module>Beginner/PivotExample</module>
+        <module>Beginner/SpreadsheetGrouping</module>
         <module>Beginner/ExcelLinks</module>
         <module>Beginner/WordLinks</module>
         <module>Beginner/ToFormulaConversion</module>
@@ -93,6 +94,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>mail-merge-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>spreadsheet-grouping-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

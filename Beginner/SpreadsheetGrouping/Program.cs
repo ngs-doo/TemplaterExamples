@@ -23,7 +23,7 @@ namespace SpreadsheetGrouping
 		}
 		public static void Main(string[] args)
 		{
-			var inputFile = "Grouping.xlsx";
+			var inputFile = "template/Grouping.xlsx";
 			var outputFile = "Result.xlsx";
 
 			var list = new List<Info>();

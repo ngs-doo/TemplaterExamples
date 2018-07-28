@@ -81,6 +81,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testSpreadsheetGrouping() throws Exception {
+		SpreadsheetGroupingExample.main(null);
+	}
+
+	@Test
 	public void testFormulaConversion() throws Exception {
 		FormulaConversionExample.main(null);
 	}
