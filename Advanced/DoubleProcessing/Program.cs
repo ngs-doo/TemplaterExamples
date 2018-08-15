@@ -12,7 +12,7 @@ namespace DoubleProcessing
 		public static void Main(string[] args)
 		{
 			var ms = new MemoryStream();
-			var bytes = File.ReadAllBytes("ResizeWithNesting.xlsx");
+			var bytes = File.ReadAllBytes("template/ResizeWithNesting.xlsx");
 			ms.Write(bytes, 0, bytes.Length);
 			ms.Position = 0;
 

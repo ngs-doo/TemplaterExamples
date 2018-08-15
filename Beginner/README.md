@@ -24,7 +24,7 @@ How to insert an image into the document.
 
 How to embed license file (templater.lic) into a web project.
 
-[resource](WebExample%20(.NET)[WebExample%20(.NET)/TemplaterWeb.csproj#L96)
+[resource](WebExample%20(.NET)/TemplaterWeb.csproj#L96)
 
 ### [Flexible types](MapExample%20(Java)/Readme.md)
 

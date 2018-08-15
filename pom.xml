@@ -44,6 +44,7 @@
         <module>Intermediate/Pictures (Java)</module>
         <module>Intermediate/WordTables</module>
         <module>Intermediate/TemplaterJson (Java)</module>
+        <module>Advanced/DoubleProcessing</module>
         <module>Advanced/SheetReport</module>
         <module>Advanced/XmlBinding</module>
         <module>Advanced/TemplaterServer (Java)</module>
@@ -199,6 +200,11 @@
         <dependency>
             <groupId>hr.ngs.templater</groupId>
             <artifactId>templater-json</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>double-processing-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

@@ -45,6 +45,7 @@ public class QuestionnaireExample {
 				Configuration.builder()
 						.include(Questionnaire.class, new QuestionnairePlugin())
 						.include(new FormatDate())
+						.withMatcher("[\\w\\.]+")
 						.build().open(templateStream, "docx", fos);
 		tpl.process(arguments);
 		tpl.flush();

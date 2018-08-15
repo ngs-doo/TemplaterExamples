@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplaterWeb", "Beginner\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartExample", "Intermediate\ChartExample\ChartExample.csproj", "{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advanced\DoubleProcessing (.NET)\DoubleProcessing.csproj", "{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advanced\DoubleProcessing\DoubleProcessing.csproj", "{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules (.NET)\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
 EndProject

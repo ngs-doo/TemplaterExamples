@@ -16,12 +16,12 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testSimpleWordExample() throws Exception {
+	public void testSimpleWord() throws Exception {
 		SimpleWordExample.main(null);
 	}
 
 	@Test
-	public void testsimpleExcelExample() throws Exception {
+	public void testSimpleExcel() throws Exception {
 		SimpleExcelExample.main(null);
 	}
 
@@ -51,7 +51,7 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testListExample() throws Exception {
+	public void testList() throws Exception {
 		ListExample.main(null);
 	}
 
@@ -168,6 +168,11 @@ public class DemoTests {
 	@Test
 	public void testResultSet() throws Exception {
 		ResultSetExample.main(null);
+	}
+
+	@Test
+	public void testDoubleProcessing() throws Exception {
+		DoubleProcessingExample.main(null);
 	}
 
 	@Test

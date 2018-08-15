@@ -8,11 +8,11 @@ Tags are supported in sheet names. Easy to create report - per sheet(s).
 
 [template](SheetReport/template/Report.xlsx?raw=true) - [result](SheetReport/result.xlsx?raw=true)
 
-### [Multi-step processing](DoubleProcessing%20(.NET)/Readme.md)
+### [Multi-step processing](DoubleProcessing/Readme.md)
 
 Sometimes documents needs to be processed multiple times before final report can be created.
 
-[template](DoubleProcessing%20(.NET)/ResizeWithNesting.xlsx?raw=true) - [result](DoubleProcessing%20(.NET)/result.xlsx?raw=true)
+[template](DoubleProcessing/template/ResizeWithNesting.xlsx?raw=true) - [result](DoubleProcessing/result.xlsx?raw=true)
 
 ### [XML binding](XmlBinding/Readme.md)
 

@@ -55,7 +55,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Readme.md" />
-    <None Include="ResizeWithNesting.xlsx">
+    <None Include="template\ResizeWithNesting.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Advanced\DoubleProcessing %28.NET%29\DoubleProcessing.csproj">
+    <ProjectReference Include="..\Advanced\DoubleProcessing\DoubleProcessing.csproj">
       <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
       <Name>DoubleProcessing</Name>
     </ProjectReference>
