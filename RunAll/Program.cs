@@ -17,6 +17,8 @@
 			PushDownExample.Program.Main(args);
 			PivotExample.Program.Main(args);
 			ToFormulaConversion.Program.Main(args);
+			BoolOverride.Program.Main(args);
+			AlternativeProperty.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
 			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);

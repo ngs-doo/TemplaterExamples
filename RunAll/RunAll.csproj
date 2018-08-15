@@ -121,6 +121,14 @@
       <Project>{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}</Project>
       <Name>ToFormulaConversion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Intermediate\AlternativeProperty\AlternativeProperty.csproj">
+      <Project>{A7093DC1-9FF8-4B52-A54B-56EDD5B5F58F}</Project>
+      <Name>AlternativeProperty</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\BoolOverride\BoolOverride.csproj">
+      <Project>{5293C949-5A04-4210-9794-00EB56708F32}</Project>
+      <Name>BoolOverride</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intermediate\ChartExample\ChartExample.csproj">
       <Project>{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}</Project>
       <Name>ChartExample</Name>

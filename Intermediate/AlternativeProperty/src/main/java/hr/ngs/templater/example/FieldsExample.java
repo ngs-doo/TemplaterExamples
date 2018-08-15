@@ -48,7 +48,7 @@ public class FieldsExample {
 
 	public static void main(final String[] args) throws Exception {
 		InputStream templateStream = FieldsExample.class.getResourceAsStream("/Fields.docx");
-		File tmp = File.createTempFile("bool", ".docx");
+		File tmp = File.createTempFile("fields", ".docx");
 		FileOutputStream fos = new FileOutputStream(tmp);
 		IDocumentFactory factory = Configuration.builder().include(new MissingFormatter(new Callable<Object>() {
 			@Override

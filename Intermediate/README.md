@@ -12,11 +12,17 @@ The path to good looking reports is to create a good looking template.
 
 [CSV template](FoodOrder%20(.NET)/FoodOrder.Web/App_Data/Order.csv) - [result](FoodOrder%20(.NET)/result.csv)
 
-### [Overriding builtin plugins](BoolOverride%20(Java)/Readme.md)
+### [Overriding builtin plugins](BoolOverride/Readme.md)
 
 How to register custom plugin instead of built-in one.
 
-[template](BoolOverride%20(Java)/src/main/resources/Bools.docx?raw=true) - [result](BoolOverride%20(Java)/result.docx?raw=true)
+[template](BoolOverride/template/Bools.docx?raw=true) - [result](BoolOverride/result.docx?raw=true)
+
+### [Extending plugins behavior](AlternativeProperty/Readme.md)
+
+How to extend plugins via custom code.
+
+[template](AlternativeProperty/template/Fields.docx?raw=true) - [result](AlternativeProperty/result.docx?raw=true)
 
 ### [Providing alternative values](AlternativeProperty%20(Java)/Readme.md)
 

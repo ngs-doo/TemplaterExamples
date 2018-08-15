@@ -126,6 +126,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testFields() throws Exception {
+		FieldsExample.main(null);
+	}
+
+	@Test
 	public void testShared() throws Exception {
 		SharedCollectionExample.main(null);
 	}
