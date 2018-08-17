@@ -133,7 +133,11 @@
       <Project>{0033CD07-DC72-445C-8FB9-0562DB9AEEAA}</Project>
       <Name>ChartExample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Intermediate\ExcelContextRules %28.NET%29\ExcelContextRules.csproj">
+    <ProjectReference Include="..\Intermediate\CollapseRegion\CollapseRegion.csproj">
+      <Project>{E40643A3-E530-4B44-9AB7-673CCD4974FA}</Project>
+      <Name>CollapseRegion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\ExcelContextRules\ExcelContextRules.csproj">
       <Project>{D28B79F8-206A-43B0-BAE4-B3402A5162DD}</Project>
       <Name>ExcelContextRules</Name>
     </ProjectReference>

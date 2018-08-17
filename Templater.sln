@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartExample", "Intermediat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleProcessing", "Advanced\DoubleProcessing\DoubleProcessing.csproj", "{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules (.NET)\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelContextRules", "Intermediate\ExcelContextRules\ExcelContextRules.csproj", "{D28B79F8-206A-43B0-BAE4-B3402A5162DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToFormulaConversion", "Beginner\ToFormulaConversion\ToFormulaConversion.csproj", "{FC6EC7C4-51A3-4516-8F40-D71B801DE5D0}"
 EndProject
@@ -74,6 +74,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlternativeProperty", "Intermediate\AlternativeProperty\AlternativeProperty.csproj", "{A7093DC1-9FF8-4B52-A54B-56EDD5B5F58F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolOverride", "Intermediate\BoolOverride\BoolOverride.csproj", "{5293C949-5A04-4210-9794-00EB56708F32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollapseRegion", "Intermediate\CollapseRegion\CollapseRegion.csproj", "{E40643A3-E530-4B44-9AB7-673CCD4974FA}"
 EndProject
 Global
 	GlobalSection(DslPlatformSolutionProperties) = preSolution
@@ -429,6 +431,16 @@ Global
 		{5293C949-5A04-4210-9794-00EB56708F32}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5293C949-5A04-4210-9794-00EB56708F32}.Release|x86.ActiveCfg = Release|x86
 		{5293C949-5A04-4210-9794-00EB56708F32}.Release|x86.Build.0 = Release|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Debug|x86.ActiveCfg = Debug|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Debug|x86.Build.0 = Debug|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Release|Any CPU.ActiveCfg = Release|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Release|x86.ActiveCfg = Release|x86
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -452,6 +464,7 @@ Global
 		{6A4C98A9-F286-4903-9072-EF5B995E28AF} = {F6AC0654-3960-4273-AA44-432FA10012E0}
 		{A7093DC1-9FF8-4B52-A54B-56EDD5B5F58F} = {F6AC0654-3960-4273-AA44-432FA10012E0}
 		{5293C949-5A04-4210-9794-00EB56708F32} = {F6AC0654-3960-4273-AA44-432FA10012E0}
+		{E40643A3-E530-4B44-9AB7-673CCD4974FA} = {F6AC0654-3960-4273-AA44-432FA10012E0}
 		{4C158D75-A416-460F-8F7B-57B0A4815C1A} = {75524312-6109-4231-90C8-3FC30AC3C794}
 		{25A57D63-D463-4090-817A-A967C2107CBF} = {75524312-6109-4231-90C8-3FC30AC3C794}
 		{C15803E4-2567-4CFE-AF78-7D1341A4214F} = {75524312-6109-4231-90C8-3FC30AC3C794}

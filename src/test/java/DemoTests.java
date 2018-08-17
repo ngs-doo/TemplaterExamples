@@ -121,6 +121,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testExcelRules() throws Exception {
+		ExcelContextRulesExample.main(null);
+	}
+
+	@Test
 	public void testOverride() throws Exception {
 		BoolExample.main(null);
 	}

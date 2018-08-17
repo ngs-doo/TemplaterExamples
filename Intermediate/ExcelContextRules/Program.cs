@@ -7,7 +7,7 @@ namespace ExcelContextRules
 	{
 		public static void Main(string[] args)
 		{
-			File.Copy("flattening.xlsx", "flattening-out.xlsx", true);
+			File.Copy("template/flattening.xlsx", "flattening-out.xlsx", true);
 			var data =
 				new[]{
 						new {player = "Cristiano Ronaldo", club = new []{new {name = "Real Madrid"}, new {name = "Manchester United"}}},

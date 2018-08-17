@@ -18,17 +18,11 @@ How to register custom plugin instead of built-in one.
 
 [template](BoolOverride/template/Bools.docx?raw=true) - [result](BoolOverride/result.docx?raw=true)
 
-### [Extending plugins behavior](AlternativeProperty/Readme.md)
-
-How to extend plugins via custom code.
-
-[template](AlternativeProperty/template/Fields.docx?raw=true) - [result](AlternativeProperty/result.docx?raw=true)
-
-### [Providing alternative values](AlternativeProperty%20(Java)/Readme.md)
+### [Providing alternative values](AlternativeProperty/Readme.md)
 
 How to provide additional data to plugin which is not supported by Templater API.
 
-[template](AlternativeProperty%20(Java)/src/main/resources/Fields.docx?raw=true) - [result](AlternativeProperty%20(Java)/result.docx?raw=true)
+[template](AlternativeProperty/template/Fields.docx?raw=true) - [result](AlternativeProperty/result.docx?raw=true)
 
 ### [Excel tables](IsoCountries%20(.NET)/Readme.md)
 
@@ -72,17 +66,17 @@ Binding chart to data source populated by Templater.
 
 [template](ExchangeRates%20(.NET)/Templates/ExchangeRate.xlsx?raw=true) - [result](ExchangeRates%20(.NET)/result.xlsx?raw=true)
 
-### [Conditional removal](CollapseRegion%20(Java)/Readme.md)
+### [Conditional removal](CollapseRegion/Readme.md)
 
 Parts of document can be removed.
 
-[template](CollapseRegion%20(Java)/src/main/resources/Collapse.docx?raw=true) - [result](CollapseRegion%20(Java)/result.docx?raw=true)
+[template](CollapseRegion/template/Collapse.docx?raw=true) - [result](CollapseRegion/result.docx?raw=true)
 
-### [Excel context explained](ExcelContextRules%20(.NET)/Readme.md)
+### [Excel context explained](ExcelContextRules/Readme.md)
 
 Tweaking the result via formulas, named ranges and tables.
 
-[template](ExcelContextRules%20(.NET)/flattening.xlsx?raw=true) - [result](ExcelContextRules%20(.NET)/result.xlsx?raw=true)
+[template](ExcelContextRules/template/flattening.xlsx?raw=true) - [result](ExcelContextRules/result.xlsx?raw=true)
 
 ### [Charts in Word](ChartExample/Readme.md)
 

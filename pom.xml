@@ -40,6 +40,7 @@
         <module>Intermediate/LimitPlugins (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
         <module>Intermediate/DocxImport (Java)</module>
+        <module>Intermediate/ExcelContextRules</module>
         <module>Intermediate/Formulas (Java)</module>
         <module>Intermediate/Pictures (Java)</module>
         <module>Intermediate/WordTables</module>
@@ -179,12 +180,12 @@
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
-            <artifactId>bool-override-example</artifactId>
+            <artifactId>docx-import-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
-            <artifactId>docx-import-example</artifactId>
+            <artifactId>excel-context-rules-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

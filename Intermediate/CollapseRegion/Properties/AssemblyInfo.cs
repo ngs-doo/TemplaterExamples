@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BoolOverride")]
+[assembly: AssemblyTitle("CollapseRegion")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("templater.info")]
-[assembly: AssemblyProduct("BoolOverride")]
+[assembly: AssemblyProduct("CollapseRegion")]
 [assembly: AssemblyCopyright("public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8b793bb0-1552-4401-8ac8-54f010dbb0ef")]
+[assembly: Guid("d5d3e2af-3761-463d-bc4d-9b755f233377")]
 
 // Version information for an assembly consists of the following four values:
 //
