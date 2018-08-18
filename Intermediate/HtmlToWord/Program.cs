@@ -7,7 +7,7 @@ using DocumentFormat.OpenXml.Packaging;
 using NGS.Templater;
 using NotesFor.HtmlToOpenXml;
 
-namespace HtmlPlugin
+namespace HtmlToWord
 {
 	public class Program
 	{
@@ -42,12 +42,12 @@ namespace HtmlPlugin
 
 		public static void Main(string[] args)
 		{
-			File.Copy("template.docx", "HtmlPlugin.docx", true);
+			File.Copy("template/template.docx", "Html.docx", true);
 			var factory = Configuration.Builder
 				.Include(SimpleHtmlConverter)//include custom plugins
 				.Include(ComplexHtmlConverter)
 				.Build();
-			using (var doc = factory.Open("HtmlPlugin.docx"))
+			using (var doc = factory.Open("Html.docx"))
 			{
 				doc.Process(new
 				{
@@ -68,7 +68,7 @@ some <strong>text</strong> in <font color=""red"">red!</font>
 </html>"
 				});
 			}
-			Process.Start("HtmlPlugin.docx");
+			Process.Start("Html.docx");
 		}
 	}
 }

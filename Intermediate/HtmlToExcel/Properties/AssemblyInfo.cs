@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HtmlPlugin")]
+[assembly: AssemblyTitle("HtmlToExcel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("templater.info")]
-[assembly: AssemblyProduct("HtmlPlugin")]
-[assembly: AssemblyCopyright("Public domain")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("HtmlToExcel")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0edf77fd-8a6e-494c-b92a-22360cc044ca")]
+[assembly: Guid("d2a0ad1b-7c1f-4a45-829a-b863b3e30440")]
 
 // Version information for an assembly consists of the following four values:
 //

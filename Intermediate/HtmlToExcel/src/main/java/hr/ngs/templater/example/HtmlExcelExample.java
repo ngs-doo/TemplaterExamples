@@ -15,7 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.*;
 
-public class HtmlExample {
+public class HtmlExcelExample {
 
 	static class Number {
 		public final int number;
@@ -97,8 +97,8 @@ public class HtmlExample {
 	}
 
 	public static void main(final String[] args) throws Exception {
-		InputStream templateStream = HtmlExample.class.getResourceAsStream("/Document.xlsx");
-		File tmp = File.createTempFile("document", ".xlsx");
+		InputStream templateStream = HtmlExcelExample.class.getResourceAsStream("/Document.xlsx");
+		File tmp = File.createTempFile("html", ".xlsx");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("html", "<p>My simple <b>bold</b> text in <span style=\"color:red\">red!</span></p>");

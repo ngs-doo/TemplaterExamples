@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AlternativeProperty")]
+[assembly: AssemblyTitle("Formulas")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("templater.info")]
-[assembly: AssemblyProduct("AlternativeProperty")]
+[assembly: AssemblyProduct("Formulas")]
 [assembly: AssemblyCopyright("Public domain")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("731941c8-15c5-4782-a783-bd666c614c7e")]
+[assembly: Guid("706b4b45-727a-4c63-9900-5d43c512e763")]
 
 // Version information for an assembly consists of the following four values:
 //

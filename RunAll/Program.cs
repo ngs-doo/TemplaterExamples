@@ -24,12 +24,14 @@
 			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);
 			DocxImport.Program.Main(args);
+			Formulas.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);
 			ExcelContextRules.Program.Main(args);
 			//FoodOrder // web app. run manually
-			HtmlPlugin.Program.Main(args);
+			HtmlToExcel.Program.Main(args);
+			HtmlToWord.Program.Main(args);
 			ChartExample.Program.Main(args);
 			QuestionnairePlugin.Program.Main(args);
 			//TemplaterWeb // web app. run manually

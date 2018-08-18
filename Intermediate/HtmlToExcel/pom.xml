@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>hr.ngs.templater.example</groupId>
-    <artifactId>formula-example</artifactId>
+    <artifactId>html-excel-example</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>FormulaExample</name>
+    <name>HtmlExcelExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>
@@ -17,6 +17,11 @@
             <groupId>hr.ngs.templater</groupId>
             <artifactId>templater</artifactId>
             <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.docx4j</groupId>
+            <artifactId>docx4j-ImportXHTML</artifactId>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
 
@@ -31,5 +36,10 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>template</directory>
+            </resource>
+        </resources>
     </build>
 </project>

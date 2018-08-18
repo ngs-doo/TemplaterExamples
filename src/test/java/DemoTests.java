@@ -92,7 +92,12 @@ public class DemoTests {
 
 	@Test
 	public void testHtmlExcel() throws Exception {
-		HtmlExample.main(null);
+		HtmlExcelExample.main(null);
+	}
+
+	@Test
+	public void testHtmlWord() throws Exception {
+		HtmlWordExample.main(null);
 	}
 
 	@Test

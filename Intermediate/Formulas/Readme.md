@@ -13,3 +13,8 @@ Templater doesn't evaluate formula, it just rewrites its expressions.
 
 On flushing Templater will go though all remaining `[[equals]]` tags and convert them into formulas.
 Since Excel doesn't allow [[tag]] or {{tag}} expressions inside formula, this is a workaround for changing text into formula.
+
+### Merge cell stretching
+
+Merge cell require at least two cells to be defined. 
+Therefore template contains tag `[[groups.description]]` across two cells so that it's not duplicated on resize, but rather stretched.

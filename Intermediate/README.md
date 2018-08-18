@@ -84,23 +84,23 @@ Charts are embedded Excel files.
 
 [template](ChartExample/template/Charts.docx?raw=true) - [result](ChartExample/result.docx?raw=true)
 
-### [Formula rewriting](Formulas%20(Java)/Readme.md)
+### [Formula rewriting](Formulas/Readme.md)
 
 Templater will rewrite formulas affected by resize actions.
 
-[template](Formulas%20(Java)/src/main/resources/Formulas.xlsx?raw=true) - [result](Formulas%20(Java)/result.xlsx?raw=true)
+[template](Formulas/template/Formulas.xlsx?raw=true) - [result](Formulas/result.xlsx?raw=true)
 
-### [Importing HTML in Word](HtmlPlugin%20(.NET)/Readme.md)
+### [Importing HTML in Word](HtmlToWord/Readme.md)
 
 HTML can be imported via external library which knows how to do HTML -> DOCX conversion.
 
-[template](HtmlPlugin%20(.NET)/template.docx?raw=true) - [result](HtmlPlugin%20(.NET)/result.xlsx?raw=true)
+[template](HtmlToWord/template/template.docx?raw=true) - [result](HtmlToWord/result.xlsx?raw=true)
 
-### [Importing HTML in Excel](HtmlToExcel%20(Java)/Readme.md)
+### [Importing HTML in Excel](HtmlToExcel/Readme.md)
 
 HTML can be imported via external library which knows how to do HTML -> OOXML conversion.
 
-[template](HtmlToExcel%20(Java)/src/main/resources/Document.xlsx?raw=true) - [result](HtmlToExcel%20(Java)/result.xlsx?raw=true)
+[template](HtmlToExcel/template/Document.xlsx?raw=true) - [result](HtmlToExcel/result.xlsx?raw=true)
 
 ### [Nesting lists and tables](ListsAndTables%20(.NET)/Readme.md)
 

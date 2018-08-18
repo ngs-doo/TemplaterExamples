@@ -145,9 +145,13 @@
       <Project>{D28B79F8-206A-43B0-BAE4-B3402A5162DD}</Project>
       <Name>ExcelContextRules</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Intermediate\HtmlPlugin %28.NET%29\HtmlPlugin.csproj">
+    <ProjectReference Include="..\Intermediate\Formulas\Formulas.csproj">
+      <Project>{9ED8DC2A-ACF6-4594-BF84-AE1F713692AE}</Project>
+      <Name>Formulas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\HtmlToWord\HtmlToWord.csproj">
       <Project>{3DED053C-9B71-4CD7-BEA2-1CA9963D9C78}</Project>
-      <Name>HtmlPlugin</Name>
+      <Name>HtmlToWord</Name>
     </ProjectReference>
     <ProjectReference Include="..\Intermediate\ListsAndTables %28.NET%29\ListsAndTables.csproj">
       <Project>{72F9D78C-1DB1-4858-84C5-EDF239E0F0EE}</Project>
