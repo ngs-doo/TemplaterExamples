@@ -137,6 +137,10 @@
       <Project>{E40643A3-E530-4B44-9AB7-673CCD4974FA}</Project>
       <Name>CollapseRegion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Intermediate\DocxImport\DocxImport.csproj">
+      <Project>{65C66EAF-384C-421F-82AB-CCA279613370}</Project>
+      <Name>DocxImport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intermediate\ExcelContextRules\ExcelContextRules.csproj">
       <Project>{D28B79F8-206A-43B0-BAE4-B3402A5162DD}</Project>
       <Name>ExcelContextRules</Name>

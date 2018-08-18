@@ -54,11 +54,11 @@ Limiting maximum displayed results via plugins.
 
 [template](LimitPlugins%20(Java)/src/main/resources/Limits.docx?raw=true) - [result](LimitPlugins%20(Java)/result.docx?raw=true)
 
-### [Importing simple documents](DocxImport%20(Java)/Readme.md)
+### [Importing simple documents](DocxImport/Readme.md)
 
 Documents are mostly XML. Templater can import XML as is.
 
-[template](DocxImport%20(Java)/src/main/resources/Master.docx) - [import](DocxImport%20(Java)/src/main/resources/ToImport.docx?raw=true) - [result](DocxImport%20(Java)/result.docx?raw=true)
+[template](DocxImport/template/Master.docx) - [import](DocxImport/template/ToImport.docx?raw=true) - [result](DocxImport/result.docx?raw=true)
 
 ### [Excel pictures and charts](ExchangeRates%20(.NET)/Readme.md)
 

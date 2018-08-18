@@ -23,6 +23,7 @@
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
 			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);
+			DocxImport.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);

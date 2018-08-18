@@ -30,7 +30,7 @@
         <module>Beginner/ExcelLinks</module>
         <module>Beginner/WordLinks</module>
         <module>Beginner/ToFormulaConversion</module>
-        <module>Intermediate/CollapseRegion (Java)</module>
+        <module>Intermediate/CollapseRegion</module>
         <module>Intermediate/BoolOverride</module>
         <module>Intermediate/AlternativeProperty</module>
         <module>Intermediate/HtmlToExcel (Java)</module>
@@ -39,7 +39,7 @@
         <module>Intermediate/QuestionnairePlugin</module>
         <module>Intermediate/LimitPlugins (Java)</module>
         <module>Intermediate/ResultSetExample (Java)</module>
-        <module>Intermediate/DocxImport (Java)</module>
+        <module>Intermediate/DocxImport</module>
         <module>Intermediate/ExcelContextRules</module>
         <module>Intermediate/Formulas (Java)</module>
         <module>Intermediate/Pictures (Java)</module>

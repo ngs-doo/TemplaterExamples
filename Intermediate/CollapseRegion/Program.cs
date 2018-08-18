@@ -10,7 +10,6 @@ using NGS.Templater;
 
 namespace CollapseRegion
 {
-
 	public class Program
 	{
 		public static void Main(string[] args)
