@@ -19,4 +19,4 @@ Templater doesn't have built-in HTML -> XLSX conversion, but this example shows 
 
 ### Conditional formatting resizing
 
-Templater will adjust range for conditional formating during resize operation.
+Templater will adjust range for conditional formatting during resize operation.

@@ -116,6 +116,11 @@ public class DemoTests {
 	}
 
 	@Test
+	public void testListsAndTables() throws Exception {
+		ListsTablesExample.main(null);
+	}
+
+	@Test
 	public void testPivot() throws Exception {
 		PivotExample.main(null);
 	}

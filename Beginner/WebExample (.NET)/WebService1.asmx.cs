@@ -14,7 +14,7 @@ namespace TemplaterWeb
 	// [System.Web.Script.Services.ScriptService]
 	public class WebService1 : System.Web.Services.WebService
 	{
-		private static readonly byte[] Template = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "template.docx"));
+		private static readonly byte[] Template = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "template", "template.docx"));
 
 		[WebMethod]
 		public void TestTemplater(string argument)

@@ -90,7 +90,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Readme.md" />
-    <None Include="template.docx">
+    <None Include="template\template.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="templater.lic" />

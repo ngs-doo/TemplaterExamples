@@ -1,50 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
-using NGS.Templater;
+﻿using NGS.Templater;
 
 namespace TemplaterWeb
 {
 	public class Global : System.Web.HttpApplication
 	{
+		//Templater is configured from resource embedded in the application
+		//if templater.lic had a valid license there would be no warning text in the output
 		public static IDocumentFactory TemplaterFactory = NGS.Templater.Configuration.Factory;
-
-		protected void Application_Start(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Session_Start(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_BeginRequest(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_AuthenticateRequest(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_Error(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Session_End(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_End(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

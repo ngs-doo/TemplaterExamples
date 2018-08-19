@@ -35,15 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+    <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HtmlToOpenXml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6ad79d83e2b60e63, processorArchitecture=MSIL">
+    <Reference Include="HtmlToOpenXml">
       <HintPath>..\..\packages\HtmlToOpenXml.dll.2.0.1\lib\net40\HtmlToOpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NGS.Templater, Version=2.9.2.32704, Culture=neutral, PublicKeyToken=b9c117a1d2974457, processorArchitecture=MSIL">
+    <Reference Include="NGS.Templater">
       <HintPath>..\..\packages\Templater.2.9.2\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -61,7 +61,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Readme.md" />
     <None Include="template\Document.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

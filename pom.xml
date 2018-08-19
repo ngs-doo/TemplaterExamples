@@ -35,17 +35,18 @@
         <module>Intermediate/AlternativeProperty</module>
         <module>Intermediate/HtmlToWord</module>
         <module>Intermediate/HtmlToExcel</module>
-        <module>Intermediate/SharedCollection (Java)</module>
+        <module>Intermediate/SharedCollection</module>
         <module>Intermediate/ChartExample</module>
         <module>Intermediate/QuestionnairePlugin</module>
-        <module>Intermediate/LimitPlugins (Java)</module>
+        <module>Intermediate/LimitPlugins</module>
+        <module>Intermediate/ListsAndTables</module>
         <module>Intermediate/ResultSetExample (Java)</module>
         <module>Intermediate/DocxImport</module>
         <module>Intermediate/ExcelContextRules</module>
         <module>Intermediate/Formulas</module>
-        <module>Intermediate/Pictures (Java)</module>
+        <module>Intermediate/Pictures</module>
         <module>Intermediate/WordTables</module>
-        <module>Intermediate/TemplaterJson (Java)</module>
+        <module>Intermediate/TemplaterJson</module>
         <module>Advanced/DoubleProcessing</module>
         <module>Advanced/SheetReport</module>
         <module>Advanced/XmlBinding</module>
@@ -197,6 +198,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>formula-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>lists-tables-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

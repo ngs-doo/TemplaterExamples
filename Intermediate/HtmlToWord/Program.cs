@@ -4,8 +4,8 @@ using System.Linq;
 using System.Xml.Linq;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
+using HtmlToOpenXml;
 using NGS.Templater;
-using NotesFor.HtmlToOpenXml;
 
 namespace HtmlToWord
 {

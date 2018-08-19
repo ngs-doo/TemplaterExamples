@@ -25,10 +25,13 @@
 			WordLinks.Program.Main(args);
 			DocxImport.Program.Main(args);
 			Formulas.Program.Main(args);
+			LimitPlugins.Program.Main(args);
+			SharedCollection.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);
 			ExcelContextRules.Program.Main(args);
+			Pictures.Program.Main(args);
 			//FoodOrder // web app. run manually
 			HtmlToExcel.Program.Main(args);
 			HtmlToWord.Program.Main(args);
