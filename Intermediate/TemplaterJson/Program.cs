@@ -72,9 +72,22 @@ namespace TemplaterJson
 			using (var fis = new FileStream(templatePath, FileMode.Open, FileAccess.Read))
 			using (var fos = outputPath == null ? Console.OpenStandardOutput() : new FileStream(outputPath, FileMode.Create, FileAccess.Write))
 			{
-				var deser = newtonsoft.Deserialize<IDictionary<string, object>>(new JsonTextReader(json));
-				using (var td = Configuration.Factory.Open(fis, fos, ext))
-					td.Process(deser);
+				while (char.IsWhiteSpace((char)json.Peek()))
+				{
+					json.Read();
+				}
+				if (json.Peek() == '[')
+				{
+					var deser = newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(json));
+					using (var td = Configuration.Factory.Open(fis, fos, ext))
+						td.Process(deser);
+				}
+				else
+				{
+					var deser = newtonsoft.Deserialize<IDictionary<string, object>>(new JsonTextReader(json));
+					using (var td = Configuration.Factory.Open(fis, fos, ext))
+						td.Process(deser);
+				}
 			}
 
 			return 0;

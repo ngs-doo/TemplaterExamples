@@ -50,6 +50,12 @@ Word features, such as columns, can be leveraged for layout.
 
 [template](Labels/template/label.docx?raw=true) - [result](Labels/result.docx?raw=true)
 
+### [CSV](CsvExample/Readme.md)
+
+CSV output can be used when appropriate.
+
+[template](CsvExample/template/example.csv?raw=true) - [result](CsvExample/result.csv?raw=true)
+
 ### [Named range](NamedRange/Readme.md)
 
 In Excel, region fine tuning can be done via named ranges.

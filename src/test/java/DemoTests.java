@@ -56,13 +56,18 @@ public class DemoTests {
 	}
 
 	@Test
-	public void testLabels() throws Exception {
-		LabelsExample.main(null);
+	public void testImage() throws Exception {
+		ImageExample.main(null);
 	}
 
 	@Test
-	public void testImage() throws Exception {
-		ImageExample.main(null);
+	public void testCSV() throws Exception {
+		CsvExample.main(null);
+	}
+
+	@Test
+	public void testLabels() throws Exception {
+		LabelsExample.main(null);
 	}
 
 	@Test

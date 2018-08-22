@@ -45,10 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Advanced\DepartmentReport\DepartmentReport.csproj">
+      <Project>{B7765E9A-952F-46C7-9E2A-4DB7A1A045F6}</Project>
+      <Name>DepartmentReport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Advanced\DoubleProcessing\DoubleProcessing.csproj">
       <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
       <Name>DoubleProcessing</Name>
@@ -60,6 +66,10 @@
     <ProjectReference Include="..\Advanced\XmlBinding\XmlBinding.csproj">
       <Project>{716992A2-B22C-463B-9D33-78CDDFB8973E}</Project>
       <Name>XmlBinding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\CsvExample\CsvExample.csproj">
+      <Project>{8B4AAFA6-C94C-4F01-B81E-6D38A7A01C4C}</Project>
+      <Name>CsvExample</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beginner\DataSet %28.NET%29\DataSetExample.csproj">
       <Project>{D8CAA4F8-5DBA-451A-B52A-AAE1BF26FCAA}</Project>

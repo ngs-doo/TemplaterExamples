@@ -32,7 +32,7 @@ public class SpreadsheetGroupingExample {
 		final List<Info> list = new ArrayList<Info>();
 		for (int i = 1; i <= 5; i++) {
 			List<Item> items = new ArrayList<Item>();
-			for (int j = 1; j <= 1; j++) {
+			for (int j = 1; j <= i; j++) {
 				items.add(new Item("name " + i + " - " + j, j * 2 + i * 3 + 2, j * 3 + i * 2 + 1));
 			}
 			Info info = new Info();

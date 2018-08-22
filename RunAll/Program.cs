@@ -9,6 +9,7 @@
 			ListExample.Program.Main(args);
 			DataSetExample.Program.Main(args);
 			ImageExample.Program.Main(args);
+			CsvExample.Program.Main(args);
 			Labels.Program.Main(args);
 			ListsAndTables.Program.Main(args);
 			DynamicResize.Program.Main(args);
@@ -41,6 +42,7 @@
 			DoubleProcessing.Program.Main(args);
 			SheetReport.Program.Main(args);
 			XmlBinding.Program.Main(args);
+			DepartmentReport.Program.Main(args);
 			//SalesOrderMVP standalone desktop app. run manually
 		}
 	}

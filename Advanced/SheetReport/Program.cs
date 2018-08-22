@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -41,7 +42,7 @@ namespace SheetReport
 					country = fields["Country or Area"],
 					year = int.Parse(fields["Year"]),
 					city = fields["City"],
-					population = (long)Double.Parse(fields["Value"])
+					population = (long)double.Parse(fields["Value"], CultureInfo.InvariantCulture)
 				};
 				result.data.Add(stats);
 				if (lastCountry != stats.country)

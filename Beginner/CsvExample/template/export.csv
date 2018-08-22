@@ -1,0 +1,2 @@
+﻿"ID";Amount;Date;User;Timestamp;Note;Status;Reference number;Branch ID;Verified by;Verified On;Total
+[[ID]];[[AMOUNT]];[[DATE]:format];[[CREATED_BY]];[[CREATED_ON]];[[NOTE]:quote];[[STATUS]];[[REFERENCE]];[[BRANCH]];[[VERIFIED_BY]];[[VERIFIED_ON]];[[ROLLING_SUM]]

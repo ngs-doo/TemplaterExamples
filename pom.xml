@@ -7,7 +7,7 @@
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>
@@ -22,6 +22,7 @@
         <module>Beginner/DynamicResize</module>
         <module>Beginner/ImageExample</module>
         <module>Beginner/Labels</module>
+        <module>Beginner/CsvExample</module>
         <module>Beginner/NamedRange</module>
         <module>Beginner/MailMerge</module>
         <module>Beginner/PushDownExample</module>
@@ -50,6 +51,7 @@
         <module>Advanced/DoubleProcessing</module>
         <module>Advanced/SheetReport</module>
         <module>Advanced/XmlBinding</module>
+        <module>Advanced/DepartmentReport</module>
         <module>Advanced/TemplaterServer (Java)</module>
     </modules>
 
@@ -93,6 +95,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>labels-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>csv-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -235,6 +242,11 @@
             <artifactId>xml-binding-example</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>department-report-example</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -243,8 +255,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
