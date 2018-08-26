@@ -51,8 +51,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Group.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Group.cs" />
+    <Compile Include="src\Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -17,29 +17,29 @@ public class DoubleProcessingExample {
         File tmp = File.createTempFile("double", ".xlsx");
 
         Random rnd = new Random();
-		int totalPeople = rnd.nextInt(4) + 3;
-		final Person[] person = new Person[totalPeople];
-		for (int i = 0; i < person.length; i++)
-			person[i] = new Person(rnd, i);
+        int totalPeople = rnd.nextInt(4) + 3;
+        final Person[] person = new Person[totalPeople];
+        for (int i = 0; i < person.length; i++)
+            person[i] = new Person(rnd, i);
 
-		IDocumentFactory factory = Configuration.factory();
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		//let's do a horizontal resize so document is prepared for second pass
-		ITemplateDocument doc1 = factory.open(templateStream, "xlsx", os);
-		//[[equals]] at the beginning of the cell causes conversion to formula
-		//this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
-		doc1.process(new HashMap<String, Object>() {{ put("Person", person); put("formula", "[[equals]]"); }});
-		doc1.flush();
+        IDocumentFactory factory = Configuration.factory();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        //let's do a horizontal resize so document is prepared for second pass
+        ITemplateDocument doc1 = factory.open(templateStream, "xlsx", os);
+        //[[equals]] at the beginning of the cell causes conversion to formula
+        //this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
+        doc1.process(new HashMap<String, Object>() {{ put("Person", person); put("formula", "[[equals]]"); }});
+        doc1.flush();
 
-		//now let's prepare our complex object for standard processing
-		Map<String, Object> complex = buildComplexObject(totalPeople);
+        //now let's prepare our complex object for standard processing
+        Map<String, Object> complex = buildComplexObject(totalPeople);
 
-		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
-		FileOutputStream fos = new FileOutputStream(tmp);
-		//let's do a second pass with our prepared object
-		ITemplateDocument doc2 = factory.open(is, "xlsx", fos);
-		doc2.process(complex);
-		doc2.flush();
+        ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+        FileOutputStream fos = new FileOutputStream(tmp);
+        //let's do a second pass with our prepared object
+        ITemplateDocument doc2 = factory.open(is, "xlsx", fos);
+        doc2.process(complex);
+        doc2.flush();
         fos.close();
 
         Desktop.getDesktop().open(tmp);
@@ -86,25 +86,25 @@ public class DoubleProcessingExample {
                 Map<String, Object> dict = new HashMap<String, Object>();
                 items.add(dict);
                 for (int j = 0; j < people; j++)
-					dict.put("Person" + j, rnd.nextInt(10000 - 10) + 10);
-				dict.put("Name", "subitem " + i + " for " + cur);
-				dict.put("TargetPercentage", BigDecimal.valueOf(rnd.nextDouble()));
-				dict.put("RecommendedDollars", BigDecimal.valueOf(rnd.nextDouble() * 10));
-				dict.put("ToleranceDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
+                    dict.put("Person" + j, rnd.nextInt(10000 - 10) + 10);
+                dict.put("Name", "subitem " + i + " for " + cur);
+                dict.put("TargetPercentage", BigDecimal.valueOf(rnd.nextDouble()));
+                dict.put("RecommendedDollars", BigDecimal.valueOf(rnd.nextDouble() * 10));
+                dict.put("ToleranceDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
             }
-			put("Items", items);
+            put("Items", items);
         }
     }
 
     static Map<String, Object> buildComplexObject(int people) {
-		Random rnd = new Random();
+        Random rnd = new Random();
         int totalGroups = (rnd.nextInt(18) + 4) / 2;
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("ReportHeader", "report header");
         //or it would be better to format cell in excel instead of using string
-		DateFormat df = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
+        DateFormat df = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
         result.put("Date", df.format(new Date()));
-		Group[] groups = new Group[totalGroups];
+        Group[] groups = new Group[totalGroups];
         result.put("Groups", groups);
         for (int i = 0; i < totalGroups; i++)
             groups[i] = new Group(rnd, i, people);
@@ -114,17 +114,17 @@ public class DoubleProcessingExample {
         {
             Map<String, Object> dict = totals[i] = new HashMap<String, Object>();
             dict.put("Name", "total " + i);
-			dict.put("TargetPercentage", BigDecimal.valueOf(rnd.nextDouble() * 10));
-			dict.put("RecommendedDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
-			dict.put("ToleranceDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
-			dict.put("Description", "desc " + i);
+            dict.put("TargetPercentage", BigDecimal.valueOf(rnd.nextDouble() * 10));
+            dict.put("RecommendedDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
+            dict.put("ToleranceDollars", BigDecimal.valueOf(rnd.nextDouble() * 100));
+            dict.put("Description", "desc " + i);
             for (int j = 0; j < people; j++)
-			{
-				int sum = 0;
-				for(int x = i * 2; x < groups.length && x < i * 2 + 2; x++)
-					sum += (Integer)(groups[x].get("Person" + j));
-				dict.put("Person" + j, sum);
-			}
+            {
+                int sum = 0;
+                for(int x = i * 2; x < groups.length && x < i * 2 + 2; x++)
+                    sum += (Integer)(groups[x].get("Person" + j));
+                dict.put("Person" + j, sum);
+            }
         }
         return result;
     }

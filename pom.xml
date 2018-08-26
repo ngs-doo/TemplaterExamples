@@ -7,7 +7,7 @@
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>
@@ -51,6 +51,7 @@
         <module>Advanced/DoubleProcessing</module>
         <module>Advanced/SheetReport</module>
         <module>Advanced/XmlBinding</module>
+        <module>Advanced/PowerQuery</module>
         <module>Advanced/DepartmentReport</module>
         <module>Advanced/TemplaterServer</module>
     </modules>
@@ -244,6 +245,11 @@
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>power-query-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
             <artifactId>department-report-example</artifactId>
             <version>1.0</version>
         </dependency>
@@ -252,11 +258,12 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

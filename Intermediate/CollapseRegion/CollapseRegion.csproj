@@ -55,12 +55,12 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Applicant.cs" />
-    <Compile Include="Application.cs" />
-    <Compile Include="EmploymentFrom.cs" />
-    <Compile Include="EmploymentFromUntil.cs" />
-    <Compile Include="Loan.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Applicant.cs" />
+    <Compile Include="src\Application.cs" />
+    <Compile Include="src\EmploymentFrom.cs" />
+    <Compile Include="src\EmploymentFromUntil.cs" />
+    <Compile Include="src\Loan.cs" />
+    <Compile Include="src\Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

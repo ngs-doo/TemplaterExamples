@@ -43,6 +43,7 @@
 			SheetReport.Program.Main(args);
 			XmlBinding.Program.Main(args);
 			DepartmentReport.Program.Main(args);
+			//PowerQuery.Program.Main(args);//requires license file to work properly
 			//SalesOrderMVP standalone desktop app. run manually
 		}
 	}

@@ -47,9 +47,9 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DictionaryConverter.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="SupportedType.cs" />
+    <Compile Include="src\DictionaryConverter.cs" />
+    <Compile Include="src\Program.cs" />
+    <Compile Include="src\SupportedType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

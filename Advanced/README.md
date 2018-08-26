@@ -38,6 +38,12 @@ Combining various Excel features to create good looking report.
 
 [template](DepartmentReport/template/departments.xlsx?raw=true) - [result](DepartmentReport/result.xlsx?raw=true)
 
+### [Power Query/Get & Transform](PowerQuery/Readme.md)
+
+Consuming embedded CSV or Excel table via Power Query.
+
+[template](PowerQuery/template/PowerQuery.xlsx?raw=true) - [result](PowerQuery/result.xlsx?raw=true)
+
 ### [Various JSON examples](TemplaterServer/Readme.md)
 
 Application from http://templater.info/demo

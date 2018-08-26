@@ -51,9 +51,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="template\MyDocument.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

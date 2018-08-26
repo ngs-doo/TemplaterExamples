@@ -59,6 +59,10 @@
       <Project>{B9C2D505-78F9-4AE9-99C5-2BC4F6739944}</Project>
       <Name>DoubleProcessing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Advanced\PowerQuery\PowerQuery.csproj">
+      <Project>{5BB2AABB-E58F-404F-8C37-DBE122E893F5}</Project>
+      <Name>PowerQuery</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Advanced\SheetReport\SheetReport.csproj">
       <Project>{B3457322-FDDB-46AC-B445-2887C27BC723}</Project>
       <Name>SheetReport</Name>

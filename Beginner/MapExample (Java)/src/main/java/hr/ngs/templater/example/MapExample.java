@@ -11,27 +11,27 @@ import java.util.Map;
 import org.joda.time.LocalDate;
 
 public class MapExample {
-	public static void main(final String[] args) throws Exception {
-		InputStream templateStream = MapExample.class.getResourceAsStream("/MyMap.docx");
-		File tmp = File.createTempFile("map", ".docx");
+    public static void main(final String[] args) throws Exception {
+        InputStream templateStream = MapExample.class.getResourceAsStream("/MyMap.docx");
+        File tmp = File.createTempFile("map", ".docx");
 
-		final Map<String, Object> myMap = new HashMap<String, Object>();
-		myMap.put("Name", "James Bond");
-		myMap.put("Age", 40);
-		myMap.put("Gun", new Gun("Revolvers", "Colt", "45"));
+        final Map<String, Object> myMap = new HashMap<String, Object>();
+        myMap.put("Name", "James Bond");
+        myMap.put("Age", 40);
+        myMap.put("Gun", new Gun("Revolvers", "Colt", "45"));
 
-		final Map<String, LocalDate> killed = new HashMap<String, LocalDate>();
-		killed.put("Dr Evil", new LocalDate("1965-05-05"));
-		killed.put("Moneypenny", new LocalDate("1967-05-05"));
-		killed.put("Spectre", new LocalDate("1968-05-05"));
+        final Map<String, LocalDate> killed = new HashMap<String, LocalDate>();
+        killed.put("Dr Evil", new LocalDate("1965-05-05"));
+        killed.put("Moneypenny", new LocalDate("1967-05-05"));
+        killed.put("Spectre", new LocalDate("1968-05-05"));
 
-		myMap.put("Kills", killed);
+        myMap.put("Kills", killed);
 
-		FileOutputStream fos = new FileOutputStream(tmp);
-		ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-		tpl.process(myMap);
-		tpl.flush();
-		fos.close();
-		Desktop.getDesktop().open(tmp);
-	}
+        FileOutputStream fos = new FileOutputStream(tmp);
+        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
+        tpl.process(myMap);
+        tpl.flush();
+        fos.close();
+        Desktop.getDesktop().open(tmp);
+    }
 }
