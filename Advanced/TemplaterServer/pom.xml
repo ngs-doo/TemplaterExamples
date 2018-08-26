@@ -67,5 +67,10 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>template</directory>
+            </resource>
+        </resources>
     </build>
 </project>

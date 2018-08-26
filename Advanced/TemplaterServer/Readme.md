@@ -8,6 +8,10 @@ Start the server from within IDE or by running
 
 And open your browser to `localhost:7777`
 
+Or by running
+
+    dotnet run
+
 Templates reside in `resources/templates`.
 Each of them has a respectable json example in `resources/examples`.
 

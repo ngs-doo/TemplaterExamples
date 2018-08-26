@@ -9,15 +9,18 @@
         .ace_editor {
             height: 400px;
         }
+
         .text_editor {
-            height : 400px;
+            height: 400px;
             width: 100%;
             font-size: 10px;
             font-family: monospace;
         }
+
         .feat-box {
             margin-top: 20px;
         }
+
         .append-bottom {
             margin-top: 10px;
         }
@@ -25,18 +28,16 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row ">
-        <h1>Templater Server Example</h1>
+    <div class="container">
+        <div class="row ">
+            <h1>Templater Server Example</h1>
+        </div>
+        <div class="main">${content}</div>
     </div>
-    <div class="main">${content}</div>
-</div>
+    <script type="text/javascript">
+        $(function () {
+            initApp();
+        })
+    </script>
 </body>
-
-<script type="text/javascript">
-    $(function() {
-        initApp();
-    })
-</script>
-
 </html>

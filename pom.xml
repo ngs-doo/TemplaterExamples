@@ -52,7 +52,7 @@
         <module>Advanced/SheetReport</module>
         <module>Advanced/XmlBinding</module>
         <module>Advanced/DepartmentReport</module>
-        <module>Advanced/TemplaterServer (Java)</module>
+        <module>Advanced/TemplaterServer</module>
     </modules>
 
     <dependencies>

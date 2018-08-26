@@ -10,15 +10,15 @@ import com.dslplatform.json.*;
 import fi.iki.elonen.NanoHTTPD;
 
 public class TemplaterServer extends NanoHTTPD {
-	static final int PORT = 7777;
-	static final Charset UTF8 = Charset.forName("UTF-8");
+	private static final int PORT = 7777;
+	private static final Charset UTF8 = Charset.forName("UTF-8");
 
-	static final String PROCESS_PATH = "/process";
+	private static final String PROCESS_PATH = "/process";
 
-	static final String TEMPLATES_FOLDER = "/templates/";
-	static final String DRIVE_PATH = "resources";
+	private static final String TEMPLATES_FOLDER = "/templates/";
+	private static final String DRIVE_PATH = "resources";
 
-	static final File rootPath;
+	private static final File rootPath;
 
 	private static final byte[] index;
 	private static final byte[] indexDefault;
@@ -26,7 +26,7 @@ public class TemplaterServer extends NanoHTTPD {
 	static {
 		File path = new File(DRIVE_PATH);
 		if (!path.exists()) {
-			path = new File(new File("Advanced", "TemplaterServer (Java)"), DRIVE_PATH);
+			path = new File(new File("Advanced", "TemplaterServer"), DRIVE_PATH);
 		}
 		rootPath = path;
 		String[] files = new File(rootPath, TEMPLATES_FOLDER).list();
@@ -56,7 +56,6 @@ public class TemplaterServer extends NanoHTTPD {
 		try {
 			String defaultHtml = new String(readStream(TemplaterServer.class.getResourceAsStream("/default.html")), UTF8);
 			indexDefault = defaultHtml.replace("${content}", indexContent).getBytes(UTF8);
-			;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -167,7 +166,7 @@ public class TemplaterServer extends NanoHTTPD {
 	 * @param templateBytes ooxml document
 	 * @return  document as pdf
 	 */
-	private static byte[] convertToPdf(final byte[] templateBytes, final String ext) throws IOException, InterruptedException {
+	private static synchronized byte[] convertToPdf(final byte[] templateBytes, final String ext) throws IOException, InterruptedException {
 		final File tmpFile = File.createTempFile("templaterDocument", "." + ext);
 		final String outputFileName = tmpFile.getPath().substring(0, tmpFile.getPath().length() - ext.length()) + "pdf";
 

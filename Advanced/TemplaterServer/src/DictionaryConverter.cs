@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace TemplaterJson
+namespace TemplaterServer
 {
 	internal class DictionaryConverter : JsonConverter
 	{
@@ -98,7 +98,6 @@ namespace TemplaterJson
 						break;
 					default:
 						var v = ReadValue(reader);
-
 						list.Add(v);
 						break;
 					case JsonToken.EndArray:

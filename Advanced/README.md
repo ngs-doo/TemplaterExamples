@@ -32,6 +32,12 @@ Templater makes it very convenient to manage report templates.
 
 [Sales order for printing](SalesOrderMVP%20(.NET)/Templates/SalesOrder.txt) - [result](SalesOrderMVP%20(.NET)/result.txt)
 
-### [Various JSON examples](TemplaterServer%20(Java)/Readme.md)
+### [Complex Excel report](DepartmentReport/Readme.md)
+
+Combining various Excel features to create good looking report.
+
+[template](DepartmentReport/template/departments.xlsx?raw=true) - [result](DepartmentReport/result.xlsx?raw=true)
+
+### [Various JSON examples](TemplaterServer/Readme.md)
 
 Application from http://templater.info/demo
