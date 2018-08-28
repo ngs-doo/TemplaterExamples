@@ -54,7 +54,7 @@ Word features, such as columns, can be leveraged for layout.
 
 CSV output can be used when appropriate.
 
-[template](CsvExample/template/example.csv?raw=true) - [result](CsvExample/result.csv?raw=true)
+[template](CsvExample/template/export.csv?raw=true) - [result](CsvExample/result.csv?raw=true)
 
 ### [Named range](NamedRange/Readme.md)
 
