@@ -34,6 +34,7 @@
         <module>Intermediate/CollapseRegion</module>
         <module>Intermediate/BoolOverride</module>
         <module>Intermediate/AlternativeProperty</module>
+        <module>Intermediate/MissingProperty</module>
         <module>Intermediate/HtmlToWord</module>
         <module>Intermediate/HtmlToExcel</module>
         <module>Intermediate/SharedCollection</module>
@@ -161,6 +162,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>bool-override-example</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>missing-property-example</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

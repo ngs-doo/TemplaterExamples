@@ -151,6 +151,11 @@ public class DemoTests {
     }
 
     @Test
+    public void testMissing() throws Exception {
+        MissingPropertyExample.main(null);
+    }
+
+    @Test
     public void testShared() throws Exception {
         SharedCollectionExample.main(null);
     }

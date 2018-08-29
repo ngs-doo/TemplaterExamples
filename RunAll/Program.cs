@@ -20,6 +20,7 @@
 			ToFormulaConversion.Program.Main(args);
 			BoolOverride.Program.Main(args);
 			AlternativeProperty.Program.Main(args);
+			MissingProperty.Program.Main(args);
 			CollapseRegion.Program.Main(args);
 			//ExchangeRates.Program.Main(args);//standalone app. run manually
 			ExcelLinks.Program.Main(args);

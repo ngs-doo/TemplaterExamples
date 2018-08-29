@@ -24,6 +24,12 @@ How to provide additional data to plugin which is not supported by Templater API
 
 [template](AlternativeProperty/template/Fields.docx?raw=true) - [result](AlternativeProperty/result.docx?raw=true)
 
+### [Handling missing properties](MissingProperty/Readme.md)
+
+Cope with missing values in dynamic input.
+
+[template](MissingProperty/template/dynamic.docx?raw=true) - [result](MissingProperty/result.docx?raw=true)
+
 ### [Excel tables](IsoCountries%20(.NET)/Readme.md)
 
 Templater understand tables and will retain colors, fonts and other cell styles while processing documents.
