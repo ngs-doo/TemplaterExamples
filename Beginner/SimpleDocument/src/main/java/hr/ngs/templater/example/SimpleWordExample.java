@@ -4,7 +4,6 @@ import hr.ngs.templater.Configuration;
 import hr.ngs.templater.ITemplateDocument;
 
 import java.io.*;
-import java.util.*;
 
 public class SimpleWordExample {
 
