@@ -15,6 +15,11 @@ namespace TemplaterServer
     {
 		private static readonly byte[] Default;
 		private static readonly byte[] Index;
+		private static readonly string[] TemplateFiles;
+		private static readonly string TemplateHtml;
+		private static readonly string DefaultHtml;
+		private static readonly Dictionary<string, string> Jsons;
+
 		private static readonly JsonSerializer Newtonsoft;
 		private static readonly IDocumentFactory Factory = Configuration.Builder.Include(JavaFormat).Build();
 
@@ -39,36 +44,71 @@ namespace TemplaterServer
 		static TemplaterController()
 		{
 			var asm = typeof(TemplaterController).Assembly;
-			var defaultHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.default.html")).ReadToEnd();
-			var indexHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.index.html")).ReadToEnd();
-			var templates = Directory.EnumerateFiles("resources/templates/");
-			var sb = new StringBuilder();
-			foreach(var t in templates.OrderBy(it => it))
-			{
-				sb.AppendFormat(@"
-<li><p><button class=""btn btn-primary feat-btn feat-btn-lg"" data-template=""{0}"">
-  <i class=""fa fa-file-text"" ></i> {0}
-</button></p></li>", t.Substring("resources/templates/".Length));
-			}
-			var index = indexHtml.Replace("${templates}", sb.ToString());
+			DefaultHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.default.html")).ReadToEnd();
+			TemplateHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.index.html")).ReadToEnd();
+			TemplateFiles = Directory.EnumerateFiles("resources/templates/").OrderBy(it => it).ToArray();
+			Jsons = new Dictionary<string, string>();
+			foreach(var f in Directory.EnumerateFiles("resources/examples/")) 
+				Jsons[Path.GetFileNameWithoutExtension(f.ToLowerInvariant())] = System.IO.File.ReadAllText(f);	
+
+			var index = CreateIndex(TemplateFiles.Length > 0 ? Path.GetFileName(TemplateFiles[0]) : string.Empty);
 			Index = Encoding.UTF8.GetBytes(index);
-			Default = Encoding.UTF8.GetBytes(defaultHtml.Replace("${content}", index));
+			Default = Encoding.UTF8.GetBytes(DefaultHtml.Replace("${content}", index));
 			Newtonsoft = new JsonSerializer();
 			Newtonsoft.Culture = System.Globalization.CultureInfo.InvariantCulture;
 			Newtonsoft.TypeNameHandling = TypeNameHandling.None;
 			Newtonsoft.Converters.Add(new DictionaryConverter());
 		}
 
-		[HttpGet]
-		public IActionResult Get()
+		private static string CreateIndex(string current)
 		{
-			return File(Default, "text/html;charset=UTF-8");
+			var sb = new StringBuilder();
+			for(int i = 0; i < TemplateFiles.Length; i++)
+			{
+				var t = TemplateFiles[i];
+				var name = t.Substring("resources/templates/".Length);
+				sb.AppendFormat(@"
+<li><p>
+	<button style=""display:none;"" class=""template btn btn-primary feat-btn feat-btn-lg{1}"" data-template=""{0}"">
+		<i class=""fa fa-file-text"" ></i> {0}
+	</button>
+	<noscript>
+		<a href=""?template={0}"">
+			<button class=""btn btn-primary feat-btn feat-btn-lg{1}""><i class=""fa fa-file-text"" ></i> {0} </button>
+		</a>
+	</noscript>
+</p></li>", name, string.Equals(name, current, StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(current) && i == 0 ? " active" : string.Empty);
+			}
+
+			var defaultTemplate = string.IsNullOrEmpty(current) ? string.Empty : "Create " + current.Substring(current.LastIndexOf('.') + 1) + " document with " + current;
+			string json;
+			if (!Jsons.TryGetValue(current.ToLowerInvariant(), out json))
+				json = string.Empty;
+
+			return TemplateHtml
+				.Replace("${templates}", sb.ToString())
+                .Replace("${defaultTemplate}", defaultTemplate)
+                .Replace("${defaultJson}", json)
+                .Replace("${downloadUrl}", string.IsNullOrEmpty(current) ? "#" : "templates/" + current)
+                .Replace("${defaultFilename}", string.IsNullOrEmpty(current) ? string.Empty : current);
 		}
 
-		[HttpGet("content")]
-		public IActionResult Content()
+		[HttpGet("{template?}")]
+		public IActionResult Get([FromQuery]string template)
 		{
-			return File(Index, "text/html;charset=UTF-8");
+			if (string.IsNullOrEmpty(template) || !Jsons.ContainsKey(template.ToLowerInvariant())) 
+				return File(Default, "text/html;charset=UTF-8");
+			var index = CreateIndex(template);
+			return File(Encoding.UTF8.GetBytes(DefaultHtml.Replace("${content}", index)), "text/html;charset=UTF-8");
+		}
+
+		[HttpGet("content/{template?}")]
+		public IActionResult Nested([FromQuery]string template)
+		{
+			if (string.IsNullOrEmpty(template) || !Jsons.ContainsKey(template.ToLowerInvariant())) 
+				return File(Index, "text/html;charset=UTF-8");
+			var index = CreateIndex(template);
+			return File(Encoding.UTF8.GetBytes(index), "text/html;charset=UTF-8");
 		}
 
 		[HttpGet("static/{file}")]
@@ -175,7 +215,7 @@ namespace TemplaterServer
 					System.IO.File.Delete(pdfFile);
 					return File(bytes, "application/pdf", Path.GetFileNameWithoutExtension(template) + ".pdf");
 				}
-				catch 
+				catch
 				{
 					return StatusCode(500, "PDF conversion failed");
 				}

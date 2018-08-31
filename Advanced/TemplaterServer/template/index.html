@@ -22,29 +22,30 @@
           </circle>
         </svg>
         <span id="loading-text">Loading Ace editor...</span>
+        <noscript>editor not available without Javascript</noscript>
       </div>
       <form id="post_action" action="/process" method="post" accept-charset="UTF-8">
         <div class="ace_editor" id="ace-editor" style="display:none"></div>
-        <textarea class="text_editor" id="template-editor" name="json"></textarea>
+        <textarea class="text_editor" id="template-editor" name="json">${defaultJson}</textarea>
 
         <div class="feat-box append-top">
           <div>
             <p>
-              <button id="beautify-json" type="button" class="btn btn-primary append-bottom">Beautify
-                JSON
+              <button id="beautify-json" style="display:none" type="button" class="btn btn-primary append-bottom">
+                Beautify JSON
               </button>
-              <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf">
-                PDF conversion <span class="active" style="display:none">ON</span><span
-                class="disabled">OFF</span>
+              <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf" style="display:none">
+                PDF conversion <span class="active" style="display:none">ON</span>
+                <span class="disabled">OFF</span>
               </button>
-              <small class="text-muted">(toggle for docx only)</small>
+              <small class="text-muted" id="toggle-helper" style="display:none;">(toggle for docx only)</small>
               <input type="hidden" name="toPdf" value="false"/>
-              <input type="hidden" name="template" value=""/>
+              <input type="hidden" name="template" value="${defaultFilename}"/>
             </p>
           </div>
           <div>
             <p>
-              <button id="process-template" type="submit" class="btn btn-success btn-lg"></button>
+              <button id="process-template" type="submit" class="btn btn-success btn-lg">${defaultTemplate}</button>
             </p>
           </div>
         </div>
@@ -60,8 +61,8 @@
         <ul class="list-unstyled list-template" id="template-list">
           ${templates}
         </ul>
-        <a href="#" class="btn btn-default btn-block btn-lg btn-success" id="download-template">
-          Download <span class="has-active-template"></span>
+        <a href="${downloadUrl}" class="btn btn-default btn-block btn-lg btn-success" id="download-template">
+          Download ${defaultFilename}<span class="has-active-template"></span>
           <span class="btn-icon"> <i class="fa fa-download"></i></span>
         </a>
       </div>

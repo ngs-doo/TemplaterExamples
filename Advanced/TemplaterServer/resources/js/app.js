@@ -10,7 +10,8 @@ function initApp()
   var $form = $('#post_action');
   var baseUrl = location.href + (location.href[location.href.length-1] !== '/' ? '/' : '');
   var convertToPdf = false;
-  var activeTemplate = null;
+  var activeTemplate = $('.template').first().attr('data-template');
+
   var aceEditor = null;
 
   function updateProcessTemplateText() {
@@ -63,22 +64,22 @@ function initApp()
 
   $('#beautify-json').on('click', function () {
     beautifyJson();
-  });
+  }).show();
 
   $('#toggle-pdf').on('click', function () {
     $(this).find('span').toggle();
     convertToPdf = !convertToPdf;
     updateProcessTemplateText();
     $form.find('[name=toPdf]').val(convertToPdf ? 'true' : '');
-  });
+  }).show();
+  $('#toggle-helper').show();
 
   $form.on('submit', function() {
     // textarea is not synced, update before submit
     if (aceEditor != null) $editor.html(escapeString(aceEditor.getSession().getValue()));
   });
 
-  // select first template as active on initial load
-  $templates.find('[data-template]').first().trigger('click');
+  $templates.find('[data-template]').show();
 
   // load Ace editor
   // after 1ms to begin svg animation immediately
