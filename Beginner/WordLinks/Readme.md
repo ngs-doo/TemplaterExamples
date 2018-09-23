@@ -21,6 +21,11 @@ Built-in support for IDictionary data type allows usage of dynamic objects. Comb
 
 WordArt can be used for tag definition. It will be replaced as any other regular tag.
 
+### Table with headers repeated on each page
+
+Word table can be configured so that header is repeated in each row.
+This is done via Table properties -> Row -> Options -> Repeat as header row at the top of each page.
+
 ### Footnotes and endnotes
 
 Footnote and endnotes are supported since v2.4.0

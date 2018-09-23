@@ -38,33 +38,15 @@ namespace WordLinks
 		public static void Main(string[] args)
 		{
 			var favorites = new List<Dictionary<string, object>>();
-			favorites.Add(new Dictionary<string, object> { 
-				{"event","Egyptian pyramids"},
-				{"date", "2630 BC" },
-				{"link_name", "BBC" },
-				{"link_url", new Uri("http://www.bbc.co.uk/history/ancient/egyptians/") },
-				{"email_name", "Pyramids" },
-				{"email_address", "pyramids@egypt.com" },
-				{"email_subject", "Pyramids" },
-			});
-			favorites.Add(new Dictionary<string, object> { 
-				{"event","The Viking at Stamford Bridge"},
-				{"date", new DateTime(1066,11,25) },
-				{"link_name", "Badass of the week" },
-				{"link_url", "http://www.badassoftheweek.com/stamfordbridge.html" },
-				{"email_name", "Badass" },
-				{"email_address", "vikings@league.com" },
-				{"email_subject", "Viking" },
-			});
-			favorites.Add(new Dictionary<string, object> { 
-				{"event","World war I"},
-				{"date", new DateTime(1914,6,28) },
-				{"link_name", "Wikipedia" },
-				{"link_url", "http://en.wikipedia.org/wiki/World_War_I" },
-				{"email_name", "Historians" },
-				{"email_address", "history@world.com" },
-				{"email_subject", "WWI" },
-			});
+			favorites.Add(Create("Egyptian pyramids", "2630 BC", "BBC", new Uri("http://www.bbc.co.uk/history/ancient/egyptians/"), "Pyramids", "pyramids@egypt.com", "Pyramids"));
+			favorites.Add(Create("The Viking at Stamford Bridge", new DateTime(1066, 11, 25), "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html", "Badass", "vikings@league.com", "Viking"));
+			favorites.Add(Create("World war I", new DateTime(1914, 6, 28), "Wikipedia", new Uri("http://en.wikipedia.org/wiki/World_War_I"), "Historians", "history@world.com", "WWI"));
+			favorites.Add(Create("World war II", new DateTime(1939, 9, 1), "Wikipedia", new Uri("https://en.wikipedia.org/wiki/World_War_II"), "Historians", "history@world.com", "WWII"));
+			favorites.Add(Create("Printing press", "1440", "Britannica", "https://www.britannica.com/biography/Johannes-Gutenberg", "Biographies", "enquiries@britannica.co.uk", "Gutenberg"));
+			favorites.Add(Create("The Industrial Revolution", "1780", "History", "https://www.history.com/topics/industrial-revolution/industrial-revolution", "Industrial Revolution", "revolution@history.com", "IR"));
+			favorites.Add(Create("Apollo 11", new DateTime(1961, 5, 25), "NASA", "https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html", "Contact NASA", "unknown@unknown.com", "Apollo13"));
+			favorites.Add(Create("ARPANET", "1969", "DARPA", new Uri("https://www.darpa.mil/about-us/timeline/arpanet"), "Media", "outreach@darpa.mil", "ARPANET"));
+
 			File.Copy("template/Links.docx", "ExternalLinks.docx", true);
 			using (var doc = Configuration.Builder.Include(StringToUrl).Include(ToHyperlink).Build().Open("ExternalLinks.docx"))
 			{
@@ -77,6 +59,19 @@ namespace WordLinks
 				});
 			}
 			Process.Start("ExternalLinks.docx");
+		}
+
+		private static Dictionary<string, object> Create(string @event, object date, string title, object url, string name, string email, string subject)
+		{
+			return new Dictionary<string, object> { 
+				{"event", @event},
+				{"date", date },
+				{"link_name", title },
+				{"link_url", url },
+				{"email_name", name },
+				{"email_address", email },
+				{"email_subject", subject },
+			};
 		}
 	}
 }
