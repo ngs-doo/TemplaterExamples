@@ -40,11 +40,11 @@ namespace WordLinks
 			var favorites = new List<Dictionary<string, object>>();
 			favorites.Add(Create("Egyptian pyramids", "2630 BC", "BBC", new Uri("http://www.bbc.co.uk/history/ancient/egyptians/"), "Pyramids", "pyramids@egypt.com", "Pyramids"));
 			favorites.Add(Create("The Viking at Stamford Bridge", new DateTime(1066, 11, 25), "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html", "Badass", "vikings@league.com", "Viking"));
-			favorites.Add(Create("World war I", new DateTime(1914, 6, 28), "Wikipedia", new Uri("http://en.wikipedia.org/wiki/World_War_I"), "Historians", "history@world.com", "WWI"));
-			favorites.Add(Create("World war II", new DateTime(1939, 9, 1), "Wikipedia", new Uri("https://en.wikipedia.org/wiki/World_War_II"), "Historians", "history@world.com", "WWII"));
+			favorites.Add(Create("World war I", new DateTime(1914, 6, 28), "Wikipedia", new Uri("http://en.wikipedia.org/wiki/World_War_I"), "Historians", "history@world.com", "WW I"));
+			favorites.Add(Create("World war II", new DateTime(1939, 9, 1), "Wikipedia", new Uri("https://en.wikipedia.org/wiki/World_War_II"), "Historians", "history@world.com", "WW II"));
 			favorites.Add(Create("Printing press", "1440", "Britannica", "https://www.britannica.com/biography/Johannes-Gutenberg", "Biographies", "enquiries@britannica.co.uk", "Gutenberg"));
 			favorites.Add(Create("The Industrial Revolution", "1780", "History", "https://www.history.com/topics/industrial-revolution/industrial-revolution", "Industrial Revolution", "revolution@history.com", "IR"));
-			favorites.Add(Create("Apollo 11", new DateTime(1961, 5, 25), "NASA", "https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html", "Contact NASA", "unknown@unknown.com", "Apollo13"));
+			favorites.Add(Create("Apollo 11", new DateTime(1961, 5, 25), "NASA", "https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html", "Contact NASA", "unknown@unknown.com", "Apollo 13"));
 			favorites.Add(Create("ARPANET", "1969", "DARPA", new Uri("https://www.darpa.mil/about-us/timeline/arpanet"), "Media", "outreach@darpa.mil", "ARPANET"));
 
 			File.Copy("template/Links.docx", "ExternalLinks.docx", true);

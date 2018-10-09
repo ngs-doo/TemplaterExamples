@@ -72,11 +72,11 @@ public class WordLinksExample {
         List<Map<String, Object>> favorites = new ArrayList<Map<String, Object>>();
         favorites.add(create("Egyptian pyramids", "2630 BC", "BBC", new URL("http://www.bbc.co.uk/history/ancient/egyptians/"), "Pyramids", "pyramids@egypt.com", "Pyramids"));
         favorites.add(create("The Viking at Stamford Bridge", "1066-11-25", "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html", "Badass", "vikings@league.com", "Viking"));
-        favorites.add(create("World war I", "1914-6-28", "Wikipedia", "http://en.wikipedia.org/wiki/World_War_I", "Historians", "history@world.com", "WWI"));
-        favorites.add(create("World war II", "1939-9-1", "Wikipedia", new URL("https://en.wikipedia.org/wiki/World_War_II"), "Historians", "history@world.com", "WWII"));
+        favorites.add(create("World war I", "1914-6-28", "Wikipedia", "http://en.wikipedia.org/wiki/World_War_I", "Historians", "history@world.com", "WW I"));
+        favorites.add(create("World war II", "1939-9-1", "Wikipedia", new URL("https://en.wikipedia.org/wiki/World_War_II"), "Historians", "history@world.com", "WW II"));
         favorites.add(create("Printing press", "1440", "Britannica", "https://www.britannica.com/biography/Johannes-Gutenberg", "Biographies", "enquiries@britannica.co.uk", "Gutenberg"));
         favorites.add(create("The Industrial Revolution", "1780", "History", "https://www.history.com/topics/industrial-revolution/industrial-revolution", "Industrial Revolution", "revolution@history.com", "IR"));
-        favorites.add(create("Apollo 11", "1961-5-25", "NASA", "https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html", "Contact NASA", "unknown@unknown.com", "Apollo13"));
+        favorites.add(create("Apollo 11", "1961-5-25", "NASA", "https://www.nasa.gov/mission_pages/apollo/missions/apollo11.html", "Contact NASA", "unknown@unknown.com", "Apollo 13"));
         favorites.add(create("ARPANET", "1969", "DARPA", new URL("https://www.darpa.mil/about-us/timeline/arpanet"), "Media", "outreach@darpa.mil", "ARPANET"));
 
         Map<String, Object> others = new HashMap<String, Object>();
