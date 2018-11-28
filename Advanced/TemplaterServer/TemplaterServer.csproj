@@ -20,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Templater" Version="2.9.4" />
+    <PackageReference Include="Templater" Version="2.9.5" />
   </ItemGroup>
 
   <ItemGroup>

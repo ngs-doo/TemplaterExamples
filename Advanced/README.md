@@ -40,7 +40,7 @@ Combining various Excel features to create good looking report.
 
 ### [Power Query/Get & Transform](PowerQuery/Readme.md)
 
-Consuming embedded CSV or Excel table via Power Query.
+Consuming embedded CSV or Excel table via Power Query (Requires Excel 2010+)
 
 [template](PowerQuery/template/PowerQuery.xlsx?raw=true) - [result](PowerQuery/result.xlsx?raw=true)
 
