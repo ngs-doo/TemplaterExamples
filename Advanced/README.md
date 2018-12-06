@@ -47,3 +47,7 @@ Consuming embedded CSV or Excel table via Power Query (Requires Excel 2010+)
 ### [Various JSON examples](TemplaterServer/Readme.md)
 
 Application from http://templater.info/demo
+
+### [PDF conversion](TemplaterServer/Readme.md)
+
+PDF conversion via [Dockerfile](TemplaterServer/Dockerfile)

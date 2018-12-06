@@ -6,7 +6,7 @@ Start the server from within IDE or by running
 
     java -jar templater-server.jar
 
-And open your browser to `localhost:7777`
+And open your browser on `localhost:7777`
 
 Or by running
 
@@ -14,6 +14,35 @@ Or by running
 
 Templates reside in `resources/templates`.
 Each of them has a respectable json example in `resources/examples`.
+
+### PDF conversion via Docker and LibreOffice
+
+Java version of Templater server has some additional APIs. One of them is `/pdf?file=name.ext` which can be used for converting input docx/xlsx stream into a output PDF stream.
+To ease the usage of such API there is a [Dockerfile](Dockerfile) to startup the container ready for conversion.
+
+Docker image can be built by running
+
+    docker build -t templater .
+
+There are several options which can be passed to server during startup. One of them is to use a special path for temporary files:
+
+    docker run -p 7777:7777 --tmpfs /mnt/ramdisk -it templater -tmp=/mnt/ramdisk -log=INFO
+
+Once the docker has started, REST API can be consumed by calling:
+
+    PUT http://localhost:7777/pdf?file=name.ext
+
+with body for the actual document. PDF document will be returned as the response
+
+### REST server for other languages
+
+Java version of Templater server has APIs for registering custom documents in runtime and processing them via JSON at `/document`
+The workflow for using the server is:
+
+  * POST /document?template=file.ext - with using request body for the actual document. Document will be kept in memory
+  * GET /document?template=file.ext - will return the saved template. If provided `If-None-Match` matches the expected `ETag` 304 will be returned.
+  * PUT /document?template=file.ext - using JSON for request body will process the previously saved template with provided JSON. To create PDF `Accept: application/pdf` can be used
+  * DELETE /document?template=file.ext - will removed previously saved template document
 
 ### Examples
 

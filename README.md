@@ -92,7 +92,7 @@ Examples:
  ***A***: You need to use XML to inject rich text into document (and format it appropriately to the target document format).
 
  ***Q***: Can I convert *docx/xlsx* to PDF?  
- ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do [PDF conversion via it](Advanced/TemplaterServer/src/main/java/hr/ngs/templater/TemplaterServer.java#L206). Almost all non MS solution have some pixel perfect issues :(
+ ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do [PDF conversion via it](Advanced/TemplaterServer/src/main/java/hr/ngs/templater/TemplaterServer.java#L214). Almost all non MS solution have some pixel perfect issues :(. To ease the usage of LibreOffice there is a [Dockerfile](Advanced/TemplaterServer/Dockerfile) which will prepare the environment for easy PDF conversion 
 
  ***Q***: Is this just a fancy mail-merge library?  
  ***A***: Not at all. Templater can create really complex documents, but you might need to have a good knowledge of Word/Excel to create such complex documents.
