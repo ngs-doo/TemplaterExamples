@@ -136,6 +136,15 @@ namespace WordDataTable
 				},
 				Headers = new[,] { { "Bottle", "Where" } }
 			};
+			var fixedItems = new Fixed[] {
+				new Fixed{ Name = "A", Quantity = 1, Price = 42 },
+				new Fixed{ Name = "B", Quantity = 2, Price = 23 },
+				new Fixed{ Name = "C", Quantity = 3, Price = 505 },
+				new Fixed{ Name = "D", Quantity = 4, Price = 99 },
+				new Fixed{ Name = "E", Quantity = 5, Price = 199 },
+				new Fixed{ Name = "F", Quantity = 6, Price = 0 },
+				new Fixed{ Name = "G", Quantity = 7, Price = 7 }
+			};
 			using (var doc = factory.Open("WordTables.docx"))
 			{
 				doc.Process(
@@ -147,7 +156,8 @@ namespace WordDataTable
 						DynamicResizeAndMerge = dynamicResize2,
 						Nulls = map,
 						Table4 = dt4,
-						Combined = combined
+						Combined = combined,
+						Fixed = fixedItems
 					});
 			}
 			Process.Start("WordTables.docx");
@@ -163,6 +173,12 @@ namespace WordDataTable
 			public string Name;
 			public string Description;
 			public string[,] Columns;
+		}
+		class Fixed
+		{
+			public string Name;
+			public int Quantity;
+			public decimal Price;
 		}
 	}
 }

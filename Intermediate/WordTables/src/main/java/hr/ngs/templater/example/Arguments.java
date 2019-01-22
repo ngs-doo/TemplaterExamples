@@ -1,5 +1,6 @@
 package hr.ngs.templater.example;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.*;
 
@@ -11,6 +12,7 @@ public class Arguments {
     public List<HashMap<String, Object>> Nulls;
     public ResultSet Table4;
     public Combined Combined;
+    public List<Fixed> Fixed;
 
     public static Combined combined(String[] headers, Beer... beers) {
         Combined c = new Combined();
@@ -33,5 +35,16 @@ public class Arguments {
         public String Name;
         public String Description;
         public String[][] Columns;
+    }
+    public static class Fixed {
+        public final String Name;
+        public final int Quantity;
+        public final BigDecimal Price;
+
+        public Fixed(String name, int quantity, BigDecimal price) {
+            Name = name;
+            Quantity = quantity;
+            Price = price;
+        }
     }
 }

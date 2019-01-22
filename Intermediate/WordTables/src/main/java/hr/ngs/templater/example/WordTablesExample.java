@@ -8,6 +8,7 @@ import hr.ngs.templater.ITemplater;
 
 import java.awt.Desktop;
 import java.io.*;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -85,6 +86,15 @@ public class WordTablesExample {
                     put("3", "c");
                 }}
         );
+        List<Arguments.Fixed> fixedItems = Arrays.asList(
+                new Arguments.Fixed("A", 1, BigDecimal.valueOf(42)),
+                new Arguments.Fixed("B", 2, BigDecimal.valueOf(23)),
+                new Arguments.Fixed("C", 3, BigDecimal.valueOf(505)),
+                new Arguments.Fixed("D", 4, BigDecimal.valueOf(99)),
+                new Arguments.Fixed("E", 5, BigDecimal.valueOf(199)),
+                new Arguments.Fixed("F", 6, BigDecimal.valueOf(0)),
+                new Arguments.Fixed("G", 7, BigDecimal.valueOf(7))
+        );
 
         Arguments arguments = new Arguments();
         arguments.Table1 = dt;
@@ -97,6 +107,7 @@ public class WordTablesExample {
                 new String[]{"Bottle", "Where"},
                 Arguments.beer("Heineken", "Green and cold", "Light", "International"),
                 Arguments.beer("Leila", "Blueish", "Blue", "Domestic"));
+        arguments.Fixed = fixedItems;
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl =

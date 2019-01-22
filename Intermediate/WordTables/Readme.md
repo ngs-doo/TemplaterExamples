@@ -30,3 +30,9 @@ Handler will iterate through all tags with the same name and either invoke colla
 ### Combining multiple features
 
 For complex documents it's often required to combine multiple features, such as in this case dynamic resize with a static part of the table.
+
+### Fixed metadata
+
+When Templater detectes **fixed** in collection metadata, it will avoid calling the resize on it and will cleanup the remaining tags after it has finished processing the collection.
+When collection is larger than the number of rows in the template, the remaining rows will not be replaced.
+If **fixed** is used in Excel, a table should be used to differentiate between other tags in ordinary cells, otherwise only first row will be processed.
