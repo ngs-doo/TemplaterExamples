@@ -44,6 +44,12 @@ Consuming embedded CSV or Excel table via Power Query (Requires Excel 2010+)
 
 [template](PowerQuery/template/PowerQuery.xlsx?raw=true) - [result](PowerQuery/result.xlsx?raw=true)
 
+### [CSV streaming](CsvStreaming/Readme.md)
+
+Stream CSV while processing to support huge exports
+
+[template](CsvStreaming/template/input.csv) - [result](CsvStreaming/result.csv)
+
 ### [Various JSON examples](TemplaterServer/Readme.md)
 
 Application from http://templater.info/demo

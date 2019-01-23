@@ -51,6 +51,10 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Advanced\CsvStreaming\CsvStreaming.csproj">
+      <Project>{5BB2AABB-A28F-404F-8C37-DBE122E893F5}</Project>
+      <Name>CsvStreaming</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Advanced\DepartmentReport\DepartmentReport.csproj">
       <Project>{B7765E9A-952F-46C7-9E2A-4DB7A1A045F6}</Project>
       <Name>DepartmentReport</Name>

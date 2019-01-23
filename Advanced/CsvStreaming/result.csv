@@ -1,0 +1,24 @@
+"Date:",All,,,,,,,,,
+"User:",All,,,,,,,,,
+"ID",Amount,Date,User,Timestamp,Note,Status,Reference number,Branch ID,Verified by,Verified On
+1000000,260.00,28.4.2016.,,28.4.2016. 19:47:29,,,reference0,branch0,suzane,28.4.2016. 19:47:29
+1000001,260.13,28.4.2016.,,28.4.2016. 20:47:29,,APPROVED,reference1,branch1,eric,28.4.2016. 19:48:29
+1000002,260.26,28.4.2016.,rick,28.4.2016. 21:47:29,-,,reference2,branch2,mick,28.4.2016. 19:49:29
+1000003,260.39,28.4.2016.,marty,28.4.2016. 22:47:29,...,APPROVED,reference3,branch3,admin,28.4.2016. 19:50:29
+1000004,260.52,28.4.2016.,suzane,28.4.2016. 23:47:29,IMPORTANT,,reference4,branch4,,28.4.2016. 19:51:29
+1000005,260.65,28.4.2016.,eric,29.4.2016. 0:47:29,REMINDER,APPROVED,reference5,branch5,,28.4.2016. 19:52:29
+1000006,260.78,28.4.2016.,mick,29.4.2016. 1:47:29,"something to look ""into later",VERIFIED,reference6,branch6,rick,28.4.2016. 19:53:29
+1000007,260.91,28.4.2016.,admin,29.4.2016. 2:47:29,"special"" char,",CANCELED,reference7,branch7,marty,28.4.2016. 19:54:29
+1000008,261.04,28.4.2016.,,29.4.2016. 3:47:29,,,reference8,branch8,suzane,28.4.2016. 19:55:29
+1000009,261.17,28.4.2016.,,29.4.2016. 4:47:29,,APPROVED,reference9,branch9,eric,28.4.2016. 19:56:29
+1000010,261.30,28.4.2016.,rick,29.4.2016. 5:47:29,-,,reference10,branch10,mick,28.4.2016. 19:57:29
+1000011,261.43,28.4.2016.,marty,29.4.2016. 6:47:29,...,APPROVED,reference11,branch11,admin,28.4.2016. 19:58:29
+1000012,261.56,28.4.2016.,suzane,29.4.2016. 7:47:29,IMPORTANT,,reference12,branch12,,28.4.2016. 19:59:29
+1000013,261.69,28.4.2016.,eric,29.4.2016. 8:47:29,REMINDER,APPROVED,reference13,branch13,,28.4.2016. 20:00:29
+1000014,261.82,28.4.2016.,mick,29.4.2016. 9:47:29,"something to look ""into later",VERIFIED,reference14,branch14,rick,28.4.2016. 20:01:29
+1000015,261.95,28.4.2016.,admin,29.4.2016. 10:47:29,"special"" char,",CANCELED,reference15,branch15,marty,28.4.2016. 20:02:29
+1000016,262.08,28.4.2016.,,29.4.2016. 11:47:29,,,reference16,branch16,suzane,28.4.2016. 20:03:29
+1000017,262.21,28.4.2016.,,29.4.2016. 12:47:29,,APPROVED,reference17,branch17,eric,28.4.2016. 20:04:29
+1000018,262.34,28.4.2016.,rick,29.4.2016. 13:47:29,-,,reference18,branch18,mick,28.4.2016. 20:05:29
+1000019,262.47,28.4.2016.,marty,29.4.2016. 14:47:29,...,APPROVED,reference19,branch19,admin,28.4.2016. 20:06:29
+1000020,262.60,28.4.2016.,suzane,29.4.2016. 15:47:29,IMPORTANT,,reference20,branch20,,28.4.2016. 20:07:29

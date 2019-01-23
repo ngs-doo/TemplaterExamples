@@ -1,0 +1,4 @@
+﻿"Date:",[[filter.date]],,,,,,,,,
+"User:",[[filter.user]],,,,,,,,,
+"ID",Amount,Date,User,Timestamp,Note,Status,Reference number,Branch ID,Verified by,Verified On
+[[data.id]],[[data.amount]],[[data.date]:format],[[data.createdBy]],[[data.createdOn]],[[data.note]],[[data.status]],[[data.reference]],[[data.branch]],[[data.verifiedBy]],[[data.verifiedOn]]

@@ -107,7 +107,11 @@ namespace CollapseRegion
 			}).Build();
 
 			using (var doc = factory.Open("Collapse.docx"))
+			{
+				//manually invoke resize 0 on a tag. ideally this would be some boolean flag/empty collection
+				doc.Templater.Resize(new[] { "remove_me" }, 0);
 				doc.Process(new[] { application1, application2, application3 });
+			}
 			Process.Start("Collapse.docx");
 		}
 	}

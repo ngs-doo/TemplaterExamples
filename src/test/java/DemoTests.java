@@ -210,6 +210,12 @@ public class DemoTests {
         SheetReportExample.main(null);
     }
 
+
+    @Test
+    public void testCsvStreaming() throws Exception {
+        CsvStreamingExample.main(null);
+    }
+
     @Test
     public void testDepartments() throws Exception {
         DepartmentReportExample.main(null);

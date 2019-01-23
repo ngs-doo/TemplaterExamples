@@ -41,3 +41,9 @@ As of v2.5 Templater can use merge-xml metadata as instruction to merge provided
 
 A common use case is for providing number expressed as words.
 This feature can be easily implemented via external plugin which does tha appropriate conversion.
+
+### Whole page removal
+
+resize(tags, 0) will invoke removal of document content between sections, so when paired with section page break, 
+it can be used to conditionally remove several pages of document.
+Templater will skip over ordinary page break, but section page break will be used as starting or ending location.
