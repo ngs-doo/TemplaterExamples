@@ -353,7 +353,8 @@ public class TemplaterServer implements AutoCloseable {
                }
                String ext = getExtension(templateName);
                String accept = httpExchange.getRequestHeaders().getFirst("accept");
-               boolean toPdf = accept != null && accept.contains(MIME_PDF) || "true".equals(params.get("toPdf"));
+               boolean toPdf = accept != null && accept.contains(MIME_PDF)
+                       || "true".equals(params.get("toPdf")) || "true".equals(params.get("topdf"));
                String name = templateName.substring(0, templateName.length() - ext.length() - 1);
 
                byte[] templaterBytes = driveMap.get(exampleName);
@@ -435,7 +436,8 @@ public class TemplaterServer implements AutoCloseable {
                     sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.");
                 } else if ("PUT".equalsIgnoreCase(httpExchange.getRequestMethod())) {
                     String accept = httpExchange.getRequestHeaders().getFirst("accept");
-                    boolean toPdf = accept != null && accept.contains(MIME_PDF) || "true".equals(params.get("toPdf"));
+                    boolean toPdf = accept != null && accept.contains(MIME_PDF)
+                            || "true".equals(params.get("toPdf")) || "true".equals(params.get("topdf"));
                     byte[] json = readBytes(httpExchange);
                     byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension);
                     byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension) : templaterResultBytes;
