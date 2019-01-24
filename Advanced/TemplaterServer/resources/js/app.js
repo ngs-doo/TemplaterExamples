@@ -48,12 +48,12 @@ function initApp()
 
     updateProcessTemplateText();
     $downloadTemplate.html('Download ' + activeTemplate)
-        .attr('href', baseUrl + 'templates/' + activeTemplate);
+        .attr('href', baseUrl + 'templates/' + activeTemplate.toLowerCase());
     $form.find('[name=template]').val(activeTemplate);
     $templates.find('.active').removeClass('active');
     $(this).addClass('active');
 
-    $.get(baseUrl + 'examples/' + activeTemplate + '.json', function (response) {
+    $.get(baseUrl + 'examples/' + activeTemplate.toLowerCase() + '.json', function (response) {
       if (aceEditor)
         aceEditor.setValue(response);
       else
