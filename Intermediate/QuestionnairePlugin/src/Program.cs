@@ -67,6 +67,19 @@ namespace QuestionnairePlugin
 			return value;
 		}
 
+		static object Letter(object value, string metadata)
+		{
+			if (metadata.StartsWith("letter("))
+			{
+				if (value == null) return string.Empty;
+				var str = value.ToString();
+				var index = int.Parse(metadata.Substring(7, metadata.Length - 8));
+				if (index >= str.Length || index < 0) return string.Empty;
+				return str[index].ToString().ToUpperInvariant();
+			}
+			return value;
+		}
+
 		public static void Main(string[] args)
 		{
 			var quest = new Questionnaire { Title = "When to write a Templater plugin?" };
@@ -93,6 +106,7 @@ namespace QuestionnairePlugin
 				Configuration.Builder
 				.Include<Questionnaire>(ProcessQuestionnaire)
 				.Include(FormatDate)
+				.Include(Letter)
 				.WithMatcher(@"[\w\.]+")
 				.Build();
 
@@ -100,7 +114,7 @@ namespace QuestionnairePlugin
 			using (var output = new FileStream("questionnaire.docx", FileMode.Create))
 			using (var doc = factory.Open(input, output, "docx"))
 			{
-				doc.Process(new { Date = DateTime.Now, Q = quest });
+				doc.Process(new { Date = DateTime.Now, Q = quest, Reason = "Example" });
 			}
 
 			Process.Start("questionnaire.docx");

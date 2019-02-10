@@ -160,7 +160,7 @@ public class TemplaterServer implements AutoCloseable {
         return templateHtml
                 .replace("${templates}", response.toString())
                 .replace("${defaultTemplate}", defaultTemplate)
-                .replace("${defaultJson}", json != null ? new String(json, UTF8) : "")
+                .replace("${defaultJson}", json != null ? new String(json, UTF8).replace("&", "&amp;") : "")
                 .replace("${downloadUrl}", current.isEmpty() ? "#" : "templates/" + current)
                 .replace("${defaultFilename}", current.isEmpty() ? "" : current);
     }

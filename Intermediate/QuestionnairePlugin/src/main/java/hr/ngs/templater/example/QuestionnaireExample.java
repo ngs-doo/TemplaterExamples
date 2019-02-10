@@ -39,12 +39,14 @@ public class QuestionnaireExample {
         Map<String, Object> arguments = new HashMap<String, Object>();
         arguments.put("Date", new Date());
         arguments.put("Q", quest);
+        arguments.put("Reason", "Example");
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl =
                 Configuration.builder()
                         .include(Questionnaire.class, new QuestionnairePlugin())
                         .include(new FormatDate())
+                        .include(new Letters())
                         .withMatcher("[\\w\\.]+")
                         .build().open(templateStream, "docx", fos);
         tpl.process(arguments);
@@ -85,6 +87,21 @@ public class QuestionnaireExample {
         public Object format(Object value, String metadata) {
             if ("date".equals(metadata) && value instanceof Date) {
                 return DATE_FORMAT.format((Date) value);
+            }
+            return value;
+        }
+    }
+
+    static class Letters implements IDocumentFactoryBuilder.IFormatter {
+
+        @Override
+        public Object format(Object value, String metadata) {
+            if (metadata.startsWith("letter(")) {
+                if (value == null) return "";
+                String str = value.toString();
+                int index = Integer.parseInt(metadata.substring(7, metadata.length() - 1));
+                if (index >= str.length() || index < 0) return "";
+                return Character.toString(str.charAt(index)).toUpperCase();
             }
             return value;
         }

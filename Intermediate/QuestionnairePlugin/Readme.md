@@ -46,3 +46,7 @@ When new data type needs to be registered, or custom processing on specific data
 
 Since v2.7.0 Templater allows for tag regex customization. Default tag regex includes only few special characters so if we want to expand (or restrict) a format of the tag we can provide a new format during setup.
 Here a format of char or dot is used.
+
+#### Letter splitting
+
+When each letter needs to be put in a separate cell, for scanning purposes, this can be done by repeating the tag in each cell and using a plugin to take a single letter in each cell

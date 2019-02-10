@@ -82,7 +82,9 @@ namespace TemplaterServer
 
 			var defaultTemplate = string.IsNullOrEmpty(current) ? string.Empty : "Create " + current.Substring(current.LastIndexOf('.') + 1) + " document with " + current;
 			string json;
-			if (!Jsons.TryGetValue(current.ToLowerInvariant(), out json))
+			if (Jsons.TryGetValue(current.ToLowerInvariant(), out json))
+				json = json.Replace("&", "&amp;");
+			else
 				json = string.Empty;
 
 			return TemplateHtml
