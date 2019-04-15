@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>double-processing-example</artifactId>
     <packaging>jar</packaging>
-    <version>2.9.6</version>
+    <version>3.0.0</version>
     <name>DoubleProcessingExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

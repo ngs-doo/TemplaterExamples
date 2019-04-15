@@ -17,9 +17,20 @@ public class MissingPropertyExample {
         HashMap<String, Object> dictionary = new HashMap<>();
         dictionary.put("provided", "something");
         dictionary.put("null", null);
+        dictionary.put("collection", Arrays.asList(
+                new HashMap() {{ put("tagA", "a"); put("tagB", "b"); }},
+                new HashMap() {{ put("tagA", "c");  }},
+                new HashMap() {{ put("tagA", "e"); put("tagB", "f"); }}
+        ));
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument doc = Configuration.factory().open(templateStream, "docx", fos);
+        ITemplateDocument doc = Configuration.builder().onUnprocessed((prefix, templater, tags, value) -> {
+            for(String t : tags) {
+                String[] md = templater.getMetadata(t, false);
+                Optional<String> missing = Arrays.stream(md).filter(it -> it.startsWith("missing(")).findFirst();
+                missing.ifPresent(s -> templater.replace(t, s.substring("missing(".length(), s.length() - 1)));
+            }
+        }).build().open(templateStream, "docx", fos);
         doc.process(dictionary);
         removeTagsWithMissing(doc.templater());
         doc.flush();

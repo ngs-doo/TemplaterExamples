@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CollapseRegion
 {
 	public class Application
 	{
-		private int paybackYears;
-		private bool? ucCheck;
-		private String ucCheckResponse;
+		public int paybackYears { get; private set; }
+		public bool? ucCheck { get; private set; }
+		public string ucCheckResponse { get; private set; }
 		private Applicant applicant;
 		private Applicant coApplicant;
 		private List<Loan> loans = new List<Loan>();
 		private bool _hideLoans;
-
-		public int getPaybackYears()
-		{
-			return paybackYears;
-		}
 
 		public Application setPaybackYears(int paybackYears)
 		{
@@ -24,20 +18,10 @@ namespace CollapseRegion
 			return this;
 		}
 
-		public bool? getUcCheck()
-		{
-			return ucCheck;
-		}
-
 		public Application setUcCheck(bool? ucCheck)
 		{
 			this.ucCheck = ucCheck;
 			return this;
-		}
-
-		public string getUcCheckResponse()
-		{
-			return ucCheckResponse;
 		}
 
 		public Application setUcCheckResponse(string ucCheckResponse)

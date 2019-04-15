@@ -9,7 +9,7 @@ Collapse plugin checks if provided value is null or empty and in which case it i
 
 ### Bean standard support
 
-Bean standard is not supported which makes templates little less readable.
+Since v3 bean standard is supported and enabled by default. Both bean name and actual names can be used.
 
 ### Custom collapse plugin
 

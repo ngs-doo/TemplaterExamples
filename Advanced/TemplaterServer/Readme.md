@@ -17,7 +17,7 @@ Each of them has a respectable json example in `resources/examples`.
 
 ### PDF conversion via Docker and LibreOffice
 
-Java version of Templater server has some additional APIs. One of them is `/pdf?file=name.ext` which can be used for converting input docx/xlsx stream into a output PDF stream.
+Java version of Templater server has some additional APIs. One of them is `/pdf?file=name.ext` which can be used for converting input docx/xlsx stream into an output PDF stream.
 To ease the usage of such API there is a [Dockerfile](Dockerfile) to startup the container ready for conversion.
 
 Docker image can be built by running

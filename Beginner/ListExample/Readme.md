@@ -6,7 +6,7 @@ Multiple levels of collections.
 ### Tag detection
 
 Templater object processor uses reflection to match fields and zero argument methods to tags in document.
-Matching is done on exact names and doesn't support Java bean standard (this means to match getter, exact getter name must be used).
+Since v3 Templater supports Java bean standard (which can be disabled during configuration).
 Only public properties are analyzed.
 
 ### Context matching

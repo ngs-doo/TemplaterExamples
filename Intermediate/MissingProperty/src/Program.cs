@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -15,8 +16,24 @@ namespace MissingProperty
 			var dictionary = new Dictionary<string, object>();
 			dictionary["provided"] = "something";
 			dictionary["null"] = null;
+			dictionary["collection"] = new[]{
+				new Dictionary<string, object>{{"tagA", "a"},{"tagB","b"}},
+				new Dictionary<string, object>{{"tagA", "c"}},
+				new Dictionary<string, object>{{"tagA", "e"},{"tagB","f"}},
+			};
 
-			using (var doc = Configuration.Factory.Open("dynamic.docx"))
+			Action<string, ITemplater, IEnumerable<string>, object> handleUnprocessed = (prefix, templater, tags, value) =>
+			{
+				foreach (var t in tags)
+				{
+					var md = templater.GetMetadata(t, false);
+					var missing = md.FirstOrDefault(it => it.StartsWith("missing("));
+					if (missing != null)
+						templater.Replace(t, missing.Substring("missing(".Length, missing.Length - 1 - "missing(".Length));
+				}
+			};
+
+			using (var doc = Configuration.Builder.OnUnprocessed(handleUnprocessed).Build().Open("dynamic.docx"))
 			{
 				doc.Process(dictionary);
 				RemoveTagsWithMissing(doc.Templater);
