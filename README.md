@@ -16,7 +16,7 @@ Additional [documentation] is available from the official website.
 ## How Templater works
 
 Templater works by analyzing provided *docx/xlsx/csv* document for **tags**. 
-Tags are snippets of text written in either **[[tag]]** or a **{{tag}}** format. 
+Tags are snippets of text written in either **`[[tag]]`**, **`{{tag}}`** or a **`<<tag>>`** format. 
 Tags can have metadata which can be used for various customization purposes, such as formatting, verbalization and others.
 
 Tags placed in a resizable part of the document can be duplicated by Templater when paired with a collection input.
