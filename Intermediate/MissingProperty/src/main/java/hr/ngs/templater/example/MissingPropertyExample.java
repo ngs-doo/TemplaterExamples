@@ -25,7 +25,7 @@ public class MissingPropertyExample {
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument doc = Configuration.builder().onUnprocessed((prefix, templater, tags, value) -> {
-            for(String t : tags) {
+            for (String t : tags) {
                 String[] md = templater.getMetadata(t, false);
                 Optional<String> missing = Arrays.stream(md).filter(it -> it.startsWith("missing(")).findFirst();
                 missing.ifPresent(s -> templater.replace(t, s.substring("missing(".length(), s.length() - 1)));

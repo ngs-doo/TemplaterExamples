@@ -7,10 +7,11 @@ Templater will use reflection to extract public properties and match it with tag
 
 ### Tag format
 
-Tags can have one of two formats:
+Tags can have one of three formats:
 
- * [[tag]]
- * {{tag}}
+ * `[[tag]]`
+ * `{{tag}}`
+ * `<<tag>>`
 
 ### Reflection rules
 
