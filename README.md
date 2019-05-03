@@ -1,4 +1,4 @@
-[documentation]: http://templater.info/
+[documentation]: https://templater.info/
 
 # Reporting for JVM and .NET
 

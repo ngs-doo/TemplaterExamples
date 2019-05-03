@@ -11,7 +11,8 @@
         "fromMonth": 11
       },
       "fromUntil": null
-    }
+    },
+    "coApplicant": null
   },
   {
     "paybackYears": 10,

@@ -3,10 +3,7 @@ import hr.ngs.templater.example.*;
 import org.junit.Test;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class DemoTests {
 
@@ -25,10 +22,17 @@ public class DemoTests {
         SimpleExcelExample.main(null);
     }
 
+    private InputStream resource(String name) throws FileNotFoundException {
+        InputStream fromResource = DemoTests.class.getResourceAsStream(name);
+        if (fromResource != null) return fromResource;
+        //IDEA changed behavior in new versions and will not load resource from a pom project ;(
+        return new FileInputStream(new File("src/test/resources" + name));
+    }
+
     @Test
     public void testJsonBench() throws Exception {
-        InputStream json = DemoTests.class.getResourceAsStream("/benchmark-data.json");
-        InputStream template = DemoTests.class.getResourceAsStream("/benchmark-template.xlsx");
+        InputStream json = resource("/benchmark-data.json");
+        InputStream template = resource("/benchmark-template.xlsx");
         File tmp = File.createTempFile("bench", ".xlsx");
         OutputStream output = new FileOutputStream(tmp);
         TemplaterJson.process("xlsx", template, json, output);
@@ -37,8 +41,8 @@ public class DemoTests {
 
     @Test
     public void testJsonBeer() throws Exception {
-        InputStream json = DemoTests.class.getResourceAsStream("/beers-data.json");
-        InputStream template = DemoTests.class.getResourceAsStream("/beers-template.docx");
+        InputStream json = resource("/beers-data.json");
+        InputStream template = resource("/beers-template.docx");
         File tmp = File.createTempFile("beers", ".docx");
         OutputStream output = new FileOutputStream(tmp);
         TemplaterJson.process("docx", template, json, output);

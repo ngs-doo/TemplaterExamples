@@ -80,11 +80,11 @@ public class WordLinksExample {
         favorites.add(create("ARPANET", "1969", "DARPA", new URL("https://www.darpa.mil/about-us/timeline/arpanet"), "Media", "outreach@darpa.mil", "ARPANET"));
 
         Map<String, Object> others = new HashMap<String, Object>();
-        others.put("urlType", new URL("http://templater.info"));
+        others.put("urlType", new URL("https://templater.info"));
         others.put("urlString", "templater.info");
         HashMap<String, String> hyperlink = new HashMap<String, String>();
         hyperlink.put("text", "text for link");
-        hyperlink.put("url", "http://templater.info/demo");
+        hyperlink.put("url", "https://templater.info/demo");
         others.put("hyperlink", hyperlink);
 
         FileOutputStream fos = new FileOutputStream(tmp);

@@ -52,7 +52,7 @@ Stream CSV while processing to support huge exports
 
 ### [Various JSON examples](TemplaterServer/Readme.md)
 
-Application from http://templater.info/demo
+Application from https://templater.info/demo
 
 ### [PDF conversion](TemplaterServer/Readme.md)
 

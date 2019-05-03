@@ -1,6 +1,6 @@
 ## Templater Server
 
-Example of running a templating processes on a small server with a preset templates, as demonstrated [on the demo page](http://templater.info/demo).
+Example of running a templating processes on a small server with a preset templates, as demonstrated [on the demo page](https://templater.info/demo).
 
 Start the server from within IDE or by running
 

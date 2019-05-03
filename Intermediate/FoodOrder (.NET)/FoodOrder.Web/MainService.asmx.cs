@@ -12,7 +12,7 @@ namespace FoodOrder.Web
 {
 	[ScriptService]
 	[ToolboxItem(false)]
-	[WebService(Namespace = "http://templater.info/")]
+	[WebService(Namespace = "https://templater.info/")]
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 	public class MainService : WebService
 	{

@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>limits-example</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <name>LimitsExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

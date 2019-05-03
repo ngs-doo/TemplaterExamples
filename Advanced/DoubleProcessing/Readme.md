@@ -23,12 +23,12 @@ Templater doesn't evaluate formulas.
 
 ### Conversion of text to formula
 
-Templater has an option to convert text input into formula (mostly due to Excel objecting to {{tag}} and [[tag]] inside formulas).
-This is done by placing [[equals]] text at the beginning of the cell.
-After processing is done Templater converts all remaining cells which starts with [[equals]] into formulas.
+Templater has an option to convert text input into formula (mostly due to Excel objecting to `{{tag}}`, `<<tag>>` and `[[tag]]` inside formulas).
+This is done by placing `[[equals]]` text at the beginning of the cell.
+After processing is done Templater converts all remaining cells which starts with `[[equals]]` into formulas.
 
-In this example due to double processing, [[equals]] can't be used into the template since it will be rewritten before values are available.
-Therefore another tag ([[formula]] is used, and at the end of first processing [[formula]] is converted into [[equals]] since:
+In this example due to double processing, `[[equals]]` can't be used into the template since it will be rewritten before values are available.
+Therefore another tag (`[[formula]]` is used, and at the end of first processing `[[formula]]` is converted into `[[equals]]` since:
 
  * Templater doesn't analyze values after replace (only after resize)
  * second processing will pick up inserted tag and will do formula replacement at the end

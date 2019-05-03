@@ -80,7 +80,7 @@ public class CsvStreamingExample {
         Class.forName("org.hsqldb.jdbcDriver");
         Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:data/export", "sa", "");
         conn.createStatement().execute(
-                "create table data(" +
+                "create table csv_data(" +
                         "id integer NOT NULL, " +
                         "amount decimal not null, " +
                         "date date not null, " +
@@ -98,7 +98,7 @@ public class CsvStreamingExample {
         String[] stats = new String[] { "", "APPROVED", "", "APPROVED", "", "APPROVED", "VERIFIED", "CANCELED" };
         LocalDate startDate = LocalDate.now().minusDays(1000);
         OffsetDateTime startTimestamp = OffsetDateTime.now().minusDays(1000);
-        PreparedStatement ins = conn.prepareStatement("INSERT INTO data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement ins = conn.prepareStatement("INSERT INTO csv_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         ZoneOffset defaultOffset = OffsetDateTime.now().getOffset();
         for (int i = 0; i < 200000; i++) {
             ins.setInt(1, 1000000 + i);
@@ -114,7 +114,7 @@ public class CsvStreamingExample {
             ins.setTimestamp(11, new java.sql.Timestamp(startTimestamp.plusMinutes(i / 1000).toInstant().toEpochMilli()));
             ins.execute();
         }
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM data");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM csv_data");
         IDocumentFactoryBuilder config = Configuration.builder().include(new Quoter());
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.getDefault());
         //if we are using a culture which has comma as decimal separator, change the output to dot

@@ -48,7 +48,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.3.0.0\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.3.1.0\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

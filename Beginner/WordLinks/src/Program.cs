@@ -53,9 +53,9 @@ namespace WordLinks
 				doc.Process(favorites);
 				doc.Process(new
 				{
-					urlType = new Uri("http://templater.info"),
+					urlType = new Uri("https://templater.info"),
 					urlString = "templater.info",
-					hyperlink = new Dictionary<string, object> { { "text", "text for link" }, { "url", "http://templater.info/demo" } }
+					hyperlink = new Dictionary<string, object> { { "text", "text for link" }, { "url", "https://templater.info/demo" } }
 				});
 			}
 			Process.Start("ExternalLinks.docx");

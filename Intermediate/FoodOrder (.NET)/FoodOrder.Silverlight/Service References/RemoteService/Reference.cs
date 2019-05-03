@@ -17,7 +17,7 @@ namespace FoodOrder.RemoteService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfString", Namespace="http://templater.info/", ItemName="string")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfString", Namespace="https://templater.info/", ItemName="string")]
     public class ArrayOfString : System.Collections.ObjectModel.ObservableCollection<string> {
     }
     
