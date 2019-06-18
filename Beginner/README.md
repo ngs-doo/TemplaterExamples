@@ -20,6 +20,12 @@ How to insert an image into the document.
 
 [template](ImageExample/template/Picture.docx?raw=true) - [result](ImageExample/result.docx?raw=true)
 
+### [Android](AndroidExample/Readme.md)
+
+Templater also works in Android.
+
+[template](AndroidExample/app/src/main/res/raw/template.docx?raw=true) - [result](AndroidExample/output.docx?raw=true)
+
 ### [License embedding](WebExample%20(.NET)/Readme.md)
 
 How to embed license file (templater.lic) into a web project.

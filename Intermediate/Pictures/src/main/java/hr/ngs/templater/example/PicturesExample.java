@@ -11,6 +11,7 @@ import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
 
@@ -105,6 +106,9 @@ public class PicturesExample {
                             double heightScale = 1.0 * actualHeight / maxHeightCm;
                             double scale = Math.max(widthScale, heightScale);
                             //let's change the DPI so image fits
+                            byte[] bytes = Files.readAllBytes(file.toPath());
+                            return new ImageInfo(bytes, file.getName().substring(file.getName().lastIndexOf('.') + 1), width, horDpi * scale, height, verDpi * scale);
+                            /* this was required before v3.2.0
                             ImageWriter writer = ImageIO.getImageWriter(reader);
                             BufferedImage bufImg = ImageIO.read(file);
                             ImageWriteParam writeParam = writer.getDefaultWriteParam();
@@ -124,7 +128,7 @@ public class PicturesExample {
                             final ImageOutputStream stream = ImageIO.createImageOutputStream(file);
                             writer.setOutput(stream);
                             writer.write(writeMetadata, new IIOImage(bufImg, null, writeMetadata), writeParam);
-                            stream.close();
+                            stream.close();*/
                         }
                     }
                     return ImageIO.createImageInputStream(file);
@@ -145,6 +149,7 @@ public class PicturesExample {
                     String resource = (String) value;
                     InputStream is = ImageLoader.class.getResourceAsStream(resource);
                     String ext = resource.substring(resource.lastIndexOf('.'));
+                    //instead of creating a file, we could return ImageInfo directly
                     File tmpPath = File.createTempFile("picture", ext);
                     FileOutputStream fos = new FileOutputStream(tmpPath);
                     byte[] buf = new byte[4096];
