@@ -130,8 +130,10 @@ public class TemplaterServer implements AutoCloseable {
             if (f.isDirectory()) {
                 cacheAllFiles(prefix, f, cache);
             } else {
-                String name = f.getAbsolutePath().substring(prefix.length()).toLowerCase().replace('\\', '/');
-                cache.put(name, Files.readAllBytes(f.toPath()));
+                String name = f.getAbsolutePath().substring(prefix.length()).replace('\\', '/');
+                byte[] bytes = Files.readAllBytes(f.toPath());
+                cache.put(name, bytes);
+                cache.put(name.toLowerCase(), bytes);
             }
         }
     }
