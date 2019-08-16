@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>excel-links-example</artifactId>
     <packaging>jar</packaging>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
     <name>Excel links</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

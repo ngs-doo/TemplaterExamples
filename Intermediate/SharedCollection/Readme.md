@@ -15,4 +15,5 @@ Previously if similar document wanted to be processed, Templater could do it out
 
 ### Image and DPI
 
-ImageInputStream will be inserted into the document using original file format and DPI info
+ImageInputStream will be inserted into the document using original file format and DPI info.
+Since v3.2.0 `ImageInfo` allows for easier image manpilation by exposing DPI values directly. ImageInputStream is internally converted into ImageInfo.

@@ -11,7 +11,7 @@ Templater will use entire document as a context during replication, which we lev
 
 Templater doesn't have an *AddPicture* method, but adding a picture into the document can be done by providing **Systme.Drawing.Image** data type which will replace tag with a picture in the document. Pictures within the Word are moved around as document is changed, while in Excel, pictures are stationary after they are inserted into the document.
 
-.NET will respect image DPI values, while JVM uses fixed DPI.
+.NET will respect image DPI values, while JVM can use Templater specific `ImageInfo` and provide exact DPI values.
 
 Since image is processed as special data type by low level API, this means it's possible to register a plugin in Templater which will convert some other data type (such as string) to an image. This is useful when data comes directly from database and points to some address, instead of having rich Image type within model.
 
