@@ -115,9 +115,17 @@
       <Project>{5E14E075-127B-47D9-9D06-5FCBE60F5949}</Project>
       <Name>PivotExample</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\PresentationTables\PresentationTables.csproj">
+      <Project>{25A67D21-D463-4090-817A-A967C2107CBF}</Project>
+      <Name>PresentationTables</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\PushDownExample\PushDownExample.csproj">
       <Project>{A379EB73-E072-46EC-B1DD-7D463C6E5EE2}</Project>
       <Name>PushDownExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beginner\SimplePresentation\SimplePresentation.csproj">
+      <Project>{172BA03B-8863-4721-B22D-0DFD205CCF46}</Project>
+      <Name>SimplePresentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beginner\WordLinks\WordLinks.csproj">
       <Project>{4C158D75-A416-460F-8F7B-57B0A4815C1A}</Project>
@@ -194,6 +202,10 @@
     <ProjectReference Include="..\Intermediate\QuestionnairePlugin\QuestionnairePlugin.csproj">
       <Project>{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}</Project>
       <Name>QuestionnairePlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intermediate\SharedCharts\SharedCharts.csproj">
+      <Project>{25A57D11-D463-4293-817A-A967C2107CBF}</Project>
+      <Name>SharedCharts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Intermediate\SharedCollection\SharedCollection.csproj">
       <Project>{41B425F1-B0B3-4287-B7AB-E99FFD412F26}</Project>

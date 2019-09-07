@@ -12,6 +12,8 @@ namespace TemplaterJson
 			Extensions["docx"] = "Office Open XML document (Word)";
 			Extensions["xlsm"] = "Macro-Enabled Office Open XML spreadsheet (Excel)";
 			Extensions["xlsx"] = "Office Open XML spreadsheet (Excel)";
+			Extensions["pptm"] = "Macro-Enabled Office Open XML presentation (PowerPoint)";
+			Extensions["pptx"] = "Office Open XML presentation (PowerPoint)";
 			Extensions["csv"] = "Comma separated values document";
 			Extensions["txt"] = "Text file (native encoding)";
 			Extensions["utf8"] = "Text file (UTF-8 encoding)";

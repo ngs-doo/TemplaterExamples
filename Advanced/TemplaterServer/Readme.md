@@ -70,6 +70,15 @@ Pushdown will move tables to appropriate position.
 
 Tags are also supported in sheet names.
 
+#### Board report
+
+Templater also supports PowerPoint.
+
+Simple replace, table resize or even embedded chart processing is supported.
+
+When tag is repeated in multiple collections it will be processed accordingly,
+which means that same data source can be displayed in various different ways.
+
 #### Charts
 
 Excel charts can be created based on data source (either table or range).
@@ -85,7 +94,14 @@ Default implementation will collapse region of document if null, empty or true v
 In this example, :clone is required, since two elements are being sent for processing and Templater doesn't cope with it otherwise.
 While :collapse will remove tags, processor will still continue trying to replace the missing tags, so empty values will end up on the next context.
 
-#### Links
+#### Dynamic resize
+
+Dynamic resize works on Object[][] or List<List<Object>> types as long as dimensions are the same.
+In .NET special two dimensional type: Array[,] is also supported.
+
+When combined with **merge-nulls** and **span-nulls** multiple cells can be combined into one.  
+
+#### External links
 
 Anchors are also analyzed for tags. This allows custom parts of the link to be populated with Templater.
 
@@ -99,34 +115,30 @@ Templater will rewrite formulas when cells are duplicated or moved around.
 Since Excel doesn't allow defining tag within formula, Templater has an "alternative way" to convert tag into formula.
 Tags which start with [[equals]] are converted into formula at the end of processing.
 
-#### Groceries
-
-Dynamic resize works on Object[][] or List<List<Object>> types.
-
 #### Label
 
 Templater is build so that templates can be designed with Word/Excel. 
 This means utilizing various their features for layout, such as multiple columns in Word.
 Table can be defined without border, so it doesn't look like table, but behaves as one.
 
-#### Dynamic data types
-
-Built-in processors for map/collections allow for working with dynamic types (even without reflection).
-It's also possible to combine several processors on a single object.
-
 #### Nesting
 
 Collections can be nested in other collections. This allows usage of Templater for very complex documents.
 Lists can be embedded within Tables.
 
-#### Table pushdown
+#### Pushdown
 
 During processing in non trivial Excel documents, cells are often moved around.
 Special rules exists for tables, named ranges, merge cells, formulas and various other objects.
 Templater will rewrite formulas, ranges for data sources so they are still valid after tables/ranges have been resized.
 Depending on the context, objects such as merge cells and ranges can be stretched or moved.
 
-#### Sales order cloning
+#### Resume
+
+Document layout can be tuned to fit specific look.
+Tags can be combined with static/dynamic pictures in each row/page.
+
+#### Sales order
 
 Row context can span multiple rows/columns.
 Since context can be nested, this allows for very complex document layouts.

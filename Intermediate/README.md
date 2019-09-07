@@ -120,6 +120,12 @@ Different parts of same collection can be used in different tables.
 
 [template](SharedCollection/template/TwoTables.docx?raw=true) - [result](SharedCollection/result.docx?raw=true)
 
+### [Shared charts](SharedCharts/Readme.md)
+
+Data source can be repeated even in the embedded Excels within PowerPoint files.
+
+[template](SharedCharts/template/charts.pptx?raw=true) - [result](SharedCharts/result.pptx?raw=true)
+
 ### [Various ways to populate Word table](WordTables/Readme.md)
 
 By combining various features, complex layouts can be created.

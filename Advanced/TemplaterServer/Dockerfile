@@ -2,7 +2,7 @@ FROM ubuntu:18.10
 
 RUN apt update && apt install openjdk-11-jre-headless libreoffice-common libreoffice-java-common libreoffice-writer libreoffice-calc wget -yq
 
-RUN wget -q https://github.com/ngs-doo/TemplaterExamples/releases/download/v3.2.1/templater-server.jar
+RUN wget -q https://github.com/ngs-doo/TemplaterExamples/releases/download/v4.0.0/templater-server.jar
 
 COPY templater.lic .
 

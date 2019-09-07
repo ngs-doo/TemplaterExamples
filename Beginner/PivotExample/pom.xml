@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>pivot-example</artifactId>
     <packaging>jar</packaging>
-    <version>3.2.1</version>
+    <version>4.0.0</version>
     <name>Pivot</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

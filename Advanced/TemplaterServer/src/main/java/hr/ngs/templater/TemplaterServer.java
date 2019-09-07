@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.util.*;
@@ -22,7 +23,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class TemplaterServer implements AutoCloseable {
-    private static final Charset UTF8 = Charset.forName("UTF-8");
+    private static final Charset UTF8 = StandardCharsets.UTF_8;
 
     private static final String DRIVE_PATH = "resources";
     private static final String MIME_PLAINTEXT = "text/plain;charset=UTF-8";
@@ -50,7 +51,7 @@ public class TemplaterServer implements AutoCloseable {
             this.name = file.substring(0, file.length() - extension.length() - 1);
             this.content = content;
             CRC32 crc32 = new CRC32();
-            crc32.update(content);
+            crc32.update(content, 0, content.length);
             this.etag = String.format("\"%X\"", crc32.getValue());
         }
     }
@@ -543,6 +544,8 @@ public class TemplaterServer implements AutoCloseable {
            return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
        if (resourcePath.endsWith("docx"))
            return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+       if (resourcePath.endsWith("pptx"))
+           return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
        if (resourcePath.endsWith("pdf")) return MIME_PDF;
        return MIME_PLAINTEXT;
    }
@@ -555,6 +558,7 @@ public class TemplaterServer implements AutoCloseable {
             String pluginFolder = ".";
             String libreoffice = "libreoffice";
             Level logLevel = Level.OFF;
+            boolean disableExit = false;
             if (args.length == 0) {
                 System.out.println("Example arguments:");
                 System.out.println("    -port=8080");
@@ -562,6 +566,7 @@ public class TemplaterServer implements AutoCloseable {
                 System.out.println("    -tmp=/mnt/ramdisk");
                 System.out.println("    -log=INFO");
                 System.out.println("    -plugins=/templater/jars");
+                System.out.println("    -disable-exit");
                 System.out.println("    -libreoffice=/user/home/office/libreoffice");
             }
             for (String a : args) {
@@ -589,6 +594,8 @@ public class TemplaterServer implements AutoCloseable {
                     }
                 } else if (a.startsWith("-log=")) {
                     logLevel = Level.parse(a.substring("-log=".length()));
+                } else if ("-disable-exit".equals(a)) {
+                    disableExit = true;
                 }
             }
             File loc = new File(pluginFolder);
@@ -601,14 +608,18 @@ public class TemplaterServer implements AutoCloseable {
             }
             URLClassLoader ucl = new URLClassLoader(urls.toArray(new URL[0]));
             TemplaterServer server = new TemplaterServer(port, timeoutLimit, tmpFolder, ucl, libreoffice, logLevel);
-            System.out.println("Server started on port " + port + ", press Enter to stop ...");
-            try {
-                System.in.read();
-            } catch (final Exception e) {
-                e.printStackTrace();
+            if (disableExit) {
+                System.out.println("Server started on port " + port);
+            } else {
+                System.out.println("Server started on port " + port + ", press Enter to stop ...");
+                try {
+                    System.in.read();
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+                server.close();
+                ucl.close();
             }
-            server.close();
-            ucl.close();
         } catch (final Exception e) {
             e.printStackTrace();
         }

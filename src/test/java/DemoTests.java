@@ -2,6 +2,9 @@ import hr.ngs.templater.TemplaterJson;
 import hr.ngs.templater.example.*;
 import org.junit.Test;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.*;
 
@@ -20,6 +23,11 @@ public class DemoTests {
     @Test
     public void testSimpleExcel() throws Exception {
         SimpleExcelExample.main(null);
+    }
+
+    @Test
+    public void testSimplePowerPoint() throws Exception {
+        SimplePresentationExample.main(null);
     }
 
     private InputStream resource(String name) throws FileNotFoundException {
@@ -76,7 +84,7 @@ public class DemoTests {
 
     @Test
     public void testDynamicResize() throws Exception {
-        DynamicResize.main(null);
+        DynamicResizeExample.main(null);
     }
 
     @Test
@@ -101,17 +109,24 @@ public class DemoTests {
 
     @Test
     public void testHtmlExcel() throws Exception {
+        //works in either Java 8 or Java 11 due to xml changes
         HtmlExcelExample.main(null);
     }
 
     @Test
     public void testHtmlWord() throws Exception {
+        //works in either Java 8 or Java 11 due to xml changes
         HtmlWordExample.main(null);
     }
 
     @Test
     public void testPushdown() throws Exception {
         TableExample.main(null);
+    }
+
+    @Test
+    public void testPresentationTables() throws Exception {
+        PresentationTablesExample.main(null);
     }
 
     @Test
@@ -160,8 +175,13 @@ public class DemoTests {
     }
 
     @Test
-    public void testShared() throws Exception {
+    public void testSharedTables() throws Exception {
         SharedCollectionExample.main(null);
+    }
+
+    @Test
+    public void testSharedCharts() throws Exception {
+        SharedChartsExample.main(null);
     }
 
     @Test

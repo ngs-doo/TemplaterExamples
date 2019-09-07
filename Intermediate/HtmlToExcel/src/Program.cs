@@ -32,7 +32,7 @@ namespace HtmlToExcel
 		private static void StripWordTags(XElement element)
 		{
 			if (element.Name.NamespaceName == "http://schemas.openxmlformats.org/wordprocessingml/2006/main")
-				element.Name = XName.Get(element.Name.LocalName);
+				element.Name = XName.Get(element.Name.LocalName, "http://schemas.openxmlformats.org/spreadsheetml/2006/main");
 			foreach (var a in element.Attributes())
 			{
 				if (a.Name.NamespaceName == "http://schemas.openxmlformats.org/wordprocessingml/2006/main")

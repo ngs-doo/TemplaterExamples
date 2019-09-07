@@ -7,6 +7,8 @@ enum SupportedType {
     DOCX("Office Open XML document (Word)"),
     XLSM("Macro-Enabled Office Open XML spreadsheet (Excel)"),
     XLSX("Office Open XML spreadsheet (Excel)"),
+    PPTM("Macro-Enabled Office Open XML presentation (PowerPoint)"),
+    PPTX("Office Open XML presentation (PowerPoint)"),
     CSV("Comma separated values document"),
     TXT("Text file (native encoding)"),
     UTF8("Text file (UTF-8 encoding)");

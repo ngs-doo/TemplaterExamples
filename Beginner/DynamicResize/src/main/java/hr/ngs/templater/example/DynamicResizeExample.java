@@ -8,9 +8,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DynamicResize {
+public class DynamicResizeExample {
     public static void main(final String[] args) throws Exception {
-        InputStream templateStream = DynamicResize.class.getResourceAsStream("/GroceryList.docx");
+        InputStream templateStream = DynamicResizeExample.class.getResourceAsStream("/GroceryList.docx");
         File tmp = File.createTempFile("grocery", ".docx");
 
         String[][] array = {

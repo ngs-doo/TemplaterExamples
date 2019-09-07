@@ -2,7 +2,7 @@
 
 # Reporting for JVM and .NET
 
-Templater is a **reporting library** which can be **easily integrated into third party apps** as advanced reporting engine.
+Templater is a **reporting library** which can be **easily integrated into third party apps** as advanced document generation engine.
 It works by binding provided data with specified template.
 Main goal is to provide customization options outside of development, so that reports/invoices/quotes and various other type of documents can be made to look as customers needs them.
 
@@ -15,7 +15,7 @@ Additional [documentation] is available from the official website.
 
 ## How Templater works
 
-Templater works by analyzing provided *docx/xlsx/csv* document for **tags**. 
+Templater works by analyzing provided *docx/xlsx/pptx/csv* document for **tags**. 
 Tags are snippets of text written in either **`[[tag]]`**, **`{{tag}}`** or a **`<<tag>>`** format. 
 Tags can have metadata which can be used for various customization purposes, such as formatting, verbalization and others.
 
@@ -23,7 +23,7 @@ Tags placed in a resizable part of the document can be duplicated by Templater w
 **Major difference from other templating solution is that repeating of a collection is implicit from tag definition instead of explicit by using for loop constructs.** 
 An example of this is a row in a table, list, page, sheet or the entire document.
 
-Templater uses documents prepared in Word/Excel/some other editor, which allows for very good looking documents, without the need for writing code. 
+Templater uses documents prepared in Microsoft Office (or some other editor), which allows for beautiful documents, without the need for writing code. 
 This works great in most cases, although Templater must infer intention for the behavior from the structure of the document/tags.
 
 Templater has minimal API for interaction:
@@ -91,11 +91,11 @@ Examples:
  ***Q***: How can I inject text with special color/bolding instead of plain (or pre-formatted) text into Templater?  
  ***A***: You need to use XML to inject rich text into document (and format it appropriately to the target document format).
 
- ***Q***: Can I convert *docx/xlsx* to PDF?  
+ ***Q***: Can I convert *docx/xlsx/pptx* to PDF?  
  ***A***: Templater does not support converting documents to PDF. If MS Office can't be used to do PDF conversion next best thing (which supports most features) is to set up headless LibreOffice and do [PDF conversion via it](Advanced/TemplaterServer/src/main/java/hr/ngs/templater/TemplaterServer.java#L214). Almost all non MS solution have some pixel perfect issues :(. To ease the usage of LibreOffice there is a [Dockerfile](Advanced/TemplaterServer/Dockerfile) which will prepare the environment for easy PDF conversion 
 
  ***Q***: Is this just a fancy mail-merge library?  
- ***A***: Not at all. Templater can create really complex documents, but you might need to have a good knowledge of Word/Excel to create such complex documents.
+ ***A***: Not at all. Templater can create really complex documents, but you might need to have a good knowledge of Word/Excel/PowerPoint to create such complex documents.
 
  ***Q***: How does Templater compare to [Microsoft OOXML SDK](https://docs.microsoft.com/en-us/office/open-xml/open-xml-sdk)?  
  ***A***: OOXML SDK is a low level abstraction over Office document formats, while Templater is a high level abstraction over populating documents with data. Templater goal is to avoid writing code for creating reports, but instead bind provided data with an existing template. 

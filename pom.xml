@@ -6,7 +6,7 @@
 
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
-    <version>3.2.1</version>
+    <version>4.0.0</version>
     <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -17,6 +17,7 @@
     <modules>
         <module>Beginner/SimpleDocument</module>
         <module>Beginner/SimpleSpreadsheet</module>
+        <module>Beginner/SimplePresentation</module>
         <module>Beginner/ListExample</module>
         <module>Beginner/MapExample (Java)</module>
         <module>Beginner/DynamicResize</module>
@@ -28,6 +29,7 @@
         <module>Beginner/PushDownExample</module>
         <module>Beginner/PivotExample</module>
         <module>Beginner/SpreadsheetGrouping</module>
+        <module>Beginner/PresentationTables</module>
         <module>Beginner/ExcelLinks</module>
         <module>Beginner/WordLinks</module>
         <module>Beginner/ToFormulaConversion</module>
@@ -40,6 +42,7 @@
         <module>Intermediate/SharedCollection</module>
         <module>Intermediate/ChartExample</module>
         <module>Intermediate/QuestionnairePlugin</module>
+        <module>Intermediate/SharedCharts</module>
         <module>Intermediate/LimitPlugins</module>
         <module>Intermediate/ListsAndTables</module>
         <module>Intermediate/ResultSetExample (Java)</module>
@@ -73,6 +76,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>simple-excel-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>simple-presentation-example</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -113,6 +121,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>spreadsheet-grouping-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>presentation-tables</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -193,6 +206,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>shared-collection-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>shared-charts</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

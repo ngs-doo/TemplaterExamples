@@ -14,9 +14,15 @@ Replacing tags in the spreadsheet.
 
 [template](SimpleSpreadsheet/template/MySpreadsheet.xlsx?raw=true) - [result](SimpleSpreadsheet/result.xlsx?raw=true)
 
+### [Simple presentation](SimplePresentation/Readme.md)
+
+Replacing tags in the presentation.
+
+[template](SimplePresentation/template/Presentation.pptx?raw=true) - [result](SimplePresentation/result.pptx?raw=true)
+
 ### [Inserting images](ImageExample/Readme.md)
 
-How to insert an image into the document.
+How to insert an image into a document.
 
 [template](ImageExample/template/Picture.docx?raw=true) - [result](ImageExample/result.docx?raw=true)
 
@@ -79,6 +85,12 @@ Context analysis will work across nested collections.
 Various Excel features are supported.
 
 [template](ExcelLinks/template/Links.xlsx?raw=true) - [result](ExcelLinks/result.xlsx?raw=true)
+
+### [PowerPoint tables](PresentationTables/Readme.md)
+
+Populating tables works the same way across formats.
+
+[template](PresentationTables/template/tables.pptx?raw=true) - [result](PresentationTables/result.pptx?raw=true)
 
 ### [Special Word objects](WordLinks/Readme.md)
 

@@ -6,6 +6,7 @@
 		{
 			SimpleDocument.Program.Main(args);
 			SimpleSpreadsheet.Program.Main(args);
+			SimplePresentation.Program.Main(args);
 			ListExample.Program.Main(args);
 			DataSetExample.Program.Main(args);
 			ImageExample.Program.Main(args);
@@ -16,6 +17,7 @@
 			NamedRange.Program.Main(args);
 			SpreadsheetGrouping.Program.Main(args);
 			PushDownExample.Program.Main(args);
+			PresentationTables.Program.Main(args);
 			PivotExample.Program.Main(args);
 			ToFormulaConversion.Program.Main(args);
 			BoolOverride.Program.Main(args);
@@ -29,6 +31,7 @@
 			Formulas.Program.Main(args);
 			LimitPlugins.Program.Main(args);
 			SharedCollection.Program.Main(args);
+			SharedCharts.Program.Main(args);
 			//IsoCountries.Program.Main(args);//standalone app. run manually
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);

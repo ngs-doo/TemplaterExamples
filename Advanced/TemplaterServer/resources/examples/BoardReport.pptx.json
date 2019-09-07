@@ -1,0 +1,48 @@
+{
+  "title": "Company monthly report",
+  "subtitle": "Powered by Templater",
+  "date": "Today",
+  "state": "On track",
+  "action": [
+    {"description": "Hire more experts"},
+    {"description": "Remove obstacles"},
+    {"description": "Marketing"},
+    {"description": "Marketing"},
+    {"description": "Marketing"}
+  ],
+  "sales": [
+    {
+      "country": "Croatia",
+      "lead": "Hrvoje Horvat",
+      "churn": 50,
+      "new": 220
+    },
+    {
+      "country": "USA",
+      "lead": "John Doe",
+      "churn": 450,
+      "new": 1500
+    },
+    {
+      "country": "Australia",
+      "lead": "Jack Smith",
+      "churn": 0,
+      "new": 3060
+    },
+    {
+      "country": "Japan",
+      "lead": "Keiko Suzuki",
+      "churn": 260,
+      "new": 820
+    }
+  ],
+  "history": [
+    {"period": "2018/Q1", "total": 5030},
+    {"period": "2018/Q2", "total": 5050},
+    {"period": "2018/Q3", "total": 6120},
+    {"period": "2018/Q4", "total": 6650},
+    {"period": "2019/Q1", "total": 7660},
+    {"period": "2019/Q2", "total": 7540},
+    {"period": "2019/Q3", "total": 8220}
+  ]
+}

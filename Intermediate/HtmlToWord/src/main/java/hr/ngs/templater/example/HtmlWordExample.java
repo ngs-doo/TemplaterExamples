@@ -71,7 +71,6 @@ public class HtmlWordExample {
     }
 
     public static void main(final String[] args) throws Exception {
-
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 

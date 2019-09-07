@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.3.2.1\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.4.0.0\lib\Net40\NGS.Templater.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -147,9 +147,13 @@ namespace TemplaterServer
 
 		private static string MimeType(string file)
 		{
-			return file.EndsWith(".docx")
-				? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-				: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+			if (file.EndsWith(".docx"))
+			    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+			if (file.EndsWith(".xlsx"))
+				return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+			if (file.EndsWith(".pptx"))
+				return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+			return "application/octet-stream";
 		}
 
 		public class Argument

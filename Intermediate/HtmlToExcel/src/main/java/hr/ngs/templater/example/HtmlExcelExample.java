@@ -26,12 +26,10 @@ public class HtmlExcelExample {
     }
 
     private static class HtmlToOoxml implements IDocumentFactoryBuilder.IFormatter {
-        DocumentBuilderFactory dbFactory;
         DocumentBuilder dBuilder;
 
-        HtmlToOoxml() throws ParserConfigurationException {
-            dbFactory = DocumentBuilderFactory.newInstance();
-            dBuilder = dbFactory.newDocumentBuilder();
+        HtmlToOoxml(DocumentBuilder dBuilder) {
+            this.dBuilder = dBuilder;
         }
 
         private static void stripWordTags(Node node, Document doc) {
@@ -97,6 +95,9 @@ public class HtmlExcelExample {
     }
 
     public static void main(final String[] args) throws Exception {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
         InputStream templateStream = HtmlExcelExample.class.getResourceAsStream("/Document.xlsx");
         File tmp = File.createTempFile("html", ".xlsx");
 
@@ -105,7 +106,7 @@ public class HtmlExcelExample {
         map.put("numbers", Arrays.asList(new Number(100), new Number(-100), new Number(10)));
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml()).build().open(templateStream, "xlsx", fos);
+        ITemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos);
         tpl.process(map);
         tpl.flush();
         fos.close();
