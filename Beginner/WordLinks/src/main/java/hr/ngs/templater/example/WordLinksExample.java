@@ -34,8 +34,8 @@ public class WordLinksExample {
         DocumentBuilderFactory dbFactory;
         DocumentBuilder dBuilder;
 
-        ToHyperlink() throws ParserConfigurationException {
-            dbFactory = DocumentBuilderFactory.newInstance();
+        ToHyperlink(DocumentBuilderFactory dbFactory) throws ParserConfigurationException {
+            this.dbFactory = dbFactory;
             dBuilder = dbFactory.newDocumentBuilder();
         }
         @Override
@@ -66,6 +66,10 @@ public class WordLinksExample {
     }
 
     public static void main(final String[] args) throws Exception {
+        run(DocumentBuilderFactory.newInstance());
+    }
+
+    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
         InputStream templateStream = WordLinksExample.class.getResourceAsStream("/Links.docx");
         File tmp = File.createTempFile("link", ".docx");
 
@@ -88,7 +92,7 @@ public class WordLinksExample {
         others.put("hyperlink", hyperlink);
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink()).build().open(templateStream, "docx", fos);
+        ITemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink(dbFactory)).build().open(templateStream, "docx", fos);
         tpl.process(favorites);
         tpl.process(others);
         tpl.flush();

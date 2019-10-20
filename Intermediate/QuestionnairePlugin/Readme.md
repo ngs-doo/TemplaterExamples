@@ -2,7 +2,7 @@
 
 How to write simple plugins.
 
-Templater 2 added plugin API. This example shows how to use it in two ways:
+Templater has plugin API. This example shows how to use it in two ways:
 
  * by detecting custom metadata - date in this case
  * by intercepting special data types - Questionnaire in this case; and processing it according to some special rules
@@ -26,9 +26,10 @@ Formatting plugin can be used to convert data value just before sending it to lo
  * hide
  * empty(alternative)
  * substring(n,l)
+ * join(separator)
  * ...
 
-In this case plugin was used to format DateTime into short format.
+In this case plugin was used to format DateTime into short format and to format string array into a single value separated by comma
 
 #### Processor plugin
 
@@ -44,7 +45,7 @@ When new data type needs to be registered, or custom processing on specific data
 
 #### Custom tag parser
 
-Since v2.7.0 Templater allows for tag regex customization. Default tag regex includes only few special characters so if we want to expand (or restrict) a format of the tag we can provide a new format during setup.
+Templater allows for tag regex customization. Default tag regex includes only few special characters so if we want to expand (or restrict) a format of the tag we can provide a new format during setup.
 Here a format of char or dot is used.
 
 #### Letter splitting

@@ -25,7 +25,7 @@ public class SheetReportExample {
         return "";
     }
 
-    private static InputData loadXml() throws Exception {
+    private static InputData loadXml(DocumentBuilderFactory dbf) throws Exception {
         InputData result = new InputData();
         InputStream input = SheetReportExample.class.getResourceAsStream("/UNdata_Export.zip");
         ZipInputStream zip = new ZipInputStream(input);
@@ -39,7 +39,6 @@ public class SheetReportExample {
         }
         zip.close();
         input.close();
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.parse(new ByteArrayInputStream(buffer));
         Element root = doc.getDocumentElement();
@@ -88,13 +87,17 @@ public class SheetReportExample {
     }
 
     public static void main(final String[] args) throws Exception {
+        run(DocumentBuilderFactory.newInstance());
+    }
+
+    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
         InputStream templateStream = SheetReportExample.class.getResourceAsStream("/Report.xlsx");
         File tmp = File.createTempFile("table", ".xlsx");
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
 
-        InputData data = loadXml();
+        InputData data = loadXml(dbFactory);
 
         tpl.process(data);
 

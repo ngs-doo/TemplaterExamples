@@ -2,17 +2,23 @@ import hr.ngs.templater.TemplaterJson;
 import hr.ngs.templater.example.*;
 import org.junit.Test;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.*;
 
 public class DemoTests {
 
+    private static DocumentBuilderFactory dbFactory;
+
     static {
         //make sure some custom xml parser is not used
         System.setProperty("templater:DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
+        try {
+            Class<?> dfClass = Class.forName("com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
+            dbFactory = (DocumentBuilderFactory)dfClass.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -110,13 +116,13 @@ public class DemoTests {
     @Test
     public void testHtmlExcel() throws Exception {
         //works in either Java 8 or Java 11 due to xml changes
-        HtmlExcelExample.main(null);
+        HtmlExcelExample.run(dbFactory);
     }
 
     @Test
     public void testHtmlWord() throws Exception {
         //works in either Java 8 or Java 11 due to xml changes
-        HtmlWordExample.main(null);
+        HtmlWordExample.run(dbFactory);
     }
 
     @Test
@@ -136,7 +142,7 @@ public class DemoTests {
 
     @Test
     public void testWordLinks() throws Exception {
-        WordLinksExample.main(null);
+        WordLinksExample.run(dbFactory);
     }
 
     @Test
@@ -151,7 +157,7 @@ public class DemoTests {
 
     @Test
     public void testCollapse() throws Exception {
-        CollapseExample.main(null);
+        CollapseExample.run(dbFactory);
     }
 
     @Test
@@ -196,7 +202,7 @@ public class DemoTests {
 
     @Test
     public void testImport() throws Exception {
-        ImportExample.main(null);
+        ImportExample.run(dbFactory);
     }
 
     @Test
@@ -231,7 +237,7 @@ public class DemoTests {
 
     @Test
     public void testSheets() throws Exception {
-        SheetReportExample.main(null);
+        SheetReportExample.run(dbFactory);
     }
 
 

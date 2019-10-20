@@ -71,7 +71,10 @@ public class HtmlWordExample {
     }
 
     public static void main(final String[] args) throws Exception {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        run(DocumentBuilderFactory.newInstance());
+    }
+
+    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
         InputStream templateStream = HtmlWordExample.class.getResourceAsStream("/template.docx");

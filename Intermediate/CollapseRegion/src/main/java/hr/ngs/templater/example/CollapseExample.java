@@ -24,6 +24,10 @@ public class CollapseExample {
     }
 
     public static void main(final String[] args) throws Exception {
+        run(DocumentBuilderFactory.newInstance());
+    }
+
+    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
         File tmp = File.createTempFile("collapse", ".docx");
         Application application1 =
                 new Application()
@@ -46,7 +50,6 @@ public class CollapseExample {
                         .setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1));
         InputStream templateStream = CollapseExample.class.getResourceAsStream("/Collapse.docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         final Charset utf8 = Charset.forName("UTF-8");
         final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);

@@ -40,6 +40,7 @@ public class QuestionnaireExample {
         arguments.put("Date", new Date());
         arguments.put("Q", quest);
         arguments.put("Reason", "Example");
+        arguments.put("Authors", new String[] {"Mark", "Jane", "Jack"});
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl =

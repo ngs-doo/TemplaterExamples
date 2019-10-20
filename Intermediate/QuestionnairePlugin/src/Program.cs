@@ -114,7 +114,13 @@ namespace QuestionnairePlugin
 			using (var output = new FileStream("questionnaire.docx", FileMode.Create))
 			using (var doc = factory.Open(input, output, "docx"))
 			{
-				doc.Process(new { Date = DateTime.Now, Q = quest, Reason = "Example" });
+				doc.Process(new
+				{
+					Date = DateTime.Now,
+					Q = quest,
+					Reason = "Example",
+					Authors = new[] { "Mark", "Jane", "Jack" }
+				});
 			}
 
 			Process.Start("questionnaire.docx");

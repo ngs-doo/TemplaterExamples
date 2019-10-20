@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>word-chart-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
     <name>Word chart</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

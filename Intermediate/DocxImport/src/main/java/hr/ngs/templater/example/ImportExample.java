@@ -13,10 +13,14 @@ import java.util.zip.ZipInputStream;
 public class ImportExample {
 
     public static void main(final String[] args) throws Exception {
+        run(DocumentBuilderFactory.newInstance());
+    }
+
+    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
         InputStream templateStream = ImportExample.class.getResourceAsStream("/Master.docx");
         File tmp = File.createTempFile("import", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        Element docx = extractDocumentBody();
+        Element docx = extractDocumentBody(dbFactory);
         NodeList paragraphs = docx.getElementsByTagName("w:p");
         ArrayList<Element> elements = new ArrayList<Element>(paragraphs.getLength());
         for (int i = 0; i < paragraphs.getLength(); i++) {
@@ -55,8 +59,7 @@ public class ImportExample {
         return false;
     }
 
-    private static Element extractDocumentBody() throws Exception {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    private static Element extractDocumentBody(DocumentBuilderFactory dbFactory) throws Exception {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         ZipInputStream zip = new ZipInputStream(ImportExample.class.getResourceAsStream("/ToImport.docx"));
         ZipEntry document;

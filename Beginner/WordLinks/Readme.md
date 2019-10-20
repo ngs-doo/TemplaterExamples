@@ -28,7 +28,7 @@ This is done via Table properties -> Row -> Options -> Repeat as header row at t
 
 ### Footnotes and endnotes
 
-Footnote and endnotes are supported since v2.4.0
+Footnote and endnotes can be used even during resize since their context belong to the document location where they are referenced.
 Templater can replace multiple tags even when they are on seemingly different places such as footnotes since their definition is within the duplicating context.
 
 ### Simple links

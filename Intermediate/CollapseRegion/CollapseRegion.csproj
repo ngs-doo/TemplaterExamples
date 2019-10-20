@@ -39,7 +39,7 @@
       <HintPath>..\..\packages\Humanizer.1.37.7\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.4.0.0\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.4.0.1\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
