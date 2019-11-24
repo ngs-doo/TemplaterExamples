@@ -11,10 +11,7 @@ import java.nio.file.Files;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.StreamHandler;
+import java.util.logging.*;
 import java.util.zip.CRC32;
 
 import com.dslplatform.json.*;
@@ -89,6 +86,19 @@ public class TemplaterServer implements AutoCloseable {
     private final Logger logger = Logger.getLogger(TemplaterServer.class.getName());
     private final HttpServer server;
 
+    private static class LoggingHandler extends StreamHandler {
+        LoggingHandler(Level level) {
+            super(System.out, new SimpleFormatter());
+            setLevel(level);
+        }
+
+        @Override
+        public synchronized void publish(LogRecord record) {
+            super.publish(record);
+            flush();
+        }
+    }
+
     public TemplaterServer(int port, int timeoutLimit, String tmpFolder, ClassLoader loader, String libreoffice, Level logLevel) throws IOException {
         this.timeoutLimit = timeoutLimit;
         this.tmpFolder = tmpFolder;
@@ -105,7 +115,7 @@ public class TemplaterServer implements AutoCloseable {
         documentFactory = builder.build();
         this.libreoffice = libreoffice;
         logger.setLevel(logLevel);
-        logger.addHandler(new StreamHandler(System.out, new SimpleFormatter()));
+        logger.addHandler(new LoggingHandler(logLevel));
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new IndexHandler());
         server.createContext("/content", new IndexHandler());
@@ -226,9 +236,17 @@ public class TemplaterServer implements AutoCloseable {
                             logger.log(Level.FINE, String.format("PDF conversion finished in %d ms. input size = %d, output size = %d", new Date().getTime() - start, templateBytes.length, output.length));
                         }
                         return output;
+                    } else {
+                        if (logger.isLoggable(Level.WARNING)) {
+                            logger.log(Level.WARNING, String.format("Unable to find output PDF. Duration: %d ms", new Date().getTime() - start));
+                        }
                     }
                 } finally {
                     result.delete();
+                }
+            } else {
+                if (logger.isLoggable(Level.WARNING)) {
+                    logger.log(Level.WARNING, String.format("Timeout waiting for PDF conversion. Duration: %d ms", new Date().getTime() - start));
                 }
             }
         } finally {
@@ -238,22 +256,36 @@ public class TemplaterServer implements AutoCloseable {
     }
 
     private byte[] processTemplate(final byte[] templateBytes, final Object data, final String ext) {
-        final InputStream is = new ByteArrayInputStream(templateBytes);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final ITemplateDocument doc = documentFactory.open(is, ext, baos);
-        doc.process(data);
-        doc.flush();
-        return baos.toByteArray();
+        long start = new Date().getTime();
+        String status = "failure";
+        try {
+            final InputStream is = new ByteArrayInputStream(templateBytes);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            final ITemplateDocument doc = documentFactory.open(is, ext, baos);
+            doc.process(data);
+            doc.flush();
+            status = "success";
+            return baos.toByteArray();
+        } finally {
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, String.format("Templater processed (%s) in %d ms. Status = %s", ext, new Date().getTime() - start, status));
+            }
+        }
     }
 
-    private static Object parseJson(final byte[] postData) throws ParseException {
+    private Object parseJson(final byte[] postData) throws ParseException {
         if (postData == null) return null;
+        long start = new Date().getTime();
         final JsonReader<Object> reader = dslJson.newReader(postData);
         try {
             reader.getNextToken();
             return ObjectConverter.deserializeObject(reader);
         } catch (IOException e) {
             throw new ParseException(e.getMessage(), reader.getCurrentIndex());
+        } finally {
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, String.format("JSON processed in %d ms. Input size: %d", new Date().getTime() - start, postData.length));
+            }
         }
     }
 
@@ -263,21 +295,21 @@ public class TemplaterServer implements AutoCloseable {
         return template.substring(lastIndexOfDot + 1).toLowerCase();
     }
 
-
-    private void sendResponse(HttpExchange http, int code, String contentType, String response) throws IOException {
-        sendResponse(http, code, contentType, response.getBytes(UTF8), 0);
+    private void sendResponse(HttpExchange http, int code, String contentType, String response, long start) throws IOException {
+        sendResponse(http, code, contentType, response.getBytes(UTF8), start);
     }
 
     private void sendResponse(HttpExchange http, int code, String contentType, byte[] bytes, long start) throws IOException {
-        if (code == 200 && start != 0) {
-            http.getResponseHeaders().add("X-Duration", Long.toString(start - new Date().getTime()));
+        long duration = new Date().getTime() - start;
+        if (code == 200) {
+            http.getResponseHeaders().add("X-Duration", Long.toString(duration));
         }
         http.getResponseHeaders().add("Content-Type", contentType);
         http.sendResponseHeaders(code, bytes.length);
         http.getResponseBody().write(bytes);
         http.getResponseBody().close();
-        if (logger.isLoggable(Level.FINEST)) {
-            logger.log(Level.FINEST, String.format("sent response: %d", code));
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, String.format("Response code: %d. Duration: %d ms. Request: %s", code, duration, http.getRequestURI()));
         }
     }
 
@@ -298,19 +330,23 @@ public class TemplaterServer implements AutoCloseable {
    class IndexHandler implements HttpHandler {
        @Override
        public void handle(HttpExchange httpExchange) throws IOException {
+           long start = new Date().getTime();
            if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("index: %s", httpExchange.getRequestURI()));
+               logger.log(Level.FINE, String.format("index entry: %s", httpExchange.getRequestURI()));
            }
            Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
            String template = params.get("template");
            boolean isRoot = "/".equals(httpExchange.getRequestURI().getPath());
            if (template == null || !templateFiles.contains(template)) {
                byte[] bytes = isRoot ? indexDefault : index;
-               sendResponse(httpExchange, 200, MIME_HTML, bytes, 0);
+               sendResponse(httpExchange, 200, MIME_HTML, bytes, start);
            } else {
                String indexContent = createIndex(template);
                String html = isRoot ? defaultHtml.replace("${content}", indexContent) : indexContent;
-               sendResponse(httpExchange, 200, MIME_HTML, html);
+               sendResponse(httpExchange, 200, MIME_HTML, html, start);
+           }
+           if (logger.isLoggable(Level.FINE)) {
+               logger.log(Level.FINE, String.format("index exit: %s", httpExchange.getRequestURI()));
            }
        }
    }
@@ -320,7 +356,7 @@ public class TemplaterServer implements AutoCloseable {
        public void handle(HttpExchange httpExchange) throws IOException {
            long start = new Date().getTime();
            if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("process: %s", httpExchange.getRequestURI()));
+               logger.log(Level.FINE, String.format("process entry: %s", httpExchange.getRequestURI()));
            }
            Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
            try {
@@ -334,24 +370,24 @@ public class TemplaterServer implements AutoCloseable {
                        for (String s : parts) {
                            String[] lr = s.split("=");
                            if (lr.length != 2) {
-                               sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Invalid form data.");
+                               sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Invalid form data.", start);
                            }
                            params.put(lr[0], URLDecoder.decode(lr[1], "UTF-8"));
                        }
                    } else if (contentType != null && contentType.toLowerCase().startsWith("application/json")) {
                        jsonBytes = bytes;
                    } else {
-                       sendResponse(httpExchange, 415, MIME_PLAINTEXT, "Use application/x-www-form-urlencoded or application/json.");
+                       sendResponse(httpExchange, 415, MIME_PLAINTEXT, "Use application/x-www-form-urlencoded or application/json.", start);
                    }
                }
                String templateName = params.get("template");
                if (templateName == null || templateName.length() == 0 || templateName.indexOf('.') == -1) {
-                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.");
+                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.", start);
                    return;
                }
                String exampleName = "/templates/" + templateName.toLowerCase();
                if (!driveMap.containsKey(exampleName)) {
-                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.");
+                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.", start);
                    return;
                }
                String ext = getExtension(templateName);
@@ -370,11 +406,11 @@ public class TemplaterServer implements AutoCloseable {
                try {
                    resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext) : templaterResultBytes;
                } catch (Exception e) {
-                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unable to convert document to PDF");
+                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unable to convert document to PDF", start);
                    return;
                }
                if (resultBytes == null) {
-                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report");
+                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report", start);
                    return;
                }
                httpExchange.getResponseHeaders().add("Accept-Ranges", "bytes");
@@ -384,12 +420,16 @@ public class TemplaterServer implements AutoCloseable {
                if (logger.isLoggable(Level.FINE)) {
                    logger.log(Level.FINE, e.toString());
                }
-               sendResponse(httpExchange, 400, MIME_PLAINTEXT, e.getMessage());
+               sendResponse(httpExchange, 400, MIME_PLAINTEXT, e.getMessage(), start);
            } catch (final Exception e) {
                if (logger.isLoggable(Level.WARNING)) {
                    logger.log(Level.WARNING, e.toString());
                }
-               sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unknown error");
+               sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unknown error", start);
+           } finally {
+               if (logger.isLoggable(Level.FINE)) {
+                   logger.log(Level.FINE, String.format("process exit: %s", httpExchange.getRequestURI()));
+               }
            }
        }
    }
@@ -397,13 +437,17 @@ public class TemplaterServer implements AutoCloseable {
    class FileHandler implements HttpHandler {
        @Override
        public void handle(HttpExchange httpExchange) throws IOException {
+           long start = new Date().getTime();
            if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("file: %s", httpExchange.getRequestURI()));
+               logger.log(Level.FINE, String.format("file entry: %s", httpExchange.getRequestURI()));
            }
            String resourcePath = httpExchange.getRequestURI().getPath();
            byte[] bytes = driveMap.get(resourcePath);
            final String mime = getMimeType(resourcePath);
-           sendResponse(httpExchange, 200, mime, bytes, 0);
+           sendResponse(httpExchange, 200, mime, bytes, start);
+           if (logger.isLoggable(Level.FINE)) {
+               logger.log(Level.FINE, String.format("file exit: %s", httpExchange.getRequestURI()));
+           }
        }
    }
 
@@ -411,11 +455,14 @@ public class TemplaterServer implements AutoCloseable {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
             long start = new Date().getTime();
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, String.format("document entry: %s", httpExchange.getRequestURI()));
+            }
             try {
                 Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
                 String templateName = params.get("template");
                 if (templateName == null || templateName.length() == 0 || templateName.indexOf('.') == -1) {
-                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.");
+                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.", start);
                     return;
                 }
                 if ("POST".equalsIgnoreCase(httpExchange.getRequestMethod())) {
@@ -428,7 +475,7 @@ public class TemplaterServer implements AutoCloseable {
                         templatesMap = copy;
                     }
                     httpExchange.getResponseHeaders().add("ETag", info.etag);
-                    sendResponse(httpExchange, 200, MIME_PLAINTEXT, "Uploaded");
+                    sendResponse(httpExchange, 200, MIME_PLAINTEXT, "Uploaded", start);
                     if (logger.isLoggable(Level.INFO)) {
                         logger.log(Level.INFO, String.format("new document uploaded: %s, size = %d", templateName, bytes.length));
                     }
@@ -436,7 +483,7 @@ public class TemplaterServer implements AutoCloseable {
                 }
                 TemplateInfo info = templatesMap.get(templateName);
                 if (info == null) {
-                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.");
+                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.", start);
                 } else if ("PUT".equalsIgnoreCase(httpExchange.getRequestMethod())) {
                     String accept = httpExchange.getRequestHeaders().getFirst("accept");
                     boolean toPdf = accept != null && accept.contains(MIME_PDF)
@@ -445,7 +492,7 @@ public class TemplaterServer implements AutoCloseable {
                     byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension);
                     byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension) : templaterResultBytes;
                     if (resultBytes == null) {
-                        sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report.");
+                        sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report.", start);
                         return;
                     }
                     httpExchange.getResponseHeaders().add("Accept-Ranges", "bytes");
@@ -460,13 +507,13 @@ public class TemplaterServer implements AutoCloseable {
                         if (logger.isLoggable(Level.FINE)) {
                             logger.log(Level.FINE, String.format("same document: %s, size = %d", templateName, info.content.length));
                         }
-                        sendResponse(httpExchange, 304, MIME_PLAINTEXT, new byte[0], 0);
+                        sendResponse(httpExchange, 304, MIME_PLAINTEXT, new byte[0], start);
                         return;
                     }
                     httpExchange.getResponseHeaders().add("ETag", info.etag);
                     httpExchange.getResponseHeaders().add("Accept-Ranges", "bytes");
                     httpExchange.getResponseHeaders().add("Content-Disposition", "attachment;filename=" + info.name + "." + info.extension);
-                    sendResponse(httpExchange, 200, getMimeType(info.extension), info.content, 0);
+                    sendResponse(httpExchange, 200, getMimeType(info.extension), info.content, start);
                     if (logger.isLoggable(Level.FINE)) {
                         logger.log(Level.FINE, String.format("document: %s, size = %d", templateName, info.content.length));
                     }
@@ -476,23 +523,27 @@ public class TemplaterServer implements AutoCloseable {
                         copy.remove(templateName);
                         templatesMap = copy;
                     }
-                    sendResponse(httpExchange, 200, MIME_PLAINTEXT, "Removed");
+                    sendResponse(httpExchange, 200, MIME_PLAINTEXT, "Removed", start);
                     if (logger.isLoggable(Level.INFO)) {
                         logger.log(Level.INFO, String.format("document removed: %s", templateName));
                     }
                 } else {
-                    sendResponse(httpExchange, 404, MIME_PLAINTEXT, "Unknown method");
+                    sendResponse(httpExchange, 404, MIME_PLAINTEXT, "Unknown method", start);
                 }
             } catch (final ParseException e) {
                 if (logger.isLoggable(Level.FINE)) {
                     logger.log(Level.FINE, e.toString());
                 }
-                sendResponse(httpExchange, 400, MIME_PLAINTEXT, e.getMessage());
+                sendResponse(httpExchange, 400, MIME_PLAINTEXT, e.getMessage(), start);
             } catch (Exception e) {
                 if (logger.isLoggable(Level.WARNING)) {
                     logger.log(Level.WARNING, e.toString());
                 }
-                sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unknown error");
+                sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unknown error", start);
+            } finally {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, String.format("document exit: %s", httpExchange.getRequestURI()));
+                }
             }
         }
     }
@@ -500,14 +551,15 @@ public class TemplaterServer implements AutoCloseable {
    class PdfHandler implements HttpHandler {
        @Override
        public void handle(HttpExchange httpExchange) throws IOException {
+           long start = new Date().getTime();
            if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("pdf: %s", httpExchange.getRequestURI()));
+               logger.log(Level.FINE, String.format("pdf entry: %s", httpExchange.getRequestURI()));
            }
            try {
                Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
                String file = params.get("file");
                if (file == null || file.length() == 0 || file.indexOf('.') == -1) {
-                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad file name.");
+                   sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad file name.", start);
                    return;
                }
                String extension = getExtension(file);
@@ -515,7 +567,7 @@ public class TemplaterServer implements AutoCloseable {
                byte[] input = readBytes(httpExchange);
                byte[] output = convertToPdf(input, extension);
                if (output == null) {
-                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating PDF");
+                   sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating PDF", start);
                    return;
                }
                httpExchange.getResponseHeaders().add("Content-type", MIME_PDF);
@@ -531,7 +583,11 @@ public class TemplaterServer implements AutoCloseable {
                if (logger.isLoggable(Level.WARNING)) {
                    logger.log(Level.WARNING, e.toString());
                }
-               sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unable to convert document to PDF");
+               sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unable to convert document to PDF", start);
+           } finally {
+               if (logger.isLoggable(Level.FINE)) {
+                   logger.log(Level.FINE, String.format("pdf exit: %s", httpExchange.getRequestURI()));
+               }
            }
        }
    }

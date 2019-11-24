@@ -1,6 +1,6 @@
 ## Templater Server
 
-Example of running a templating processes on a small server with a preset templates, as demonstrated [on the demo page](https://templater.info/demo).
+Example of running a templating processes on a small server with a predefined templates, as demonstrated [on the demo page](https://templater.info/demo).
 
 Start the server from within IDE or by running
 
@@ -13,7 +13,7 @@ Or by running
     dotnet run
 
 Templates reside in `resources/templates`.
-Each of them has a respectable json example in `resources/examples`.
+Each of them has a relevant json example in `resources/examples`.
 
 ### PDF conversion via Docker and LibreOffice
 
@@ -42,7 +42,7 @@ The workflow for using the server is:
   * POST /document?template=file.ext - with using request body for the actual document. Document will be kept in memory
   * GET /document?template=file.ext - will return the saved template. If provided `If-None-Match` matches the expected `ETag` 304 will be returned.
   * PUT /document?template=file.ext - using JSON for request body will process the previously saved template with provided JSON. To create PDF `Accept: application/pdf` can be used
-  * DELETE /document?template=file.ext - will removed previously saved template document
+  * DELETE /document?template=file.ext - will remove previously saved template document
 
 ### Examples
 
