@@ -111,6 +111,10 @@
       <Project>{9104479D-955D-4928-B537-FCBBEAEBED35}</Project>
       <Name>NamedRange</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Beginner\Paragraphs\Paragraphs.csproj">
+      <Project>{25A57D63-D463-4090-817B-B967C2107CBF}</Project>
+      <Name>Paragraphs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beginner\PivotExample\PivotExample.csproj">
       <Project>{5E14E075-127B-47D9-9D06-5FCBE60F5949}</Project>
       <Name>PivotExample</Name>

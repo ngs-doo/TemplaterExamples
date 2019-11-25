@@ -89,6 +89,11 @@ public class DemoTests {
     }
 
     @Test
+    public void testParagraphs() throws Exception {
+        ParagraphsExample.main(null);
+    }
+
+    @Test
     public void testDynamicResize() throws Exception {
         DynamicResizeExample.main(null);
     }

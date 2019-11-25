@@ -23,6 +23,7 @@
         <module>Beginner/DynamicResize</module>
         <module>Beginner/ImageExample</module>
         <module>Beginner/Labels</module>
+        <module>Beginner/Paragraphs</module>
         <module>Beginner/CsvExample</module>
         <module>Beginner/NamedRange</module>
         <module>Beginner/MailMerge</module>
@@ -106,6 +107,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>labels-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>paragraphs-example</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

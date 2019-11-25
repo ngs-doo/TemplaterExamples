@@ -62,6 +62,12 @@ Word features, such as columns, can be leveraged for layout.
 
 [template](Labels/template/label.docx?raw=true) - [result](Labels/result.docx?raw=true)
 
+### [Paragraphs](Paragraphs/Readme.md)
+
+Resizing of paragraphs can be easily simulated via lists and tables.
+
+[template](Paragraphs/template/Paragraphs.docx?raw=true) - [result](Paragraphs/result.docx?raw=true)
+
 ### [CSV](CsvExample/Readme.md)
 
 CSV output can be used when appropriate.

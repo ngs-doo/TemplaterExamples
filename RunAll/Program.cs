@@ -12,6 +12,7 @@
 			ImageExample.Program.Main(args);
 			CsvExample.Program.Main(args);
 			Labels.Program.Main(args);
+			Paragraphs.Program.Main(args);
 			ListsAndTables.Program.Main(args);
 			DynamicResize.Program.Main(args);
 			NamedRange.Program.Main(args);
