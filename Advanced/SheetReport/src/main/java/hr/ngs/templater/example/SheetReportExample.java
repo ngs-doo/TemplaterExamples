@@ -87,10 +87,7 @@ public class SheetReportExample {
     }
 
     public static void main(final String[] args) throws Exception {
-        run(DocumentBuilderFactory.newInstance());
-    }
-
-    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
+        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
         InputStream templateStream = SheetReportExample.class.getResourceAsStream("/Report.xlsx");
         File tmp = File.createTempFile("table", ".xlsx");
 

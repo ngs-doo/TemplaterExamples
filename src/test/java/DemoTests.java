@@ -2,23 +2,15 @@ import hr.ngs.templater.TemplaterJson;
 import hr.ngs.templater.example.*;
 import org.junit.Test;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.*;
 
 public class DemoTests {
 
-    private static DocumentBuilderFactory dbFactory;
-
     static {
-        //make sure some custom xml parser is not used
-        System.setProperty("templater:DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
-        try {
-            Class<?> dfClass = Class.forName("com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
-            dbFactory = (DocumentBuilderFactory)dfClass.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        //override custom META-INF services
+        System.getProperties().setProperty("javax.xml.parsers.DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
+        System.getProperties().setProperty("javax.xml.parsers.SAXParserFactory", "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
     }
 
     @Test
@@ -121,13 +113,13 @@ public class DemoTests {
     @Test
     public void testHtmlExcel() throws Exception {
         //works in either Java 8 or Java 11 due to xml changes
-        HtmlExcelExample.run(dbFactory);
+        HtmlExcelExample.main(null);
     }
 
     @Test
     public void testHtmlWord() throws Exception {
         //works in either Java 8 or Java 11 due to xml changes
-        HtmlWordExample.run(dbFactory);
+        HtmlWordExample.main(null);
     }
 
     @Test
@@ -147,7 +139,7 @@ public class DemoTests {
 
     @Test
     public void testWordLinks() throws Exception {
-        WordLinksExample.run(dbFactory);
+        WordLinksExample.main(null);
     }
 
     @Test
@@ -162,7 +154,7 @@ public class DemoTests {
 
     @Test
     public void testCollapse() throws Exception {
-        CollapseExample.run(dbFactory);
+        CollapseExample.main(null);
     }
 
     @Test
@@ -207,7 +199,7 @@ public class DemoTests {
 
     @Test
     public void testImport() throws Exception {
-        ImportExample.run(dbFactory);
+        ImportExample.main(null);
     }
 
     @Test
@@ -242,7 +234,7 @@ public class DemoTests {
 
     @Test
     public void testSheets() throws Exception {
-        SheetReportExample.run(dbFactory);
+        SheetReportExample.main(null);
     }
 
 

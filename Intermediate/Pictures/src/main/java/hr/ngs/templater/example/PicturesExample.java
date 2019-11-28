@@ -7,7 +7,6 @@ import javax.imageio.*;
 import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataNode;
 import javax.imageio.stream.ImageInputStream;
-import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -69,11 +68,11 @@ public class PicturesExample {
 
     static class MaxSizeImageStream implements IDocumentFactoryBuilder.IFormatter {
 
-        private double getPixelSizeMM(IIOMetadataNode dimension, String elementName) {
+        private float getPixelSizeMM(IIOMetadataNode dimension, String elementName) {
             NodeList pixelSizes = dimension.getElementsByTagName(elementName);
             if (pixelSizes.getLength() > 0) {
                 IIOMetadataNode pixelSize = (IIOMetadataNode) pixelSizes.item(0);
-                return 25.4 / Double.parseDouble(pixelSize.getAttribute("value"));
+                return 25.4f / Float.parseFloat(pixelSize.getAttribute("value"));
             } else {
                 return 96;
             }
@@ -97,38 +96,17 @@ public class PicturesExample {
                         IIOMetadata readMetadata = reader.getImageMetadata(0);
                         IIOMetadataNode stdTree = (IIOMetadataNode) readMetadata.getAsTree("javax_imageio_1.0");
                         IIOMetadataNode dimension = (IIOMetadataNode) stdTree.getElementsByTagName("Dimension").item(0);
-                        double horDpi = getPixelSizeMM(dimension, "HorizontalPixelSize");
-                        double verDpi = getPixelSizeMM(dimension, "VerticalPixelSize");
-                        double actualWidth = width / horDpi * 2.54;
-                        double actualHeight = height / verDpi * 2.54;
+                        float horDpi = getPixelSizeMM(dimension, "HorizontalPixelSize");
+                        float verDpi = getPixelSizeMM(dimension, "VerticalPixelSize");
+                        float actualWidth = width / horDpi * 2.54f;
+                        float actualHeight = height / verDpi * 2.54f;
                         if (width > 0 && maxWidthCm > 0 && actualWidth > maxWidthCm || height > 0 && maxHeightCm > 0 && actualHeight > maxHeightCm) {
-                            double widthScale = 1.0 * actualWidth / maxWidthCm;
-                            double heightScale = 1.0 * actualHeight / maxHeightCm;
-                            double scale = Math.max(widthScale, heightScale);
+                            float widthScale = actualWidth / maxWidthCm;
+                            float heightScale = actualHeight / maxHeightCm;
+                            float scale = Math.max(widthScale, heightScale);
                             //let's change the DPI so image fits
                             byte[] bytes = Files.readAllBytes(file.toPath());
                             return new ImageInfo(bytes, file.getName().substring(file.getName().lastIndexOf('.') + 1), width, horDpi * scale, height, verDpi * scale);
-                            /* this was required before v3.2.0
-                            ImageWriter writer = ImageIO.getImageWriter(reader);
-                            BufferedImage bufImg = ImageIO.read(file);
-                            ImageWriteParam writeParam = writer.getDefaultWriteParam();
-                            ImageTypeSpecifier typeSpecifier = ImageTypeSpecifier.createFromBufferedImageType(BufferedImage.TYPE_INT_RGB);
-                            IIOMetadata writeMetadata = writer.getDefaultImageMetadata(typeSpecifier, writeParam);
-                            IIOMetadataNode horiz = new IIOMetadataNode("HorizontalPixelSize");
-                            horiz.setAttribute("value", Double.toString(horDpi / 25.4 * scale ));
-                            IIOMetadataNode vert = new IIOMetadataNode("VerticalPixelSize");
-                            vert.setAttribute("value", Double.toString(verDpi / 25.4 * scale ));
-                            IIOMetadataNode dim = new IIOMetadataNode("Dimension");
-                            dim.appendChild(horiz);
-                            dim.appendChild(vert);
-                            IIOMetadataNode root = new IIOMetadataNode("javax_imageio_1.0");
-                            root.appendChild(dim);
-                            writeMetadata.mergeTree("javax_imageio_1.0", root);
-
-                            final ImageOutputStream stream = ImageIO.createImageOutputStream(file);
-                            writer.setOutput(stream);
-                            writer.write(writeMetadata, new IIOImage(bufImg, null, writeMetadata), writeParam);
-                            stream.close();*/
                         }
                     }
                     return ImageIO.createImageInputStream(file);

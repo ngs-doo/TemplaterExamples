@@ -11,7 +11,6 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.*;
 
@@ -95,11 +94,7 @@ public class HtmlExcelExample {
     }
 
     public static void main(final String[] args) throws Exception {
-        run(DocumentBuilderFactory.newInstance());
-    }
-
-    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
         InputStream templateStream = HtmlExcelExample.class.getResourceAsStream("/Document.xlsx");
         File tmp = File.createTempFile("html", ".xlsx");

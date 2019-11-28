@@ -66,10 +66,7 @@ public class WordLinksExample {
     }
 
     public static void main(final String[] args) throws Exception {
-        run(DocumentBuilderFactory.newInstance());
-    }
-
-    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         InputStream templateStream = WordLinksExample.class.getResourceAsStream("/Links.docx");
         File tmp = File.createTempFile("link", ".docx");
 

@@ -24,10 +24,7 @@ public class CollapseExample {
     }
 
     public static void main(final String[] args) throws Exception {
-        run(DocumentBuilderFactory.newInstance());
-    }
-
-    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         File tmp = File.createTempFile("collapse", ".docx");
         Application application1 =
                 new Application()
@@ -56,7 +53,7 @@ public class CollapseExample {
         ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
             @Override
             public boolean handle(Object value, String metadata, String path, ITemplater templater) {
-                if (value != null && value instanceof String && metadata.startsWith("collapseIf(")) {
+                if (value instanceof String && metadata.startsWith("collapseIf(")) {
                     //Extract the matching expression
                     String expression = metadata.substring("collapseIf(".length(), metadata.length() - 1);
                     if (value.equals(expression)) {

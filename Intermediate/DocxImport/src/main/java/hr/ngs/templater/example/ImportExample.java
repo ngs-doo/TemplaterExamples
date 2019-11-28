@@ -13,10 +13,7 @@ import java.util.zip.ZipInputStream;
 public class ImportExample {
 
     public static void main(final String[] args) throws Exception {
-        run(DocumentBuilderFactory.newInstance());
-    }
-
-    public static void run(DocumentBuilderFactory dbFactory) throws Exception {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         InputStream templateStream = ImportExample.class.getResourceAsStream("/Master.docx");
         File tmp = File.createTempFile("import", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
