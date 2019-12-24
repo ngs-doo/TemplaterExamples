@@ -9,14 +9,14 @@ function initApp()
   var $downloadTemplate = $('#download-template');
   var $form = $('#post_action');
   var baseUrl = location.href + (location.href[location.href.length-1] !== '/' ? '/' : '');
-  var convertToPdf = false;
+  var currentPdfConverter = -1;
   var activeTemplate = $('.template').first().attr('data-template');
 
   var aceEditor = null;
 
   function updateProcessTemplateText() {
     var extension = activeTemplate.substr(activeTemplate.lastIndexOf('.') + 1);
-    if (convertToPdf && extension == 'docx') extension = 'pdf';
+    if (currentPdfConverter != -1 && extension == 'docx') extension = 'pdf';
     $processTemplate.html('Create ' + extension + ' document with ' + activeTemplate);
   }
 
@@ -67,12 +67,25 @@ function initApp()
   }).show();
 
   $('#toggle-pdf').on('click', function () {
-    $(this).find('span').toggle();
-    convertToPdf = !convertToPdf;
+    currentPdfConverter += 1;
+    var pdfConverter = null;
+    if (currentPdfConverter >= pdfConverters.length) {
+        currentPdfConverter = -1;
+    } else {
+        pdfConverter = pdfConverters[currentPdfConverter];
+    }
     updateProcessTemplateText();
-    $form.find('[name=toPdf]').val(convertToPdf ? 'true' : '');
-  }).show();
-  $('#toggle-helper').show();
+    $form.find('[name=toPdf]').val(pdfConverter != null ? 'true' : '');
+    if (pdfConverter != null) {
+        $form.find('[name=pdf]').val(pdfConverter);
+        $(this).text('PDF conversion via ' + pdfConverter);
+        $('#toggle-helper').show();
+    } else {
+        $(this).text('PDF conversion OFF');
+        $('#toggle-helper').hide();
+    }
+  });
+  $('#toggle-pdf').show();
 
   $form.on('submit', function() {
     // textarea is not synced, update before submit

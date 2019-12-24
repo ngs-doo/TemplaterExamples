@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,15 +12,23 @@ namespace TemplaterServer
     [Route("/")]
     public class TemplaterController : Controller
     {
-		private static readonly byte[] Default;
-		private static readonly byte[] Index;
-		private static readonly string[] TemplateFiles;
-		private static readonly string TemplateHtml;
-		private static readonly string DefaultHtml;
-		private static readonly Dictionary<string, string> Jsons;
-
 		private static readonly JsonSerializer Newtonsoft;
 		private static readonly IDocumentFactory Factory = Configuration.Builder.Include(JavaFormat).Build();
+		
+		static TemplaterController()
+		{
+			Newtonsoft = new JsonSerializer();
+			Newtonsoft.Culture = System.Globalization.CultureInfo.InvariantCulture;
+			Newtonsoft.TypeNameHandling = TypeNameHandling.None;
+			Newtonsoft.Converters.Add(new DictionaryConverter());
+		}
+
+		private readonly SharedResource SharedResource;
+
+		public TemplaterController(SharedResource sharedResource)
+		{
+			this.SharedResource = sharedResource;
+		}
 
 		static object JavaFormat(object value, string metadata)
 		{
@@ -41,75 +48,21 @@ namespace TemplaterServer
 			return value;
 		}
 
-		static TemplaterController()
-		{
-			var asm = typeof(TemplaterController).Assembly;
-			DefaultHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.default.html")).ReadToEnd();
-			TemplateHtml = new StreamReader(asm.GetManifestResourceStream("TemplaterServer.template.index.html")).ReadToEnd();
-			TemplateFiles = Directory.EnumerateFiles("resources/templates/").OrderBy(it => it).ToArray();
-			Jsons = new Dictionary<string, string>();
-			foreach(var f in Directory.EnumerateFiles("resources/examples/")) 
-				Jsons[Path.GetFileNameWithoutExtension(f.ToLowerInvariant())] = System.IO.File.ReadAllText(f);	
-
-			var index = CreateIndex(TemplateFiles.Length > 0 ? Path.GetFileName(TemplateFiles[0]) : string.Empty);
-			Index = Encoding.UTF8.GetBytes(index);
-			Default = Encoding.UTF8.GetBytes(DefaultHtml.Replace("${content}", index));
-			Newtonsoft = new JsonSerializer();
-			Newtonsoft.Culture = System.Globalization.CultureInfo.InvariantCulture;
-			Newtonsoft.TypeNameHandling = TypeNameHandling.None;
-			Newtonsoft.Converters.Add(new DictionaryConverter());
-		}
-
-		private static string CreateIndex(string current)
-		{
-			var sb = new StringBuilder();
-			for(int i = 0; i < TemplateFiles.Length; i++)
-			{
-				var t = TemplateFiles[i];
-				var name = t.Substring("resources/templates/".Length);
-				sb.AppendFormat(@"
-<li><p>
-	<button style=""display:none;"" class=""template btn btn-primary feat-btn feat-btn-lg{1}"" data-template=""{0}"">
-		<i class=""fa fa-file-text"" ></i> {0}
-	</button>
-	<noscript>
-		<a href=""?template={0}"">
-			<button class=""btn btn-primary feat-btn feat-btn-lg{1}""><i class=""fa fa-file-text"" ></i> {0} </button>
-		</a>
-	</noscript>
-</p></li>", name, string.Equals(name, current, StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(current) && i == 0 ? " active" : string.Empty);
-			}
-
-			var defaultTemplate = string.IsNullOrEmpty(current) ? string.Empty : "Create " + current.Substring(current.LastIndexOf('.') + 1) + " document with " + current;
-			string json;
-			if (Jsons.TryGetValue(current.ToLowerInvariant(), out json))
-				json = json.Replace("&", "&amp;");
-			else
-				json = string.Empty;
-
-			return TemplateHtml
-				.Replace("${templates}", sb.ToString())
-                .Replace("${defaultTemplate}", defaultTemplate)
-                .Replace("${defaultJson}", json)
-                .Replace("${downloadUrl}", string.IsNullOrEmpty(current) ? "#" : "templates/" + current)
-                .Replace("${defaultFilename}", string.IsNullOrEmpty(current) ? string.Empty : current);
-		}
-
 		[HttpGet("{template?}")]
 		public IActionResult Get([FromQuery]string template)
 		{
-			if (string.IsNullOrEmpty(template) || !Jsons.ContainsKey(template.ToLowerInvariant())) 
-				return File(Default, "text/html;charset=UTF-8");
-			var index = CreateIndex(template);
-			return File(Encoding.UTF8.GetBytes(DefaultHtml.Replace("${content}", index)), "text/html;charset=UTF-8");
+			if (string.IsNullOrEmpty(template) || !SharedResource.Jsons.ContainsKey(template.ToLowerInvariant())) 
+				return File(SharedResource.Default, "text/html;charset=UTF-8");
+			var index = SharedResource.CreateIndex(template);
+			return File(Encoding.UTF8.GetBytes(SharedResource.DefaultHtml.Replace("${content}", index)), "text/html;charset=UTF-8");
 		}
 
 		[HttpGet("content/{template?}")]
 		public IActionResult Nested([FromQuery]string template)
 		{
-			if (string.IsNullOrEmpty(template) || !Jsons.ContainsKey(template.ToLowerInvariant())) 
-				return File(Index, "text/html;charset=UTF-8");
-			var index = CreateIndex(template);
+			if (string.IsNullOrEmpty(template) || !SharedResource.Jsons.ContainsKey(template.ToLowerInvariant())) 
+				return File(SharedResource.Index, "text/html;charset=UTF-8");
+			var index = SharedResource.CreateIndex(template);
 			return File(Encoding.UTF8.GetBytes(index), "text/html;charset=UTF-8");
 		}
 
@@ -161,6 +114,7 @@ namespace TemplaterServer
 			public string json { get; set; }
 			public string template { get; set; }
 			public bool toPdf { get; set; }
+			public string pdf { get; set; }
 		}
 
 		private static MemoryStream Process(FileInfo fi, string argument)
@@ -188,48 +142,29 @@ namespace TemplaterServer
 			if (!fi.Exists) return NotFound();
 			var ms = Process(fi, arg.json);
 			if (arg.toPdf)
-				return ConvertToPdf(ms, arg.template);
+				return ConvertToPdf(ms, arg.template, arg.pdf);
 			return File(ms, MimeType(arg.template), arg.template);
 		}
 
-		private static int FileCounter;
-
-		private IActionResult ConvertToPdf(MemoryStream ms, string template)
+		private IActionResult ConvertToPdf(MemoryStream ms, string template, string use)
 		{
-			lock (Index)
+			try
 			{
-				var tmpPath = Path.GetTempPath();
-				var fileName = (++FileCounter) + template;
-				var tmpFile = Path.Combine(tmpPath, fileName);
-				using (var fs = System.IO.File.OpenWrite(tmpFile))
-					ms.WriteTo(fs);
-				try
+				var converters = !string.IsNullOrEmpty(use) && SharedResource.PdfConverters.ContainsKey(use)
+					? new[] { SharedResource.PdfConverters[use] }
+					: SharedResource.PdfConverters.Values.ToArray();
+				foreach (var pdf in converters)
 				{
-					var info = new ProcessStartInfo
-					{
-						FileName = "libreoffice", //use exact path on your local machine
-						//FileName = @"C:\Program Files (x86)\LibreOffice 3.6\program\soffice.exe",
-						Arguments = "--norestore --nofirststartwizard --nologo --headless --convert-to pdf " + fileName,
-						WorkingDirectory = tmpPath
-					};
-					var conv = System.Diagnostics.Process.Start(info);
-					conv.Start();
-					if (!conv.WaitForExit(30000))
-						return StatusCode(503, "Timeout waiting for PDF conversion");
-					var pdfFile = Path.Combine(tmpPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
-					var bytes = System.IO.File.ReadAllBytes(pdfFile);
-					System.IO.File.Delete(pdfFile);
-					return File(bytes, "application/pdf", Path.GetFileNameWithoutExtension(template) + ".pdf");
-				}
-				catch
-				{
-					return StatusCode(500, "PDF conversion failed");
-				}
-				finally
-				{
-					System.IO.File.Delete(tmpFile);
+					var result = pdf.Convert(ms, Path.GetExtension(template));
+					return File(result, "application/pdf", Path.GetFileNameWithoutExtension(template) + ".pdf");
 				}
 			}
+			catch (TimeoutException)
+			{
+				return StatusCode(503, "Timeout waiting for PDF conversion");
+			}
+			catch { }
+			return StatusCode(500, "PDF conversion failed");
 		}
 	}
 }

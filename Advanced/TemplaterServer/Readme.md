@@ -44,6 +44,24 @@ The workflow for using the server is:
   * PUT /document?template=file.ext - using JSON for request body will process the previously saved template with provided JSON. To create PDF `Accept: application/pdf` can be used
   * DELETE /document?template=file.ext - will remove previously saved template document
 
+### PDF conversion libraries for docx
+
+Several libraries/applications are available for PDF output:
+
+  * LibreOffice
+  * Aspose
+  * Spire
+
+By default all of them will be available when app is locally started. Which are available can be specified via configuration parameter, eg:
+ 
+    java -jar templater-server.jar -pdf=LibreOffice,Aspose
+
+When multiple libraries are available, additional parameter can be used in HTTP requests, `pdf=library`, eg:
+
+    POST /process?template=file.docx?toPdf=true&pdf=Aspose
+    
+    PUT /document?template=file.docx?toPdf=true&pdf=LibreOffice
+
 ### Examples
 
 Examples are showing specific features of Templater

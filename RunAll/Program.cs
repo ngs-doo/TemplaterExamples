@@ -37,7 +37,7 @@
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);
 			ExcelContextRules.Program.Main(args);
-			Pictures.Program.Main(args);
+			//Pictures.Program.Main(args); .NET 3.5
 			//FoodOrder // web app. run manually
 			HtmlToExcel.Program.Main(args);
 			HtmlToWord.Program.Main(args);

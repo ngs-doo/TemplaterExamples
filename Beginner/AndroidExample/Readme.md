@@ -8,7 +8,7 @@ This can be done by registering Xalan XML library.
 ### Setting up dependencies
 
     dependencies {
-      implementation 'hr.ngs.templater:templater:4.1.0'
+      implementation 'hr.ngs.templater:templater:4.2.0'
       implementation 'xalan:xalan:2.7.2'
       implementation 'xerces:xercesImpl:2.12.0'
     }

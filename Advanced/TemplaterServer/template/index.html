@@ -6,6 +6,9 @@
       </h2>
     </div>
   </div>
+  <script type="application/javascript">
+    var pdfConverters = [${pdfConverters}];
+  </script>
   <div class="row">
     <div class="col-sm-8">
       <h3>Put your JSON here:</h3>
@@ -35,11 +38,11 @@
                 Beautify JSON
               </button>
               <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf" style="display:none">
-                PDF conversion <span class="active" style="display:none">ON</span>
-                <span class="disabled">OFF</span>
+                PDF conversion OFF
               </button>
-              <small class="text-muted" id="toggle-helper" style="display:none;">(toggle for docx only)</small>
+              <small class="text-muted" id="toggle-helper" style="display:none;">(toggle for docx)</small>
               <input type="hidden" name="toPdf" value="false"/>
+              <input type="hidden" name="pdf" value=""/>
               <input type="hidden" name="template" value="${defaultFilename}"/>
             </p>
           </div>

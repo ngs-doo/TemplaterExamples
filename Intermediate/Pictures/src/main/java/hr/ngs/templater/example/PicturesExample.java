@@ -1,6 +1,15 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.*;
+import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.batik.dom.GenericComment;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.batik.util.XMLResourceDescriptor;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.imageio.*;
@@ -32,6 +41,18 @@ public class PicturesExample {
         Boat(String name, String picture) {
             this.name = name;
             this.picture = picture;
+        }
+    }
+
+    static class Svg {
+        public String name;
+        public String description;
+        public Document document;
+
+        Svg(String name, String description, Document document) {
+            this.name = name;
+            this.description = description;
+            this.document = document;
         }
     }
 
@@ -148,20 +169,57 @@ public class PicturesExample {
         }
     }
 
+    static class ExampleTranscoderWithSize extends PNGTranscoder {
+        public int getWidth() { return (int)super.width; }
+        public int getHeight() { return (int)super.height; }
+    }
+
+    static class BatikSvgConversion implements IDocumentFactoryBuilder.SvgConverter {
+
+        @Override
+        public ImageInfo convert(Document document) {
+            try {
+                Node node = document.getFirstChild();
+                //don't convert first picture for example sake
+                if (node instanceof GenericComment) return null;
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ExampleTranscoderWithSize t = new ExampleTranscoderWithSize();
+                TranscoderInput input = new TranscoderInput(document);
+                TranscoderOutput output = new TranscoderOutput(os);
+                t.transcode(input, output);
+                os.flush();
+                return ImageInfo.from(os.toByteArray())
+                        .extension("png")
+                        .height(t.getHeight())
+                        .width(t.getWidth())
+                        .build();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    private static Document svgDoc(SAXSVGDocumentFactory factory, String name) throws IOException {
+        return factory.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, Svg.class.getResourceAsStream(name));
+    }
+
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = PicturesExample.class.getResourceAsStream("/Pictures.docx");
         File tmp = File.createTempFile("picture", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
         IDocumentFactory factory = Configuration
                 .builder()
-                .include(new ImageLoader())
-                .include(new MaxSizeBufferedImage())
-                .include(new MaxSizeImageStream())
+                .include(new ImageLoader())//setup image loading via from-resource metadata
+                .include(new MaxSizeBufferedImage())//setup image resizing via maxSize(X, Y) metadata
+                .include(new MaxSizeImageStream())//setup image resizing via maxSize(X, Y) metadata
+                .svgConverter(new BatikSvgConversion())
                 .build();
+        SAXSVGDocumentFactory svgFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         Map<String, List> data = new HashMap<String, List>();
         data.put("cars", Arrays.asList(
-                new Car("Really fast car", "/car1.jpg"),
+                new Car("Really fast car", "/car1.gif"),
                 new Car("Ford Focus", "/car2.jpg"),
                 new Car("Regular car", "/car3.png")
         ));
@@ -170,6 +228,10 @@ public class PicturesExample {
                 //current DPI change implementation in MaxSizeImageStream only works correctly on PNG
                 new Boat("Slowboat", "/boat2.png"),
                 new Boat("Cruiser", "/boat3.jpg")
+        ));
+        data.put("svg", Arrays.asList(
+                new Svg("Cat face", "without fallback image conversion - works only in MS Word 2016+", svgDoc(svgFactory, "/cat_face.svg")), //Icon made by Freepik from www.flaticon.com
+                new Svg("Happy cat", "with fallback image conversion", svgDoc(svgFactory, "/cat_happy.svg")) //Icon made by Smashicons from www.flaticon.com
         ));
         tpl.process(data);
         tpl.flush();

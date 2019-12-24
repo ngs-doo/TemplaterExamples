@@ -1,16 +1,13 @@
-package hr.ngs.templater;
+package hr.ngs.templater.server;
 
 import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.net.URLDecoder;
+import java.lang.reflect.Constructor;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.*;
 import java.util.zip.CRC32;
 
@@ -18,6 +15,8 @@ import com.dslplatform.json.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import hr.ngs.templater.*;
+import hr.ngs.templater.Configuration;
 
 public class TemplaterServer implements AutoCloseable {
     private static final Charset UTF8 = StandardCharsets.UTF_8;
@@ -27,14 +26,6 @@ public class TemplaterServer implements AutoCloseable {
     private static final String MIME_HTML = "text/html;charset=UTF-8";
     private static final String MIME_PDF = "application/pdf";
 
-    private static final byte[] index;
-    private static final byte[] indexDefault;
-    private static final List<String> templateFiles;
-    private static final String templateHtml;
-    private static final String defaultHtml;
-
-    private static final Map<String, byte[]> driveMap = new HashMap<>();
-    private static Map<String, TemplateInfo> templatesMap = new HashMap<>();
     private static final DslJson<Object> dslJson = new DslJson<>();
 
     static class TemplateInfo {
@@ -53,38 +44,20 @@ public class TemplaterServer implements AutoCloseable {
         }
     }
 
-    static {
-        File path = new File(DRIVE_PATH);
-        if (!path.exists()) {
-            path = new File(new File("Advanced", "TemplaterServer"), DRIVE_PATH);
-        }
-        String[] files = new File(path, "templates").list();
-        if (files != null) {
-            Arrays.sort(files);
-            templateFiles = Arrays.asList(files);
-        } else templateFiles = Collections.emptyList();
-        InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
-        try {
-            cacheAllFiles(path.getAbsolutePath(), path, driveMap);
-
-            templateHtml = new String(readStream(stream, -1), UTF8);
-            String indexContent = createIndex(templateFiles.size() > 0 ? templateFiles.get(0) : "");
-            index = indexContent.getBytes(UTF8);
-
-            defaultHtml = new String(readStream(TemplaterServer.class.getResourceAsStream("/default.html"), -1), UTF8);
-            indexDefault = defaultHtml.replace("${content}", indexContent).getBytes(UTF8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
     private final int timeoutLimit;
-    private final String tmpFolder;
     private final IDocumentFactory documentFactory;
-    private final String libreoffice;
-    private final Logger logger = Logger.getLogger(TemplaterServer.class.getName());
+    private final Logger logger;
     private final HttpServer server;
+    private final Map<String, PdfConverter> pdfConverters;
+
+    private final byte[] index;
+    private final byte[] indexDefault;
+    private final List<String> templateFiles;
+    private final String templateHtml;
+    private final String defaultHtml;
+
+    private final Map<String, byte[]> driveMap = new HashMap<>();
+    private Map<String, TemplateInfo> templatesMap = new HashMap<>();
 
     private static class LoggingHandler extends StreamHandler {
         LoggingHandler(Level level) {
@@ -99,9 +72,34 @@ public class TemplaterServer implements AutoCloseable {
         }
     }
 
-    public TemplaterServer(int port, int timeoutLimit, String tmpFolder, ClassLoader loader, String libreoffice, Level logLevel) throws IOException {
+    public TemplaterServer(int port, int timeoutLimit, ClassLoader loader, Logger logger, LinkedHashMap<String, PdfConverter> pdfConverters) throws IOException {
         this.timeoutLimit = timeoutLimit;
-        this.tmpFolder = tmpFolder;
+        this.logger = logger;
+        this.pdfConverters = pdfConverters;
+
+        File path = new File(DRIVE_PATH);
+        if (!path.exists()) {
+            path = new File(new File("Advanced", "TemplaterServer"), DRIVE_PATH);
+        }
+        String[] files = new File(path, "templates").list();
+        if (files != null) {
+            Arrays.sort(files);
+            templateFiles = Arrays.asList(files);
+        } else templateFiles = Collections.emptyList();
+        InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
+        try {
+            cacheAllFiles(path.getAbsolutePath(), path, driveMap);
+
+            templateHtml = new String(readStream(stream, -1), UTF8);
+            String indexContent = createIndex(templateFiles.size() > 0 ? templateFiles.get(0) : "", pdfConverters.keySet());
+            index = indexContent.getBytes(UTF8);
+
+            defaultHtml = new String(readStream(TemplaterServer.class.getResourceAsStream("/default.html"), -1), UTF8);
+            indexDefault = defaultHtml.replace("${content}", indexContent).getBytes(UTF8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         IDocumentFactoryBuilder builder = Configuration.builder();
         for (IDocumentFactoryBuilder.IFormatter f : ServiceLoader.load(IDocumentFactoryBuilder.IFormatter.class, loader)) {
             builder.include(f);
@@ -113,10 +111,7 @@ public class TemplaterServer implements AutoCloseable {
             builder.include(llr);
         }
         documentFactory = builder.build();
-        this.libreoffice = libreoffice;
-        logger.setLevel(logLevel);
-        logger.addHandler(new LoggingHandler(logLevel));
-        this.server = HttpServer.create(new InetSocketAddress(port), 0);
+        this.server = HttpServer.create(new InetSocketAddress(InetAddress.getLoopbackAddress(), port), 0);
         server.createContext("/", new IndexHandler());
         server.createContext("/content", new IndexHandler());
         server.createContext("/process", new ProcessHandler());
@@ -149,7 +144,7 @@ public class TemplaterServer implements AutoCloseable {
         }
     }
 
-    private static String createIndex(String current) {
+    private String createIndex(String current, Set<String> pdfs) {
         StringBuilder response = new StringBuilder();
 
         String listItemHtml = "<li><p>" +
@@ -170,7 +165,15 @@ public class TemplaterServer implements AutoCloseable {
 
         String defaultTemplate = current.isEmpty() ? "" : "Create " + current.substring(current.lastIndexOf('.') + 1) + " document with " + current;
         byte[] json = current.isEmpty() ? null : driveMap.get("/examples/" + current.toLowerCase() + ".json");
+        StringBuilder pdfConverters = new StringBuilder();
+        for(String pdf : pdfs) {
+            pdfConverters.append("\"").append(pdf).append("\",");
+        }
+        if (pdfConverters.length() > 0) {
+            pdfConverters.setLength(pdfConverters.length() - 1);
+        }
         return templateHtml
+                .replace("${pdfConverters}", pdfConverters.toString())
                 .replace("${templates}", response.toString())
                 .replace("${defaultTemplate}", defaultTemplate)
                 .replace("${defaultJson}", json != null ? new String(json, UTF8).replace("&", "&amp;") : "")
@@ -210,49 +213,42 @@ public class TemplaterServer implements AutoCloseable {
         return readStream(httpExchange.getRequestBody(), len);
     }
 
-    private int counter = 1;
-
-    private synchronized byte[] convertToPdf(final byte[] templateBytes, final String ext) throws IOException, InterruptedException {
-        final File tmpFile = tmpFolder.length() == 0
-            ? File.createTempFile("templaterDocument", "." + ext)
-            : new File(tmpFolder, "templaterDocument" + (counter++) + "." + ext);
-        final String outputFileName = tmpFile.getPath().substring(0, tmpFile.getPath().length() - ext.length()) + "pdf";
-
-        try {
-            long start = new Date().getTime();
-            final OutputStream os = new FileOutputStream(tmpFile);
-            os.write(templateBytes);
-            os.close();
-
-            ProcessBuilder builder = new ProcessBuilder(libreoffice, "--norestore", "--nofirststartwizard", "--nologo", "--headless", "--convert-to", "pdf", tmpFile.getPath());
-            builder.directory(tmpFile.getParentFile());
-            Process process = builder.start();
-            if (process.waitFor(timeoutLimit, TimeUnit.SECONDS)) {
-                File result = new File(outputFileName);
-                try {
-                    if (result.exists()) {
-                        byte[] output = Files.readAllBytes(result.toPath());
-                        if (logger.isLoggable(Level.FINE)) {
-                            logger.log(Level.FINE, String.format("PDF conversion finished in %d ms. input size = %d, output size = %d", new Date().getTime() - start, templateBytes.length, output.length));
-                        }
-                        return output;
-                    } else {
+    private byte[] convertToPdf(byte[] templateBytes, String ext, String use) throws InterruptedException {
+        final byte[][] lambdaResult = {null};
+        final long start = new Date().getTime();
+        Thread pdfThread = new Thread(() -> {
+            try {
+                Collection<PdfConverter> canUseConverters = pdfConverters.containsKey(use)
+                        ? Collections.singletonList(pdfConverters.get(use))
+                        : pdfConverters.values();
+                for (PdfConverter pdf : canUseConverters) {
+                    try {
+                        lambdaResult[0] = pdf.convert(templateBytes, ext);
+                    } catch (Exception ex) {
                         if (logger.isLoggable(Level.WARNING)) {
-                            logger.log(Level.WARNING, String.format("Unable to find output PDF. Duration: %d ms", new Date().getTime() - start));
+                            logger.log(Level.WARNING, String.format("PDF handling error. Duration: %d ms. Error: %s", new Date().getTime() - start, ex.toString()));
                         }
                     }
-                } finally {
-                    result.delete();
                 }
-            } else {
+            } catch (Exception global) {
                 if (logger.isLoggable(Level.WARNING)) {
-                    logger.log(Level.WARNING, String.format("Timeout waiting for PDF conversion. Duration: %d ms", new Date().getTime() - start));
+                    logger.log(Level.WARNING, String.format("Global PDF handling error. Duration: %d ms", new Date().getTime() - start));
                 }
             }
-        } finally {
-            tmpFile.delete();
+        });
+        pdfThread.start();
+        pdfThread.join(timeoutLimit * 1000L);
+        byte[] result = lambdaResult[0];
+        if (result == null) {
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.log(Level.WARNING, String.format("PDF conversion failed. Duration: %d ms", new Date().getTime() - start));
+            }
+            return null;
         }
-        return null;
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, String.format("PDF conversion finished in %d ms. input size = %d, output size = %d", new Date().getTime() - start, templateBytes.length, result.length));
+        }
+        return result;
     }
 
     private byte[] processTemplate(final byte[] templateBytes, final Object data, final String ext) {
@@ -331,6 +327,13 @@ public class TemplaterServer implements AutoCloseable {
        @Override
        public void handle(HttpExchange httpExchange) throws IOException {
            long start = new Date().getTime();
+           if (httpExchange.getRequestURI().getPath().indexOf('/', 2) > 0) {
+               if (logger.isLoggable(Level.WARNING)) {
+                   logger.log(Level.WARNING, String.format("bad url: %s", httpExchange.getRequestURI()));
+               }
+               sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Invalid url", start);
+               return;
+           }
            if (logger.isLoggable(Level.FINE)) {
                logger.log(Level.FINE, String.format("index entry: %s", httpExchange.getRequestURI()));
            }
@@ -341,7 +344,7 @@ public class TemplaterServer implements AutoCloseable {
                byte[] bytes = isRoot ? indexDefault : index;
                sendResponse(httpExchange, 200, MIME_HTML, bytes, start);
            } else {
-               String indexContent = createIndex(template);
+               String indexContent = createIndex(template, pdfConverters.keySet());
                String html = isRoot ? defaultHtml.replace("${content}", indexContent) : indexContent;
                sendResponse(httpExchange, 200, MIME_HTML, html, start);
            }
@@ -404,7 +407,7 @@ public class TemplaterServer implements AutoCloseable {
                byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(jsonBytes), ext);
                byte[] resultBytes;
                try {
-                   resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext) : templaterResultBytes;
+                   resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext, params.get("pdf")) : templaterResultBytes;
                } catch (Exception e) {
                    sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unable to convert document to PDF", start);
                    return;
@@ -490,7 +493,7 @@ public class TemplaterServer implements AutoCloseable {
                             || "true".equals(params.get("toPdf")) || "true".equals(params.get("topdf"));
                     byte[] json = readBytes(httpExchange);
                     byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension);
-                    byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension) : templaterResultBytes;
+                    byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension, params.get("pdf")) : templaterResultBytes;
                     if (resultBytes == null) {
                         sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report.", start);
                         return;
@@ -565,7 +568,7 @@ public class TemplaterServer implements AutoCloseable {
                String extension = getExtension(file);
                String name = file.substring(0, file.length() - extension.length() - 1);
                byte[] input = readBytes(httpExchange);
-               byte[] output = convertToPdf(input, extension);
+               byte[] output = convertToPdf(input, extension, params.get("pdf"));
                if (output == null) {
                    sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating PDF", start);
                    return;
@@ -610,11 +613,11 @@ public class TemplaterServer implements AutoCloseable {
         try {
             int port = 7777;
             int timeoutLimit = 30;
-            String tmpFolder = "";
             String pluginFolder = ".";
-            String libreoffice = "libreoffice";
             Level logLevel = Level.OFF;
+            String[] pdfs = {"LibreOffice", "Spire", "Aspose"};
             boolean disableExit = false;
+
             if (args.length == 0) {
                 System.out.println("Example arguments:");
                 System.out.println("    -port=8080");
@@ -623,6 +626,7 @@ public class TemplaterServer implements AutoCloseable {
                 System.out.println("    -log=INFO");
                 System.out.println("    -plugins=/templater/jars");
                 System.out.println("    -disable-exit");
+                System.out.println("    -pdf=LibreOffice,Spire,Aspose");
                 System.out.println("    -libreoffice=/user/home/office/libreoffice");
             }
             for (String a : args) {
@@ -630,26 +634,16 @@ public class TemplaterServer implements AutoCloseable {
                     port = Integer.parseInt(a.substring("-port=".length()));
                 } else if (a.startsWith("-timeout=")) {
                     timeoutLimit = Integer.parseInt(a.substring("-timeout=".length()));
-                } else if (a.startsWith("-tmp=")) {
-                    tmpFolder = a.substring("-tmp=".length());
-                    File f = new File(tmpFolder);
-                    if (!f.exists()) {
-                        throw new RuntimeException("Unable to find specified temporary folder: " + tmpFolder);
-                    }
                 } else if (a.startsWith("-plugins=")) {
                     pluginFolder = a.substring("-plugins=".length());
                     File f = new File(pluginFolder);
                     if (!f.exists()) {
                         throw new RuntimeException("Unable to find specified plugins folder: " + pluginFolder);
                     }
-                } else if (a.startsWith("-libreoffice=")) {
-                    libreoffice = a.substring("-libreoffice=".length());
-                    File f = new File(libreoffice);
-                    if (!f.exists()) {
-                        throw new RuntimeException("Unable to find specified libreoffice path: " + libreoffice);
-                    }
                 } else if (a.startsWith("-log=")) {
                     logLevel = Level.parse(a.substring("-log=".length()));
+                } else if (a.startsWith("-pdf=")) {
+                    pdfs = a.substring("-pdf=".length()).split(",");
                 } else if ("-disable-exit".equals(a)) {
                     disableExit = true;
                 }
@@ -663,7 +657,35 @@ public class TemplaterServer implements AutoCloseable {
                 }
             }
             URLClassLoader ucl = new URLClassLoader(urls.toArray(new URL[0]));
-            TemplaterServer server = new TemplaterServer(port, timeoutLimit, tmpFolder, ucl, libreoffice, logLevel);
+            LinkedHashMap<String, PdfConverter> pdfConverters = new LinkedHashMap<>();
+            Logger logger = Logger.getLogger(TemplaterServer.class.getName());
+            logger.setLevel(logLevel);
+            logger.addHandler(new LoggingHandler(logLevel));
+            Object[] pdfCtorArgs = {logger, args};
+            for (String name : pdfs) {
+                final Class<?> manifest;
+                try {
+                    manifest = ucl.loadClass("hr.ngs.templater.server." + name);
+                } catch (Exception ex) {
+                    throw new RuntimeException("Unable to find " + name + " on class path. Class must be in hr.ngs.templater.server package");
+                }
+                Constructor<?>[] ctors = manifest.getConstructors();
+                if (ctors.length > 0) {
+                    try {
+                        Constructor<?> ctor = ctors[0];
+                        if (ctor.getParameterCount() == 0) {
+                            PdfConverter converter = (PdfConverter) ctor.newInstance();
+                            pdfConverters.put(name, converter);
+                        } else if (ctors[0].getParameterCount() == 2) {
+                            PdfConverter converter = (PdfConverter) ctor.newInstance(pdfCtorArgs);
+                            pdfConverters.put(name, converter);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            TemplaterServer server = new TemplaterServer(port, timeoutLimit, ucl, logger, pdfConverters);
             if (disableExit) {
                 System.out.println("Server started on port " + port);
             } else {

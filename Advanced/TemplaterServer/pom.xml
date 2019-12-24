@@ -4,14 +4,25 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>templater-server</artifactId>
     <packaging>jar</packaging>
-    <version>4.1.0</version>
+    <version>4.2.0</version>
     <name>TemplaterServer</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <name>e-iceblue</name>
+            <url>http://repo.e-iceblue.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>AsposeJavaAPI</id>
+            <name>Aspose Java API</name>
+            <url>http://repository.aspose.com/repo</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>hr.ngs.templater</groupId>
@@ -22,6 +33,17 @@
             <groupId>com.dslplatform</groupId>
             <artifactId>dsl-json</artifactId>
             <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.doc.free</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>19.12</version>
+            <classifier>jdk17</classifier>
         </dependency>
     </dependencies>
 
@@ -42,7 +64,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>hr.ngs.templater.TemplaterServer</mainClass>
+                            <mainClass>hr.ngs.templater.server.TemplaterServer</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

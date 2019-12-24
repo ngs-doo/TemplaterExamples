@@ -8,21 +8,29 @@ Templater has support for images in several ways:
 When `replace(tag, Image)` is called, a new image will be inserted in the document at the place where tag was defined.
 Combined with plugins we can lazily convert type into an image, eg plugin for String -> BufferedImage conversion which loads up images from a specific place.
 
-Templater will assume 96dpi for picture and will save it as PNG inside docx stream and convert it into appropriate Office representation.
+### ImageInfo specific type and conversion
 
-Since v2.5.2 Templater has changed default DPI from 72 to 96 since this is the default on Windows.
-This can be controlled through System.getProperties with 'templater:dpi' setting. Eg:
+There is Templater specific ImageInfo type for working with images, but by default Templater will detect most image types and convert them into ImageInfo.
+Natively supported types are:
 
-    System.getProperties.setProperty("templater:dpi", "72")
+ * System.Drawing.Image (.NET)
+ * System.Drawing.Icon (.NET)
+ * java.awt.image.BufferedImage (JVM)
+ * javax.imageio.stream.ImageInputStream (JVM)
 
-will use the old behavior.
+By default during startup low-level converters are registered to detect specified types and convert them into ImageInfo.
+In Java Templater will try to detect DPI in ImageInputStream, but will assume 96dpi BufferedImage.
+When working in Android, builtin converters need to be disabled since such types are not available on Android.
 
-### Java internal image type
+While sometimes ImageInputStream could be used to inject images with extra metadata information, the recommended way to deal with images is to pass them through the internal `ImageInfo` type.
 
-Since v3.2.0 Templater exposes image type: `ImageInfo` for direct image manipulation.
-By default during startup low-level converters are registered to detect BufferedImage and ImageInputStream and convert them into ImageInfo.
-DPI setting is no longer applicable and instead such setting can be set directly on the `ImageInfo`.
-
-Previously ImageInputStream could be used to inject images with extra metadata information, but the recommended way to deal with images is to pass them through the internal `ImageInfo` type.
 If Java image types are used, to preserve image format and DPI info (and various other metadata) ImageInputStream can be used instead of BufferedImage.
 Java can have some issues when ImageInputStream is created from input stream directly, so sometimes it's better to create it from file directly (or first save it to file with appropriate extension first).
+
+It's convenient to use external tools to extract such metadata and then keep them as external attributes along the image. Then they can just be passed via ImageInfo type.
+
+### SVG images
+
+Microsoft Office 2016 introduces SVG image support. Since 4.2.0 Templater supports SVG images when passed as XML document with svg name.
+By default Templater will only inject SVG image into the document, but if a fallback image is required this can be converted via external plugin registered during Templater configuration.
+Previous Office version will fallback to image format so documents will look similar on both old and new MS Office versions.

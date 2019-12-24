@@ -199,10 +199,6 @@
       <Project>{AF4F0BF6-87C2-4A49-AFF0-CA8FBE5C53F2}</Project>
       <Name>MissingProperty</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Intermediate\Pictures\Pictures.csproj">
-      <Project>{17D7FF35-744F-4201-8731-7666E4C06BA9}</Project>
-      <Name>Pictures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Intermediate\QuestionnairePlugin\QuestionnairePlugin.csproj">
       <Project>{81A89939-E6C7-4EA2-8B28-FA7CEF51A2AF}</Project>
       <Name>QuestionnairePlugin</Name>

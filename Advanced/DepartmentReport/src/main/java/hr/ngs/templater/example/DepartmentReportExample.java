@@ -2,18 +2,11 @@ package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
 import hr.ngs.templater.ITemplateDocument;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.Desktop;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 public class DepartmentReportExample {
 

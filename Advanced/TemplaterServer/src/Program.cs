@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 
 namespace TemplaterServer
@@ -12,6 +13,10 @@ namespace TemplaterServer
 
 		public static IWebHost BuildWebHost(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.ConfigureServices(s =>
+				{
+					s.AddSingleton(new SharedResource(args));
+				})
 				.UseStartup<Startup>()
 				.Build();
 	}
