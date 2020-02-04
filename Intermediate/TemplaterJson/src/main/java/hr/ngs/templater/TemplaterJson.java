@@ -4,11 +4,13 @@ import com.dslplatform.json.DslJson;
 import com.dslplatform.json.JsonReader;
 import com.dslplatform.json.ObjectConverter;
 
+import javax.imageio.ImageIO;
 import java.io.*;
+import java.util.Base64;
 import java.util.Formatter;
 
 public class TemplaterJson {
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) {
         int exitCode;
         if (args.length == 0) {
             outputHelp(System.out);
@@ -68,10 +70,25 @@ public class TemplaterJson {
 
         Object data = readData(dataStream);
 
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, extension, outputStream);
+        ITemplateDocument tpl = Configuration.builder().include(IMAGE_DECODER).build().open(templateStream, extension, outputStream);
         tpl.process(data);
         tpl.flush();
     }
+
+    private static IDocumentFactoryBuilder.IFormatter IMAGE_DECODER = new IDocumentFactoryBuilder.IFormatter() {
+        @Override
+        public Object format(Object value, String metadata) {
+            if ("image".equals(metadata) && value instanceof String) {
+                byte[] bytes = Base64.getDecoder().decode((String)value);
+                try {
+                    return ImageIO.read(new ByteArrayInputStream(bytes));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return value;
+        }
+    };
 
     private static void outputHelp(final PrintStream ps) {
         StringBuilder sb = new StringBuilder();
@@ -83,6 +100,8 @@ public class TemplaterJson {
                 "\toutput.ext:   output path where the processed report is to be placed (eg. result.docx)%n%n" +
                 "Alternatively, you can use omit the [data.json] and [output.ext] arguments to read from stdin and write to stdout%n" +
                 "\tjava -jar templater-json.jar template.ext < [data.json] > [output.ext]%n%n" +
+                "\tjava -jar templater-json.jar template.ext < [data.json] > [output.ext]%n%n" +
+                "Images can be sent as base64 string in JSON and paired with :image metadata on the tag.%n%n" +
                 "Supported extensions are:%n");
 
         for (SupportedType st : SupportedType.values()) {

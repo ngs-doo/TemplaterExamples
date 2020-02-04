@@ -25,7 +25,7 @@
 			AlternativeProperty.Program.Main(args);
 			MissingProperty.Program.Main(args);
 			CollapseRegion.Program.Main(args);
-			//ExchangeRates.Program.Main(args);//standalone app. run manually
+			//ExchangeRates.Program.Main(args);//standalone app in .NET 3.5. run manually
 			ExcelLinks.Program.Main(args);
 			WordLinks.Program.Main(args);
 			DocxImport.Program.Main(args);
@@ -33,7 +33,7 @@
 			LimitPlugins.Program.Main(args);
 			SharedCollection.Program.Main(args);
 			SharedCharts.Program.Main(args);
-			//IsoCountries.Program.Main(args);//standalone app. run manually
+			//IsoCountries.Program.Main(args);//standalone app in .NET 3.5. run manually
 			WordDataTable.Program.Main(args);
 			MailMerge.Program.Main(args);
 			ExcelContextRules.Program.Main(args);

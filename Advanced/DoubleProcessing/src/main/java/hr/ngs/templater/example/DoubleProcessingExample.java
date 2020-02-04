@@ -1,5 +1,6 @@
 package hr.ngs.templater.example;
 
+import com.mockrunner.mock.jdbc.MockResultSet;
 import hr.ngs.templater.Configuration;
 import hr.ngs.templater.IDocumentFactory;
 import hr.ngs.templater.ITemplateDocument;
@@ -7,6 +8,8 @@ import hr.ngs.templater.ITemplateDocument;
 import java.awt.Desktop;
 import java.io.*;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -22,6 +25,8 @@ public class DoubleProcessingExample {
         for (int i = 0; i < person.length; i++)
             person[i] = new Person(rnd, i);
 
+        ResultSet units = prepareStarcraftUnits();
+
         IDocumentFactory factory = Configuration.factory();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         //let's do a horizontal resize so document is prepared for second pass
@@ -29,6 +34,25 @@ public class DoubleProcessingExample {
         //[[equals]] at the beginning of the cell causes conversion to formula
         //this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
         doc1.process(new HashMap<String, Object>() {{ put("Person", person); put("formula", "[[equals]]"); }});
+        Set<String> columns = new HashSet<>();
+        ResultSetMetaData rsMD = units.getMetaData();
+        for (int i = 1; i <= rsMD.getColumnCount(); i++) {
+            columns.add(rsMD.getColumnName(i));
+        }
+        String[] tags = doc1.templater().tags();
+        for (String t : tags) {
+            if (!t.startsWith("starcraft.")) continue;
+            List<String> metadata = new ArrayList<>(Arrays.asList(doc1.templater().getMetadata(t, false)));
+            if (!metadata.contains("horizontal-resize")) continue;//we are interested only in specific columns
+            String colName = t.substring("starcraft.".length());
+            if (columns.contains(colName)) {
+                metadata.remove("horizontal-resize");
+                String appendMetadata = metadata.size() == 0 ? "" : ":" + String.join(":", metadata);
+                doc1.templater().replace(t, "[[" + t + "]" + appendMetadata + "]");//strip horizontal resize attribute
+            } else {
+                doc1.templater().resize(new String[] { t }, 0);//hide column from output
+            }
+        }
         doc1.flush();
 
         //now let's prepare our complex object for standard processing
@@ -39,6 +63,7 @@ public class DoubleProcessingExample {
         //let's do a second pass with our prepared object
         ITemplateDocument doc2 = factory.open(is, "xlsx", fos);
         doc2.process(complex);
+        doc2.process(new HashMap<String, Object>() {{ put("starcraft", units); }});
         doc2.flush();
         fos.close();
 
@@ -127,5 +152,25 @@ public class DoubleProcessingExample {
             }
         }
         return result;
+    }
+
+    static ResultSet prepareStarcraftUnits() {
+        MockResultSet dt = new MockResultSet("Starcraft");
+        dt.addColumn("unit");
+        dt.addColumn("size");
+        //version not included so it's removed from the output
+        dt.addColumn("minerals");
+        dt.addColumn("gas");
+        dt.addColumn("ground attack");
+        dt.addColumn("air attack");
+        //range not included so it's removed from the output
+        dt.addColumn("build time");
+        dt.addRow(Arrays.asList("Battlecruiser", "L", 400, 300, 25, 25, 160));
+        dt.addRow(Arrays.asList("Dropship", "L", 100, 100, 0, 0, 50));
+        dt.addRow(Arrays.asList("Firebat", "S", 50, 25, 16, 0, 24));
+        dt.addRow(Arrays.asList("Ghost", "S", 25, 75, 10, 10, 50));
+        dt.addRow(Arrays.asList("Marine", "S", 50, 0, 6, 6, 24));
+        dt.addRow(Arrays.asList("Vulture", "M", 75, 0, 20, 0, 30));
+        return dt;
     }
 }

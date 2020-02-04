@@ -111,6 +111,8 @@ public class TemplaterServer implements AutoCloseable {
             builder.include(llr);
         }
         documentFactory = builder.build();
+        System.getProperties().remove("com.sun.net.httpserver.HttpServerProvider"); //disable custom http servers
+        //TODO: disable custom HttpServerProvider
         this.server = HttpServer.create(new InetSocketAddress(InetAddress.getLoopbackAddress(), port), 0);
         server.createContext("/", new IndexHandler());
         server.createContext("/content", new IndexHandler());
@@ -372,15 +374,15 @@ public class TemplaterServer implements AutoCloseable {
                        String[] parts = new String(bytes, UTF8).split("&");
                        for (String s : parts) {
                            String[] lr = s.split("=");
-                           if (lr.length != 2) {
-                               sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Invalid form data.", start);
+                           if (lr.length == 2) {
+                               params.put(lr[0], URLDecoder.decode(lr[1], "UTF-8"));
                            }
-                           params.put(lr[0], URLDecoder.decode(lr[1], "UTF-8"));
                        }
                    } else if (contentType != null && contentType.toLowerCase().startsWith("application/json")) {
                        jsonBytes = bytes;
                    } else {
                        sendResponse(httpExchange, 415, MIME_PLAINTEXT, "Use application/x-www-form-urlencoded or application/json.", start);
+                       return;
                    }
                }
                String templateName = params.get("template");

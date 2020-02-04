@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater</groupId>
     <artifactId>templater-json</artifactId>
     <packaging>jar</packaging>
-    <version>4.2.0</version>
+    <version>4.3.0</version>
     <name>TemplaterJson</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.dslplatform</groupId>
             <artifactId>dsl-json</artifactId>
-            <version>1.9.3</version>
+            <version>1.9.5</version>
         </dependency>
     </dependencies>
 

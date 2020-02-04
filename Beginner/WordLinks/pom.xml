@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>word-links-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.2.0</version>
+    <version>4.3.0</version>
     <name>Word links</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

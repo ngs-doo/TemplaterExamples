@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>paragraphs-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.2.0</version>
+    <version>4.3.0</version>
     <name>Paragraphs</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

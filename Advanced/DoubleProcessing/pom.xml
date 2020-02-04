@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>double-processing-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.2.0</version>
+    <version>4.3.0</version>
     <name>DoubleProcessingExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -17,6 +17,11 @@
             <groupId>hr.ngs.templater</groupId>
             <artifactId>templater</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mockrunner</groupId>
+            <artifactId>mockrunner-jdbc</artifactId>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 

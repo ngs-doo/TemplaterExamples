@@ -4,6 +4,10 @@
   "description": "Test description",
   "groups": [
     {
+      "name": "Group 0",
+      "clauses": []
+    },
+    {
       "name": "Group 1",
       "clauses": [
         {

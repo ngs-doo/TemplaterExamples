@@ -47,7 +47,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.4.2.0\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.4.3.0\lib\Net40\NGS.Templater.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />

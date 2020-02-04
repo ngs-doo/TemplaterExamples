@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Text;
 using Newtonsoft.Json;
 using NGS.Templater;
 
@@ -46,6 +46,9 @@ namespace TemplaterJson
 			writer.WriteLine();
 			writer.WriteLine("Alternatively, you can use omit the [data.json] and [output.ext] arguments to read from stdin and write to stdout");
 			writer.WriteLine("	" + name + " template.ext < [data.json] > [output.ext]");
+			writer.WriteLine();
+			writer.WriteLine("Images can be sent as base64 string in JSON and paired with :image metadata on the tag.");
+			writer.WriteLine();
 			SupportedType.ShowHelp(writer);
 			writer.Flush();
 			return result;
@@ -80,18 +83,26 @@ namespace TemplaterJson
 				if (json.Peek() == '[')
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(json));
-					using (var td = Configuration.Factory.Open(fis, fos, ext))
+					using (var td = Configuration.Builder.Include(Base64Image).Build().Open(fis, fos, ext))
 						td.Process(deser);
 				}
 				else
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>>(new JsonTextReader(json));
-					using (var td = Configuration.Factory.Open(fis, fos, ext))
+					using (var td = Configuration.Builder.Include(Base64Image).Build().Open(fis, fos, ext))
 						td.Process(deser);
 				}
 			}
 
 			return 0;
+		}
+
+		static object Base64Image(object value, string metadata)
+		{
+			var str = value as string;
+			if (metadata == "image" && str != null)
+				return Image.FromStream(new MemoryStream(System.Convert.FromBase64String(str)));
+			return value;
 		}
 	}
 }

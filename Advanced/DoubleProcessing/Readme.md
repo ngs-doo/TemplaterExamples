@@ -16,6 +16,13 @@ Horizontal resize will duplicate content to the right, as opposed to the bottom.
 
 Often after horizontal resize document needs to be reanalyzed to help Templater copy with changes.
 
+If 0 is used during horizontal resize and affected region include whole column, Templater will perform pull to the left by hiding the relevant columns.
+Whole column can be defined in multiple ways:
+
+ * by using named range which spans the whole column
+ * via builtin **whole-column** metadata
+ * when tags which are getting resized are located on both starting and ending row
+
 ### Formula rewriting
 
 Templater will analyze and rewrite formula definitions. This allows for creating very generic templates which when expanded fit into place.

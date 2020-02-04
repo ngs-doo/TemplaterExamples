@@ -35,6 +35,9 @@ and a builder API for customization.
 
 Usage of Templater mostly consists from passing existing model to high level API.
 
+![Template](https://user-images.githubusercontent.com/1181401/73782167-ea99cf00-4791-11ea-8ca0-6930c88c6f5b.png)
+![Result](https://user-images.githubusercontent.com/1181401/73781251-32b7f200-4790-11ea-9438-b007521dc72a.png)
+
 ## Data types
 
 Most data types are processed by Templater with conversion to string. 

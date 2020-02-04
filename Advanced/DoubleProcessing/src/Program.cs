@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -22,12 +23,32 @@ namespace DoubleProcessing
 			for (int i = 0; i < person.Length; i++)
 				person[i] = new Person(rnd, i);
 
+			var units = PrepareStarcraftUnits();
+
 			//let's do a horizontal resize so document is prepared for second pass
 			using (var doc = Configuration.Factory.Open(ms, "xlsx"))
 			{
 				//[[equals]] at the beginning of the cell causes conversion to formula
 				//this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
 				doc.Process(new { Person = person, formula = "[[equals]]" });
+				//remove columns which do not exist in the data table
+				var columns = new HashSet<string>(units.Columns.Cast<DataColumn>().Select(it => it.ColumnName));
+				var tags = doc.Templater.Tags.ToList();
+				foreach (var t in tags)
+				{
+					if (!t.StartsWith("starcraft.")) continue;
+					var metadata = doc.Templater.GetMetadata(t, false).ToList();
+					if (!metadata.Contains("horizontal-resize")) continue;//we are interested only in specific columns
+					var colName = t.Substring("starcraft.".Length);
+					if (columns.Contains(colName))
+					{
+						metadata.Remove("horizontal-resize");//keep all metadata except horizontal resize
+						var appendMetadata = metadata.Count == 0 ? string.Empty : ":" + string.Join(":", metadata);
+						doc.Templater.Replace(t, "[[" + t + "]" + appendMetadata + "]");//strip horizontal resize attribute
+					}
+					else
+						doc.Templater.Resize(new string[] { t }, 0);//hide column from output
+				}
 			}
 			File.WriteAllBytes("DoubleProcessing.xlsx", ms.ToArray());
 			ms.Position = 0;
@@ -37,7 +58,10 @@ namespace DoubleProcessing
 
 			//let's do a second pass with our prepared object
 			using (var doc = Configuration.Factory.Open(ms, "xlsx"))
+			{
 				doc.Process(complex);
+				doc.Process(new { starcraft = units });
+			}
 
 			File.WriteAllBytes("DoubleProcessing.xlsx", ms.ToArray());
 
@@ -125,6 +149,27 @@ namespace DoubleProcessing
 					dict["Person" + j] = groups.Skip(i * 2).Take(2).Sum(it => (int)it["Person" + j]);
 			}
 			return result;
+		}
+
+		static DataTable PrepareStarcraftUnits()
+		{
+			var dt = new DataTable();
+			dt.Columns.Add("unit", typeof(string));
+			dt.Columns.Add("size", typeof(string));
+			//version not included so it's removed from the output
+			dt.Columns.Add("minerals", typeof(int));
+			dt.Columns.Add("gas", typeof(int));
+			dt.Columns.Add("ground attack", typeof(int));
+			dt.Columns.Add("air attack", typeof(int));
+			//range not included so it's removed from the output
+			dt.Columns.Add("build time", typeof(int));
+			dt.Rows.Add("Battlecruiser", "L", 400, 300, 25, 25, 160);
+			dt.Rows.Add("Dropship", "L", 100, 100, 0, 0, 50);
+			dt.Rows.Add("Firebat", "S", 50, 25, 16, 0, 24);
+			dt.Rows.Add("Ghost", "S", 25, 75, 10, 10, 50);
+			dt.Rows.Add("Marine", "S", 50, 0, 6, 6, 24);
+			dt.Rows.Add("Vulture", "M", 75, 0, 20, 0, 30);
+			return dt;
 		}
 	}
 }

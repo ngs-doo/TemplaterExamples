@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.4.2.0\lib\Net35\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.4.3.0\lib\Net35\NGS.Templater.dll</HintPath>
     </Reference>
     <Reference Include="Svg">
       <HintPath>..\..\packages\Svg.2.4.3\lib\Svg.dll</HintPath>
