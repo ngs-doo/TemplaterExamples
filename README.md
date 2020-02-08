@@ -35,8 +35,8 @@ and a builder API for customization.
 
 Usage of Templater mostly consists from passing existing model to high level API.
 
-![Template](https://user-images.githubusercontent.com/1181401/73782167-ea99cf00-4791-11ea-8ca0-6930c88c6f5b.png)
-![Result](https://user-images.githubusercontent.com/1181401/73781251-32b7f200-4790-11ea-9438-b007521dc72a.png)
+![Template](https://user-images.githubusercontent.com/1181401/74080873-b7349a00-4a48-11ea-8686-53b31bb2fd96.png)
+![Result](https://user-images.githubusercontent.com/1181401/74080884-da5f4980-4a48-11ea-8d0e-db9de4db743c.png)
 
 ## Data types
 
