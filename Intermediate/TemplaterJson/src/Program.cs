@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using Newtonsoft.Json;
 using NGS.Templater;
@@ -80,16 +81,18 @@ namespace TemplaterJson
 				{
 					json.Read();
 				}
+				//disable low level plugins so it works on more platforms without GDI library for System.Drawing
+				var config = Configuration.Builder.Include(Base64Image).BuiltInLowLevelPlugins(false);
 				if (json.Peek() == '[')
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(json));
-					using (var td = Configuration.Builder.Include(Base64Image).Build().Open(fis, fos, ext))
+					using (var td = config.Build().Open(fis, fos, ext))
 						td.Process(deser);
 				}
 				else
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>>(new JsonTextReader(json));
-					using (var td = Configuration.Builder.Include(Base64Image).Build().Open(fis, fos, ext))
+					using (var td = config.Build().Open(fis, fos, ext))
 						td.Process(deser);
 				}
 			}
@@ -101,7 +104,14 @@ namespace TemplaterJson
 		{
 			var str = value as string;
 			if (metadata == "image" && str != null)
-				return Image.FromStream(new MemoryStream(System.Convert.FromBase64String(str)));
+			{
+				var image = Image.FromStream(new MemoryStream(System.Convert.FromBase64String(str)));
+				//if we did not disable builtin plugins we could just return it now, but lets convert into Templater specific image
+				var ms = new MemoryStream();
+				image.Save(ms, ImageFormat.Png);
+				ms.Position = 0;
+				return new ImageInfo(ms, "png", image.Width, image.HorizontalResolution, image.Height, image.VerticalResolution);
+			}
 			return value;
 		}
 	}

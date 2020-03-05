@@ -105,8 +105,9 @@ namespace TemplaterJson
 						if (list.Count == 0 || list[0] == null) return list;
 						var type = list[0].GetType();
 						if (list.Any(it => it == null || it.GetType() != type)) return list;
-						var arr = (object[])Array.CreateInstance(type, list.Count);
-						list.CopyTo(arr, 0);
+						var arr = Array.CreateInstance(type, list.Count);
+						for (int i = 0; i < list.Count; i++)
+							arr.SetValue(list[i], i);
 						return arr;
 				}
 			}

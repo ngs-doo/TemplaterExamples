@@ -16,3 +16,7 @@ Images can be used if base64 encoded value is provided in JSON and matching tag 
  * java -jar templater-json.jar benchmark-template.xlsx < benchmark-data.json > benchmark-output.xlsx
  * java -jar templater-json.jar beers-template.docx beers-data.json beers-output.docx
 
+
+### DotNet AOT compilation
+
+Project support self contained exe output without .NET dependency and without usage of reflection

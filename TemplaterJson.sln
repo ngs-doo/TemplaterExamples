@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplaterJsonDotNetCore", "Intermediate\TemplaterJson\TemplaterJsonDotNetCore.csproj", "{F79D95FF-0A98-49E9-BBBE-5B7A35D58A5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F79D95FF-0A98-49E9-BBBE-5B7A35D58A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79D95FF-0A98-49E9-BBBE-5B7A35D58A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79D95FF-0A98-49E9-BBBE-5B7A35D58A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79D95FF-0A98-49E9-BBBE-5B7A35D58A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F02633F-144D-4F8B-AA2A-24E0EBDD148A}
+	EndGlobalSection
+EndGlobal
