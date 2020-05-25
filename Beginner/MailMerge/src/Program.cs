@@ -17,7 +17,7 @@ namespace MailMerge
 			}
 		}
 
-		private static object ImageReferenceReplacer(object value)
+		private static object ImageReferenceReplacer(object value, string tag, string[] metadata)
 		{
 			if (value is ImageReference)
 			{

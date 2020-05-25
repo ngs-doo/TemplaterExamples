@@ -80,7 +80,7 @@ namespace CollapseRegion
 					return list.Count == 0;
 				}
 				return false;
-			}).Include(value =>
+			}).Include((value, tag, metadata) =>
 			{
 				if (value is Color)
 				{

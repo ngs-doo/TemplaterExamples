@@ -6,7 +6,9 @@ It's advanced way to manipulate data in Excel and fixes some limits, such as 1 m
 Templater can be used to prepare the data, while Power Query can manipulate such prepared data in various ways.
 
 Power Query can work on CSV files, in which case it's much faster than using data from Excel sheets.
-This makes it convenient integration point where Templater populates the CSV files which Power Query consumes.  
+This makes it convenient integration point where Templater populates the CSV files which Power Query consumes.
+Since v4.4 embedded CSV files are processed automatically when embedded within xlsx. 
+This makes it very convenient to embed them and use PowerQuery on them. 
 
 ### Bundling it all in a single xlsx
 
@@ -88,11 +90,8 @@ With those two functions we can combine loading of CSV with some Power Query cod
 This function will take the first found CSV file and project it via specified columns.
 It will use `en-US` culture to process the CSV so that decimal numbers are imported correctly (dot represents the decimal separator).
 
-Templater for Java will save the zip in streaming mode, which means we need to convert it into non-streaming mode before passing it for processing.
-
 ### Running the example
 
 Due to some Power Query limitations, running the example without the proper Templater license will "corrupt the document".
-This can be avoided by removing the **xlsx** processing part of the example and only leave the **csv** part which does not inject warnings for unlicensed versions. 
 
 Non Power Query sheets are hidden in the template, but can be shown to understand the template better.

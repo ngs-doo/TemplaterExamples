@@ -2,25 +2,22 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.IO.Packaging;
 using NGS.Templater;
 
 namespace PowerQuery
 {
 	public class Program
 	{
-		private static readonly IDocumentFactory XlsxFactory =
+		private static readonly IDocumentFactory Factory =
 			Configuration.Builder
+			.Include(ToIsoFormat)
 			//Excel will complain about corrupted file unless Templater is initialized with a valid license
 			.Build("Customer email", "Customer license");
 
-		private static readonly IDocumentFactory CsvFactory =
-			Configuration.Builder
-			.Include(ToIsoFormat)
-			.Build();//CSV does not require license file
-
-		private static object ToIsoFormat(object value)
+		private static object ToIsoFormat(object value, string tag, string[] metadata)
 		{
+			//only apply iso format on CSV part of the processing
+			if (!tag.StartsWith("csv.")) return value;
 			if (value is DateTime)
 			{
 				var dt = (DateTime)value;
@@ -100,16 +97,6 @@ namespace PowerQuery
 			public CsvData[] sheet;
 		}
 
-		private static void UpdateCSV(string file, InputData data)
-		{
-			//let's update CSV within the ZIP with actual data
-			var zip = ZipPackage.Open(file);
-			var part = zip.GetPart(new Uri("/xl/embeddings/data.csv", UriKind.Relative));
-			using (var doc = CsvFactory.Open(part.GetStream(FileMode.Open, FileAccess.ReadWrite), "csv"))
-				doc.Process(data);
-			zip.Close();
-		}
-
 		public static void Main(string[] args)
 		{
 			var data = new InputData();
@@ -118,10 +105,8 @@ namespace PowerQuery
 
 			using (var fis = File.OpenRead("template/PowerQuery.xlsx"))
 			using (var fos = File.OpenWrite("PowerQuery.xlsx"))
-			using (var doc = XlsxFactory.Open(fis, fos, "xlsx"))
+			using (var doc = Factory.Open(fis, fos, "xlsx"))
 				doc.Process(data);
-
-			UpdateCSV("PowerQuery.xlsx", data);
 
 			Process.Start("PowerQuery.xlsx");
 		}

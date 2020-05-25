@@ -12,7 +12,7 @@ namespace CsvStreaming
 {
 	public class Program
 	{
-		static object Quoter(object value)
+		static object Quoter(object value, string tag, string[] metadata)
 		{
 			var str = value as string;
 			if (str != null)
@@ -24,7 +24,7 @@ namespace CsvStreaming
 			}
 			return value;
 		}
-		static object NumberAsDot(object value)
+		static object NumberAsDot(object value, string tag, string[] metadata)
 		{
 			if (value is decimal)
 				return ((decimal)value).ToString(CultureInfo.InvariantCulture);

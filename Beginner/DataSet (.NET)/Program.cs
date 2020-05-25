@@ -9,7 +9,7 @@ namespace DataSetExample
 {
 	public class Program
 	{
-		private static object ColorConverter(object value)
+		private static object ColorConverter(object value, string tag, string[] metadata)
 		{
 			if (value is Color)
 			{

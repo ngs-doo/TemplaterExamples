@@ -18,3 +18,8 @@ Since Excel doesn't allow `[[tag]]`, `{{tag}}` or `<<tag>>` expressions inside f
 
 Merge cell require at least two cells to be defined. 
 Therefore template contains tag `[[groups.description]]` across two cells so that it's not duplicated on resize, but rather stretched.
+
+### References to "removed" sheet
+
+Sheet can be removed with a resize(tags, 0) when tag is located within a sheet tab or it has special :sheet or :page metadata.
+Still, formulas referencing that sheet will continue working, as sheet is not really removed, just special very hidden visibility is set on it.

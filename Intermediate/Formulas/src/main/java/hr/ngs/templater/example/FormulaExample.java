@@ -12,6 +12,13 @@ public class FormulaExample {
         public int person;
     }
 
+    static class NumA {
+        public final int a;
+        public NumA(int a) {
+            this.a = a;
+        }
+    }
+
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = FormulaExample.class.getResourceAsStream("/Formulas.xlsx");
         File tmp = File.createTempFile("formula", ".xlsx");
@@ -30,6 +37,12 @@ public class FormulaExample {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("groups", groups);
         map.put("total", totals);
+        map.put("num", Arrays.asList(
+                new NumA(1),
+                new NumA(2),
+                new NumA(3)
+        ));
+        map.put("hide_sheet", null);
 
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);

@@ -37,13 +37,13 @@ namespace Pictures
 			}
 		}
 
-		class Svg
+		class SvgDoc
 		{
 			public readonly string name;
 			public readonly string description;
 			public readonly XDocument document;
 
-			public Svg(string name, string description, string path)
+			public SvgDoc(string name, string description, string path)
 			{
 				this.name = name;
 				this.description = description;
@@ -85,7 +85,7 @@ namespace Pictures
 			xml.LoadXml(document.ToString());
 			//don't convert first picture for example sake
 			if (xml.InnerXml.StartsWith("<!--")) return null;
-			var svg = global::Svg.SvgDocument.Open(xml);
+			var svg = Svg.SvgDocument.Open(xml);
 			var bmp = svg.Draw();
 			var ms = new MemoryStream();
 			bmp.Save(ms, ImageFormat.Png);
@@ -109,8 +109,8 @@ namespace Pictures
 					new Boat("Cruiser", "boat3.jpg")
 			};
 			data["svg"] = new[] {
-					new Svg("Cat face", "without fallback image conversion - works only in MS Word 2016+", "cat_face.svg"), //Icon made by Freepik from www.flaticon.com
-					new Svg("Happy cat", "with fallback image conversion", "cat_happy.svg") //Icon made by Smashicons from www.flaticon.com
+					new SvgDoc("Cat face", "without fallback image conversion - works only in MS Word 2016+", "cat_face.svg"), //Icon made by Freepik from www.flaticon.com
+					new SvgDoc("Happy cat", "with fallback image conversion", "cat_happy.svg") //Icon made by Smashicons from www.flaticon.com
 			};
 			var factory = Configuration.Builder
 				.Include(ImageLoader)//setup image loading via from-resource metadata

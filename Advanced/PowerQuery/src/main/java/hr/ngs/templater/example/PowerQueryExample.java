@@ -15,17 +15,15 @@ import java.util.zip.ZipOutputStream;
 
 public class PowerQueryExample {
 
-    private static IDocumentFactory xlsxFactory = Configuration.builder()
+    private static IDocumentFactory factory = Configuration.builder()
             .include(new LocalDateToDate())
             //Excel will complain about corrupted file unless Templater is initialized with a valid license
             .build("Customer email", "Customer license");
-    private static IDocumentFactory csvFactory = Configuration.builder()
-            .build();//CSV does not require license file
 
     static class LocalDateToDate implements IDocumentFactoryBuilder.ILowLevelReplacer {
 
         @Override
-        public Object replace(Object value) {
+        public Object replace(Object value, String tag, String[] metadata) {
             //Templater does not understand java8 types so we can convert local date into legacy date
             if (value instanceof LocalDate) {
                 return java.sql.Date.valueOf((LocalDate)value);
@@ -89,7 +87,7 @@ public class PowerQueryExample {
         return result;
     }
 
-    private static File updateCSV(File file, InputData data) throws IOException {
+    private static File fixStreamingZip(File file) throws IOException {
         //PowerQuery Zip function doesn't cope well with streaming ZIP, so let's convert it to zip without data descriptors
         File result = File.createTempFile("power", ".xlsx");
         ZipFile from = new ZipFile(file);
@@ -108,16 +106,6 @@ public class PowerQueryExample {
             to.closeEntry();
         }
         to.close();
-        //and let's update CSV within the ZIP with actual data
-        try (FileSystem zipfs = FileSystems.newFileSystem(result.toPath(), null)) {
-            Path csv = zipfs.getPath("/xl/embeddings/data.csv");
-            try(InputStream is = new ByteArrayInputStream(Files.readAllBytes(csv));
-                OutputStream os = Files.newOutputStream(csv, StandardOpenOption.CREATE)) {
-                ITemplateDocument tpl = csvFactory.open(is, "csv", os);
-                tpl.process(data);
-                tpl.flush();
-            }
-        }
         file.delete();
         return result;
     }
@@ -130,12 +118,12 @@ public class PowerQueryExample {
 
         try(InputStream is = PowerQueryExample.class.getResourceAsStream("/PowerQuery.xlsx");
             OutputStream os = Files.newOutputStream(tmp.toPath())) {
-            ITemplateDocument tpl = xlsxFactory.open(is, "xlsx", os);
+            ITemplateDocument tpl = factory.open(is, "xlsx", os);
             tpl.process(data);
             tpl.flush();
         }
 
-        File result = updateCSV(tmp, data);
+        File result = fixStreamingZip(tmp);
 
         Desktop.getDesktop().open(result);
     }

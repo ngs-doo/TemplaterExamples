@@ -31,6 +31,12 @@ namespace Formulas
 			var map = new Dictionary<string, object>();
 			map["groups"] = groups;
 			map["total"] = totals;
+			map["num"] = new[] {
+				new { a = 1},
+				new { a = 2},
+				new { a = 3}
+			};
+			map["hide_sheet"] = null;
 
 			using (var doc = Configuration.Factory.Open("Formulas.xlsx"))
 				doc.Process(map);
