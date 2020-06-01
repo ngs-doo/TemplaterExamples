@@ -33,7 +33,7 @@ namespace SharedCharts
 			usage.Add(new LanguageUsage("Javascript", 92.54m, 42.67m, 38.78m));
 			using (var doc = Configuration.Factory.Open("charts.pptx"))
 				doc.Process(new { title = "Languages", subtitle = "Usage analysis", data = usage });
-			Process.Start("charts.pptx");
+			Process.Start(new ProcessStartInfo("charts.pptx") { UseShellExecute = true });
 		}
 	}
 }

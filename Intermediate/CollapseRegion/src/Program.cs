@@ -112,7 +112,7 @@ namespace CollapseRegion
 				doc.Templater.Resize(new[] { "remove_me" }, 0);
 				doc.Process(new[] { application1, application2, application3 });
 			}
-			Process.Start("Collapse.docx");
+			Process.Start(new ProcessStartInfo("Collapse.docx") { UseShellExecute = true });
 		}
 	}
 }

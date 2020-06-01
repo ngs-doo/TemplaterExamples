@@ -49,7 +49,7 @@ namespace MailMerge
 			{
 				doc.Process(data);
 			}
-			Process.Start("merge.docx");
+			Process.Start(new ProcessStartInfo("merge.docx") { UseShellExecute = true });
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace SimpleSpreadsheet
 				document.Process(data);
 			}
 
-			Process.Start("out.xlsx");
+			Process.Start(new ProcessStartInfo("out.xlsx") { UseShellExecute = true });
 		}
 	}
 }

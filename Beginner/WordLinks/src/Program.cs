@@ -58,7 +58,7 @@ namespace WordLinks
 					hyperlink = new Dictionary<string, object> { { "text", "text for link" }, { "url", "https://templater.info/demo" } }
 				});
 			}
-			Process.Start("ExternalLinks.docx");
+			Process.Start(new ProcessStartInfo("ExternalLinks.docx") { UseShellExecute = true });
 		}
 
 		private static Dictionary<string, object> Create(string @event, object date, string title, object url, string name, string email, string subject)

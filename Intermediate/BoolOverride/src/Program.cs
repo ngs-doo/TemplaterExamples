@@ -29,7 +29,7 @@ namespace BoolOverride
 			var factory = Configuration.Builder.Include(CustomBoolFormater).Build();
 			using (var doc = factory.Open("Bools.docx"))
 				doc.Process(new Bools());
-			Process.Start("Bools.docx");
+			Process.Start(new ProcessStartInfo("Bools.docx") { UseShellExecute = true });
 		}
 	}
 }

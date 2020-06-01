@@ -18,7 +18,7 @@ namespace ExcelContextRules
 			{
 				doc.Process(new { simple = data, tables = data, ranges = data });
 			}
-			Process.Start("flattening-out.xlsx");
+			Process.Start(new ProcessStartInfo("flattening-out.xlsx") { UseShellExecute = true });
 		}
 	}
 }

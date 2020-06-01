@@ -42,7 +42,7 @@ namespace SpreadsheetGrouping
 				document.Process(new { Simple = list, Range = list });
 			}
 
-			Process.Start(outputFile);
+			Process.Start(new ProcessStartInfo(outputFile) { UseShellExecute = true });
 		}
 	}
 }

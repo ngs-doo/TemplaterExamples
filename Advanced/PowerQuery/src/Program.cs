@@ -108,7 +108,7 @@ namespace PowerQuery
 			using (var doc = Factory.Open(fis, fos, "xlsx"))
 				doc.Process(data);
 
-			Process.Start("PowerQuery.xlsx");
+			Process.Start(new ProcessStartInfo("PowerQuery.xlsx") { UseShellExecute = true });
 		}
 	}
 }

@@ -40,7 +40,7 @@ namespace Formulas
 
 			using (var doc = Configuration.Factory.Open("Formulas.xlsx"))
 				doc.Process(map);
-			Process.Start("Formulas.xlsx");
+			Process.Start(new ProcessStartInfo("Formulas.xlsx") { UseShellExecute = true });
 		}
 	}
 }

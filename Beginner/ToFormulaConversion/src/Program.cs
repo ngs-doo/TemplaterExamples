@@ -14,7 +14,7 @@ namespace ToFormulaConversion
 			{
 				doc.Process(new { aa = 100, bb = 22.2m });
 			}
-			Process.Start("formula.xlsx");
+			Process.Start(new ProcessStartInfo("formula.xlsx") { UseShellExecute = true });
 		}
 	}
 }

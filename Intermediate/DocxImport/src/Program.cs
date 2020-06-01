@@ -20,7 +20,7 @@ namespace DocxImport
 				 select p).ToArray();
 			using (var doc = Configuration.Factory.Open("Master.docx"))
 				doc.Templater.Replace("imported_document", elements);
-			Process.Start("Master.docx");
+			Process.Start(new ProcessStartInfo("Master.docx") { UseShellExecute = true });
 		}
 
 		private static readonly XName RID = XName.Get("id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");

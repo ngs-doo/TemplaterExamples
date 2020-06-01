@@ -29,19 +29,19 @@ namespace SalesOrderMVP.Controllers
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.EditExcelGridTemplate,
-					(s, ea) => Process.Start(excelGridTemplate)));
+					(s, ea) => Process.Start(new ProcessStartInfo(excelGridTemplate) { UseShellExecute = true })));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.EditExcelItemTemplate,
-					(s, ea) => Process.Start(excelItemTemplate)));
+					(s, ea) => Process.Start(new ProcessStartInfo(excelItemTemplate) { UseShellExecute = true })));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.EditItemTemplate,
-					(s, ea) => Process.Start(itemTemplate)));
+					(s, ea) => Process.Start(new ProcessStartInfo(itemTemplate) { UseShellExecute = true })));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.EditTxtTemplate,
-					(s, ea) => Process.Start(txtTemplate)));
+					(s, ea) => Process.Start(new ProcessStartInfo(txtTemplate) { UseShellExecute = true })));
 			Bindings.Add(
 				new CommandBinding(
 					GlobalCommands.ShowExcelGridData,
@@ -75,7 +75,7 @@ namespace SalesOrderMVP.Controllers
 			using (var doc = Factory.Open(file))
 				doc.Process(data);
 
-			Process.Start(file);
+			Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
 		}
 
 		public void Dispose()

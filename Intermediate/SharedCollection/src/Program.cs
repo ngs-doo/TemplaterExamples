@@ -88,7 +88,7 @@ namespace SharedCollection
 			{
 				doc.Process(data);
 			}
-			Process.Start("TwoTables.docx");
+			Process.Start(new ProcessStartInfo("TwoTables.docx") { UseShellExecute = true });
 		}
 	}
 }

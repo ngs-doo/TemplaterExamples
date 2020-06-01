@@ -43,7 +43,7 @@ namespace PushDownExample
 
 			using (var doc = Configuration.Factory.Open("MyTable.xlsx"))
 				doc.Process(menu);
-			Process.Start("MyTable.xlsx");
+			Process.Start(new ProcessStartInfo("MyTable.xlsx") { UseShellExecute = true });
 		}
 	}
 }

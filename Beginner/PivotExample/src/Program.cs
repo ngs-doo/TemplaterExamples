@@ -45,7 +45,7 @@ namespace PivotExample
 
 			using (var doc = Configuration.Factory.Open("Pivot.xlsx"))
 				doc.Process(data);
-			Process.Start("Pivot.xlsx");
+			Process.Start(new ProcessStartInfo("Pivot.xlsx") { UseShellExecute = true });
 		}
 
 		private static Dictionary<string, object> CreateItem(string town, string country, double population, int gdp)

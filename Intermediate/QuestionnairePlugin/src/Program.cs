@@ -123,7 +123,7 @@ namespace QuestionnairePlugin
 				});
 			}
 
-			Process.Start("questionnaire.docx");
+			Process.Start(new ProcessStartInfo("questionnaire.docx") { UseShellExecute = true });
 		}
 	}
 }

@@ -63,7 +63,7 @@ namespace CsvExample
 			}
 			using (var doc = Configuration.Builder.Include(Quoter).Build().Open("export.csv"))
 				doc.Process(table);
-			Process.Start("export.csv");
+			Process.Start(new ProcessStartInfo("export.csv") { UseShellExecute = true });
 		}
 	}
 }

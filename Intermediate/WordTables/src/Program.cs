@@ -160,7 +160,7 @@ namespace WordDataTable
 						Fixed = fixedItems
 					});
 			}
-			Process.Start("WordTables.docx");
+			Process.Start(new ProcessStartInfo("WordTables.docx") { UseShellExecute = true });
 		}
 
 		class Combined

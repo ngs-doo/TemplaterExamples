@@ -16,7 +16,7 @@ namespace SimplePresentation
 				document.Process(data);
 			}
 
-			Process.Start("out.pptx");
+			Process.Start(new ProcessStartInfo("out.pptx") { UseShellExecute = true });
 		}
 	}
 }

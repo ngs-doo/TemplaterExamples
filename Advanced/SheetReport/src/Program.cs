@@ -21,7 +21,7 @@ namespace SheetReport
 			using (var doc = Configuration.Factory.Open("SheetReport.xlsx"))
 				doc.Process(data);
 
-			Process.Start("SheetReport.xlsx");
+			Process.Start(new ProcessStartInfo("SheetReport.xlsx") { UseShellExecute = true });
 		}
 
 		private static InputData LoadXml()

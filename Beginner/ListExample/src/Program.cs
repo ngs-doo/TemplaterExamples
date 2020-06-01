@@ -43,7 +43,7 @@ namespace ListExample
 
 			using (var doc = Configuration.Factory.Open("List.docx"))
 				doc.Process(myList);
-			Process.Start("List.docx");
+			Process.Start(new ProcessStartInfo("List.docx") { UseShellExecute = true });
 		}
 	}
 }

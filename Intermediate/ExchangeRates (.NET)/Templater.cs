@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using NGS.Templater;
@@ -21,7 +22,7 @@ namespace ExchangeRates
 				document.Templater.Replace("Image", image);
 			}
 
-			System.Diagnostics.Process.Start(file);
+			System.Diagnostics.Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
 		}
 	}
 }

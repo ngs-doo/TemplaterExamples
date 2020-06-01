@@ -16,7 +16,7 @@ namespace ImageExample
 				//we can even use low level API to change tags directly
 				doc.Templater.Replace("picture", image);
 			}
-			Process.Start("Image.docx");
+			Process.Start(new ProcessStartInfo("Image.docx") { UseShellExecute = true });
 		}
 	}
 }

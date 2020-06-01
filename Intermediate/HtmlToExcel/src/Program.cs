@@ -88,7 +88,7 @@ namespace HtmlToExcel
 					numbers = new[] { new Number(100), new Number(-100), new Number(10) }
 				});
 			}
-			Process.Start("Html.xlsx");
+			Process.Start(new ProcessStartInfo("Html.xlsx") { UseShellExecute = true });
 		}
 	}
 }

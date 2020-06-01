@@ -33,7 +33,7 @@ namespace XmlBinding
 			using (var doc = factory.Open("XmlBinding.docx"))
 				doc.Templater.Replace("xml", xml.ToString());
 
-			Process.Start("XmlBinding.docx");
+			Process.Start(new ProcessStartInfo("XmlBinding.docx") { UseShellExecute = true });
 		}
 	}
 

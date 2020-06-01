@@ -68,7 +68,7 @@ some <strong>text</strong> in <font color=""red"">red!</font>
 </html>"
 				});
 			}
-			Process.Start("Html.docx");
+			Process.Start(new ProcessStartInfo("Html.docx") { UseShellExecute = true });
 		}
 	}
 }

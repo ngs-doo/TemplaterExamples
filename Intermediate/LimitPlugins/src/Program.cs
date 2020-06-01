@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NGS.Templater;
-using System.Collections;
 
 namespace LimitPlugins
 {
@@ -33,7 +33,7 @@ namespace LimitPlugins
 					//mutate the object in place... while this is not ideal, it's a convenient way to implement such requirement
 					//alternative is to replicate Iterable processor features which is not trivial
 					var size = list.Count - x;
-					while(size-- > 0)
+					while (size-- > 0)
 						list.RemoveAt(x);
 				}
 			}
@@ -76,7 +76,7 @@ namespace LimitPlugins
 			var factory = Configuration.Builder.Include(TopNElementsFormatting).Include<IList>(TopNElementsProcessing).Build();
 			using (var doc = factory.Open("Limits.docx"))
 				doc.Process(input);
-			Process.Start("Limits.docx");
+			Process.Start(new ProcessStartInfo("Limits.docx") { UseShellExecute = true });
 		}
 	}
 }

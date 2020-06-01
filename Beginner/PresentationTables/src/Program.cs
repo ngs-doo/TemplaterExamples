@@ -28,7 +28,7 @@ namespace PresentationTables
 			};
 			using (var doc = Configuration.Factory.Open("tables.pptx"))
 				doc.Process(new { title = "Tables", subtitle = "Working with", table1 = table1, table2 = table2 });
-			Process.Start("tables.pptx");
+			Process.Start(new ProcessStartInfo("tables.pptx") { UseShellExecute = true });
 		}
 	}
 }

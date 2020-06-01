@@ -38,7 +38,7 @@ namespace MissingProperty
 				doc.Process(dictionary);
 				RemoveTagsWithMissing(doc.Templater);
 			}
-			Process.Start("dynamic.docx");
+			Process.Start(new ProcessStartInfo("dynamic.docx") { UseShellExecute = true });
 		}
 
 		static void RemoveTagsWithMissing(ITemplater templater)

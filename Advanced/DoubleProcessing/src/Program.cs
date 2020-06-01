@@ -65,7 +65,7 @@ namespace DoubleProcessing
 
 			File.WriteAllBytes("DoubleProcessing.xlsx", ms.ToArray());
 
-			Process.Start("DoubleProcessing.xlsx");
+			Process.Start(new ProcessStartInfo("DoubleProcessing.xlsx") { UseShellExecute = true });
 		}
 
 		class Person

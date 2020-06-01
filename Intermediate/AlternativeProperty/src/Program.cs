@@ -45,7 +45,7 @@ namespace AlternativeProperty
 			var factory = Configuration.Builder.Include(missingFormatter).Build();
 			using (var doc = factory.Open("Fields.docx"))
 				ProcessValue(doc, new MyObject());
-			Process.Start("Fields.docx");
+			Process.Start(new ProcessStartInfo("Fields.docx") { UseShellExecute = true });
 		}
 
 		private static void ProcessValue(ITemplateDocument doc, object value)

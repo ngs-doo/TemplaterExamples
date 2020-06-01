@@ -64,7 +64,7 @@ namespace DataSetExample
 			{
 				doc.Process(ds);
 			}
-			Process.Start("out2.docx");
+			Process.Start(new ProcessStartInfo("out2.docx") { UseShellExecute = true });
 		}
 	}
 }

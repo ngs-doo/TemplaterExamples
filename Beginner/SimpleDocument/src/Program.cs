@@ -16,7 +16,7 @@ namespace SimpleDocument
 				document.Process(data);
 			}
 
-			Process.Start("out.docx");
+			Process.Start(new ProcessStartInfo("out.docx") { UseShellExecute = true });
 		}
 	}
 }

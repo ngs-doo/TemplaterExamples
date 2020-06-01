@@ -169,7 +169,7 @@ namespace ListsAndTables
 			{
 				doc.Process(people);
 			}
-			Process.Start("listsAndTables.docx");
+			Process.Start(new ProcessStartInfo("listsAndTables.docx") { UseShellExecute = true });
 		}
 	}
 }

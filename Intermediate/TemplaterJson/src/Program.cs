@@ -55,6 +55,18 @@ namespace TemplaterJson
 			return result;
 		}
 
+		private static FileStream Open(string path)
+		{
+			try
+			{
+				return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+			}
+			catch
+			{
+				return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			}
+		}
+
 		private static int Process(string templatePath, string dataPath, string outputPath)
 		{
 			var ext = SupportedType.FindExtension(templatePath);
@@ -69,12 +81,12 @@ namespace TemplaterJson
 				Console.Error.WriteLine("Unable to find specified data file: " + dataPath);
 				return 2;
 			}
-			var json = dataPath == null ? Console.In : new StreamReader(new FileStream(dataPath, FileMode.Open, FileAccess.Read));
+			var json = dataPath == null ? Console.In : new StreamReader(Open(dataPath));
 
 			var newtonsoft = new Newtonsoft.Json.JsonSerializer();
 			newtonsoft.Converters.Add(new DictionaryConverter());
 
-			using (var fis = new FileStream(templatePath, FileMode.Open, FileAccess.Read))
+			using (var fis = Open(templatePath))
 			using (var fos = outputPath == null ? Console.OpenStandardOutput() : new FileStream(outputPath, FileMode.Create, FileAccess.Write))
 			{
 				while (char.IsWhiteSpace((char)json.Peek()))

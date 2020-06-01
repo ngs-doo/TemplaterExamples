@@ -121,7 +121,7 @@ namespace Pictures
 			{
 				doc.Process(data);
 			}
-			Process.Start("Pictures.docx");
+			Process.Start(new ProcessStartInfo("Pictures.docx") { UseShellExecute = true });
 		}
 	}
 }

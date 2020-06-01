@@ -15,7 +15,7 @@ namespace Paragraphs
 			};
 			using (var doc = Configuration.Factory.Open("Paragraphs.docx"))
 				doc.Process(new { table = paragraphs, list = paragraphs });
-			Process.Start("Paragraphs.docx");
+			Process.Start(new ProcessStartInfo("Paragraphs.docx") { UseShellExecute = true });
 		}
 	}
 }

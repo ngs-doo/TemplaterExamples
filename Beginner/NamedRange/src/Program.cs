@@ -33,7 +33,7 @@ namespace NamedRange
 
 			using (var doc = Configuration.Factory.Open("Scorecard.xlsx"))
 				doc.Process(MakeScorecard(100));
-			Process.Start("Scorecard.xlsx");
+			Process.Start(new ProcessStartInfo("Scorecard.xlsx") { UseShellExecute = true });
 		}
 
 		private static Scorecard MakeScorecard(int groups)

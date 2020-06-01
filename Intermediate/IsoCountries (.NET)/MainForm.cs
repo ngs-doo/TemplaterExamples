@@ -43,12 +43,12 @@ namespace IsoCountries
 		private void OnReport(string file)
 		{
 			tssStatus.Text = "Ready.";
-			Process.Start(file);
+			Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
 		}
 
 		private void isoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(isoLink.Text);
+			Process.Start(new ProcessStartInfo(isoLink.Text) { UseShellExecute = true });
 		}
 	}
 }

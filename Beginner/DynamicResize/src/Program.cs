@@ -47,7 +47,7 @@ namespace DynamicResize
 					{"vertical-nulls", vertical}
 				});
 			}
-			Process.Start("Groceries.docx");
+			Process.Start(new ProcessStartInfo("Groceries.docx") { UseShellExecute = true });
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace ChartExample
 					new { tag = "first page", pie = pie1, lines = lines1 },
 					new { tag = "second page", pie = pie2, lines = lines2 }});
 			}
-			Process.Start("ChartExample.docx");
+			Process.Start(new ProcessStartInfo("ChartExample.docx") { UseShellExecute = true });
 		}
 	}
 }

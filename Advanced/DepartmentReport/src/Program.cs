@@ -69,7 +69,7 @@ namespace DepartmentReport
 			using (var doc = Configuration.Factory.Open(fis, fos, "xlsx"))
 				doc.Process(GetCompany());
 
-			Process.Start("departments.xlsx");
+			Process.Start(new ProcessStartInfo("departments.xlsx") { UseShellExecute = true });
 		}
 
 		private static Company GetCompany()

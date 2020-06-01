@@ -29,7 +29,7 @@ namespace ExcelLinks
 
 			using (var doc = Configuration.Factory.Open("Links.xlsx"))
 				doc.Process(favories);
-			Process.Start("Links.xlsx");
+			Process.Start(new ProcessStartInfo("Links.xlsx") { UseShellExecute = true });
 		}
 	}
 }

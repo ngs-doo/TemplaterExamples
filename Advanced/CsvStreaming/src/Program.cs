@@ -132,7 +132,7 @@ namespace CsvStreaming
 					doc.Templater.Resize(doc.Templater.Tags, 0);
 				}
 			}
-			Process.Start("output.zip");
+			Process.Start(new ProcessStartInfo("output.zip") { UseShellExecute = true });
 		}
 	}
 }

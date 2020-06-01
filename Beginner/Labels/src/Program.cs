@@ -22,7 +22,7 @@ namespace Labels
 				addresses.Add(new Address { FirstName = "name " + i, LastName = "surname " + i, Line = "line " + i, PostCode = "post " + i });
 			using (var doc = Configuration.Factory.Open("label.docx"))
 				doc.Process(addresses);
-			Process.Start("label.docx");
+			Process.Start(new ProcessStartInfo("label.docx") { UseShellExecute = true });
 		}
 	}
 }
