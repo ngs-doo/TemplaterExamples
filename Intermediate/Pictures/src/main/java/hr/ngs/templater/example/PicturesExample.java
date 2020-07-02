@@ -217,7 +217,7 @@ public class PicturesExample {
                 .build();
         SAXSVGDocumentFactory svgFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
-        Map<String, List> data = new HashMap<String, List>();
+        Map<String, Object> data = new HashMap<String, Object>();
         data.put("cars", Arrays.asList(
                 new Car("Really fast car", "/car1.gif"),
                 new Car("Ford Focus", "/car2.jpg"),
@@ -233,6 +233,7 @@ public class PicturesExample {
                 new Svg("Cat face", "without fallback image conversion - works only in MS Word 2016+", svgDoc(svgFactory, "/cat_face.svg")), //Icon made by Freepik from www.flaticon.com
                 new Svg("Happy cat", "with fallback image conversion", svgDoc(svgFactory, "/cat_happy.svg")) //Icon made by Smashicons from www.flaticon.com
         ));
+        data.put("placeholder", ImageIO.read(PicturesExample.class.getResourceAsStream("/unicorn.jpg")));
         tpl.process(data);
         tpl.flush();
         fos.close();

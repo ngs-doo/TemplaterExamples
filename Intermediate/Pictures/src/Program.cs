@@ -112,6 +112,7 @@ namespace Pictures
 					new SvgDoc("Cat face", "without fallback image conversion - works only in MS Word 2016+", "cat_face.svg"), //Icon made by Freepik from www.flaticon.com
 					new SvgDoc("Happy cat", "with fallback image conversion", "cat_happy.svg") //Icon made by Smashicons from www.flaticon.com
 			};
+			data["placeholder"] = Image.FromFile("template/unicorn.jpg");
 			var factory = Configuration.Builder
 				.Include(ImageLoader)//setup image loading via from-resource metadata
 				.Include(ImageMaxSize)//setup image resizing via maxSize(X, Y) metadata

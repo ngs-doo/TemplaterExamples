@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.4.4.0\lib\Net35\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.4.5.0\lib\Net35\NGS.Templater.dll</HintPath>
     </Reference>
     <Reference Include="Svg">
       <HintPath>..\..\packages\Svg.2.4.3\lib\Svg.dll</HintPath>
@@ -88,6 +88,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="template\cat_happy.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="template\unicorn.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

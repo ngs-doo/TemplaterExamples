@@ -96,7 +96,7 @@ public class CollapseExample {
             }
         }).include(new IDocumentFactoryBuilder.ILowLevelReplacer() {
             @Override
-            public Object replace(Object value) {
+            public Object replace(Object value, String tag, String[] metadata) {
                 if (value instanceof Color) {
                     String fillValue = Integer.toHexString(((Color) value).getRGB()).substring(2);
                     String xml = "<w:tc><w:tcPr>\n" +

@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Templater" Version="4.4.0" />
+    <PackageReference Include="Templater" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>

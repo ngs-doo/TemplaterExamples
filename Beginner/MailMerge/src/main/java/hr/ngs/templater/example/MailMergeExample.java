@@ -37,7 +37,7 @@ public class MailMergeExample {
 
     static class ImageReferenceReplacer implements IDocumentFactoryBuilder.ILowLevelReplacer {
         @Override
-        public Object replace(Object value) {
+        public Object replace(Object value, String tag, String[] metadata) {
             if (value instanceof ImageReference) {
                 ImageReference ir = (ImageReference) value;
                 InputStream is = MailMergeExample.class.getResourceAsStream("/" + ir.value);

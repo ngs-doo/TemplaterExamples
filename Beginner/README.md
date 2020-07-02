@@ -58,7 +58,7 @@ While simple scenario such as repeating of a table rows is supported, arbitrary 
 
 ### [Labels](Labels/Readme.md)
 
-Word features, such as columns, can be leveraged for layout.
+Word features, such as columns, can be leveraged for layout. Barcodes from embedded fonts.
 
 [template](Labels/template/label.docx?raw=true) - [result](Labels/result.docx?raw=true)
 

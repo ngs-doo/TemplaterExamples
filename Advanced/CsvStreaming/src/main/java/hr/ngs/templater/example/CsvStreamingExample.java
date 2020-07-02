@@ -21,7 +21,7 @@ public class CsvStreamingExample {
     static class Quoter implements IDocumentFactoryBuilder.ILowLevelReplacer {
 
         @Override
-        public Object replace(Object value) {
+        public Object replace(Object value, String tag, String[] metadata) {
             if (value != null) {
                 String str = value.toString();
                 int ind1 = str.indexOf(',');
@@ -35,7 +35,7 @@ public class CsvStreamingExample {
     static class NumberAsComma implements IDocumentFactoryBuilder.ILowLevelReplacer {
 
         @Override
-        public Object replace(Object value) {
+        public Object replace(Object value, String tag, String[] metadata) {
             if (value instanceof BigDecimal) {
                 BigDecimal bd = (BigDecimal)value;
                 return bd.toString().replace('.', ',');

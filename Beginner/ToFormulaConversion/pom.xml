@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>formula-conversion-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.4.0</version>
+    <version>4.5.0</version>
     <name>To formula conversion</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

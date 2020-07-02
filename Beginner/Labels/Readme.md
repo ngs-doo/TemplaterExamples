@@ -22,4 +22,9 @@ but often using built-in Word/Excel features offer for more convenient solution.
 
 ### Tag analysis
 
-Built-in type processor for dictionary collection will analyze all elements of the collection to find best context matching tags within the document and keys in dictionaries.    
+Built-in type processor for dictionary collection will analyze all elements of the collection to find best context matching tags within the document and keys in dictionaries.
+
+### Barcodes
+
+Fonts can be used in creative ways and one such way is to printing barcodes via custom fonts.
+If font is embedded in the document, document will open even on systems which do not have such fonts installed.     

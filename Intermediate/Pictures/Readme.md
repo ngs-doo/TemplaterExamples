@@ -34,3 +34,8 @@ It's convenient to use external tools to extract such metadata and then keep the
 Microsoft Office 2016 introduces SVG image support. Since 4.2.0 Templater supports SVG images when passed as XML document with svg name.
 By default Templater will only inject SVG image into the document, but if a fallback image is required this can be converted via external plugin registered during Templater configuration.
 Previous Office version will fallback to image format so documents will look similar on both old and new MS Office versions.
+
+### Existing images
+
+Since v4.5 existing images can be used for replacement. In that case Templater will retain its configuration such as effects, size and other image properties.
+This allows more configuration during image manipulation and allows the use of images in PowerPoint

@@ -26,6 +26,10 @@ enum SupportedType {
         if (lastIndexOfDot == -1) return null;
 
         final String extension = path.substring(lastIndexOfDot + 1);
-        return valueOf(extension.toUpperCase(Locale.ENGLISH));
+        try {
+            return valueOf(extension.toUpperCase(Locale.ENGLISH));
+        } catch (Exception ignore) {
+            return null;
+        }
     }
 }
