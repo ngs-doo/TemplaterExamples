@@ -16,7 +16,7 @@ function initApp()
 
   function updateProcessTemplateText() {
     var extension = activeTemplate.substr(activeTemplate.lastIndexOf('.') + 1);
-    if (currentPdfConverter != -1 && extension == 'docx') extension = 'pdf';
+    if (currentPdfConverter != -1 && (extension == 'docx' || extension == 'pptx')) extension = 'pdf';
     $processTemplate.html('Create ' + extension + ' document with ' + activeTemplate);
   }
 

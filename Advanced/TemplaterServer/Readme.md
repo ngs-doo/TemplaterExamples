@@ -17,7 +17,7 @@ Each of them has a relevant json example in `resources/examples`.
 
 ### PDF conversion via Docker and LibreOffice
 
-Java version of Templater server has some additional APIs. One of them is `/pdf?file=name.ext` which can be used for converting input docx/xlsx stream into an output PDF stream.
+Java version of Templater server has some additional APIs. One of them is `/pdf?file=name.ext` which can be used for converting input docx/xlsx/pptx stream into an output PDF stream.
 To ease the usage of such API there is a [Dockerfile](Dockerfile) to startup the container ready for conversion.
 
 Docker image can be built by running
@@ -32,7 +32,9 @@ Once the docker has started, REST API can be consumed by calling:
 
     PUT http://localhost:7777/pdf?file=name.ext
 
-with body for the actual document. PDF document will be returned as the response
+with body for the actual document. PDF document will be returned as the response.
+
+Alternatively [portable version of LibreOffice](https://www.libreoffice.org/download/portable-versions/) can be used instead of Docker.
 
 ### REST server for other languages
 
@@ -52,7 +54,7 @@ Several libraries/applications are available for PDF output:
   * Aspose
   * Spire
 
-By default all of them will be available when app is locally started. Which are available can be specified via configuration parameter, eg:
+By default all of them will be available when app is started locally. Which are available can be specified via configuration parameter, eg:
  
     java -jar templater-server.jar -pdf=LibreOffice,Aspose
 
