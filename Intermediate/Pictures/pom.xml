@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>pictures-example</artifactId>
     <packaging>jar</packaging>
-    <version>4.5.0</version>
+    <version>4.6.0</version>
     <name>PicturesExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

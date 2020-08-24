@@ -29,3 +29,8 @@ It looks as a read-only document to the user.
 
 Simple "load-image" plugin is registered during startup which loads image based on filename.
 Templater "understands" image type and will convert it into a picture (respecting it's DPI settings)
+
+### Tag aliases
+
+This template uses Templater Editor tag alias feature for defining prefix `Jobs.Projects.Tasks` as `task`.
+Also, schema has been defined meaning that tag listing is available with error checking.
