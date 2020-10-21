@@ -18,3 +18,23 @@ Plugins are called in succession, which means that multiple plugins can apply ru
 
 Templater calls processors in succession until one says it has handled that data type.
 That behavior can be hijacked with custom plugin by mutating object in place.
+
+### Navigation plugin
+
+Since v5 there is a natural way to deal with such scenarios by using navigation plugin.
+Navigation plugin can provide alternative object for further processing.
+This can be used for various purposes:
+
+ * returning same collection somewhat changed (limiting, sorting, filtering, ...)
+ * returning totally different object/collection
+ * calling methods with arguments (unlike only being able to use zero method navigation)
+ * various other complex logic
+ 
+Navigation plugin can become very unreadable really fast - so it is suggested to pair it with alias whenever possible.
+That way instead of writing something like
+
+`[[groups:sort(usage).products:filter(active).name]]`
+
+alias can be defined like products = groups:sort(usage).products:filter(active)
+
+and tag can look like `[[products.name]]` with all the behavior which was implicitly defined

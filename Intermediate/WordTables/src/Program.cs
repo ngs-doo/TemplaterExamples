@@ -47,37 +47,75 @@ namespace WordDataTable
 			return false;
 		}
 
-		static bool CollapseNonEmpty(object value, string metadata, string property, ITemplater templater)
+		//for this example position is ignored as it is always -1
+		static bool CollapseNonEmpty(object value, string metadata, string tag, int position, ITemplater templater)
 		{
-			if (metadata == "collapseNonEmpty" || metadata == "collapseEmpty")
+			var dt = value as DataTable;
+			if (dt != null && (metadata == "collapseNonEmpty" || metadata == "collapseEmpty"))
 			{
-				var dt = value as DataTable;
-				if (dt == null) return false;
 				var isEmpty = dt.Rows.Count == 0;
 				//loop until all tags with the same name are processed
 				do
 				{
-					var md = templater.GetMetadata(property, false);
+					var md = templater.GetMetadata(tag, false);
 					var collapseOnEmpty = md.Contains("collapseEmpty");
 					var collapseNonEmpty = md.Contains("collapseNonEmpty");
 					if (isEmpty)
 					{
 						if (collapseOnEmpty)
-							templater.Resize(property, 0);
+						{
+							//when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+							//otherwise we need to use "advanced" resize API to specify which exact tag to replace
+							if (position == -1)
+								templater.Resize(new[] { tag }, 0);
+							else
+								templater.Resize(new[] { new TagPosition(tag, position) }, 0);
+						}
 						else
-							templater.Replace(property, "");
+						{
+							//when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
+							//otherwise we can replace that exact tag via position API
+							//replacing the first tag is the same as calling replace(tag, 0, value)
+							if (position == -1)
+								templater.Replace(tag, "");
+							else
+								templater.Replace(tag, position, "");
+						}
 					}
 					else
 					{
 						if (collapseNonEmpty)
-							templater.Resize(property, 0);
+						{
+							if (position == -1)
+								templater.Resize(new[] { tag }, 0);
+							else
+								templater.Resize(new[] { new TagPosition(tag, position) }, 0);
+						}
 						else
-							templater.Replace(property, "");
+						{
+							if (position == -1)
+								templater.Replace(tag, "");
+							else
+								templater.Replace(tag, position, "");
+						}
 					}
-				} while (templater.Tags.Contains(property));
+				} while (templater.Tags.Contains(tag));
 				return true;
 			}
 			return false;
+		}
+
+		static object LimitDataTable(object parent, object value, string member, string metadata)
+		{
+			var rs = value as DataTable;
+			//check if plugin is applicable
+			if (rs == null || !metadata.StartsWith("limit(")) return value;
+			int limit = int.Parse(metadata.Substring(6, metadata.Length - 7));
+			var dt = rs.Clone();
+			for (int i = 0; i < limit; i++)
+				dt.ImportRow(rs.Rows[i]);
+			//return different object which will be used further in the processing
+			return dt;
 		}
 
 		public static void Main(string[] args)
@@ -98,6 +136,8 @@ namespace WordDataTable
 				Configuration.Builder
 				.Include(Top10Rows)
 				.Include<DataTable>(Limit10Table)
+				.NavigateSeparator(':')
+				.Include(LimitDataTable)
 				.Include(CollapseNonEmpty)
 				.Build();
 			var dynamicResize1 = new object[7, 3]{

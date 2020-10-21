@@ -42,6 +42,19 @@ namespace LimitPlugins
 			return false;
 		}
 
+		static object TopNElementNavigation(object parent, object value, string member, string metadata)
+		{
+			if (value is IList && metadata.StartsWith("limit("))
+			{
+				//extract argument from the metadata
+				var limit = int.Parse(metadata.Substring(6, metadata.Length - 7));
+				var list = (IList)value;
+				//return only a subset of list for processing - does not mutate the object like previous plugin
+				return list.OfType<object>().Take(limit);
+			}
+			return value;
+		}
+
 		class Instance
 		{
 			public string column1;
@@ -73,7 +86,12 @@ namespace LimitPlugins
 			input["dynamic"] = dynamicResize;
 			input["fixed"] = instances;
 
-			var factory = Configuration.Builder.Include(TopNElementsFormatting).Include<IList>(TopNElementsProcessing).Build();
+			var factory = Configuration.Builder
+				.Include(TopNElementsFormatting)
+				.Include<IList>(TopNElementsProcessing)
+				.NavigateSeparator(':')
+				.Include(TopNElementNavigation)
+				.Build();
 			using (var doc = factory.Open("Limits.docx"))
 				doc.Process(input);
 			Process.Start(new ProcessStartInfo("Limits.docx") { UseShellExecute = true });

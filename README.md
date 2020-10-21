@@ -85,6 +85,7 @@ Examples:
 
  * [verbalize number into words](Intermediate/CollapseRegion)
  * [customize tag pattern](Intermediate/QuestionnairePlugin)
+ * [custom transformation during navigation](Intermediate/LimitPlugins)
  * [custom reflection processing](Intermediate/AlternativeProperty)
  * [overriding bultin plugins](Intermediate/BoolOverride)
  * [custom type processing](Intermediate/QuestionnairePlugin)

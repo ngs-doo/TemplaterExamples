@@ -41,6 +41,21 @@ public class LimitsExample {
         }
     }
 
+    static class TopNElementNavigation implements IDocumentFactoryBuilder.INavigate {
+
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (value instanceof List && metadata.startsWith("limit(")) {
+                //extract argument from the metadata
+                int limit = Integer.parseInt(metadata.substring(6, metadata.length() - 1));
+                List list = (List)value;
+                //return only a subset of list for processing - does not mutate the object like previous plugin
+                return list.subList(0, limit);
+            }
+            return value;
+        }
+    }
+
     static class Instance {
         public String column1;
         public String column2;
@@ -74,6 +89,8 @@ public class LimitsExample {
                 Configuration.builder()
                         .include(new TopNElementsFormatting())
                         .include(List.class, new TopNElementsProcessing())
+                        .navigateSeparator(':')
+                        .include(new TopNElementNavigation())
                         .build();
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         tpl.process(input);

@@ -4,6 +4,7 @@ import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.ibm.icu.util.ULocale;
 import hr.ngs.templater.*;
+import hr.ngs.templater.ITemplater.TagPosition;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -52,13 +53,18 @@ public class CollapseExample {
         final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);
         ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
             @Override
-            public boolean handle(Object value, String metadata, String path, ITemplater templater) {
+            public boolean handle(Object value, String metadata, String path, int position, ITemplater templater) {
                 if (value instanceof String && metadata.startsWith("collapseIf(")) {
                     //Extract the matching expression
                     String expression = metadata.substring("collapseIf(".length(), metadata.length() - 1);
                     if (value.equals(expression)) {
                         //remove the context around the specific property
-                        templater.resize(new String[]{path}, 0);
+                        if (position == -1)
+                            //when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+                            templater.resize(new String[]{path}, 0);
+                        else
+                            //otherwise we need to use "advanced" resize API to specify which exact tag to replace
+                            templater.resize(new TagPosition[] { new TagPosition(path, position)}, 0);
                         return true;
                     }
                 }
@@ -66,28 +72,49 @@ public class CollapseExample {
             }
         }).include(new IDocumentFactoryBuilder.IHandler() {
             @Override
-            public boolean handle(Object value, String metadata, String property, ITemplater templater) {
+            public boolean handle(Object value, String metadata, String tag, int position, ITemplater templater) {
                 if (value instanceof List && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                     List list = (List) value;
                     //loop until all tags with the same name are processed
                     do {
-                        String[] md = templater.getMetadata(property, false);
+                        String[] md = templater.getMetadata(tag, false);
                         boolean collapseOnEmpty = contains(md, "collapseEmpty");
                         boolean collapseNonEmpty = contains(md, "collapseNonEmpty");
                         if (list.isEmpty()) {
                             if (collapseOnEmpty) {
-                                templater.resize(new String[]{property}, 0);
+                                //when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+                                //otherwise we need to use "advanced" resize API to specify which exact tag to replace
+                                if (position == -1) {
+                                    templater.resize(new String[]{tag}, 0);
+                                } else {
+                                    templater.resize(new TagPosition[] { new TagPosition(tag, position)}, 0);
+                                }
                             } else {
-                                templater.replace(property, "");
+                                //when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
+                                //otherwise we can replace that exact tag via position API
+                                //replacing the first tag is the same as calling replace(tag, 0, value)
+                                if (position == -1) {
+                                    templater.replace(tag, "");
+                                } else {
+                                    templater.replace(tag, position, "");
+                                }
                             }
                         } else {
                             if (collapseNonEmpty) {
-                                templater.resize(new String[]{property}, 0);
+                                if (position == -1) {
+                                    templater.resize(new String[]{tag}, 0);
+                                } else {
+                                    templater.resize(new TagPosition[] { new TagPosition(tag, position)}, 0);
+                                }
                             } else {
-                                templater.replace(property, "");
+                                if (position == -1) {
+                                    templater.replace(tag, "");
+                                } else {
+                                    templater.replace(tag, position, "");
+                                }
                             }
                         }
-                    } while (contains(templater.tags(), property));
+                    } while (contains(templater.tags(), tag));
                     //we want to stop further processing if list is empty
                     //otherwise we want to continue resizing list and processing it's elements
                     return list.isEmpty();

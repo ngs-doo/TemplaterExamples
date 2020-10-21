@@ -20,3 +20,10 @@ they are not visible in the output or printout.
 Lists can be defined with different bullet styles. 
 But bullet style can also be no bullet in which case it's hard to distinguish list items from ordinary paragraphs.
 When placing caret in such a list, Word will highlight the list dropdown in the Ribbon. 
+
+### Content controls
+
+Content controls can be used to implement part of paragraph conditionality. If resize(tag inside content control, 0) is invoked, only content control will be removed.
+This works even when content control is inside lists or table.
+This way sections of the text can be easily removed without using specific text as part of the tag or as value inside a tag.
+TextBox has the same behavior as content control when it comes to removal

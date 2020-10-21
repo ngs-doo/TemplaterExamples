@@ -50,41 +50,13 @@ public class WordTablesExample {
                 {"a", "b", null}
         };
         List<HashMap<String, Object>> map = Arrays.asList(
-                new HashMap<String, Object>() {{
-                    put("1", "a");
-                    put("2", "b");
-                    put("3", "c");
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", "a");
-                    put("2", null);
-                    put("3", "c");
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", "a");
-                    put("2", "b");
-                    put("3", null);
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", null);
-                    put("2", "b");
-                    put("3", "c");
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", "a");
-                    put("2", null);
-                    put("3", null);
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", null);
-                    put("2", null);
-                    put("3", null);
-                }},
-                new HashMap<String, Object>() {{
-                    put("1", "a");
-                    put("2", "b");
-                    put("3", "c");
-                }}
+                new HashMap<String, Object>() {{ put("1", "a"); put("2", "b"); put("3", "c"); }},
+                new HashMap<String, Object>() {{ put("1", "a"); put("2", null); put("3", "c"); }},
+                new HashMap<String, Object>() {{ put("1", "a"); put("2", "b"); put("3", null); }},
+                new HashMap<String, Object>() {{ put("1", null); put("2", "b"); put("3", "c"); }},
+                new HashMap<String, Object>() {{ put("1", "a"); put("2", null); put("3", null); }},
+                new HashMap<String, Object>() {{ put("1", null); put("2", null); put("3", null); }},
+                new HashMap<String, Object>() {{ put("1", "a"); put("2", "b"); put("3", "c"); }}
         );
         List<Arguments.Fixed> fixedItems = Arrays.asList(
                 new Arguments.Fixed("A", 1, BigDecimal.valueOf(42)),
@@ -114,6 +86,9 @@ public class WordTablesExample {
                 Configuration.builder()
                         .include(new Top10Rows())
                         .include(ResultSet.class, new Limit10Table())
+                        //without specifying separator, navigation feature will not be available
+                        .navigateSeparator(':')
+                        .include(new LimitResultSet())
                         .include(new CollapseNonEmpty())
                         .build().open(templateStream, "docx", fos);
         tpl.process(arguments);
@@ -140,6 +115,8 @@ public class WordTablesExample {
                         }
                         newRs.addRow(row);
                     }
+                    //since this is in memory and we are reusing it in plugins for the sake of example, let's just reposition
+                    oldRs.beforeFirst();
                     return newRs;
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -149,34 +126,69 @@ public class WordTablesExample {
         }
     }
 
+    static class LimitResultSet implements IDocumentFactoryBuilder.INavigate {
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            //check if plugin is applicable
+            if (value instanceof ResultSet == false || !metadata.startsWith("limit(")) return value;
+            int limit = Integer.parseInt(metadata.substring(6, metadata.length() - 1));
+            ResultSet rs = (ResultSet) value;
+            MockResultSet dt = new MockResultSet("rs-copy");
+            try {
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columns = rsmd.getColumnCount();
+                for (int i = 1; i <= columns; i++) {
+                    dt.addColumn(rsmd.getColumnName(i));
+                }
+                for (int i = 0; rs.next() && i < limit; i++) {
+                    Object[] row = new Object[columns];
+                    for (int j = 0; j < columns; j++) {
+                        row[j] = rs.getObject(j + 1);
+                    }
+                    dt.addRow(row);
+                }
+                //since this is in memory and we are reusing it in plugins for the sake of example, let's just reposition
+                rs.beforeFirst();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            //return different object which will be used further in the processing
+            return dt;
+        }
+    }
+
     static class Limit10Table implements IDocumentFactoryBuilder.IProcessor<ResultSet> {
         @Override
         public boolean tryProcess(String prefix, ITemplater templater, ResultSet resultSet) {
             try {
+                ResultSetMetaData rsMD = resultSet.getMetaData();
+                boolean hasMatchingTag = false;
+                for (int i = 0; !hasMatchingTag && i < rsMD.getColumnCount(); i++) {
+                    String tag = prefix + rsMD.getColumnName(i + 1);
+                    //if any of the found tags matches limit10 condition
+                    hasMatchingTag = Arrays.asList(templater.getMetadata(tag, true)).contains("limit10");
+                }
+                if (!hasMatchingTag) return false;
                 resultSet.last();
                 int rows = resultSet.getRow();
-                resultSet.first();
+                resultSet.beforeFirst();
                 if (rows > 10) {
                     //simplified way to match columns against tags
                     List<String> tags = new ArrayList<String>();
-                    ResultSetMetaData rsMD = resultSet.getMetaData();
-                    boolean hasMatchingTag = false;
                     for (int i = 0; i < rsMD.getColumnCount(); i++) {
                         String tag = prefix + rsMD.getColumnName(i + 1);
                         tags.add(tag);
-                        hasMatchingTag = hasMatchingTag || Arrays.asList(templater.getMetadata(tag, true)).contains("limit10");
                     }
-                    //if any of the found tags matches limit10 condition
-                    if (hasMatchingTag) {
-                        templater.resize(tags.toArray(new String[0]), 10);
-                        for (int i = 0; i < 10; i++) {
-                            resultSet.next();
-                            for (int x = 0; x < rsMD.getColumnCount(); x++) {
-                                templater.replace(prefix + rsMD.getColumnName(x + 1), resultSet.getObject(x + 1));
-                            }
+                    templater.resize(tags.toArray(new String[0]), 10);
+                    for (int i = 0; i < 10; i++) {
+                        resultSet.next();
+                        for (int x = 0; x < rsMD.getColumnCount(); x++) {
+                            templater.replace(prefix + rsMD.getColumnName(x + 1), resultSet.getObject(x + 1));
                         }
-                        return true;
                     }
+                    //since this is in memory and we are reusing it in plugins for the sake of example, let's just reposition
+                    resultSet.beforeFirst();
+                    return true;
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -187,29 +199,50 @@ public class WordTablesExample {
 
     static class CollapseNonEmpty implements IDocumentFactoryBuilder.IHandler {
         @Override
-        public boolean handle(Object value, String metadata, String property, ITemplater templater) {
-            if ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata)) {
-                if (value instanceof ResultSet == false) return false;
+        public boolean handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+            if (value instanceof ResultSet && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                 ResultSet rs = (ResultSet) value;
                 try {
                     boolean isEmpty = !rs.next();
                     //loop until all tags with the same name are processed
                     do {
-                        List<String> md = Arrays.asList(templater.getMetadata(property, false));
+                        List<String> md = Arrays.asList(templater.getMetadata(tag, false));
                         boolean collapseOnEmpty = md.contains("collapseEmpty");
                         boolean collapseNonEmpty = md.contains("collapseNonEmpty");
                         if (isEmpty) {
-                            if (collapseOnEmpty)
-                                templater.resize(new String[]{property}, 0);
-                            else
-                                templater.replace(property, "");
+                            if (collapseOnEmpty) {
+                                //when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+                                //otherwise we need to use "advanced" resize API to specify which exact tag to replace
+                                if (position == -1) {
+                                    templater.resize(new String[]{tag}, 0);
+                                } else {
+                                    templater.resize(new ITemplater.TagPosition[] { new ITemplater.TagPosition(tag, position)}, 0);
+                                }
+                            } else {
+                                //when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
+                                //otherwise we can replace that exact tag via position API
+                                if (position == -1) {
+                                    templater.replace(tag, "");
+                                } else {
+                                    templater.replace(tag, position, "");
+                                }
+                            }
                         } else {
-                            if (collapseNonEmpty)
-                                templater.resize(new String[]{property}, 0);
-                            else
-                                templater.replace(property, "");
+                            if (collapseNonEmpty) {
+                                if (position == -1) {
+                                    templater.resize(new String[]{tag}, 0);
+                                } else {
+                                    templater.resize(new ITemplater.TagPosition[] { new ITemplater.TagPosition(tag, position)}, 0);
+                                }
+                            } else {
+                                if (position == -1) {
+                                    templater.replace(tag, "");
+                                } else {
+                                    templater.replace(tag, position, "");
+                                }
+                            }
                         }
-                    } while (Arrays.asList(templater.tags()).contains(property));
+                    } while (Arrays.asList(templater.tags()).contains(tag));
                     return true;
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);

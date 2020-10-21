@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 using NGS.Templater;
 
@@ -124,6 +125,14 @@ namespace TemplaterJson
 				ms.Position = 0;
 				return new ImageInfo(ms, "png", image.Width, image.HorizontalResolution, image.Height, image.VerticalResolution);
 			}
+			return value;
+		}
+
+		static object Xml(object value, string metadata)
+		{
+			var str = value as string;
+			if (metadata == "xml" && str != null)
+				return XElement.Parse(str);
 			return value;
 		}
 	}

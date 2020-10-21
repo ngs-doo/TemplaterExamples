@@ -47,3 +47,11 @@ This feature can be easily implemented via external plugin which does tha approp
 resize(tags, 0) will invoke removal of document content between sections, so when paired with section page break, 
 it can be used to conditionally remove several pages of document.
 Templater will skip over ordinary page break, but section page break will be used as starting or ending location.
+
+### Collapse best practice
+
+While collapse can be used in various scenarios,
+if it can be avoided it should be avoided in favor of better data structure.
+Templater will by default collapse empty collections and similar types,
+which is a more natural way to model template -> it will lead to simpler templates
+without "magic" tags for the purpose of conditional removal.

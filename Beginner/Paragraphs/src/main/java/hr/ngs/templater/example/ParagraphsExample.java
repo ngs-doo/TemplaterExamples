@@ -17,6 +17,7 @@ public class ParagraphsExample {
     public static class Model {
         public Paragraph[] table;
         public Paragraph[] list;
+        public String remove_cc;
     }
 
     public static void main(final String[] args) throws Exception {

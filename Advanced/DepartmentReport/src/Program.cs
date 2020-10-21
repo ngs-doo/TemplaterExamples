@@ -66,10 +66,24 @@ namespace DepartmentReport
 		{
 			using (var fis = File.OpenRead("template/departments.xlsx"))
 			using (var fos = File.OpenWrite("departments.xlsx"))
-			using (var doc = Configuration.Factory.Open(fis, fos, "xlsx"))
+			using (var doc = Configuration
+				.Builder
+				.NavigateSeparator(':')
+				.Include(SortExpression)
+				.Build()
+				.Open(fis, fos, "xlsx"))
 				doc.Process(GetCompany());
 
 			Process.Start(new ProcessStartInfo("departments.xlsx") { UseShellExecute = true });
+		}
+
+		static object SortExpression(object parent, object value, string member, string metadata)
+		{
+			var col = value as ICollection;
+			if (!metadata.StartsWith("sort(") || col == null || col.Count < 2) return value;
+			var property = metadata.Substring(5, metadata.Length - 6);
+			var f = col.OfType<object>().First().GetType().GetField(property);
+			return col.OfType<object>().OrderBy(it => f.GetValue(it)).ToList();
 		}
 
 		private static Company GetCompany()

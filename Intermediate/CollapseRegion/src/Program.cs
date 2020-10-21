@@ -34,7 +34,7 @@ namespace CollapseRegion
 							.setPaybackYears(10)
 							.setUcCheck(true).setUcCheckResponse("Ok")
 							.setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1));
-			var factory = Configuration.Builder.Include((value, metadata, path, templater) =>
+			var factory = Configuration.Builder.Include((value, metadata, path, position, templater) =>
 			{
 				var str = value as string;
 				if (str != null && metadata.StartsWith("collapseIf("))
@@ -44,12 +44,21 @@ namespace CollapseRegion
 					if (str == expression)
 					{
 						//remove the context around the specific property
-						templater.Resize(new[] { path }, 0);
+						if (position == -1)
+						{
+							//when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+							templater.Resize(new[] { path }, 0);
+						}
+						else
+						{
+							//otherwise we need to use "advanced" resize API to specify which exact tag to replace
+							templater.Resize(new[] { new TagPosition(path, position) }, 0);
+						}
 						return true;
 					}
 				}
 				return false;
-			}).Include((value, metadata, property, templater) =>
+			}).Include((value, metadata, tag, position, templater) =>
 			{
 				if (value is IList && ("collapseNonEmpty" == metadata || "collapseEmpty" == metadata))
 				{
@@ -57,24 +66,49 @@ namespace CollapseRegion
 					//loop until all tags with the same name are processed
 					do
 					{
-						var md = templater.GetMetadata(property, false);
+						var md = templater.GetMetadata(tag, false);
 						var collapseOnEmpty = md.Contains("collapseEmpty");
 						var collapseNonEmpty = md.Contains("collapseNonEmpty");
 						if (list.Count == 0)
 						{
 							if (collapseOnEmpty)
-								templater.Resize(new[] { property }, 0);
+							{
+								//when position is -1 it means non sharing tag is being used, in which case we can resize that region via "standard" API
+								//otherwise we need to use "advanced" resize API to specify which exact tag to replace
+								if (position == -1)
+									templater.Resize(new[] { tag }, 0);
+								else
+									templater.Resize(new[] { new TagPosition(tag, position) }, 0);
+							}
 							else
-								templater.Replace(property, "");
+							{
+								//when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
+								//otherwise we can replace that exact tag via position API
+								//replacing the first tag is the same as calling replace(tag, 0, value)
+								if (position == -1)
+									templater.Replace(tag, "");
+								else
+									templater.Replace(tag, position, "");
+							}
 						}
 						else
 						{
 							if (collapseNonEmpty)
-								templater.Resize(new[] { property }, 0);
+							{
+								if (position == -1)
+									templater.Resize(new[] { tag }, 0);
+								else
+									templater.Resize(new[] { new TagPosition(tag, position) }, 0);
+							}
 							else
-								templater.Replace(property, "");
+							{
+								if (position == -1)
+									templater.Replace(tag, "");
+								else
+									templater.Replace(tag, position, "");
+							}
 						}
-					} while (templater.Tags.Contains(property));
+					} while (templater.Tags.Contains(tag));
 					//we want to stop further processing if list is empty
 					//otherwise we want to continue resizing list and processing it's elements
 					return list.Count == 0;

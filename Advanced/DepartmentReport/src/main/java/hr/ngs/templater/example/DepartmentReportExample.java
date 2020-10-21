@@ -1,10 +1,12 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
+import hr.ngs.templater.IDocumentFactoryBuilder;
 import hr.ngs.templater.ITemplateDocument;
 
 import java.awt.Desktop;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,11 +91,48 @@ public class DepartmentReportExample {
         File tmp = File.createTempFile("department", ".xlsx");
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
+        ITemplateDocument tpl = Configuration
+                .builder()
+                .navigateSeparator(':')
+                .include(new SortExpression())
+                .build()
+                .open(templateStream, "xlsx", fos);
         tpl.process(getCompany());
         tpl.flush();
         fos.close();
         Desktop.getDesktop().open(tmp);
+    }
+
+    //this is just a simplistic implementation
+    //a better implementation would take care of methods, dictionaries and various other types
+    static class SortExpression implements IDocumentFactoryBuilder.INavigate {
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (!metadata.startsWith("sort(") || value instanceof Object[] == false) return value;
+            Object[] elements = (Object[])value;
+            if (elements.length < 2 || elements[0] == null) return value;
+            String property = metadata.substring(5, metadata.length() - 1);
+            Field f;
+            try {
+                f = elements[0].getClass().getField(property);
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
+            //just a simplistic implementation
+            //it doesn't check for primitives and non Comparable objects
+            Comparator propertyComparator = (left, right) -> {
+                try {
+                    Comparable lv = (Comparable)f.get(left);
+                    Comparable rv = (Comparable)f.get(right);
+                    return lv.compareTo(rv);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            };
+            Arrays.sort(elements, propertyComparator);
+
+            return value;
+        }
     }
 
     private static Company getCompany() {

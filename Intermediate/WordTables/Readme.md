@@ -14,6 +14,28 @@ To inject column names, **:header** metadata must be used; otherwise only data w
 
 Templater has built-in processor for DataTable/ResultSet, which *knows* how to process them. In that case more style formatting can be applied on the document.
 
+### Navigation plugin
+
+Since v5 there is a natural way to deal with data manipulation during navigation via navigation plugin.
+Navigation plugin can provide alternative object for further processing.
+This can be used for various purposes:
+
+ * returning same collection somewhat changed (limiting, sorting, filtering, ...)
+ * returning totally different object/collection
+ * calling methods with arguments (unlike only being able to use zero method navigation)
+ * various other complex logic
+ 
+Navigation plugin can become very unreadable really fast - so it is suggested to pair it with alias whenever possible.
+That way instead of writing something like
+
+`[[groups:sort(usage).products:filter(active).name]]`
+
+alias can be defined like products = groups:sort(usage).products:filter(active)
+
+and tag can look like `[[products.name]]` with all the behavior which was implicitly defined
+
+Here, navigation was used to take top N elements from the result set in an idiomatic way. 
+
 ### merge-nulls/span-nulls metadata
 
 Specific internal metadata (meaning it can't be implemented as a simple plugin) are **merge-nulls** and **span-nulls**.

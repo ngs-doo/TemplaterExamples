@@ -42,3 +42,17 @@ If data sheet was hidden and Summary was the first sheet report would be even ea
 
 Templater can work with IEnumerable or Collection data sources in which case it will extract the signature from the provided data.
 This way anonymous objects can be used for easier development via C# LINQ or Java Streams
+
+
+### Navigation plugin
+
+This template has alias defined for `department.team.project:sort(name)` as `project`
+Since v5 there is a natural way to deal with data manipulation during navigation via navigation plugin.
+Navigation plugin can provide alternative object for further processing.
+This can be used for various purposes:
+
+ * returning same collection somewhat changed (limiting, sorting, filtering, ...)
+ * returning totally different object/collection
+ * calling methods with arguments (unlike only being able to use zero method navigation)
+ * various other complex logic
+ 
