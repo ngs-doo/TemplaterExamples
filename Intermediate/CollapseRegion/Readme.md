@@ -24,6 +24,12 @@ Example shows how to display special table when there are no rows (since default
 Appropriate section will be removed based on the custom metadata and the appropriate handler.
 Handler will iterate through all tags with the same name and either invoke collapse of that region or hide the tag.
 
+### Content controls as removable region
+
+Content controls can be used as an alternative way for conditional removal.
+They can be utilized in various other ways, as they can be nested,
+can contain other tables and lists, or can be used to remove part of table cell, paragraph or list item.
+
 ### Coloring
 
 Templater doesn't have coloring API, but to implement coloring you can drop down to XML format and send in appropriate XML.

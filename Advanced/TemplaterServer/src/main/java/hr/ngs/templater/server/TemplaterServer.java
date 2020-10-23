@@ -46,6 +46,7 @@ public class TemplaterServer implements AutoCloseable {
 
     private final int timeoutLimit;
     private final IDocumentFactory documentFactory;
+    private final IDocumentFactory schemaFactory;
     private final Logger logger;
     private final HttpServer server;
     private final Map<String, PdfConverter> pdfConverters;
@@ -111,6 +112,8 @@ public class TemplaterServer implements AutoCloseable {
             builder.include(llr);
         }
         documentFactory = builder.build();
+        //schema embedding will only work with valid Reporting Team or Enterprise license
+        schemaFactory = Configuration.builder().configureEditor().tagListing(true).configure(true).build();
         System.getProperties().remove("com.sun.net.httpserver.HttpServerProvider"); //disable custom http servers
         //TODO: disable custom HttpServerProvider
         this.server = HttpServer.create(new InetSocketAddress(InetAddress.getLoopbackAddress(), port), 0);
@@ -253,13 +256,15 @@ public class TemplaterServer implements AutoCloseable {
         return result;
     }
 
-    private byte[] processTemplate(final byte[] templateBytes, final Object data, final String ext) {
+    private byte[] processTemplate(final byte[] templateBytes, final Object data, final String ext, boolean asSchema) {
         long start = new Date().getTime();
         String status = "failure";
         try {
             final InputStream is = new ByteArrayInputStream(templateBytes);
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final ITemplateDocument doc = documentFactory.open(is, ext, baos);
+            //we can process template regulary or just to embed schema inside
+            IDocumentFactory factory = asSchema ? schemaFactory : documentFactory;
+            final ITemplateDocument doc = factory.open(is, ext, baos);
             doc.process(data);
             doc.flush();
             status = "success";
@@ -406,7 +411,7 @@ public class TemplaterServer implements AutoCloseable {
                    String json = params.containsKey("json") ? params.get("json") : params.get("postData");
                    jsonBytes = json != null ? json.getBytes(UTF8) : null;
                }
-               byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(jsonBytes), ext);
+               byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(jsonBytes), ext, false);
                byte[] resultBytes;
                try {
                    resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext, params.get("pdf")) : templaterResultBytes;
@@ -443,15 +448,45 @@ public class TemplaterServer implements AutoCloseable {
        @Override
        public void handle(HttpExchange httpExchange) throws IOException {
            long start = new Date().getTime();
+           URI requestUri = httpExchange.getRequestURI();
            if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("file entry: %s", httpExchange.getRequestURI()));
+               logger.log(Level.FINE, String.format("file entry: %s", requestUri));
            }
-           String resourcePath = httpExchange.getRequestURI().getPath();
+           String resourcePath = requestUri.getPath();
            byte[] bytes = driveMap.get(resourcePath);
            final String mime = getMimeType(resourcePath);
-           sendResponse(httpExchange, 200, mime, bytes, start);
-           if (logger.isLoggable(Level.FINE)) {
-               logger.log(Level.FINE, String.format("file exit: %s", httpExchange.getRequestURI()));
+           try {
+               if (resourcePath.startsWith("/templates/") && requestUri.getQuery() != null && !requestUri.getQuery().contains("?")) {
+                   Map<String, String> params = splitQuery(requestUri.getQuery());
+                   boolean withSchema = "true".equalsIgnoreCase(params.get("withschema"));
+                   if (withSchema) {
+                       String templateName = resourcePath.substring("/templates/".length());
+                       byte[] jsonBytes = driveMap.get("/examples/" + templateName + ".json");
+                       if (jsonBytes == null) {
+                           sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Template not found.", start);
+                           return;
+                       }
+                       String ext = getExtension(templateName);
+                       byte[] template = processTemplate(bytes, parseJson(jsonBytes), ext, true);
+                       sendResponse(httpExchange, 200, mime, template, start);
+                       return;
+                   }
+               }
+               sendResponse(httpExchange, 200, mime, bytes, start);
+           } catch (final ParseException e) {
+               if (logger.isLoggable(Level.FINE)) {
+                   logger.log(Level.FINE, e.toString());
+               }
+               sendResponse(httpExchange, 400, MIME_PLAINTEXT, e.getMessage(), start);
+           } catch (final Exception e) {
+               if (logger.isLoggable(Level.WARNING)) {
+                   logger.log(Level.WARNING, e.toString());
+               }
+               sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Unknown error", start);
+           } finally {
+               if (logger.isLoggable(Level.FINE)) {
+                   logger.log(Level.FINE, String.format("file exit: %s", requestUri));
+               }
            }
        }
    }
@@ -473,7 +508,7 @@ public class TemplaterServer implements AutoCloseable {
                 if ("POST".equalsIgnoreCase(httpExchange.getRequestMethod())) {
                     byte[] bytes = readBytes(httpExchange);
                     TemplateInfo info = new TemplateInfo(templateName, bytes);
-                    processTemplate(bytes, new HashMap<String, Object>(), info.extension);
+                    processTemplate(bytes, new HashMap<String, Object>(), info.extension, false);
                     synchronized (this) {
                         HashMap<String, TemplateInfo> copy = new HashMap<>(templatesMap);
                         copy.put(templateName, info);
@@ -494,7 +529,7 @@ public class TemplaterServer implements AutoCloseable {
                     boolean toPdf = accept != null && accept.contains(MIME_PDF)
                             || "true".equals(params.get("toPdf")) || "true".equals(params.get("topdf"));
                     byte[] json = readBytes(httpExchange);
-                    byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension);
+                    byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension, false);
                     byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension, params.get("pdf")) : templaterResultBytes;
                     if (resultBytes == null) {
                         sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report.", start);

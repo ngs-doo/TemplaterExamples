@@ -13,7 +13,9 @@ namespace TemplaterServer
     public class TemplaterController : Controller
     {
 		private static readonly JsonSerializer Newtonsoft;
-		private static readonly IDocumentFactory Factory = Configuration.Builder.Include(JavaFormat).Build();
+		private static readonly IDocumentFactory DocumentFactory = Configuration.Builder.Include(JavaFormat).Build();
+		//schema embedding will only work with valid Reporting Team or Enterprise license
+		private static readonly IDocumentFactory SchemaFactory = Configuration.Builder.ConfigureEditor().TagListing(true).Configure(true).Build();
 		
 		static TemplaterController()
 		{
@@ -91,10 +93,18 @@ namespace TemplaterServer
 		}
 
 		[HttpGet("templates/{file}")]
-		public IActionResult Templates(string file)
+		public IActionResult Templates(string file, [FromQuery] string withSchema)
 		{
 			var fi = new FileInfo("resources/templates/" + file);
 			if (!fi.Exists) return NotFound();
+			if ("true".Equals(withSchema, StringComparison.OrdinalIgnoreCase)) 
+			{
+				var jfi = new FileInfo("resources/examples/" + file + ".json");
+				if (!jfi.Exists) return NotFound();
+				string jsonString = System.IO.File.ReadAllText(jfi.FullName);
+				var ms = Process(fi, jsonString, true);
+				return File(ms, MimeType(file), file);
+			}
 			return PhysicalFile(fi.FullName, MimeType(file));
 		}
 
@@ -117,13 +127,14 @@ namespace TemplaterServer
 			public string pdf { get; set; }
 		}
 
-		private static MemoryStream Process(FileInfo fi, string argument)
+		private static MemoryStream Process(FileInfo fi, string argument, bool asSchema)
 		{
 			var ms = new MemoryStream();
 			var bytes = System.IO.File.ReadAllBytes(fi.FullName);
 			ms.Write(bytes, 0, bytes.Length);
 			ms.Position = 0;
-			using (var doc = Factory.Open(ms, fi.Extension))
+			var factory = asSchema ? SchemaFactory : DocumentFactory;
+			using (var doc = factory.Open(ms, fi.Extension))
 			{
 				if (argument.TrimStart().StartsWith("["))
 					doc.Process(Newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(new StringReader(argument))));
@@ -140,7 +151,7 @@ namespace TemplaterServer
 			if (arg == null) return NotFound();
 			var fi = new FileInfo("resources/templates/" + arg.template);
 			if (!fi.Exists) return NotFound();
-			var ms = Process(fi, arg.json);
+			var ms = Process(fi, arg.json, false);
 			if (arg.toPdf)
 				return ConvertToPdf(ms, arg.template, arg.pdf);
 			return File(ms, MimeType(arg.template), arg.template);

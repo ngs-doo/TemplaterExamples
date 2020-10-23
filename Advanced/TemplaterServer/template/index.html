@@ -64,10 +64,16 @@
         <ul class="list-unstyled list-template" id="template-list">
           ${templates}
         </ul>
-        <a href="${downloadUrl}" class="btn btn-default btn-block btn-lg btn-success" id="download-template">
-          Download ${defaultFilename}<span class="has-active-template"></span>
-          <span class="btn-icon"> <i class="fa fa-download"></i></span>
-        </a>
+        <form id="download_action" action="${downloadUrl}" method="get" accept-charset="UTF-8">
+          <input type="hidden" name="withSchema" value="false"/>
+          <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-schema" style="display:none; margin-bottom: 4px">
+            Templater Editor Schema OFF
+          </button>
+          <button id="download-template" type="submit" class="btn btn-success btn-lg">
+            Download ${defaultFilename}<span class="has-active-template"></span>
+            <span class="btn-icon"> <i class="fa fa-download"></i></span>
+          </button>
+        </form>
       </div>
     </div>
   </div>

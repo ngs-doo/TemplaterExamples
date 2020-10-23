@@ -8,8 +8,10 @@ function initApp()
   var $processTemplate = $('#process-template');
   var $downloadTemplate = $('#download-template');
   var $form = $('#post_action');
+  var $download = $('#download_action');
   var baseUrl = location.href + (location.href[location.href.length-1] !== '/' ? '/' : '');
   var currentPdfConverter = -1;
+  var withSchema = false;
   var activeTemplate = $('.template').first().attr('data-template');
 
   var aceEditor = null;
@@ -86,6 +88,13 @@ function initApp()
     }
   });
   $('#toggle-pdf').show();
+
+  $('#toggle-schema').on('click', function () {
+    withSchema = !withSchema;
+    $('#toggle-schema').text('Templater Editor Schema ' + (withSchema ? 'ON' : 'OFF'));
+    $download.find('[name=withSchema]').val(withSchema);
+  });
+  $('#toggle-schema').show();
 
   $form.on('submit', function() {
     // textarea is not synced, update before submit
