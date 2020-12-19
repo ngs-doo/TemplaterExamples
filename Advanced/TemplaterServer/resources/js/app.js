@@ -8,10 +8,12 @@ function initApp()
   var $processTemplate = $('#process-template');
   var $downloadTemplate = $('#download-template');
   var $form = $('#post_action');
-  var $download = $('#download_action');
+  var $postAction = $('#post_action');
+  var $downloadAction = $('#download_action');
   var baseUrl = location.href + (location.href[location.href.length-1] !== '/' ? '/' : '');
   var currentPdfConverter = -1;
   var withSchema = false;
+  var debugLog = false;
   var activeTemplate = $('.template').first().attr('data-template');
 
   var aceEditor = null;
@@ -92,9 +94,16 @@ function initApp()
   $('#toggle-schema').on('click', function () {
     withSchema = !withSchema;
     $('#toggle-schema').text('Templater Editor Schema ' + (withSchema ? 'ON' : 'OFF'));
-    $download.find('[name=withSchema]').val(withSchema);
+    $downloadAction.find('[name=withSchema]').val(withSchema);
   });
   $('#toggle-schema').show();
+
+  $('#toggle-debug').on('click', function () {
+    debugLog = !debugLog;
+    $('#toggle-debug').text('Templater Editor Debug log ' + (debugLog ? 'ON' : 'OFF'));
+    $postAction.find('[name=debugLog]').val(debugLog);
+  });
+  $('#toggle-debug').show();
 
   $form.on('submit', function() {
     // textarea is not synced, update before submit

@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>mail-merge-example</artifactId>
     <packaging>jar</packaging>
-    <version>5.0.1</version>
+    <version>5.1.1</version>
     <name>MailMergeExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

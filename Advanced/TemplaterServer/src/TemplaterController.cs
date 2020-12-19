@@ -13,8 +13,10 @@ namespace TemplaterServer
     public class TemplaterController : Controller
     {
 		private static readonly JsonSerializer Newtonsoft;
+
 		private static readonly IDocumentFactory DocumentFactory = Configuration.Builder.Include(JavaFormat).Build();
-		//schema embedding will only work with valid Reporting Team or Enterprise license
+		//schema embedding and debugLog will only work with valid Reporting Team or Enterprise license
+		private static readonly IDocumentFactory DebugFactory = Configuration.Builder.Include(JavaFormat).ConfigureEditor().DebugLog(true).Configure(false).Build();
 		private static readonly IDocumentFactory SchemaFactory = Configuration.Builder.ConfigureEditor().TagListing(true).Configure(true).Build();
 		
 		static TemplaterController()
@@ -102,7 +104,7 @@ namespace TemplaterServer
 				var jfi = new FileInfo("resources/examples/" + file + ".json");
 				if (!jfi.Exists) return NotFound();
 				string jsonString = System.IO.File.ReadAllText(jfi.FullName);
-				var ms = Process(fi, jsonString, true);
+				var ms = Process(fi, jsonString, true, false);
 				return File(ms, MimeType(file), file);
 			}
 			return PhysicalFile(fi.FullName, MimeType(file));
@@ -125,15 +127,16 @@ namespace TemplaterServer
 			public string template { get; set; }
 			public bool toPdf { get; set; }
 			public string pdf { get; set; }
+			public bool debugLog { get; set; }
 		}
 
-		private static MemoryStream Process(FileInfo fi, string argument, bool asSchema)
+		private static MemoryStream Process(FileInfo fi, string argument, bool asSchema, bool debugLog)
 		{
 			var ms = new MemoryStream();
 			var bytes = System.IO.File.ReadAllBytes(fi.FullName);
 			ms.Write(bytes, 0, bytes.Length);
 			ms.Position = 0;
-			var factory = asSchema ? SchemaFactory : DocumentFactory;
+			var factory = asSchema ? SchemaFactory : debugLog ? DebugFactory : DocumentFactory;
 			using (var doc = factory.Open(ms, fi.Extension))
 			{
 				if (argument.TrimStart().StartsWith("["))
@@ -151,7 +154,7 @@ namespace TemplaterServer
 			if (arg == null) return NotFound();
 			var fi = new FileInfo("resources/templates/" + arg.template);
 			if (!fi.Exists) return NotFound();
-			var ms = Process(fi, arg.json, false);
+			var ms = Process(fi, arg.json, false, arg.debugLog);
 			if (arg.toPdf)
 				return ConvertToPdf(ms, arg.template, arg.pdf);
 			return File(ms, MimeType(arg.template), arg.template);

@@ -31,7 +31,7 @@ public class CollapseExample {
                 new Application()
                         .setPaybackYears(20)
                         .setUcCheck(true).setUcCheckResponse("Ok")
-                        .setApplicant(new Applicant("first applicant").setFrom("Google", 2012, 11));
+                        .setApplicant(new Applicant("first applicant").setFrom("Google", 2012, 11).addChild("Mary"));
         application1.getLoans().add(new Loan("Big Bank", BigDecimal.valueOf(10000), Color.BLUE));
         application1.getLoans().add(new Loan("Small Bank", BigDecimal.valueOf(2000), Color.GREEN));
         Application application2 =
@@ -45,7 +45,10 @@ public class CollapseExample {
                 new Application()
                         .setPaybackYears(10)
                         .setUcCheck(true).setUcCheckResponse("Ok")
-                        .setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1));
+                        .setApplicant(
+                                new Applicant("third applicant").setFrom("Microsoft", 2010, 1)
+                                .addChild("Jack").addChild("Jane")
+                        );
         InputStream templateStream = CollapseExample.class.getResourceAsStream("/Collapse.docx");
         FileOutputStream fos = new FileOutputStream(tmp);
         final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -53,7 +56,7 @@ public class CollapseExample {
         final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);
         ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
             @Override
-            public boolean handle(Object value, String metadata, String path, int position, ITemplater templater) {
+            public Handled handle(Object value, String metadata, String path, int position, ITemplater templater) {
                 if (value instanceof String && metadata.startsWith("collapseIf(")) {
                     //Extract the matching expression
                     String expression = metadata.substring("collapseIf(".length(), metadata.length() - 1);
@@ -65,14 +68,14 @@ public class CollapseExample {
                         else
                             //otherwise we need to use "advanced" resize API to specify which exact tag to replace
                             templater.resize(new TagPosition[] { new TagPosition(path, position)}, 0);
-                        return true;
+                        return Handled.NESTED_TAGS;
                     }
                 }
-                return false;
+                return Handled.NOTHING;
             }
         }).include(new IDocumentFactoryBuilder.IHandler() {
             @Override
-            public boolean handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+            public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
                 if (value instanceof List && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                     List list = (List) value;
                     //loop until all tags with the same name are processed
@@ -87,7 +90,7 @@ public class CollapseExample {
                                 if (position == -1) {
                                     templater.resize(new String[]{tag}, 0);
                                 } else {
-                                    templater.resize(new TagPosition[] { new TagPosition(tag, position)}, 0);
+                                    templater.resize(new TagPosition[]{new TagPosition(tag, position)}, 0);
                                 }
                             } else {
                                 //when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
@@ -104,7 +107,7 @@ public class CollapseExample {
                                 if (position == -1) {
                                     templater.resize(new String[]{tag}, 0);
                                 } else {
-                                    templater.resize(new TagPosition[] { new TagPosition(tag, position)}, 0);
+                                    templater.resize(new TagPosition[]{new TagPosition(tag, position)}, 0);
                                 }
                             } else {
                                 if (position == -1) {
@@ -117,9 +120,9 @@ public class CollapseExample {
                     } while (contains(templater.tags(), tag));
                     //we want to stop further processing if list is empty
                     //otherwise we want to continue resizing list and processing it's elements
-                    return list.isEmpty();
+                    return list.isEmpty() ? Handled.NESTED_TAGS : Handled.NOTHING;
                 }
-                return false;
+                return Handled.NOTHING;
             }
         }).include(new IDocumentFactoryBuilder.ILowLevelReplacer() {
             @Override
@@ -136,6 +139,24 @@ public class CollapseExample {
                     }
                 }
                 return value;
+            }
+        }).include(new IDocumentFactoryBuilder.IHandler() {
+            @Override
+            public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+                if ("leaveIfEmpty".equals(metadata) && value instanceof List) {
+                    List list = (List)value;
+                    if (list.isEmpty()) {
+                        //when list is empty we want to leave the default message
+                        templater.replace(tag, "");
+                    } else {
+                        //when list is not empty, we will remove the default message
+                        templater.resize(new String[]{ tag }, 0);
+                    }
+                    //indicates that only this tag was handled,
+                    //so Templater will either duplicate or remove other tags from this collection
+                    return Handled.THIS_TAG;
+                }
+                return Handled.NOTHING;
             }
         }).include(new IDocumentFactoryBuilder.IFormatter() {
             @Override

@@ -40,8 +40,12 @@
               <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf" style="display:none">
                 PDF conversion OFF
               </button>
+              <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-debug" style="display:none">
+                Templater Editor Debug log OFF
+              </button>
               <small class="text-muted" id="toggle-helper" style="display:none;">(toggle for docx and pptx)</small>
               <input type="hidden" name="toPdf" value="false"/>
+              <input type="hidden" name="debugLog" value="false"/>
               <input type="hidden" name="pdf" value=""/>
               <input type="hidden" name="template" value="${defaultFilename}"/>
             </p>
@@ -66,7 +70,7 @@
         </ul>
         <form id="download_action" action="${downloadUrl}" method="get" accept-charset="UTF-8">
           <input type="hidden" name="withSchema" value="false"/>
-          <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-schema" style="display:none; margin-bottom: 4px">
+          <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-schema" style="display:none; margin-bottom: 6px">
             Templater Editor Schema OFF
           </button>
           <button id="download-template" type="submit" class="btn btn-success btn-lg">

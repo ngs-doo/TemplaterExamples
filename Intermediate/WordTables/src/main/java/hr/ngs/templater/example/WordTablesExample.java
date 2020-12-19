@@ -1,10 +1,7 @@
 package hr.ngs.templater.example;
 
-import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.*;
 import com.mockrunner.mock.jdbc.MockResultSet;
-import hr.ngs.templater.ITemplater;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -199,7 +196,7 @@ public class WordTablesExample {
 
     static class CollapseNonEmpty implements IDocumentFactoryBuilder.IHandler {
         @Override
-        public boolean handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+        public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
             if (value instanceof ResultSet && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                 ResultSet rs = (ResultSet) value;
                 try {
@@ -243,12 +240,12 @@ public class WordTablesExample {
                             }
                         }
                     } while (Arrays.asList(templater.tags()).contains(tag));
-                    return true;
+                    return Handled.NESTED_TAGS;
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }
-            return false;
+            return Handled.NOTHING;
         }
     }
 }

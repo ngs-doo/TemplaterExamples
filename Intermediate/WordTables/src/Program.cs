@@ -48,7 +48,7 @@ namespace WordDataTable
 		}
 
 		//for this example position is ignored as it is always -1
-		static bool CollapseNonEmpty(object value, string metadata, string tag, int position, ITemplater templater)
+		static Handled CollapseNonEmpty(object value, string metadata, string tag, int position, ITemplater templater)
 		{
 			var dt = value as DataTable;
 			if (dt != null && (metadata == "collapseNonEmpty" || metadata == "collapseEmpty"))
@@ -100,9 +100,9 @@ namespace WordDataTable
 						}
 					}
 				} while (templater.Tags.Contains(tag));
-				return true;
+				return Handled.NestedTags;
 			}
-			return false;
+			return Handled.Nothing;
 		}
 
 		static object LimitDataTable(object parent, object value, string member, string metadata)

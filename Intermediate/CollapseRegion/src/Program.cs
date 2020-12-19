@@ -19,7 +19,7 @@ namespace CollapseRegion
 					new Application()
 							.setPaybackYears(20)
 							.setUcCheck(true).setUcCheckResponse("Ok")
-							.setApplicant(new Applicant("first applicant").setFrom("Google", 2012, 11));
+							.setApplicant(new Applicant("first applicant").setFrom("Google", 2012, 11).addChild("Mary"));
 			application1.getLoans().Add(new Loan("Big Bank", 10000, Color.Blue));
 			application1.getLoans().Add(new Loan("Small Bank", 2000, Color.Lime));
 			var application2 =
@@ -33,7 +33,7 @@ namespace CollapseRegion
 					new Application()
 							.setPaybackYears(10)
 							.setUcCheck(true).setUcCheckResponse("Ok")
-							.setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1));
+							.setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1).addChild("Jack").addChild("Jane"));
 			var factory = Configuration.Builder.Include((value, metadata, path, position, templater) =>
 			{
 				var str = value as string;
@@ -54,10 +54,10 @@ namespace CollapseRegion
 							//otherwise we need to use "advanced" resize API to specify which exact tag to replace
 							templater.Resize(new[] { new TagPosition(path, position) }, 0);
 						}
-						return true;
+						return Handled.NestedTags;
 					}
 				}
-				return false;
+				return Handled.Nothing;
 			}).Include((value, metadata, tag, position, templater) =>
 			{
 				if (value is IList && ("collapseNonEmpty" == metadata || "collapseEmpty" == metadata))
@@ -111,9 +111,9 @@ namespace CollapseRegion
 					} while (templater.Tags.Contains(tag));
 					//we want to stop further processing if list is empty
 					//otherwise we want to continue resizing list and processing it's elements
-					return list.Count == 0;
+					return list.Count == 0 ? Handled.NestedTags : Handled.Nothing;
 				}
-				return false;
+				return Handled.Nothing;
 			}).Include((value, tag, metadata) =>
 			{
 				if (value is Color)
@@ -130,6 +130,26 @@ namespace CollapseRegion
 								new XAttribute(XName.Get("fill", "http://schemas.openxmlformats.org/wordprocessingml/2006/main"), fillValue))));
 				}
 				return value;
+			}).Include((value, metadata, tag, position, templater) =>
+			{
+				if ("leaveIfEmpty" == metadata && value is IList)
+				{
+					var list = (IList)value;
+					if (list.Count == 0)
+					{
+						//when list is empty we want to leave the default message
+						templater.Replace(tag, "");
+					}
+					else
+					{
+						//when list is not empty, we will remove the default message
+						templater.Resize(new[] { tag }, 0);
+					}
+					//indicates that only this tag was handled,
+					//so Templater will either duplicate or remove other tags from this collection
+					return Handled.ThisTag;
+				}
+				return Handled.Nothing;
 			}).Include((value, metadata) =>
 			{
 				if ("verbalize" == metadata && value is decimal)

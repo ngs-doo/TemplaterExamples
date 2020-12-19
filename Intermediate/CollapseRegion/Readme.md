@@ -16,6 +16,8 @@ Since v3 bean standard is supported and enabled by default. Both bean name and a
 Builtin collapse is just a plugin which can be registered from the outside.
 Here a plugin collapseIf(Value) is shown which will do the collapse only if the property has specific value.
 
+leaveIfEmpty collapse plugin shows how to handle only the relevant tag and leave the others to regular processing.
+
 ### Section support + custom handler for removing sections
 
 Templater uses document structure to infer beginning/end of the replicating context.
