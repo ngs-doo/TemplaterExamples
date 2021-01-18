@@ -21,7 +21,6 @@ import hr.ngs.templater.Configuration;
 public class TemplaterServer implements AutoCloseable {
     private static final Charset UTF8 = StandardCharsets.UTF_8;
 
-    private static final String DRIVE_PATH = "resources";
     private static final String MIME_PLAINTEXT = "text/plain;charset=UTF-8";
     private static final String MIME_HTML = "text/html;charset=UTF-8";
     private static final String MIME_PDF = "application/pdf";
@@ -74,26 +73,33 @@ public class TemplaterServer implements AutoCloseable {
         }
     }
 
-    public TemplaterServer(int port, int timeoutLimit, ClassLoader loader, Logger logger, LinkedHashMap<String, PdfConverter> pdfConverters) throws IOException {
+    public TemplaterServer(int port, File path, int timeoutLimit, Logger logger, LinkedHashMap<String, PdfConverter> pdfConverters) throws IOException {
         this.timeoutLimit = timeoutLimit;
         this.logger = logger;
         this.pdfConverters = pdfConverters;
 
-        File path = new File(DRIVE_PATH);
-        if (!path.exists()) {
-            path = new File(new File("Advanced", "TemplaterServer"), DRIVE_PATH);
-        }
         String[] files = new File(path, "templates").list();
         if (files != null) {
             Arrays.sort(files);
             templateFiles = Arrays.asList(files);
-        } else templateFiles = Collections.emptyList();
+            if (logger.isLoggable(Level.FINE)) {
+                for (String tf : templateFiles) {
+                    logger.log(Level.FINE, String.format("Template file found: %s", tf));
+                }
+            }
+        } else {
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.log(Level.WARNING, "No template files found");
+            }
+            templateFiles = Collections.emptyList();
+        }
         InputStream stream = TemplaterServer.class.getResourceAsStream("/index.html");
         try {
-            cacheAllFiles(path.getAbsolutePath(), path, driveMap);
+            cacheAllFiles(path.getAbsolutePath(), path, driveMap, logger);
 
             templateHtml = new String(readStream(stream, -1), UTF8);
-            String indexContent = createIndex(templateFiles.size() > 0 ? templateFiles.get(0) : "", pdfConverters.keySet());
+            String current = templateFiles.isEmpty() ? "" : templateFiles.get(0);
+            String indexContent = createIndex(current, templateFiles, pdfConverters.keySet());
             index = indexContent.getBytes(UTF8);
 
             defaultHtml = new String(readStream(TemplaterServer.class.getResourceAsStream("/default.html"), -1), UTF8);
@@ -126,22 +132,29 @@ public class TemplaterServer implements AutoCloseable {
         server.stop(0);
     }
 
-    private static void cacheAllFiles(String prefix, File file, Map<String, byte[]> cache) throws IOException {
+    private static void cacheAllFiles(String prefix, File file, Map<String, byte[]> cache, Logger logger) throws IOException {
         File[] files = file.listFiles();
         if (files == null) return;
         for (File f : files) {
             if (f.isDirectory()) {
-                cacheAllFiles(prefix, f, cache);
+                cacheAllFiles(prefix, f, cache, logger);
             } else {
                 String name = f.getAbsolutePath().substring(prefix.length()).replace('\\', '/');
                 byte[] bytes = Files.readAllBytes(f.toPath());
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, String.format("Found static resource: %s. Size: %d", name, bytes.length));
+                }
                 cache.put(name, bytes);
                 cache.put(name.toLowerCase(), bytes);
+                if (!name.startsWith("/")) {
+                    cache.put("/" + name, bytes);
+                    cache.put("/" + name.toLowerCase(), bytes);
+                }
             }
         }
     }
 
-    private String createIndex(String current, Set<String> pdfs) {
+    private String createIndex(String current, List<String> templateFiles, Set<String> pdfs) {
         StringBuilder response = new StringBuilder();
 
         String listItemHtml = "<li><p>" +
@@ -345,7 +358,7 @@ public class TemplaterServer implements AutoCloseable {
                byte[] bytes = isRoot ? indexDefault : index;
                sendResponse(httpExchange, 200, MIME_HTML, bytes, start);
            } else {
-               String indexContent = createIndex(template, pdfConverters.keySet());
+               String indexContent = createIndex(template, templateFiles, pdfConverters.keySet());
                String html = isRoot ? defaultHtml.replace("${content}", indexContent) : indexContent;
                sendResponse(httpExchange, 200, MIME_HTML, html, start);
            }
@@ -649,6 +662,7 @@ public class TemplaterServer implements AutoCloseable {
             Level logLevel = Level.OFF;
             String[] pdfs = {"LibreOffice", "Spire", "Aspose"};
             boolean disableExit = false;
+            File path = new File("resources");
 
             if (args.length == 0) {
                 System.out.println("Example arguments:");
@@ -657,6 +671,7 @@ public class TemplaterServer implements AutoCloseable {
                 System.out.println("    -tmp=/mnt/ramdisk");
                 System.out.println("    -log=INFO");
                 System.out.println("    -plugins=/templater/jars");
+                System.out.println("    -files=/templater/files");
                 System.out.println("    -disable-exit");
                 System.out.println("    -pdf=LibreOffice,Spire,Aspose");
                 System.out.println("    -libreoffice=/user/home/office/libreoffice");
@@ -672,6 +687,11 @@ public class TemplaterServer implements AutoCloseable {
                     if (!f.exists()) {
                         throw new RuntimeException("Unable to find specified plugins folder: " + pluginFolder);
                     }
+                } else if (a.startsWith("-files=")) {
+                    path = new File(a.substring("-files=".length()));
+                    if (!path.exists()) {
+                        throw new RuntimeException("Unable to find specified file folder: " + path);
+                    }
                 } else if (a.startsWith("-log=")) {
                     logLevel = Level.parse(a.substring("-log=".length()));
                 } else if (a.startsWith("-pdf=")) {
@@ -680,6 +700,13 @@ public class TemplaterServer implements AutoCloseable {
                     disableExit = true;
                 }
             }
+            if (!path.exists()) {
+                path = new File(new File("Advanced", "TemplaterServer"), "resources");
+                if (!path.exists()) {
+                    throw new RuntimeException("Unable to find default or fallback resource folder: " + path);
+                }
+            }
+
             File loc = new File(pluginFolder);
             File[] jars = loc.listFiles(file -> file.getPath().toLowerCase().endsWith(".jar"));
             List<URL> urls = new ArrayList<>(jars != null ? jars.length : 0);
@@ -717,7 +744,7 @@ public class TemplaterServer implements AutoCloseable {
                     }
                 }
             }
-            TemplaterServer server = new TemplaterServer(port, timeoutLimit, ucl, logger, pdfConverters);
+            TemplaterServer server = new TemplaterServer(port, path, timeoutLimit, logger, pdfConverters);
             if (disableExit) {
                 System.out.println("Server started on port " + port);
             } else {

@@ -51,8 +51,8 @@ function initApp()
     activeTemplate = $(this).attr('data-template');
 
     updateProcessTemplateText();
-    $downloadTemplate.html('Download ' + activeTemplate)
-        .attr('href', baseUrl + 'templates/' + activeTemplate.toLowerCase());
+    $downloadTemplate.html('Download ' + activeTemplate);
+    $downloadAction.attr('action', 'templates/' + activeTemplate);
     $form.find('[name=template]').val(activeTemplate);
     $templates.find('.active').removeClass('active');
     $(this).addClass('active');
