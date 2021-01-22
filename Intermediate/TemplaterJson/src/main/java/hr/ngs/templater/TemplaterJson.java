@@ -10,6 +10,7 @@ import java.util.Base64;
 import java.util.Formatter;
 
 public class TemplaterJson {
+
     public static void main(final String[] args) {
         int exitCode;
         if (args.length == 0) {
@@ -70,7 +71,9 @@ public class TemplaterJson {
 
         Object data = readData(dataStream);
 
-        ITemplateDocument tpl = Configuration.builder().include(IMAGE_DECODER).build().open(templateStream, extension, outputStream);
+        ITemplateDocument tpl = Configuration.builder()
+                .include(IMAGE_DECODER)
+                .build().open(templateStream, extension, outputStream);
         tpl.process(data);
         tpl.flush();
     }

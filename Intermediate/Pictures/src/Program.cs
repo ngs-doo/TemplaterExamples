@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using NGS.Templater;
+using QRCoder;
 
 namespace Pictures
 {
@@ -57,6 +58,16 @@ namespace Pictures
 			if (metadata == "from-resource" && value is string)
 				return Image.FromFile("template/" + value);
 			return value;
+		}
+
+		static object ConverterQR(object value, string metadata)
+		{
+			//Plugin can be used to convert string into a QR code
+			if (metadata != "qr" || value is string == false) return value;
+			var qrGenerator = new QRCodeGenerator();
+			var qrCodeData = qrGenerator.CreateQrCode(value as string, QRCodeGenerator.ECCLevel.Q);
+			var qrCode = new QRCode(qrCodeData);
+			return qrCode.GetGraphic(2);
 		}
 
 		static object ImageMaxSize(object value, string metadata)
@@ -113,10 +124,12 @@ namespace Pictures
 					new SvgDoc("Happy cat", "with fallback image conversion", "cat_happy.svg") //Icon made by Smashicons from www.flaticon.com
 			};
 			data["placeholder"] = Image.FromFile("template/unicorn.jpg");
+			data["qr-tag"] = "https://templater.info/";
 			var factory = Configuration.Builder
 				.Include(ImageLoader)//setup image loading via from-resource metadata
 				.Include(ImageMaxSize)//setup image resizing via maxSize(X, Y) metadata
 				.SvgConverter(ConvertSvg)
+				.Include(ConverterQR) //setup QR code generation from text
 				.Build();
 			using (var doc = factory.Open("Pictures.docx"))
 			{

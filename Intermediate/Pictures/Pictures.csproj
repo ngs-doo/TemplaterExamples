@@ -42,6 +42,9 @@
     <Reference Include="Svg">
       <HintPath>..\..\packages\Svg.2.4.3\lib\Svg.dll</HintPath>
     </Reference>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

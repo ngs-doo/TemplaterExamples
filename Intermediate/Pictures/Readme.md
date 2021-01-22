@@ -39,3 +39,8 @@ Previous Office version will fallback to image format so documents will look sim
 
 Since v4.5 existing images can be used for replacement. In that case Templater will retain its configuration such as effects, size and other image properties.
 This allows more configuration during image manipulation and allows the use of images in PowerPoint
+
+### QR code
+
+Since Templater supports external plugins, its rather easy to introduce QR code generator in the process.
+In this example `qr` metadata is used to match the need for conversion of text into QR code image.

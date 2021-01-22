@@ -1,5 +1,10 @@
 package hr.ngs.templater.example;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import hr.ngs.templater.*;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
@@ -204,6 +209,23 @@ public class PicturesExample {
         return factory.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, Svg.class.getResourceAsStream(name));
     }
 
+    static class ConvertQR implements IDocumentFactoryBuilder.IFormatter {
+
+        @Override
+        public Object format(Object value, String metadata) {
+            if (!"qr".equals(metadata) || value instanceof String == false) return value;
+            try {
+                BitMatrix matrix = new MultiFormatWriter().encode((String) value, BarcodeFormat.QR_CODE, 72, 72);
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                MatrixToImageWriter.writeToStream(matrix, "png", os);
+                return ImageInfo.from(os.toByteArray()).width(72).height(72).extension("png").build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return value;
+            }
+        }
+    }
+
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = PicturesExample.class.getResourceAsStream("/Pictures.docx");
         File tmp = File.createTempFile("picture", ".docx");
@@ -214,6 +236,7 @@ public class PicturesExample {
                 .include(new MaxSizeBufferedImage())//setup image resizing via maxSize(X, Y) metadata
                 .include(new MaxSizeImageStream())//setup image resizing via maxSize(X, Y) metadata
                 .svgConverter(new BatikSvgConversion())
+                .include(new ConvertQR())//setup QR code generation from text
                 .build();
         SAXSVGDocumentFactory svgFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
@@ -234,6 +257,7 @@ public class PicturesExample {
                 new Svg("Happy cat", "with fallback image conversion", svgDoc(svgFactory, "/cat_happy.svg")) //Icon made by Smashicons from www.flaticon.com
         ));
         data.put("placeholder", ImageIO.read(PicturesExample.class.getResourceAsStream("/unicorn.jpg")));
+        data.put("qr-tag", "https://templater.info/");
         tpl.process(data);
         tpl.flush();
         fos.close();

@@ -95,7 +95,10 @@ namespace TemplaterJson
 					json.Read();
 				}
 				//disable low level plugins so it works on more platforms without GDI library for System.Drawing
-				var config = Configuration.Builder.Include(Base64Image).BuiltInLowLevelPlugins(false);
+				var config = Configuration.Builder
+					.Include(Base64Image)
+					.Include(Xml)
+					.BuiltInLowLevelPlugins(false);
 				if (json.Peek() == '[')
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(json));
@@ -116,24 +119,20 @@ namespace TemplaterJson
 		static object Base64Image(object value, string metadata)
 		{
 			var str = value as string;
-			if (metadata == "image" && str != null)
-			{
-				var image = Image.FromStream(new MemoryStream(System.Convert.FromBase64String(str)));
-				//if we did not disable builtin plugins we could just return it now, but lets convert into Templater specific image
-				var ms = new MemoryStream();
-				image.Save(ms, ImageFormat.Png);
-				ms.Position = 0;
-				return new ImageInfo(ms, "png", image.Width, image.HorizontalResolution, image.Height, image.VerticalResolution);
-			}
-			return value;
+			if (metadata != "image" || str == null) return value;
+			var image = Image.FromStream(new MemoryStream(System.Convert.FromBase64String(str)));
+			//if we did not disable builtin plugins we could just return it now, but lets convert into Templater specific image
+			var ms = new MemoryStream();
+			image.Save(ms, ImageFormat.Png);
+			ms.Position = 0;
+			return new ImageInfo(ms, "png", image.Width, image.HorizontalResolution, image.Height, image.VerticalResolution);
 		}
 
 		static object Xml(object value, string metadata)
 		{
 			var str = value as string;
-			if (metadata == "xml" && str != null)
-				return XElement.Parse(str);
-			return value;
+			if (metadata != "xml" || str == null) return value;
+			return XElement.Parse(str);
 		}
 	}
 }

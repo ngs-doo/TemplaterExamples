@@ -84,6 +84,7 @@ Various plugins are embedded into library, while others can be registered during
 Examples:
 
  * [verbalize number into words](Intermediate/CollapseRegion)
+ * [insert QR code](Intermediate/Pictures)
  * [customize tag pattern](Intermediate/QuestionnairePlugin)
  * [custom transformation during navigation](Intermediate/LimitPlugins)
  * [custom reflection processing](Intermediate/AlternativeProperty)

@@ -6,7 +6,7 @@ This example shows how to process JSON data with Templater, also how you could u
 This Java application accepts 3 arguments, path to the template, path to the JSON and the output path.
 If only 1 argument is specified it will assume console input and output to support piping.
 
-Images can be used if base64 encoded value is provided in JSON and matching tag has :image metadata which will attempt the conversion.
+Images can be used if base64 encoded value is provided in JSON and matching tag has `:image` metadata which will attempt the conversion.
 
 ### Example usage .NET:
  * TemplaterJson.exe benchmark-template.xlsx < benchmark-data.json > benchmark-output.xlsx
