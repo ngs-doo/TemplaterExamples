@@ -55,6 +55,20 @@ namespace LimitPlugins
 			return value;
 		}
 
+		static object ListGroupping(object parent, object value, string member, string metadata)
+		{
+			if (value is IList && metadata.StartsWith("group("))
+			{
+				//extract grouping column
+				var name = metadata.Substring(6, metadata.Length - 7);
+				return from dict in ((IList)value).OfType<IDictionary>()
+					   //group by specified argument
+					   group dict by dict[name] into grp
+					   select new { key = grp.Key, value = grp.ToList() };
+			}
+			return value;
+		}
+
 		class Instance
 		{
 			public string column1;
@@ -70,6 +84,7 @@ namespace LimitPlugins
 			var instances = new List<Instance>();
 			var rnd = new Random();
 			var col = rnd.Next(3) + 2;
+			var list = new List<Dictionary<string, object>>();
 			for (int i = 0; i < 100; i++)
 			{
 				var columns = new List<string>(col);
@@ -81,16 +96,23 @@ namespace LimitPlugins
 				instance.column2 = "row " + i + " col2 " + " = " + rnd.Next();
 				instance.column3 = "row " + i + " col3 " + " = " + rnd.Next();
 				instances.Add(instance);
+				var item = new Dictionary<string, object>();
+				item["A"] = "group " + (i % 5 + 1);
+				item["B"] = "row " + (i + 1);
+				item["C"] = "modulo " + (i % 10);
+				list.Add(item);
 			}
 			var input = new Dictionary<string, object>();
 			input["dynamic"] = dynamicResize;
 			input["fixed"] = instances;
+			input["list"] = list;
 
 			var factory = Configuration.Builder
 				.Include(TopNElementsFormatting)
 				.Include<IList>(TopNElementsProcessing)
 				.NavigateSeparator(':')
 				.Include(TopNElementNavigation)
+				.Include(ListGroupping)
 				.Build();
 			using (var doc = factory.Open("Limits.docx"))
 				doc.Process(input);

@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>templater-server</artifactId>
     <packaging>jar</packaging>
-    <version>5.1.1</version>
+    <version>5.2.0</version>
     <name>TemplaterServer</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

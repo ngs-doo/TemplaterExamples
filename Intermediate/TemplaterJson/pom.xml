@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater</groupId>
     <artifactId>templater-json</artifactId>
     <packaging>jar</packaging>
-    <version>5.1.1</version>
+    <version>5.2.0</version>
     <name>TemplaterJson</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

@@ -17,3 +17,8 @@ Previously if similar document wanted to be processed, Templater could do it out
 
 ImageInputStream will be inserted into the document using original file format and DPI info.
 Since v3.2.0 `ImageInfo` allows for easier image manpilation by exposing DPI values directly. ImageInputStream is internally converted into ImageInfo.
+
+### Digital signature
+
+Templater supports document signing with a certificate. This can be used to provide authenticity of the document, since any change to the document after the signing will invalidate the signature.
+Note: Certificates which are not trusted will be shown as Recoverable certificates. Certificate used in this example is self signed and thus not trusted.

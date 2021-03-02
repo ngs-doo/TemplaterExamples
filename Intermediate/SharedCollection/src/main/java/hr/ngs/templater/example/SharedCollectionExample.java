@@ -10,6 +10,9 @@ import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.List;
 
@@ -114,7 +117,12 @@ public class SharedCollectionExample {
         InputStream templateStream = SharedCollectionExample.class.getResourceAsStream("/TwoTables.docx");
         File tmp = File.createTempFile("sharing", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        IDocumentFactory factory = Configuration.builder().include(new ImageWithDPI()).build();
+        InputStream certStream = SharedCollectionExample.class.getResourceAsStream("/templater.pfx");
+        KeyStore keyStore = KeyStore.getInstance("PKCS12");
+        keyStore.load(certStream, "templater".toCharArray());
+        X509Certificate certificate = (X509Certificate)keyStore.getCertificate("templater.info");
+        PrivateKey privateKey = (PrivateKey)keyStore.getKey("templater.info", "templater".toCharArray());
+        IDocumentFactory factory = Configuration.builder().include(new ImageWithDPI()).sign(certificate, privateKey).build();
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         HashMap<String, Object> data = new HashMap<String, Object>();
         data.put("analysis", "Patient info");

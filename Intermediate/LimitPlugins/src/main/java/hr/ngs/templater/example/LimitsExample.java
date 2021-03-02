@@ -4,6 +4,7 @@ import hr.ngs.templater.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LimitsExample {
 
@@ -56,6 +57,25 @@ public class LimitsExample {
         }
     }
 
+    static class ListGrouping implements IDocumentFactoryBuilder.INavigate {
+
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (value instanceof List && metadata.startsWith("group(")) {
+                //extract grouping column
+                String name = metadata.substring(6, metadata.length() - 1);
+                List<Map> list = (List) value;
+                Map<String, List<Map>> result = list.stream().collect(
+                        //use linked hash map to preserve order
+                        Collectors.groupingBy(it -> (String) it.get(name), LinkedHashMap::new, Collectors.toList())
+                );
+                //key and value members work due to Java Bean support which map getKey and getValue into such tags
+                return result.entrySet();
+            }
+            return value;
+        }
+    }
+
     static class Instance {
         public String column1;
         public String column2;
@@ -69,6 +89,7 @@ public class LimitsExample {
         List<Instance> fixed = new ArrayList<>();
         Random rnd = new Random();
         int col = rnd.nextInt(3) + 2;
+        List<Map> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             List<String> columns = new ArrayList<>(col);
             for (int j = 0; j < col; j++) {
@@ -80,10 +101,16 @@ public class LimitsExample {
             instance.column2 = "row " + i + " col2 " + " = " + rnd.nextInt();
             instance.column3 = "row " + i + " col3 " + " = " + rnd.nextInt();
             fixed.add(instance);
+            Map<String, Object> item = new HashMap<>();
+            item.put("A", "group " + (i % 5 + 1));
+            item.put("B", "row " + (i + 1));
+            item.put("C", "modulo " + (i % 10));
+            list.add(item);
         }
         Map<String, Object> input = new HashMap<>();
         input.put("dynamic", dynamicResize);
         input.put("fixed", fixed);
+        input.put("list", list);
         FileOutputStream fos = new FileOutputStream(tmp);
         IDocumentFactory factory =
                 Configuration.builder()
@@ -91,6 +118,7 @@ public class LimitsExample {
                         .include(List.class, new TopNElementsProcessing())
                         .navigateSeparator(':')
                         .include(new TopNElementNavigation())
+                        .include(new ListGrouping())
                         .build();
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         tpl.process(input);

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using NGS.Templater;
 
 namespace SharedCollection
@@ -63,6 +64,7 @@ namespace SharedCollection
 		public static void Main(string[] args)
 		{
 			File.Copy("template/TwoTables.docx", "TwoTables.docx", true);
+			var certificate = new X509Certificate2("template/templater.pfx", "templater");
 
 			var data = new Dictionary<string, object>();
 			data["analysis"] = "Patient info";
@@ -83,7 +85,7 @@ namespace SharedCollection
 
 			data["imageWithDPI"] = "/java.png";
 
-			var factory = Configuration.Builder.Include(ImageWithDPI).Build();
+			var factory = Configuration.Builder.Include(ImageWithDPI).Sign(certificate).Build();
 			using (var doc = factory.Open("TwoTables.docx"))
 			{
 				doc.Process(data);

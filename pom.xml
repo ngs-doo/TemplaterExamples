@@ -6,7 +6,7 @@
 
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
-    <version>5.1.1</version>
+    <version>5.2.0</version>
     <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

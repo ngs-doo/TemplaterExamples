@@ -116,7 +116,7 @@ Deep nesting in practice.
 
 ### [Shared collection](SharedCollection/Readme.md)
 
-Different parts of same collection can be used in different tables.
+Different parts of same collection can be used in different tables. Digital signatures.
 
 [template](SharedCollection/template/TwoTables.docx?raw=true) - [result](SharedCollection/result.docx?raw=true)
 
