@@ -36,11 +36,10 @@ public class NamedRangeExample {
         InputStream templateStream = NamedRangeExample.class.getResourceAsStream("/Scorecard.xlsx");
         File tmp = File.createTempFile("score", ".xlsx");
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(makeScorecard(100));
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(makeScorecard(100));
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

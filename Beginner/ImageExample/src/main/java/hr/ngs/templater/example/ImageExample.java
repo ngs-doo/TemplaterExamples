@@ -14,13 +14,12 @@ public class ImageExample {
         InputStream templateStream = ImageExample.class.getResourceAsStream("/Picture.docx");
         File tmp = File.createTempFile("image", ".docx");
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        BufferedImage img = ImageIO.read(ImageExample.class.getResourceAsStream("/Chuck_Norris.jpg"));
-        //we can even use low level API to change tags directly
-        tpl.templater().replace("picture", img);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            BufferedImage img = ImageIO.read(ImageExample.class.getResourceAsStream("/Chuck_Norris.jpg"));
+            //we can even use low level API to change tags directly
+            tpl.templater().replace("picture", img);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

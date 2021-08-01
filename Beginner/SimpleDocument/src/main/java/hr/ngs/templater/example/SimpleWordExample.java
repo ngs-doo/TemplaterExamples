@@ -17,11 +17,10 @@ public class SimpleWordExample {
 
         MyClass data = new MyClass();
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(data);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(data);
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 

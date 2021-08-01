@@ -60,7 +60,7 @@ namespace DataSetExample
 
 			using (var in2 = new FileStream("SampleLetter.docx", FileMode.Open))
 			using (var out2 = new FileStream("out2.docx", FileMode.Create))
-			using (var doc = NGS.Templater.Configuration.Builder.Include(ColorConverter).Build().Open(in2, out2, "docx"))
+			using (var doc = NGS.Templater.Configuration.Builder.Include(ColorConverter).Build().Open(in2, "docx", out2))
 			{
 				doc.Process(ds);
 			}

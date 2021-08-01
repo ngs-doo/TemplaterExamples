@@ -37,7 +37,7 @@ namespace SpreadsheetGrouping
 
 			using (var input = new MemoryStream(File.ReadAllBytes(inputFile)))
 			using (var output = new FileStream(outputFile, FileMode.Create))
-			using (var document = Configuration.Factory.Open(input, output, "xlsx"))
+			using (var document = Configuration.Factory.Open(input, "xlsx", output))
 			{
 				document.Process(new { Simple = list, Range = list });
 			}

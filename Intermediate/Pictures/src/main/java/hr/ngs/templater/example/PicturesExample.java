@@ -259,7 +259,7 @@ public class PicturesExample {
         data.put("placeholder", ImageIO.read(PicturesExample.class.getResourceAsStream("/unicorn.jpg")));
         data.put("qr-tag", "https://templater.info/");
         tpl.process(data);
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

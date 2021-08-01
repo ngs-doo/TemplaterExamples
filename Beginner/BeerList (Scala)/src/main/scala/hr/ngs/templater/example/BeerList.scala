@@ -34,7 +34,7 @@ object BeerList extends App {
   val output: FileOutputStream = new FileOutputStream(tmp)
   val tpl = Configuration.factory().open(templateStream, "docx", output)
   tpl.process(report)
-  tpl.flush()
+  tpl.close()
   templateStream.close()
   output.close()
   Desktop.getDesktop.open(tmp)

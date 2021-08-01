@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>simple-presentation-example</artifactId>
     <packaging>jar</packaging>
-    <version>5.2.0</version>
+    <version>6.0.0</version>
     <name>Simple PowerPoint document</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

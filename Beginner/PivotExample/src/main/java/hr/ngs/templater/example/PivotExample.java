@@ -47,11 +47,10 @@ public class PivotExample {
         data.add(createItem("Mumbai (Bombay)", "India", 19.35, 209));
         data.add(createItem("Rio de Janeiro", "Brasil", 328.13, 201));
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(data);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(data);
+        }
         Desktop.getDesktop().open(tmp);
     }
 

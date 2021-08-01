@@ -43,7 +43,7 @@ public class PresentationTablesExample {
             public final List<TableRow> table1 = list;
             public final String[][] table2 = array;
         });
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

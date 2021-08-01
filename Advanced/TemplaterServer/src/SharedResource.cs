@@ -13,6 +13,7 @@ namespace TemplaterServer
 		internal readonly string[] TemplateFiles;
 		internal readonly string TemplateHtml;
 		internal readonly string DefaultHtml;
+		internal readonly int Timeout = 30;
 		internal readonly Dictionary<string, string> Jsons;
 		internal readonly Dictionary<string, PdfConverter> PdfConverters = new Dictionary<string, PdfConverter>();
 
@@ -25,6 +26,8 @@ namespace TemplaterServer
 			{
 				if (a.StartsWith("pdf="))
 					pdf = a.Substring("pdf=".Length).Split(',');
+				else if (a.StartsWith("timeout="))
+					Timeout = int.Parse(a.Substring("timeout=".Length));
 			}
 
 			foreach (var t in types)

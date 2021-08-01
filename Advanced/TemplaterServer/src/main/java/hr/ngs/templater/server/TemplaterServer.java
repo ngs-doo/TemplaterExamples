@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.util.*;
+import java.util.concurrent.CancellationException;
 import java.util.logging.*;
 import java.util.zip.CRC32;
 
@@ -271,9 +272,18 @@ public class TemplaterServer implements AutoCloseable {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             //we can process template regularly or just to embed schema inside
             IDocumentFactory factory = asSchema ? schemaFactory : debugLog ? debugFactory : documentFactory;
-            final ITemplateDocument doc = factory.open(is, ext, baos);
-            doc.process(data);
-            doc.flush();
+            IDocumentFactory.CancellationToken cancellationToken = new IDocumentFactory.CancellationToken() {
+                private final long runUntil = System.currentTimeMillis() + timeoutLimit * 1000L;
+                @Override
+                public boolean isCanceled() {
+                    //if processing does not finish within specified timeout (default 30 seconds), cancel the run
+                    //when operation is canceled CancellationException is thrown
+                    return timeoutLimit > 0 && System.currentTimeMillis() > runUntil;
+                }
+            };
+            try(ITemplateDocument doc = factory.open(is, ext, baos, cancellationToken)) {
+                doc.process(data);
+            }
             status = "success";
             return baos.toByteArray();
         } finally {
@@ -418,7 +428,13 @@ public class TemplaterServer implements AutoCloseable {
                    String json = params.containsKey("json") ? params.get("json") : params.get("postData");
                    jsonBytes = json != null ? json.getBytes(UTF8) : null;
                }
-               byte[] templaterResultBytes = processTemplate(templaterBytes, parseJson(jsonBytes), ext, false, params);
+               byte[] templaterResultBytes;
+               try {
+                   templaterResultBytes = processTemplate(templaterBytes, parseJson(jsonBytes), ext, false, params);
+               } catch (CancellationException e) {
+                   sendResponse(httpExchange, 429, MIME_PLAINTEXT, "Processing the request took too long. Processing canceled", start);
+                   return;
+               }
                byte[] resultBytes;
                try {
                    resultBytes = toPdf ? convertToPdf(templaterResultBytes, ext, params.get("pdf")) : templaterResultBytes;
@@ -475,7 +491,13 @@ public class TemplaterServer implements AutoCloseable {
                            return;
                        }
                        String ext = getExtension(templateName);
-                       byte[] template = processTemplate(bytes, parseJson(jsonBytes), ext, true, params);
+                       byte[] template;
+                       try {
+                           template = processTemplate(bytes, parseJson(jsonBytes), ext, true, params);
+                       } catch (CancellationException e) {
+                           sendResponse(httpExchange, 429, MIME_PLAINTEXT, "Processing the request took too long. Processing canceled", start);
+                           return;
+                       }
                        sendResponse(httpExchange, 200, mime, template, start);
                        return;
                    }
@@ -516,7 +538,12 @@ public class TemplaterServer implements AutoCloseable {
                 if ("POST".equalsIgnoreCase(httpExchange.getRequestMethod())) {
                     byte[] bytes = readBytes(httpExchange);
                     TemplateInfo info = new TemplateInfo(templateName, bytes);
-                    processTemplate(bytes, new HashMap<String, Object>(), info.extension, false, params);
+                    try {
+                        processTemplate(bytes, new HashMap<String, Object>(), info.extension, false, params);
+                    } catch (CancellationException e) {
+                        sendResponse(httpExchange, 429, MIME_PLAINTEXT, "Processing the request took too long. Processing canceled", start);
+                        return;
+                    }
                     synchronized (this) {
                         HashMap<String, TemplateInfo> copy = new HashMap<>(templatesMap);
                         copy.put(templateName, info);
@@ -537,7 +564,13 @@ public class TemplaterServer implements AutoCloseable {
                     boolean toPdf = accept != null && accept.contains(MIME_PDF)
                             || "true".equals(params.get("toPdf")) || "true".equals(params.get("topdf"));
                     byte[] json = readBytes(httpExchange);
-                    byte[] templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension, false, params);
+                    byte[] templaterResultBytes;
+                    try {
+                        templaterResultBytes = processTemplate(info.content, parseJson(json), info.extension, false, params);
+                    } catch (CancellationException e) {
+                        sendResponse(httpExchange, 429, MIME_PLAINTEXT, "Processing the request took too long. Processing canceled", start);
+                        return;
+                    }
                     byte[] resultBytes = toPdf ? convertToPdf(templaterResultBytes, info.extension, params.get("pdf")) : templaterResultBytes;
                     if (resultBytes == null) {
                         sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Failed creating report.", start);

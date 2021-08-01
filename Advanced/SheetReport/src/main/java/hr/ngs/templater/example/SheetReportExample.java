@@ -98,7 +98,7 @@ public class SheetReportExample {
 
         tpl.process(data);
 
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

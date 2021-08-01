@@ -16,21 +16,8 @@ import java.util.zip.ZipOutputStream;
 public class PowerQueryExample {
 
     private static IDocumentFactory factory = Configuration.builder()
-            .include(new LocalDateToDate())
             //Excel will complain about corrupted file unless Templater is initialized with a valid license
             .build("Customer email", "Customer license");
-
-    static class LocalDateToDate implements IDocumentFactoryBuilder.ILowLevelReplacer {
-
-        @Override
-        public Object replace(Object value, String tag, String[] metadata) {
-            //Templater does not understand java8 types so we can convert local date into legacy date
-            if (value instanceof LocalDate) {
-                return java.sql.Date.valueOf((LocalDate)value);
-            }
-            return value;
-        }
-    }
 
     //class should be public Templater to reduce the overhead of reflection access
     public static class CsvData {
@@ -113,14 +100,13 @@ public class PowerQueryExample {
     public static void main(final String[] args) throws Exception {
         File tmp = File.createTempFile("power", ".xlsx");
         InputData data = new InputData();
-        data.csv = generateData(100000);
-        data.sheet = generateData(25000);
+        data.csv = generateData(100_000);
+        data.sheet = generateData(50_000);
 
         try(InputStream is = PowerQueryExample.class.getResourceAsStream("/PowerQuery.xlsx");
-            OutputStream os = Files.newOutputStream(tmp.toPath())) {
-            ITemplateDocument tpl = factory.open(is, "xlsx", os);
+            OutputStream os = Files.newOutputStream(tmp.toPath());
+            ITemplateDocument tpl = factory.open(is, "xlsx", os)) {
             tpl.process(data);
-            tpl.flush();
         }
 
         File result = fixStreamingZip(tmp);

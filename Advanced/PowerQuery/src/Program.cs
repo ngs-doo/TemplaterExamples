@@ -16,8 +16,8 @@ namespace PowerQuery
 
 		private static object ToIsoFormat(object value, string tag, string[] metadata)
 		{
-			//only apply iso format on CSV part of the processing
-			if (!tag.StartsWith("csv.")) return value;
+			//only apply iso format on CSV part of the processing (StartsWith using Ordinal is significantly faster)
+			if (!tag.StartsWith("csv.", StringComparison.Ordinal)) return value;
 			if (value is DateTime)
 			{
 				var dt = (DateTime)value;
@@ -101,11 +101,11 @@ namespace PowerQuery
 		{
 			var data = new InputData();
 			data.csv = GenerateData(100000);
-			data.sheet = GenerateData(25000);
+			data.sheet = GenerateData(50000);
 
 			using (var fis = File.OpenRead("template/PowerQuery.xlsx"))
 			using (var fos = File.OpenWrite("PowerQuery.xlsx"))
-			using (var doc = Factory.Open(fis, fos, "xlsx"))
+			using (var doc = Factory.Open(fis, "xlsx", fos))
 				doc.Process(data);
 
 			Process.Start(new ProcessStartInfo("PowerQuery.xlsx") { UseShellExecute = true });

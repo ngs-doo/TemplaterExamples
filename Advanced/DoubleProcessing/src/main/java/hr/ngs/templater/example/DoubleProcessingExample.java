@@ -53,7 +53,7 @@ public class DoubleProcessingExample {
                 doc1.templater().resize(new String[] { t }, 0);//hide column from output
             }
         }
-        doc1.flush();
+        doc1.close();
 
         //now let's prepare our complex object for standard processing
         Map<String, Object> complex = buildComplexObject(totalPeople);
@@ -64,7 +64,7 @@ public class DoubleProcessingExample {
         ITemplateDocument doc2 = factory.open(is, "xlsx", fos);
         doc2.process(complex);
         doc2.process(new HashMap<String, Object>() {{ put("starcraft", units); }});
-        doc2.flush();
+        doc2.close();
         fos.close();
 
         Desktop.getDesktop().open(tmp);

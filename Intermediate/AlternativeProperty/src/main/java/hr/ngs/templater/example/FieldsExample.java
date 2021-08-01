@@ -56,9 +56,9 @@ public class FieldsExample {
                 return currentRoot.get();
             }
         })).build();
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
-        process(tpl, new MyObject());
-        tpl.flush();
+        try(ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+            process(tpl, new MyObject());
+        }
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

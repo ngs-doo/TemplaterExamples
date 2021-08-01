@@ -25,7 +25,7 @@ namespace TemplaterWeb
 				Context.Response.ClearContent();
 				Context.Response.AddHeader("Content-Disposition", "attachment; filename=test.docx");
 				Context.Response.ContentType = "application/octet-stream";
-				using (var doc = Global.TemplaterFactory.Open(ms, Context.Response.OutputStream, "docx"))
+				using (var doc = Global.TemplaterFactory.Open(ms, "docx", Context.Response.OutputStream))
 				{
 					doc.Templater.Replace("test", DateTime.Now);
 					doc.Templater.Replace("argument", argument);

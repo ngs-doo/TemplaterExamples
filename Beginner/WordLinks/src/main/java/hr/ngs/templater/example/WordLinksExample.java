@@ -88,12 +88,11 @@ public class WordLinksExample {
         hyperlink.put("url", "https://templater.info/demo");
         others.put("hyperlink", hyperlink);
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink(dbFactory)).build().open(templateStream, "docx", fos);
-        tpl.process(favorites);
-        tpl.process(others);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink(dbFactory)).build().open(templateStream, "docx", fos)) {
+            tpl.process(favorites);
+            tpl.process(others);
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 

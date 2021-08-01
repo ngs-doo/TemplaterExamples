@@ -145,7 +145,7 @@ public class CsvStreamingExample {
         }
         //remove remaining rows
         doc.templater().resize(doc.templater().tags(), 0);
-        doc.flush();
+        doc.close();
         conn.close();
         zos.closeEntry();
         zos.close();

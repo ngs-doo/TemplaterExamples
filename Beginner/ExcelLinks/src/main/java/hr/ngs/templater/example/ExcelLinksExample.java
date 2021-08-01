@@ -17,11 +17,10 @@ public class ExcelLinksExample {
         favorites.add(create("The Viking at Stamford Bridge", "1066-11-25", "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html"));
         favorites.add(create("World war I", "1914-6-28", "Wikipedia", "http://en.wikipedia.org/wiki/World_War_I"));
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(favorites);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(favorites);
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 

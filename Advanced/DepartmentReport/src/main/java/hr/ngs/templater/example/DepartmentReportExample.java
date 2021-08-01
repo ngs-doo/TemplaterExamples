@@ -98,7 +98,7 @@ public class DepartmentReportExample {
                 .build()
                 .open(templateStream, "xlsx", fos);
         tpl.process(getCompany());
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

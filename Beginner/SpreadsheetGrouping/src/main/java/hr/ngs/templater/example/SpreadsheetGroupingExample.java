@@ -41,11 +41,13 @@ public class SpreadsheetGroupingExample {
             list.add(info);
         }
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(new HashMap<String, List<Info>>() {{ put("Simple", list); put("Range", list); }});
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(new HashMap<String, List<Info>>() {{
+                put("Simple", list);
+                put("Range", list);
+            }});
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

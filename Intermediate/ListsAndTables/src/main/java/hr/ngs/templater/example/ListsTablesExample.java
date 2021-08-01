@@ -122,12 +122,11 @@ public class ListsTablesExample {
                                 "Research", "Development")
                 ));
 
-        FileOutputStream fos = new FileOutputStream(tmp);
         IDocumentFactory factory = Configuration.builder().include(new LoadImage()).build();
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
-        tpl.process(Arrays.asList(woz, kay));
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+            tpl.process(Arrays.asList(woz, kay));
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

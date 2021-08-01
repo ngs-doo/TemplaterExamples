@@ -71,7 +71,7 @@ namespace DepartmentReport
 				.NavigateSeparator(':')
 				.Include(SortExpression)
 				.Build()
-				.Open(fis, fos, "xlsx"))
+				.Open(fis, "xlsx", fos))
 				doc.Process(GetCompany());
 
 			Process.Start(new ProcessStartInfo("departments.xlsx") { UseShellExecute = true });

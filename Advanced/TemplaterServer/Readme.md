@@ -34,7 +34,7 @@ Once the docker has started, REST API can be consumed by calling:
 
 with body for the actual document. PDF document will be returned as the response.
 
-Alternatively [portable version of LibreOffice](https://www.libreoffice.org/download/portable-versions/) can be used instead of Docker.
+Alternatively, on Windows [portable version of LibreOffice](https://www.libreoffice.org/download/portable-versions/) can be used instead of Docker.
 
 ### REST server for other languages
 
@@ -45,6 +45,8 @@ The workflow for using the server is:
   * GET /document?template=file.ext - will return the saved template. If provided `If-None-Match` matches the expected `ETag` 304 will be returned.
   * PUT /document?template=file.ext - using JSON for request body will process the previously saved template with provided JSON. To create PDF `Accept: application/pdf` can be used
   * DELETE /document?template=file.ext - will remove previously saved template document
+
+Templater supports cancellation pattern via token interface. This example uses timeout based implementation to limit the execution duration of the request.
 
 ### PDF conversion libraries for docx
 
@@ -117,7 +119,7 @@ While :collapse will remove tags, processor will still continue trying to replac
 #### Dynamic resize
 
 Dynamic resize works on Object[][] or List<List<Object>> types as long as dimensions are the same.
-In .NET special two dimensional type: Array[,] is also supported.
+In .NET special two-dimensional type: Array[,] is also supported.
 
 When combined with **merge-nulls** and **span-nulls** multiple cells can be combined into one.  
 
@@ -163,7 +165,6 @@ Tags can be combined with static/dynamic pictures in each row/page.
 Row context can span multiple rows/columns.
 Since context can be nested, this allows for very complex document layouts.
 Text based watermark is supported.
-Currently it requires usage of :all metadata, since watermark is repeated multiple times in different document parts.
 
 #### Scorecard
 

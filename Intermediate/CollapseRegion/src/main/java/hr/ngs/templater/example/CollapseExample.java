@@ -171,7 +171,7 @@ public class CollapseExample {
         //manually invoke resize 0 on a tag. ideally this would be some boolean flag/empty collection
         tpl.templater().resize(new String[] { "remove_me" }, 0);
         tpl.process(Arrays.asList(application1, application2, application3));
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

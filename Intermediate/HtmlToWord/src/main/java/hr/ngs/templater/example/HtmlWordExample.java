@@ -99,7 +99,7 @@ public class HtmlWordExample {
                     "</body>\n" +
                     "</html>");
         }});
-        tpl.flush();
+        tpl.close();
         fos.close();
         java.awt.Desktop.getDesktop().open(tmp);
     }

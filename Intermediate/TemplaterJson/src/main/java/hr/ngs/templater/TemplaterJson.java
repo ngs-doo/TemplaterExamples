@@ -75,7 +75,7 @@ public class TemplaterJson {
                 .include(IMAGE_DECODER)
                 .build().open(templateStream, extension, outputStream);
         tpl.process(data);
-        tpl.flush();
+        tpl.close();
     }
 
     private static IDocumentFactoryBuilder.IFormatter IMAGE_DECODER = new IDocumentFactoryBuilder.IFormatter() {

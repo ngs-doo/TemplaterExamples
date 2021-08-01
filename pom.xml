@@ -6,7 +6,7 @@
 
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
-    <version>5.2.0</version>
+    <version>6.0.0</version>
     <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -54,14 +54,13 @@ public class WordChartExample {
                 new HashMap<String, Object>() {{ put("category", "cute"); put("ser1", 212); put("ser2", 15); put("ser3", 2); }}
         };
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(new Info[] {
-                new Info("first page", pie1, lines1),
-                new Info("second page", pie2, lines2)
-        });
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(new Info[]{
+                    new Info("first page", pie1, lines1),
+                    new Info("second page", pie2, lines2)
+            });
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

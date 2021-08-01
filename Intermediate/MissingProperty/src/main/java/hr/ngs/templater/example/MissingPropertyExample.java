@@ -33,7 +33,7 @@ public class MissingPropertyExample {
         }).build().open(templateStream, "docx", fos);
         doc.process(dictionary);
         removeTagsWithMissing(doc.templater());
-        doc.flush();
+        doc.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

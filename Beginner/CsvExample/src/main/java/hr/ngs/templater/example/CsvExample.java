@@ -76,11 +76,10 @@ public class CsvExample {
             ins.execute();
         }
         ResultSet table = conn.createStatement().executeQuery("SELECT * FROM data");
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new Quoter()).build().open(templateStream, "csv", fos);
-        tpl.process(table);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.builder().include(new Quoter()).build().open(templateStream, "csv", fos)) {
+            tpl.process(table);
+        }
         conn.close();
         Desktop.getDesktop().open(tmp);
     }

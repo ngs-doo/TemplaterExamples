@@ -24,7 +24,7 @@ public class ResultSetExample {
         final Long endTime = System.currentTimeMillis();
         System.out.println("Finished in " + (endTime - startTime) + "ms");
 
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

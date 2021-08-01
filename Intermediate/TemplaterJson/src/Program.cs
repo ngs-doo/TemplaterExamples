@@ -102,13 +102,13 @@ namespace TemplaterJson
 				if (json.Peek() == '[')
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(json));
-					using (var td = config.Build().Open(fis, fos, ext))
+					using (var td = config.Build().Open(fis, ext, fos))
 						td.Process(deser);
 				}
 				else
 				{
 					var deser = newtonsoft.Deserialize<IDictionary<string, object>>(new JsonTextReader(json));
-					using (var td = config.Build().Open(fis, fos, ext))
+					using (var td = config.Build().Open(fis, ext, fos))
 						td.Process(deser);
 				}
 			}

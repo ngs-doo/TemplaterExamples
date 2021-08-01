@@ -31,11 +31,10 @@ public class ParagraphsExample {
         Model model = new Model();
         model.table = paragraphs;
         model.list = paragraphs;
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(model);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(model);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

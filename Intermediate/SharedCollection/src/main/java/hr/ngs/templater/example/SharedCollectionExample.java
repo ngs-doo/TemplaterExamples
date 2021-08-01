@@ -141,7 +141,7 @@ public class SharedCollectionExample {
         data.put("imageWithDPI", "/java.png");
 
         tpl.process(data);
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

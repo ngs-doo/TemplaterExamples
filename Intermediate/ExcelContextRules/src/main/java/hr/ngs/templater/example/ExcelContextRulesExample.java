@@ -38,11 +38,14 @@ public class ExcelContextRulesExample {
                 new Person("Zlatan Ibrahimović", "Paris Saint-Germain", "Barcelona", "Inter Milan")
         };
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(new HashMap<String, Person[]>() {{ put("simple", data); put("tables", data); put("ranges", data); }});
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(new HashMap<String, Person[]>() {{
+                put("simple", data);
+                put("tables", data);
+                put("ranges", data);
+            }});
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

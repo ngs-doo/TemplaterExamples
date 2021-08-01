@@ -30,11 +30,10 @@ public class LabelsExample {
             address.PostCode = "post " + i;
             addresses.add(address);
         }
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(addresses);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(addresses);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

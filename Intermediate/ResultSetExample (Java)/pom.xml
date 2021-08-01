@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>resultset-example</artifactId>
     <packaging>jar</packaging>
-    <version>5.2.0</version>
+    <version>6.0.0</version>
     <name>ResultSetExample</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

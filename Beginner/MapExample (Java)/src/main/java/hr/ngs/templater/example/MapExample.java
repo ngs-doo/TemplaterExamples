@@ -27,11 +27,10 @@ public class MapExample {
 
         myMap.put("Kills", killed);
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(myMap);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(myMap);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

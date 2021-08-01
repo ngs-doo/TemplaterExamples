@@ -66,11 +66,10 @@ public class MailMergeExample {
         }
         br.close();
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new ImageReferenceReplacer()).build().open(templateStream, "docx", fos);
-        tpl.process(data);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.builder().include(new ImageReferenceReplacer()).build().open(templateStream, "docx", fos)) {
+            tpl.process(data);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

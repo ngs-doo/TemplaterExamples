@@ -103,11 +103,10 @@ public class HtmlExcelExample {
         map.put("html", "<p>My simple <b>bold</b> text in <span style=\"color:red\">red!</span></p>");
         map.put("numbers", Arrays.asList(new Number(100), new Number(-100), new Number(10)));
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos);
-        tpl.process(map);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos)) {
+            tpl.process(map);
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

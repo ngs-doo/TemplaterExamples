@@ -112,7 +112,7 @@ namespace QuestionnairePlugin
 
 			using (var input = new FileStream("template/questions.docx", FileMode.Open))
 			using (var output = new FileStream("questionnaire.docx", FileMode.Create))
-			using (var doc = factory.Open(input, output, "docx"))
+			using (var doc = factory.Open(input, "docx", output))
 			{
 				doc.Process(new
 				{

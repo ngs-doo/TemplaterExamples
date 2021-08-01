@@ -107,7 +107,7 @@ namespace CsvStreaming
 			using (var zip = new ZipOutputStream("output.zip"))
 			{
 				zip.PutNextEntry("output.csv");
-				using (var doc = config.Build().Open(File.OpenRead("template/input.csv"), zip, "csv"))
+				using (var doc = config.Build().Open(File.OpenRead("template/input.csv"), "csv", zip))
 				{
 					//streaming processing assumes we have only a single collection, which means we first need to process all other tags
 					doc.Process(new { filter = new { date = "All", user = "All" } });

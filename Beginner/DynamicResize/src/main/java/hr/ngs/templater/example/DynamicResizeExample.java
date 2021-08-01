@@ -38,17 +38,16 @@ public class DynamicResizeExample {
                 {"Dinner", null, "Apple", "Bananas", "Fruit", null, null, "Cake"}
         };
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        //low level API call supports the dynamic resize feature
-        tpl.templater().replace("myArr", array);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("horizontal-nulls", horizontal);
-        map.put("vertical-nulls", vertical);
-        //high level API call supports the dynamic resize feature
-        tpl.process(map);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            //low level API call supports the dynamic resize feature
+            tpl.templater().replace("myArr", array);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("horizontal-nulls", horizontal);
+            map.put("vertical-nulls", vertical);
+            //high level API call supports the dynamic resize feature
+            tpl.process(map);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

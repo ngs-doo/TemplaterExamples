@@ -122,7 +122,7 @@ public class LimitsExample {
                         .build();
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         tpl.process(input);
-        tpl.flush();
+        tpl.close();
         fos.close();
         java.awt.Desktop.getDesktop().open(tmp);
     }

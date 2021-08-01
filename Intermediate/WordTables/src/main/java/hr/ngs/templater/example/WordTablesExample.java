@@ -89,7 +89,7 @@ public class WordTablesExample {
                         .include(new CollapseNonEmpty())
                         .build().open(templateStream, "docx", fos);
         tpl.process(arguments);
-        tpl.flush();
+        tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
     }

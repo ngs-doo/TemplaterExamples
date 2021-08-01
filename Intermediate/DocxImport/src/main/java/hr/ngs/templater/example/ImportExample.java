@@ -29,7 +29,7 @@ public class ImportExample {
         IDocumentFactory factory = Configuration.factory();
         ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
         tpl.templater().replace("imported_document", elements.toArray(new Element[0]));
-        tpl.flush();
+        tpl.close();
         fos.close();
         java.awt.Desktop.getDesktop().open(tmp);
     }

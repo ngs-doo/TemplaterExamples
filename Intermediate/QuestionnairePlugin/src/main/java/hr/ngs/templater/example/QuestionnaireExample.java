@@ -42,17 +42,16 @@ public class QuestionnaireExample {
         arguments.put("Reason", "Example");
         arguments.put("Authors", new String[] {"Mark", "Jane", "Jack"});
 
-        FileOutputStream fos = new FileOutputStream(tmp);
+        try(FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl =
                 Configuration.builder()
                         .include(Questionnaire.class, new QuestionnairePlugin())
                         .include(new FormatDate())
                         .include(new Letters())
                         .withMatcher("[\\w\\.]+")
-                        .build().open(templateStream, "docx", fos);
-        tpl.process(arguments);
-        tpl.flush();
-        fos.close();
+                        .build().open(templateStream, "docx", fos)) {
+            tpl.process(arguments);
+        }
         Desktop.getDesktop().open(tmp);
     }
 

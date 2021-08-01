@@ -27,11 +27,10 @@ public class TableExample {
 
         Menu menu = new Menu("Bon voyage", specialMenu, dailyMenu);
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(menu);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(menu);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

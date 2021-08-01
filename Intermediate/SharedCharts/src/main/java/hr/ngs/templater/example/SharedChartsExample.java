@@ -36,11 +36,10 @@ public class SharedChartsExample {
         data.put("title", "Languages");
         data.put("subtitle", "Usage analysis");
         data.put("data", usage);
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos);
-        tpl.process(data);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos)) {
+            tpl.process(data);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

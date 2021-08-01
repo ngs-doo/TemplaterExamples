@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NGS.Templater;
@@ -104,7 +105,15 @@ namespace TemplaterServer
 				var jfi = new FileInfo("resources/examples/" + file + ".json");
 				if (!jfi.Exists) return NotFound();
 				string jsonString = System.IO.File.ReadAllText(jfi.FullName);
-				var ms = Process(fi, jsonString, true, false);
+				MemoryStream ms;
+				try 
+				{
+					ms = Process(fi, jsonString, true, false);
+				} 
+				catch (OperationCanceledException) 
+				{
+					return StatusCode(429, "Processing the request took too long. Processing canceled");
+				}
 				return File(ms, MimeType(file), file);
 			}
 			return PhysicalFile(fi.FullName, MimeType(file));
@@ -130,14 +139,17 @@ namespace TemplaterServer
 			public bool debugLog { get; set; }
 		}
 
-		private static MemoryStream Process(FileInfo fi, string argument, bool asSchema, bool debugLog)
+		private MemoryStream Process(FileInfo fi, string argument, bool asSchema, bool debugLog)
 		{
+			var cts = new CancellationTokenSource();
+			//if processing does not finish within specified timeout (default 30 seconds),
+			//cancel the run which will throw OperationCancelledException
+			if (SharedResource.Timeout > 0)
+				cts.CancelAfter(SharedResource.Timeout * 1000);
 			var ms = new MemoryStream();
-			var bytes = System.IO.File.ReadAllBytes(fi.FullName);
-			ms.Write(bytes, 0, bytes.Length);
-			ms.Position = 0;
 			var factory = asSchema ? SchemaFactory : debugLog ? DebugFactory : DocumentFactory;
-			using (var doc = factory.Open(ms, fi.Extension))
+			using (var input = System.IO.File.Open(fi.FullName, FileMode.Open, FileAccess.Read))
+			using (var doc = factory.Open(input, fi.Extension, ms, cts.Token))
 			{
 				if (argument.TrimStart().StartsWith("["))
 					doc.Process(Newtonsoft.Deserialize<IDictionary<string, object>[]>(new JsonTextReader(new StringReader(argument))));
@@ -154,7 +166,15 @@ namespace TemplaterServer
 			if (arg == null) return NotFound();
 			var fi = new FileInfo("resources/templates/" + arg.template);
 			if (!fi.Exists) return NotFound();
-			var ms = Process(fi, arg.json, false, arg.debugLog);
+			MemoryStream ms;
+			try
+			{
+				ms = Process(fi, arg.json, false, arg.debugLog);
+			} 
+			catch (OperationCanceledException) 
+			{
+				return StatusCode(429, "Processing the request took too long. Processing canceled");
+			}				
 			if (arg.toPdf)
 				return ConvertToPdf(ms, arg.template, arg.pdf);
 			return File(ms, MimeType(arg.template), arg.template);

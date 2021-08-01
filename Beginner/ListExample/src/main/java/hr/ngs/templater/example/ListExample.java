@@ -42,11 +42,10 @@ public class ListExample {
                                 new LocalDate("2014-04-12"),
                                 horses2));
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos);
-        tpl.process(myList);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+            tpl.process(myList);
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

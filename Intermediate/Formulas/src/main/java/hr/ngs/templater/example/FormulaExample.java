@@ -44,11 +44,10 @@ public class FormulaExample {
         ));
         map.put("hide_sheet", null);
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-        tpl.process(map);
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(map);
+        }
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

@@ -30,12 +30,11 @@ public class BoolExample {
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = BoolExample.class.getResourceAsStream("/Bools.docx");
         File tmp = File.createTempFile("bool", ".docx");
-        FileOutputStream fos = new FileOutputStream(tmp);
         IDocumentFactory factory = Configuration.builder().include(new CustomBoolFormatter()).build();
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
-        tpl.process(new Bools());
-        tpl.flush();
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(tmp);
+            ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+            tpl.process(new Bools());
+        }
         Desktop.getDesktop().open(tmp);
     }
 }

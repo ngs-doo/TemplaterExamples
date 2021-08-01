@@ -40,7 +40,7 @@ public class XmlBindingExample {
                 new Item("Planets", "PLN", "Big balls", 123567, "Very much"),
                 new Item("Stars", "STR", "Glowing things", 66554433, "Very many")));
 
-        tpl.flush();
+        tpl.close();
         fos.close();
 
         String xml = loadXml(tmp);
@@ -48,7 +48,7 @@ public class XmlBindingExample {
         //put xml into document for presentation
         tpl = Configuration.factory().open(tmp.getAbsolutePath());
         tpl.templater().replace("xml", xml);
-        tpl.flush();
+        tpl.close();
 
         Desktop.getDesktop().open(tmp);
     }
