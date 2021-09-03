@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>simple-excel-example</artifactId>
     <packaging>jar</packaging>
-    <version>6.0.0</version>
+    <version>6.1.0</version>
     <name>Simple Excel document</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
