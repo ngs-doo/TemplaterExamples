@@ -20,13 +20,16 @@ public class SharedChartsExample {
             this.desktop = BigDecimal.valueOf(desktop);
             this.mobile = BigDecimal.valueOf(mobile);
         }
+        public BigDecimal total() {
+            return web.add(desktop).add(mobile);
+        }
     }
 
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = SharedChartsExample.class.getResourceAsStream("/charts.pptx");
         File tmp = File.createTempFile("chart", ".pptx");
 
-        List<LanguageUsage> usage = new ArrayList<LanguageUsage>();
+        List<LanguageUsage> usage = new ArrayList<>();
         usage.add(new LanguageUsage("C#", 81.3, 92.22, 52.62));
         usage.add(new LanguageUsage("Java", 87.43, 69.44, 89.91));
         usage.add(new LanguageUsage("C++", 15.6, 32.6, 27.04));
@@ -36,6 +39,10 @@ public class SharedChartsExample {
         data.put("title", "Languages");
         data.put("subtitle", "Usage analysis");
         data.put("data", usage);
+        data.put("dr", new Object() {
+            public final String[][] kind = {{"Web", "Desktop", "Mobile"}};
+            public final Object[][] data = usage.stream().map(it -> new Object[]{it.language, it.web, it.desktop, it.mobile}).toArray(Object[][]::new);
+        });
         try(FileOutputStream fos = new FileOutputStream(tmp);
             ITemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos)) {
             tpl.process(data);

@@ -43,6 +43,8 @@ But if we want CSV files to remain in the Excel we need to slighly modify the xl
 
 These steps will prevent Excel from removing the CSV file on further saves.
 
+**Alternatively embedded CSV files can be managed via Templater Editor in which case there is no need for this manual setup.** 
+
 ### Consuming CSV from PowerQuery
 
 To load CSV into PowerQuery two more pieces are required:

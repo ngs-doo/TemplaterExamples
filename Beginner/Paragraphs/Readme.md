@@ -27,3 +27,7 @@ Content controls can be used to implement part of paragraph conditionality. If r
 This works even when content control is inside lists or table.
 This way sections of the text can be easily removed without using specific text as part of the tag or as value inside a tag.
 TextBox has the same behavior as content control when it comes to removal
+
+### Repeating Section Content control
+
+This is a special kind of Content control which allows for easy duplication of document region. Its available since Templater v6.1 and Word 2013+.

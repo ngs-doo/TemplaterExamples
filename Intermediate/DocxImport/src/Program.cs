@@ -18,8 +18,16 @@ namespace DocxImport
 				(from p in docx.Descendants(XName.Get("p", "http://schemas.openxmlformats.org/wordprocessingml/2006/main"))
 				 where !HasIdReference(p)
 				 select p).ToArray();
+			var file = new FileInfo(Path.GetTempPath() + Guid.NewGuid() + ".docx");
+			File.Copy("template/ToImport.docx", file.FullName, true);
+
 			using (var doc = Configuration.Factory.Open("Master.docx"))
-				doc.Templater.Replace("imported_document", elements);
+			{
+				doc.Templater.Replace("imported_document1", elements);//Templater will recognize XML and inject it directly into the document
+				doc.Templater.Replace("imported_document2", file);//Templater will recognize FileInfo type and add it as embedded document
+			}
+			//once imported file can be deleted
+			file.Delete();
 			Process.Start(new ProcessStartInfo("Master.docx") { UseShellExecute = true });
 		}
 

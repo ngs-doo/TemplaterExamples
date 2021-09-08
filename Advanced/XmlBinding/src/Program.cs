@@ -21,6 +21,16 @@ namespace XmlBinding
 					new Item { product = "Planets", code = "PLN", description = "Big balls", quantity = 123567, title = "Very much"},
 					new Item { product = "Stars", code = "STR", description = "Glowing things", quantity = 66554433, title = "Very many"}
 				});
+				doc.Process(new
+				{
+					selectedValue = "Unknown",
+					dropdown = new[] {
+						new {name = "Option 1", value = "1"},
+						new {name = "Option 2", value = "2"},
+						new {name = "C value", value = "C"},
+						new {name = "Unknown", value = "unknown"}
+					}
+				});
 			}
 
 			//load resulting bound xml from the document
@@ -37,7 +47,7 @@ namespace XmlBinding
 		}
 	}
 
-	class Item
+	public class Item
 	{
 		public string product { get; set; }
 		public string code { get; set; }

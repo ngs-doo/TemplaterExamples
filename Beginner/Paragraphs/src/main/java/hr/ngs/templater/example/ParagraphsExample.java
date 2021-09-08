@@ -17,6 +17,7 @@ public class ParagraphsExample {
     public static class Model {
         public Paragraph[] table;
         public Paragraph[] list;
+        public Paragraph[] section;
         public String remove_cc;
     }
 
@@ -31,6 +32,7 @@ public class ParagraphsExample {
         Model model = new Model();
         model.table = paragraphs;
         model.list = paragraphs;
+        model.section = paragraphs;
         try(FileOutputStream fos = new FileOutputStream(tmp);
             ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
             tpl.process(model);

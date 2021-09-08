@@ -6,6 +6,8 @@ Using external library for converting HTML into DOCX format.
 
 Using *XElement* to paste raw XML into Templater.
 
+Alternative method of using special Word feature of document embedding.
+
 ### Special data type - XElement
 
 Templater supports XElement and collection of XElements as raw input. This means it will be injected into Word as-is instead of first translated into string value (or some special value such as Image).
@@ -17,6 +19,16 @@ This will leave old paragraph empty, which might lead to whitespace bloat. To de
  * remove-old-xml - which will remove previous paragraph after XML is inserted
  * replace-xml - which will insert XML at the place of the paragraph (instead of after it)
  * merge-xml - which will merge provided XML into the found structure
+
+### Document merging
+With version 6.1 Templater also supports document embedding in Word. This can be used for document merging, HTML/RTF import and similar purposes. To import embedded document, special type must be used:
+
+  * System.IO.FileInfo in C#
+  * java.io.File in Java
+
+This works for non-trivial cases, as images, tables and other objects can be imported this way. When replacing such tag, Templater will check if previous tag location would leave paragraph empty. In that case it will remove old paragraph to not leave whitespace around.
+
+Templater will recognize tags inside embedded documents, so this will work seamlessly in various use cases.
 
 ### Plugin example
 

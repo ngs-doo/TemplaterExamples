@@ -14,6 +14,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 public class HtmlWordExample {
@@ -76,6 +79,9 @@ public class HtmlWordExample {
         InputStream templateStream = HtmlWordExample.class.getResourceAsStream("/template.docx");
         File tmp = File.createTempFile("html", ".docx");
 
+        Path embeddedHtml = Files.createTempFile("embed", ".html");
+        Files.copy(HtmlWordExample.class.getResourceAsStream("/example.html"), embeddedHtml, StandardCopyOption.REPLACE_EXISTING);
+
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl =
                 Configuration.builder()
@@ -98,9 +104,11 @@ public class HtmlWordExample {
                     "</ul>\n" +
                     "</body>\n" +
                     "</html>");
+            put("Html3", embeddedHtml.toFile());
         }});
         tpl.close();
         fos.close();
+        Files.delete(embeddedHtml);//once finished we can delete the file
         java.awt.Desktop.getDesktop().open(tmp);
     }
 }

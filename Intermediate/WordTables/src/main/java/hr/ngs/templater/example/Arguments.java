@@ -11,6 +11,7 @@ public class Arguments {
     public Object[][] DynamicResizeAndMerge;
     public List<HashMap<String, Object>> Nulls;
     public ResultSet Table4;
+    public ResultSet Table5;
     public Combined Combined;
     public List<Fixed> Fixed;
 

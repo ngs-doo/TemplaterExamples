@@ -16,6 +16,23 @@ import java.util.zip.ZipInputStream;
 
 public class SheetReportExample {
 
+    public static void main(final String[] args) throws Exception {
+        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
+        InputStream templateStream = SheetReportExample.class.getResourceAsStream("/Report.xlsx");
+        File tmp = File.createTempFile("table", ".xlsx");
+
+        FileOutputStream fos = new FileOutputStream(tmp);
+        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
+
+        InputData data = loadXml(dbFactory);
+
+        tpl.process(data);
+
+        tpl.close();
+        fos.close();
+        Desktop.getDesktop().open(tmp);
+    }
+
     private static String getValue(NodeList xml, String attribute) {
         for (int i = 0; i < xml.getLength(); i++) {
             Element item = (Element) xml.item(i);
@@ -26,7 +43,7 @@ public class SheetReportExample {
     }
 
     private static InputData loadXml(DocumentBuilderFactory dbf) throws Exception {
-        InputData result = new InputData();
+        InputData result = new InputData(6);
         InputStream input = SheetReportExample.class.getResourceAsStream("/UNdata_Export.zip");
         ZipInputStream zip = new ZipInputStream(input);
         ZipEntry entry = zip.getNextEntry();
@@ -86,46 +103,61 @@ public class SheetReportExample {
         return result;
     }
 
-    public static void main(final String[] args) throws Exception {
-        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
-        InputStream templateStream = SheetReportExample.class.getResourceAsStream("/Report.xlsx");
-        File tmp = File.createTempFile("table", ".xlsx");
+    public static class InputData {
+        public List<RawData> data = new ArrayList<>();
+        public List<CountryInfo> country = new ArrayList<>();
+        public String[][] cities;
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
+        public InputData(int size) {
+            cities = new String[1][];
+            cities[0] = new String[size];
+            for (int i = 0; i < size; i++) {
+                cities[0][i] = ORDER[i] + " city";
+            }
+        }
 
-        InputData data = loadXml(dbFactory);
-
-        tpl.process(data);
-
-        tpl.close();
-        fos.close();
-        Desktop.getDesktop().open(tmp);
+        public Object[][] analysis() {
+            int size = cities[0].length;
+            Object[][] result = new Object[country.size()][size + 1];
+            for (int i = 0; i < country.size(); i++) {
+                CountryInfo c = country.get(i);
+                CityData[] sorted = c.city.stream().sorted(Comparator.comparingLong(it -> -it.population)).toArray(CityData[]::new);
+                result[i][0] = c.name;
+                for (int j = 1; j <= size && j <= sorted.length; j++) {
+                    result[i][j] = sorted[j - 1].population;
+                }
+            }
+            return result;
+        }
     }
+    private static String[] ORDER = {
+            "Largest",
+            "Second",
+            "Third",
+            "Fourth",
+            "Fifth",
+            "Sixth",
+            "Seventh",
+    };
 
-    static class InputData {
-        public List<RawData> data = new ArrayList<RawData>();
-        public List<CountryInfo> country = new ArrayList<CountryInfo>();
-    }
-
-    static class RawData {
+    public static class RawData {
         public String country;
         public String city;
         public int year;
         public long population;
     }
 
-    static class CityData {
+    public static class CityData {
         public String name;
         public long population;
     }
 
-    static class CountryInfo {
+    public static class CountryInfo {
         public String name;
-        //In this case, Tenplater doesn't cope with same tag twice, so let's put tag for the sheet into a separate tag
+        //In this case, Templater doesn't cope with same tag twice, so let's put tag for the sheet into a separate tag
         //also, sheet name can't be longer than 31 characters
         public String sheetName() { return name.substring(0, Math.min(30, name.length())); }
-        public List<CityData> city = new ArrayList<CityData>();
+        public List<CityData> city = new ArrayList<>();
     }
 
 }

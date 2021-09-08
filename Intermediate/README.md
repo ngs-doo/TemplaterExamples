@@ -60,9 +60,9 @@ Limiting maximum displayed results via plugins.
 
 [template](LimitPlugins/template/Limits.docx?raw=true) - [result](LimitPlugins/result.docx?raw=true)
 
-### [Importing simple documents](DocxImport/Readme.md)
+### [Importing/merging documents](DocxImport/Readme.md)
 
-Documents are mostly XML. Templater can import XML as is.
+Documents can be embedded or added directly as XML.
 
 [template](DocxImport/template/Master.docx?raw=true) - [import](DocxImport/template/ToImport.docx?raw=true) - [result](DocxImport/result.docx?raw=true)
 
@@ -98,7 +98,7 @@ Templater will rewrite formulas affected by resize actions.
 
 ### [Importing HTML in Word](HtmlToWord/Readme.md)
 
-HTML can be imported via external library which knows how to do HTML -> DOCX conversion.
+HTML can be imported natively or via external library which knows how to do HTML -> DOCX conversion.
 
 [template](HtmlToWord/template/template.docx?raw=true) - [result](HtmlToWord/result.docx?raw=true)
 

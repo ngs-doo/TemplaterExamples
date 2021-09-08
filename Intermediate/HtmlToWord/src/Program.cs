@@ -65,7 +65,8 @@ some <strong>text</strong> in <font color=""red"">red!</font>
 		<li>Number 2</li>
 </ul>
 </body>
-</html>"
+</html>",
+					Html3 = new FileInfo("template/example.html")
 				});
 			}
 			Process.Start(new ProcessStartInfo("Html.docx") { UseShellExecute = true });

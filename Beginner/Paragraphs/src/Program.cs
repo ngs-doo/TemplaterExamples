@@ -14,7 +14,7 @@ namespace Paragraphs
 				new { paragraph = "A common use case for paragraphs is custom indentation rules for paragraphs which can be replicated just fine inside lists and tables with a use of some tricks."}
 			};
 			using (var doc = Configuration.Factory.Open("Paragraphs.docx"))
-				doc.Process(new { table = paragraphs, list = paragraphs, remove_cc = "" });
+				doc.Process(new { table = paragraphs, list = paragraphs, section = paragraphs, remove_cc = "" });
 			Process.Start(new ProcessStartInfo("Paragraphs.docx") { UseShellExecute = true });
 		}
 	}

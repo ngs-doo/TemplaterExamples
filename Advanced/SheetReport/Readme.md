@@ -14,6 +14,11 @@ Sheet duplication can be done in two ways; by using clone (which will duplicate 
 Sheet will be duplicate at appropriate index (meaning for sheet resize there can be other sheets after it).
 If sheet tag is not replaced sheet will have a generic name.
 
+### Charts with Dynamic Resize
+
+When charts have unknown number of series, they can be populated via Dynamic Resize.
+This can be done via 2 or 3 tags (as same tag can be used for categories and values).
+
 ### Utilizing Excel features 
 
 While table on specific sheet is not hidden, it could be put in columns without width so it would look like it's not there.

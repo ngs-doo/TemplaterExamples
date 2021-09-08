@@ -49,6 +49,12 @@ Example shows how to display special table when there are no rows (since default
 Appropriate section will be removed based on the custom metadata and the appropriate handler.
 Handler will iterate through all tags with the same name and either invoke collapse of that region or hide the tag.
 
+### Repeating Section Content Control
+
+On Word 2013+ versions Templater can leverage RSCC as an alternative to sections.
+Sometimes they are easier to manage and will behave in similar ways (tables, lists and other objects can be nest inside).
+Templater supports standard features on this object type, so it can be removed, repeated or complex objects can be nested inside.
+
 ### Combining multiple features
 
 For complex documents it's often required to combine multiple features, such as in this case dynamic resize with a static part of the table.

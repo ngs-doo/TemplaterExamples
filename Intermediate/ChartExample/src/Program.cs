@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using NGS.Templater;
 
 namespace ChartExample
@@ -29,10 +30,32 @@ namespace ChartExample
 			using (var doc = Configuration.Factory.Open("ChartExample.docx"))
 			{
 				doc.Process(new[] {
-					new { tag = "first page", pie = pie1, lines = lines1 },
-					new { tag = "second page", pie = pie2, lines = lines2 }});
+					new { tag = "first page", pie = pie1, lines = lines1, dr = new DynamicResize(lines1) },
+					new { tag = "second page", pie = pie2, lines = lines2, dr = new DynamicResize(lines2) },
+				});
 			}
 			Process.Start(new ProcessStartInfo("ChartExample.docx") { UseShellExecute = true });
+		}
+
+		public class DynamicResize
+		{
+			public string[][] series;
+			public string[][] categories;
+			public object[][] values;
+
+			public DynamicResize(Dictionary<string, object>[] setup)
+			{
+				categories = new string[setup.Length][];
+				values = new object[categories.Length][];
+				series = new string[1][];
+				series[0] = setup[0].Keys.Skip(1).ToArray();
+				for (int i = 0; i < categories.Length; i++)
+				{
+					var d = setup[i];
+					categories[i] = new[] { d["category"].ToString() };
+					values[i] = series[0].Select(s => d[s]).ToArray();
+				}
+			}
 		}
 	}
 }

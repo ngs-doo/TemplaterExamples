@@ -25,3 +25,7 @@ Since tags for XML bindings are just a cache replacing a single tag will actuall
 ### Non bound content control
 
 Content controls can be used without binding with XML in which case they will behave just as any other tag.
+
+### Bound lists
+
+Some Content controls such as Dropdown lists and ComboBoxes support element binding, which allows for easy elements population.

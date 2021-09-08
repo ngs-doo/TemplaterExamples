@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using NGS.Templater;
 
 namespace SharedCharts
@@ -32,7 +33,19 @@ namespace SharedCharts
 			usage.Add(new LanguageUsage("Python", 40.22m, 33.36m, 20.41m));
 			usage.Add(new LanguageUsage("Javascript", 92.54m, 42.67m, 38.78m));
 			using (var doc = Configuration.Factory.Open("charts.pptx"))
-				doc.Process(new { title = "Languages", subtitle = "Usage analysis", data = usage });
+			{
+				doc.Process(new
+				{
+					title = "Languages",
+					subtitle = "Usage analysis",
+					data = usage,
+					dr = new
+					{
+						kind = new[] { new[] { "Web", "Desktop", "Mobile" } }, //2 dimensional array to trigger DR
+						data = usage.Select(it => new object[] { it.language, it.web, it.desktop, it.mobile }).ToArray()
+					}
+				});
+			}
 			Process.Start(new ProcessStartInfo("charts.pptx") { UseShellExecute = true });
 		}
 	}

@@ -18,16 +18,16 @@ public class WordTablesExample {
 
         //Result set mocking library hijacks the default XML parser. let's specify which one Templater should use
         System.setProperty("templater:DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
-        MockResultSet dt = new MockResultSet("Table");
-        dt.addColumn("Col1");
-        dt.addColumn("Col2");
-        dt.addColumn("Col3");
+        MockResultSet dtData = new MockResultSet("Table");
+        dtData.addColumn("Col1");
+        dtData.addColumn("Col2");
+        dtData.addColumn("Col3");
         for (int i = 0; i < 100; i++) {
-            dt.addRow(new String[]{"a" + i, "b" + i, "c" + i});
+            dtData.addRow(new String[]{"a" + i, "b" + i, "c" + i});
         }
-        MockResultSet dt4 = new MockResultSet("Empty");
-        dt4.addColumn("Name");
-        dt4.addColumn("Description");
+        MockResultSet dtEmpty = new MockResultSet("Empty");
+        dtEmpty.addColumn("Name");
+        dtEmpty.addColumn("Description");
         Object[][] dynamicResize1 = {
                 {"a", "b", "c"},
                 {"a", null, "c"},
@@ -66,12 +66,13 @@ public class WordTablesExample {
         );
 
         Arguments arguments = new Arguments();
-        arguments.Table1 = dt;
-        arguments.Table2 = dt;
+        arguments.Table1 = dtData;
+        arguments.Table2 = dtData;
         arguments.DynamicResize = dynamicResize1;
         arguments.DynamicResizeAndMerge = dynamicResize2;
         arguments.Nulls = map;
-        arguments.Table4 = dt4;
+        arguments.Table4 = dtEmpty;
+        arguments.Table5 = dtEmpty;
         arguments.Combined = Arguments.combined(
                 new String[]{"Bottle", "Where"},
                 Arguments.beer("Heineken", "Green and cold", "Light", "International"),

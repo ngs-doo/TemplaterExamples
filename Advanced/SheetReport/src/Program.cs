@@ -30,7 +30,7 @@ namespace SheetReport
 			var entry = zip.GetEntry("UNdata_Export.xml");
 			var xml = XElement.Load(zip.GetInputStream(entry.ZipFileIndex));
 			zip.Close();
-			var result = new InputData();
+			var result = new InputData(6);
 			var lastCountry = string.Empty;
 			CountryInfo country = new CountryInfo();
 			var cities = new Dictionary<string, RawData>();
@@ -71,28 +71,61 @@ namespace SheetReport
 		{
 			public List<RawData> data = new List<RawData>();
 			public List<CountryInfo> country = new List<CountryInfo>();
+			public string[][] cities;
+
+			public InputData(int size)
+			{
+				cities = new string[1][];
+				cities[0] = new string[size];
+				for (int i = 0; i < size; i++)
+					cities[0][i] = Order[i] + " city";
+			}
+
+			public object[,] analysis()
+			{
+				var size = cities[0].Length;
+				var result = new object[country.Count, size + 1];
+				for (int i = 0; i < country.Count; i++)
+				{
+					var c = country[i];
+					var sorted = c.city.OrderByDescending(it => it.population).ToArray();
+					result[i, 0] = c.name;
+					for (int j = 1; j <= size && j <= sorted.Length; j++)
+						result[i, j] = sorted[j - 1].population;
+				}
+				return result;
+			}
 		}
+		private static string[] Order = new string[]{
+			"Largest",
+			"Second",
+			"Third",
+			"Fourth",
+			"Fifth",
+			"Sixth",
+			"Seventh",
+		};
 
 		class RawData
 		{
-			public String country;
-			public String city;
+			public string country;
+			public string city;
 			public int year;
 			public long population;
 		}
 
 		class CityData
 		{
-			public String name;
+			public string name;
 			public long population;
 		}
 
 		class CountryInfo
 		{
-			public String name;
-			//In this case, Tenplater doesn't cope with same tag twice, so let's put tag for the sheet into a separate tag
+			public string name;
+			//In this case, Templater doesn't cope with same tag twice, so let's put tag for the sheet into a separate tag
 			//also, sheet name can't be longer than 31 characters
-			public String sheetName() { return name.Substring(0, Math.Min(30, name.Length)); }
+			public string sheetName() { return name.Substring(0, Math.Min(30, name.Length)); }
 			public List<CityData> city = new List<CityData>();
 		}
 	}

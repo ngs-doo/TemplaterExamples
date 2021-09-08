@@ -121,15 +121,15 @@ namespace WordDataTable
 		public static void Main(string[] args)
 		{
 			File.Copy("template/Tables.docx", "WordTables.docx", true);
-			var dt = new DataTable();
-			dt.Columns.Add("Col1");
-			dt.Columns.Add("Col2");
-			dt.Columns.Add("Col3");
+			var dtData = new DataTable();
+			dtData.Columns.Add("Col1");
+			dtData.Columns.Add("Col2");
+			dtData.Columns.Add("Col3");
 			for (int i = 0; i < 100; i++)
-				dt.Rows.Add("a" + i, "b" + i, "c" + i);
-			var dt4 = new DataTable();
-			dt4.Columns.Add("Name");
-			dt4.Columns.Add("Description");
+				dtData.Rows.Add("a" + i, "b" + i, "c" + i);
+			var dtEmpty = new DataTable();
+			dtEmpty.Columns.Add("Name");
+			dtEmpty.Columns.Add("Description");
 			//for (int i = 0; i < 10; i++)
 			//dt4.Rows.Add("Name" + i, "Description" + i);
 			var factory =
@@ -190,12 +190,13 @@ namespace WordDataTable
 				doc.Process(
 					new
 					{
-						Table1 = dt,
-						Table2 = dt,
+						Table1 = dtData,
+						Table2 = dtData,
 						DynamicResize = dynamicResize1,
 						DynamicResizeAndMerge = dynamicResize2,
 						Nulls = map,
-						Table4 = dt4,
+						Table4 = dtEmpty,
+						Table5 = dtEmpty,
 						Combined = combined,
 						Fixed = fixedItems
 					});

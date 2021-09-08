@@ -274,6 +274,7 @@ public class TemplaterServer implements AutoCloseable {
             IDocumentFactory factory = asSchema ? schemaFactory : debugLog ? debugFactory : documentFactory;
             IDocumentFactory.CancellationToken cancellationToken = new IDocumentFactory.CancellationToken() {
                 private final long runUntil = System.currentTimeMillis() + timeoutLimit * 1000L;
+
                 @Override
                 public boolean isCanceled() {
                     //if processing does not finish within specified timeout (default 30 seconds), cancel the run
@@ -281,11 +282,16 @@ public class TemplaterServer implements AutoCloseable {
                     return timeoutLimit > 0 && System.currentTimeMillis() > runUntil;
                 }
             };
-            try(ITemplateDocument doc = factory.open(is, ext, baos, cancellationToken)) {
+            try (ITemplateDocument doc = factory.open(is, ext, baos, cancellationToken)) {
                 doc.process(data);
             }
             status = "success";
             return baos.toByteArray();
+        } catch (Throwable ex) {
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, ex.getMessage());
+            }
+            throw ex;
         } finally {
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, String.format("Templater processed (%s) in %d ms. Status = %s", ext, new Date().getTime() - start, status));
@@ -496,6 +502,9 @@ public class TemplaterServer implements AutoCloseable {
                            template = processTemplate(bytes, parseJson(jsonBytes), ext, true, params);
                        } catch (CancellationException e) {
                            sendResponse(httpExchange, 429, MIME_PLAINTEXT, "Processing the request took too long. Processing canceled", start);
+                           return;
+                       } catch (Exception e) {
+                           sendResponse(httpExchange, 500, MIME_PLAINTEXT, "Error processing the request", start);
                            return;
                        }
                        sendResponse(httpExchange, 200, mime, template, start);
