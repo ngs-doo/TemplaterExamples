@@ -745,7 +745,7 @@ public class TemplaterServer implements AutoCloseable {
             if (!path.exists()) {
                 path = new File(new File("Advanced", "TemplaterServer"), "resources");
                 if (!path.exists()) {
-                    throw new RuntimeException("Unable to find default or fallback resource folder: " + path);
+                    System.out.println("Running without examples since resource path is not found...");
                 }
             }
 
