@@ -80,7 +80,7 @@ public class QuestionnaireExample {
         }
     }
 
-    static class FormatDate implements IDocumentFactoryBuilder.IFormatter {
+    static class FormatDate implements IDocumentFactoryBuilder.Formatter {
         private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
         @Override
@@ -92,7 +92,7 @@ public class QuestionnaireExample {
         }
     }
 
-    static class Letters implements IDocumentFactoryBuilder.IFormatter {
+    static class Letters implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -107,7 +107,7 @@ public class QuestionnaireExample {
         }
     }
 
-    static class QuestionnairePlugin implements IDocumentFactoryBuilder.IProcessor<Questionnaire> {
+    static class QuestionnairePlugin implements IDocumentFactoryBuilder.Processor<Questionnaire> {
         @Override
         public boolean tryProcess(String prefix, ITemplater templater, Questionnaire q) {
             String[] tags = templater.tags();

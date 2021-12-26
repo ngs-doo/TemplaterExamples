@@ -17,7 +17,7 @@ import java.util.*;
 
 public class WordLinksExample {
 
-    private static class StringToUrl implements IDocumentFactoryBuilder.IFormatter {
+    private static class StringToUrl implements IDocumentFactoryBuilder.Formatter {
         @Override
         public Object format(Object value, String metadata) {
             if ("url".equals(metadata)) {
@@ -30,7 +30,7 @@ public class WordLinksExample {
         }
     }
 
-    private static class ToHyperlink implements IDocumentFactoryBuilder.IFormatter {
+    private static class ToHyperlink implements IDocumentFactoryBuilder.Formatter {
         DocumentBuilderFactory dbFactory;
         DocumentBuilder dBuilder;
 

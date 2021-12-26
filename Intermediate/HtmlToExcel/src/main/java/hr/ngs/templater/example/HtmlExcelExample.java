@@ -24,7 +24,7 @@ public class HtmlExcelExample {
         }
     }
 
-    private static class HtmlToOoxml implements IDocumentFactoryBuilder.IFormatter {
+    private static class HtmlToOoxml implements IDocumentFactoryBuilder.Formatter {
         DocumentBuilder dBuilder;
 
         HtmlToOoxml(DocumentBuilder dBuilder) {

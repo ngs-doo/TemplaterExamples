@@ -55,7 +55,7 @@ public class ListsTablesExample {
         }
     }
 
-    static class LoadImage implements IDocumentFactoryBuilder.IFormatter {
+    static class LoadImage implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {

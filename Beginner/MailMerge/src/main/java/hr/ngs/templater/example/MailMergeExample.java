@@ -35,7 +35,7 @@ public class MailMergeExample {
         }
     }
 
-    static class ImageReferenceReplacer implements IDocumentFactoryBuilder.ILowLevelReplacer {
+    static class ImageReferenceReplacer implements IDocumentFactoryBuilder.LowLevelReplacer {
         @Override
         public Object replace(Object value, String tag, String[] metadata) {
             if (value instanceof ImageReference) {

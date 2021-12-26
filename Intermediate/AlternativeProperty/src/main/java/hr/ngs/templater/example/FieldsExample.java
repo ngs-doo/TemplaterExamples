@@ -19,7 +19,7 @@ public class FieldsExample {
         public MyObjectB objectB = new MyObjectB();
     }
 
-    static class MissingFormatter implements IDocumentFactoryBuilder.IFormatter {
+    static class MissingFormatter implements IDocumentFactoryBuilder.Formatter {
         private Callable<Object> getRoot;
         public MissingFormatter(Callable<Object> getRoot) {
             this.getRoot = getRoot;

@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>templater-server</artifactId>
     <packaging>jar</packaging>
-    <version>6.1.0</version>
+    <version>6.2.0</version>
     <name>TemplaterServer</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -38,14 +38,14 @@
             <groupId>e-iceblue</groupId>
             <artifactId>spire.doc.free</artifactId>
             <version>3.9.0</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.aspose</groupId>
             <artifactId>aspose-words</artifactId>
             <version>21.7</version>
             <classifier>jdk17</classifier>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>

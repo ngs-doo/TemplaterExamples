@@ -34,7 +34,7 @@ Templater makes it very convenient to manage report templates.
 
 ### [Complex Excel report](DepartmentReport/Readme.md)
 
-Combining various Excel features to create good looking report.
+Combining various Excel features to create good-looking report. Using expression parser for filtering.
 
 [template](DepartmentReport/template/departments.xlsx?raw=true) - [result](DepartmentReport/result.xlsx?raw=true)
 

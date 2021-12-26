@@ -54,7 +54,7 @@ public class SharedCollectionExample {
         }
     }
 
-    static class ImageWithDPI implements IDocumentFactoryBuilder.IFormatter {
+    static class ImageWithDPI implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String md) {

@@ -39,7 +39,7 @@ public class HtmlWordExample {
         }
     }
 
-    private static class SimpleHtmlConverter implements IDocumentFactoryBuilder.IFormatter {
+    private static class SimpleHtmlConverter implements IDocumentFactoryBuilder.Formatter {
         private final DocumentBuilder dBuilder;
         public SimpleHtmlConverter(DocumentBuilder dBuilder) {
             this.dBuilder = dBuilder;
@@ -54,7 +54,7 @@ public class HtmlWordExample {
         }
     }
 
-    private static class ComplexHtmlConverter implements IDocumentFactoryBuilder.IFormatter {
+    private static class ComplexHtmlConverter implements IDocumentFactoryBuilder.Formatter {
         private final DocumentBuilder dBuilder;
         public ComplexHtmlConverter(DocumentBuilder dBuilder) {
             this.dBuilder = dBuilder;

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LimitsExample {
 
-    static class TopNElementsFormatting implements IDocumentFactoryBuilder.IFormatter {
+    static class TopNElementsFormatting implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -20,7 +20,7 @@ public class LimitsExample {
         }
     }
 
-    static class TopNElementsProcessing implements IDocumentFactoryBuilder.IProcessor<List> {
+    static class TopNElementsProcessing implements IDocumentFactoryBuilder.Processor<List> {
         @Override
         public boolean tryProcess(String prefix, ITemplater templater, List list) {
             for (String t : templater.tags()) {
@@ -42,7 +42,7 @@ public class LimitsExample {
         }
     }
 
-    static class TopNElementNavigation implements IDocumentFactoryBuilder.INavigate {
+    static class TopNElementNavigation implements IDocumentFactoryBuilder.Navigate {
 
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
@@ -57,7 +57,7 @@ public class LimitsExample {
         }
     }
 
-    static class ListGrouping implements IDocumentFactoryBuilder.INavigate {
+    static class ListGrouping implements IDocumentFactoryBuilder.Navigate {
 
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
@@ -116,7 +116,7 @@ public class LimitsExample {
                 Configuration.builder()
                         .include(new TopNElementsFormatting())
                         .include(List.class, new TopNElementsProcessing())
-                        .navigateSeparator(':')
+                        .navigateSeparator(':', null)
                         .include(new TopNElementNavigation())
                         .include(new ListGrouping())
                         .build();

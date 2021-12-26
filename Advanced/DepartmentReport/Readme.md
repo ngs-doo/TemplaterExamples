@@ -56,3 +56,7 @@ This can be used for various purposes:
  * calling methods with arguments (unlike only being able to use zero method navigation)
  * various other complex logic
  
+There are two navigation plugin implementations in the project:
+
+ * sort - using simplistic reflection implementation
+ * filter - using expression parsing libraries

@@ -90,6 +90,7 @@ Examples:
  * [custom reflection processing](Intermediate/AlternativeProperty)
  * [overriding bultin plugins](Intermediate/BoolOverride)
  * [custom type processing](Intermediate/QuestionnairePlugin)
+ * [runtime filtering](Advanced/DepartmentReport)
 
 ## FAQ
 

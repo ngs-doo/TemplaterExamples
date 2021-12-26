@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 
 public class CsvExample {
 
-    static class Quoter implements IDocumentFactoryBuilder.IFormatter {
+    static class Quoter implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {

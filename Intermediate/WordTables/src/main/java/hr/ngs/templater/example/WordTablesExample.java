@@ -85,7 +85,7 @@ public class WordTablesExample {
                         .include(new Top10Rows())
                         .include(ResultSet.class, new Limit10Table())
                         //without specifying separator, navigation feature will not be available
-                        .navigateSeparator(':')
+                        .navigateSeparator(':', null)
                         .include(new LimitResultSet())
                         .include(new CollapseNonEmpty())
                         .build().open(templateStream, "docx", fos);
@@ -95,7 +95,7 @@ public class WordTablesExample {
         Desktop.getDesktop().open(tmp);
     }
 
-    static class Top10Rows implements IDocumentFactoryBuilder.IFormatter {
+    static class Top10Rows implements IDocumentFactoryBuilder.Formatter {
         public Object format(Object argument, String metadata) {
             //if we find exact metadata and type invoke the plugin
             if ("top10".equals(metadata) && argument instanceof ResultSet) {
@@ -124,7 +124,7 @@ public class WordTablesExample {
         }
     }
 
-    static class LimitResultSet implements IDocumentFactoryBuilder.INavigate {
+    static class LimitResultSet implements IDocumentFactoryBuilder.Navigate {
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
             //check if plugin is applicable
@@ -155,7 +155,7 @@ public class WordTablesExample {
         }
     }
 
-    static class Limit10Table implements IDocumentFactoryBuilder.IProcessor<ResultSet> {
+    static class Limit10Table implements IDocumentFactoryBuilder.Processor<ResultSet> {
         @Override
         public boolean tryProcess(String prefix, ITemplater templater, ResultSet resultSet) {
             try {
@@ -195,7 +195,7 @@ public class WordTablesExample {
         }
     }
 
-    static class CollapseNonEmpty implements IDocumentFactoryBuilder.IHandler {
+    static class CollapseNonEmpty implements IDocumentFactoryBuilder.Handler {
         @Override
         public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
             if (value instanceof ResultSet && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {

@@ -110,7 +110,7 @@ namespace LimitPlugins
 			var factory = Configuration.Builder
 				.Include(TopNElementsFormatting)
 				.Include<IList>(TopNElementsProcessing)
-				.NavigateSeparator(':')
+				.NavigateSeparator(':', null)
 				.Include(TopNElementNavigation)
 				.Include(ListGroupping)
 				.Build();

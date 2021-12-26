@@ -61,7 +61,7 @@ public class PicturesExample {
         }
     }
 
-    static class MaxSizeBufferedImage implements IDocumentFactoryBuilder.IFormatter {
+    static class MaxSizeBufferedImage implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -92,7 +92,7 @@ public class PicturesExample {
         }
     }
 
-    static class MaxSizeImageStream implements IDocumentFactoryBuilder.IFormatter {
+    static class MaxSizeImageStream implements IDocumentFactoryBuilder.Formatter {
 
         private float getPixelSizeMM(IIOMetadataNode dimension, String elementName) {
             NodeList pixelSizes = dimension.getElementsByTagName(elementName);
@@ -144,7 +144,7 @@ public class PicturesExample {
         }
     }
 
-    static class ImageLoader implements IDocumentFactoryBuilder.IFormatter {
+    static class ImageLoader implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -209,7 +209,7 @@ public class PicturesExample {
         return factory.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, Svg.class.getResourceAsStream(name));
     }
 
-    static class ConvertQR implements IDocumentFactoryBuilder.IFormatter {
+    static class ConvertQR implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {

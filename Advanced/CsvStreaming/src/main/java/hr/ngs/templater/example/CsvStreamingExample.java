@@ -18,7 +18,7 @@ import java.util.zip.*;
 
 public class CsvStreamingExample {
 
-    static class Quoter implements IDocumentFactoryBuilder.ILowLevelReplacer {
+    static class Quoter implements IDocumentFactoryBuilder.LowLevelReplacer {
 
         @Override
         public Object replace(Object value, String tag, String[] metadata) {
@@ -32,7 +32,7 @@ public class CsvStreamingExample {
             return value;
         }
     }
-    static class NumberAsComma implements IDocumentFactoryBuilder.ILowLevelReplacer {
+    static class NumberAsComma implements IDocumentFactoryBuilder.LowLevelReplacer {
 
         @Override
         public Object replace(Object value, String tag, String[] metadata) {

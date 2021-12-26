@@ -136,7 +136,7 @@ namespace WordDataTable
 				Configuration.Builder
 				.Include(Top10Rows)
 				.Include<DataTable>(Limit10Table)
-				.NavigateSeparator(':')
+				.NavigateSeparator(':', null)
 				.Include(LimitDataTable)
 				.Include(CollapseNonEmpty)
 				.Build();

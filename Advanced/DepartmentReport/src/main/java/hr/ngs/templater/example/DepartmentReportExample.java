@@ -4,8 +4,10 @@ import hr.ngs.templater.Configuration;
 import hr.ngs.templater.IDocumentFactoryBuilder;
 import hr.ngs.templater.ITemplateDocument;
 
+import javax.script.*;
 import java.awt.Desktop;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,15 +31,10 @@ public class DepartmentReportExample {
                                                         public final String epic = e.name;
                                                         public final String task = it.id;
                                                         public final double days = it.spent;
-                                                    }
-                                            )
-                                    )
-                            )
-                    )
-            ).collect(Collectors.toList());
+                                                    }))))).collect(Collectors.toList());
         }
     }
-    static class Department {
+    public static class Department {
         public String name;
         public String code;
         public String head;
@@ -49,7 +46,7 @@ public class DepartmentReportExample {
             this.team = teams;
         }
     }
-    static class Team {
+    public static class Team {
         public String name;
         public String lead;
         public Project[] project;
@@ -59,7 +56,7 @@ public class DepartmentReportExample {
             this.project = projects;
         }
     }
-    static class Project {
+    public static class Project {
         public String name;
         public Epic[] epic;
         public Project(String name, Epic... epics) {
@@ -67,7 +64,7 @@ public class DepartmentReportExample {
             this.epic = epics;
         }
     }
-    static class Epic {
+    public static class Epic {
         public String name;
         public Task[] task;
         public Epic(String name, Task... tasks) {
@@ -75,7 +72,7 @@ public class DepartmentReportExample {
             this.task = tasks;
         }
     }
-    static class Task {
+    public static class Task {
         public String id;
         public double estimated;
         public double spent;
@@ -90,14 +87,31 @@ public class DepartmentReportExample {
         InputStream templateStream = DepartmentReportExample.class.getResourceAsStream("/departments.xlsx");
         File tmp = File.createTempFile("department", ".xlsx");
 
+        Company company = getCompany();
         FileOutputStream fos = new FileOutputStream(tmp);
         ITemplateDocument tpl = Configuration
                 .builder()
-                .navigateSeparator(':')
+                .withMatcher("[\\w\\s \\.,:?!+\\*-<>=()]+")
+                .navigateSeparator(':', null)
                 .include(new SortExpression())
+                .include(new FilterExpression())
                 .build()
                 .open(templateStream, "xlsx", fos);
-        tpl.process(getCompany());
+        tpl.process(company);
+        List flattened =
+                Arrays.stream(company.department).flatMap(d ->
+                    Arrays.stream(d.team).flatMap(t ->
+                            Arrays.stream(t.project).flatMap(p ->
+                                    Arrays.stream(p.epic).flatMap(e ->
+                                            Arrays.stream(e.task).map(it ->
+                                                    new Object() {
+                                                        public final Department department = d;
+                                                        public final Team team = t;
+                                                        public final Project project = p;
+                                                        public final Epic epic = e;
+                                                        public final Task task = it;
+                                                    }))))).collect(Collectors.toList());
+        tpl.process(new Object() { public final List flatten = flattened; });
         tpl.close();
         fos.close();
         Desktop.getDesktop().open(tmp);
@@ -105,7 +119,7 @@ public class DepartmentReportExample {
 
     //this is just a simplistic implementation
     //a better implementation would take care of methods, dictionaries and various other types
-    static class SortExpression implements IDocumentFactoryBuilder.INavigate {
+    static class SortExpression implements IDocumentFactoryBuilder.Navigate {
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
             if (!metadata.startsWith("sort(") || value instanceof Object[] == false) return value;
@@ -132,6 +146,35 @@ public class DepartmentReportExample {
             Arrays.sort(elements, propertyComparator);
 
             return value;
+        }
+    }
+
+    private static final ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("JavaScript");
+
+    static class FilterExpression implements IDocumentFactoryBuilder.Navigate {
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (!metadata.startsWith("filter(") || value instanceof List == false) return value;
+            List<Object> elements = (List) value;
+            if (elements.size() == 0 || elements.get(0) == null) return value;
+            String expression = metadata.substring(7, metadata.length() - 1);
+            Field[] fields = elements.get(0).getClass().getFields();
+            List<Object> result = new ArrayList<>();
+            Bindings bindings = scriptEngine.createBindings();
+            for (Object el : elements) {
+                try {
+                    for (Field f : fields) {
+                        bindings.put(f.getName(), f.get(el));
+                    }
+                    Object eval = scriptEngine.eval(expression, bindings);
+                    if (Boolean.TRUE.equals(eval)) {
+                        result.add(el);
+                    }
+                } catch (IllegalAccessException | ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return result;
         }
     }
 

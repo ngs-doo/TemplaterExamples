@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NGS.Templater;
+using NReco.Linq;
 
 namespace DepartmentReport
 {
@@ -64,16 +67,28 @@ namespace DepartmentReport
 
 		public static void Main(string[] args)
 		{
+			var company = GetCompany();
 			using (var fis = File.OpenRead("template/departments.xlsx"))
 			using (var fos = File.OpenWrite("departments.xlsx"))
 			using (var doc = Configuration
 				.Builder
-				.NavigateSeparator(':')
+				.WithMatcher(@"[\w\s \.,:?!+\*-<>=()]+")
+				.NavigateSeparator(':', null)
 				.Include(SortExpression)
+				.Include(FilterExpression)
 				.Build()
 				.Open(fis, "xlsx", fos))
-				doc.Process(GetCompany());
-
+			{
+				doc.Process(company);
+				var flattened =
+					from d in company.department
+					from t in d.team
+					from p in t.project
+					from e in p.epic
+					from k in e.task
+					select new { department = d, team = t, project = p, epic = e, task = k };
+				doc.Process(new { flatten = flattened });
+			}
 			Process.Start(new ProcessStartInfo("departments.xlsx") { UseShellExecute = true });
 		}
 
@@ -84,6 +99,25 @@ namespace DepartmentReport
 			var property = metadata.Substring(5, metadata.Length - 6);
 			var f = col.OfType<object>().First().GetType().GetField(property);
 			return col.OfType<object>().OrderBy(it => f.GetValue(it)).ToList();
+		}
+
+		private static readonly LambdaParser ExpressionParser = new LambdaParser { UseCache = true };
+		private static Func<string, object> GetValue(object instance)
+		{
+			var type = instance.GetType();
+			return name =>
+			{
+				var property = type.GetProperty(name);
+				return property.GetValue(instance, new object[0]);
+			};
+		}
+
+		static object FilterExpression(object parent, object value, string member, string metadata)
+		{
+			var col = value as IEnumerable<object>;
+			if (!metadata.StartsWith("filter(") || col == null) return value;
+			var expression = metadata.Substring(7, metadata.Length - 8);
+			return col.Where(it => (bool)ExpressionParser.Eval(expression, GetValue(it)));
 		}
 
 		private static Company GetCompany()

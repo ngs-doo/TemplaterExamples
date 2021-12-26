@@ -11,7 +11,7 @@ public class BoolExample {
         public boolean game2 = true;
     }
 
-    static class CustomBoolFormatter implements IDocumentFactoryBuilder.IFormatter {
+    static class CustomBoolFormatter implements IDocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
