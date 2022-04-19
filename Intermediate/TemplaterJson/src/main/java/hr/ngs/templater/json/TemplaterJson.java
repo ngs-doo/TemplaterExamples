@@ -1,8 +1,11 @@
-package hr.ngs.templater;
+package hr.ngs.templater.json;
 
 import com.dslplatform.json.DslJson;
 import com.dslplatform.json.JsonReader;
 import com.dslplatform.json.ObjectConverter;
+import hr.ngs.templater.Configuration;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -71,14 +74,14 @@ public class TemplaterJson {
 
         Object data = readData(dataStream);
 
-        ITemplateDocument tpl = Configuration.builder()
+        TemplateDocument tpl = Configuration.builder()
                 .include(IMAGE_DECODER)
                 .build().open(templateStream, extension, outputStream);
         tpl.process(data);
         tpl.close();
     }
 
-    private static IDocumentFactoryBuilder.IFormatter IMAGE_DECODER = new IDocumentFactoryBuilder.IFormatter() {
+    private static DocumentFactoryBuilder.Formatter IMAGE_DECODER = new DocumentFactoryBuilder.Formatter() {
         @Override
         public Object format(Object value, String metadata) {
             if ("image".equals(metadata) && value instanceof String) {

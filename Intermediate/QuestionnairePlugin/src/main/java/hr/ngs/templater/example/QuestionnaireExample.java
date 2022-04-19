@@ -1,9 +1,9 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
-import hr.ngs.templater.ITemplater;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
+import hr.ngs.templater.Templater;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -40,16 +40,16 @@ public class QuestionnaireExample {
         arguments.put("Date", new Date());
         arguments.put("Q", quest);
         arguments.put("Reason", "Example");
-        arguments.put("Authors", new String[] {"Mark", "Jane", "Jack"});
+        arguments.put("Authors", new String[]{"Mark", "Jane", "Jack"});
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl =
-                Configuration.builder()
-                        .include(Questionnaire.class, new QuestionnairePlugin())
-                        .include(new FormatDate())
-                        .include(new Letters())
-                        .withMatcher("[\\w\\.]+")
-                        .build().open(templateStream, "docx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl =
+                     Configuration.builder()
+                             .include(Questionnaire.class, new QuestionnairePlugin())
+                             .include(new FormatDate())
+                             .include(new Letters())
+                             .withMatcher("[\\w\\.]+")
+                             .build().open(templateStream, "docx", fos)) {
             tpl.process(arguments);
         }
         Desktop.getDesktop().open(tmp);
@@ -80,7 +80,7 @@ public class QuestionnaireExample {
         }
     }
 
-    static class FormatDate implements IDocumentFactoryBuilder.Formatter {
+    static class FormatDate implements DocumentFactoryBuilder.Formatter {
         private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
         @Override
@@ -92,7 +92,7 @@ public class QuestionnaireExample {
         }
     }
 
-    static class Letters implements IDocumentFactoryBuilder.Formatter {
+    static class Letters implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -107,9 +107,9 @@ public class QuestionnaireExample {
         }
     }
 
-    static class QuestionnairePlugin implements IDocumentFactoryBuilder.Processor<Questionnaire> {
+    static class QuestionnairePlugin implements DocumentFactoryBuilder.Processor<Questionnaire> {
         @Override
-        public boolean tryProcess(String prefix, ITemplater templater, Questionnaire q) {
+        public boolean tryProcess(String prefix, Templater templater, Questionnaire q) {
             String[] tags = templater.tags();
             for (String t : tags) {
                 if ((prefix + "title").equalsIgnoreCase(t))

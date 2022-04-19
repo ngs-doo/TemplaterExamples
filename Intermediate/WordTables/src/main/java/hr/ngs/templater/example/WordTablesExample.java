@@ -80,7 +80,7 @@ public class WordTablesExample {
         arguments.Fixed = fixedItems;
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl =
+        TemplateDocument tpl =
                 Configuration.builder()
                         .include(new Top10Rows())
                         .include(ResultSet.class, new Limit10Table())
@@ -95,7 +95,7 @@ public class WordTablesExample {
         Desktop.getDesktop().open(tmp);
     }
 
-    static class Top10Rows implements IDocumentFactoryBuilder.Formatter {
+    static class Top10Rows implements DocumentFactoryBuilder.Formatter {
         public Object format(Object argument, String metadata) {
             //if we find exact metadata and type invoke the plugin
             if ("top10".equals(metadata) && argument instanceof ResultSet) {
@@ -124,7 +124,7 @@ public class WordTablesExample {
         }
     }
 
-    static class LimitResultSet implements IDocumentFactoryBuilder.Navigate {
+    static class LimitResultSet implements DocumentFactoryBuilder.Navigate {
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
             //check if plugin is applicable
@@ -155,9 +155,9 @@ public class WordTablesExample {
         }
     }
 
-    static class Limit10Table implements IDocumentFactoryBuilder.Processor<ResultSet> {
+    static class Limit10Table implements DocumentFactoryBuilder.Processor<ResultSet> {
         @Override
-        public boolean tryProcess(String prefix, ITemplater templater, ResultSet resultSet) {
+        public boolean tryProcess(String prefix, Templater templater, ResultSet resultSet) {
             try {
                 ResultSetMetaData rsMD = resultSet.getMetaData();
                 boolean hasMatchingTag = false;
@@ -195,9 +195,9 @@ public class WordTablesExample {
         }
     }
 
-    static class CollapseNonEmpty implements IDocumentFactoryBuilder.Handler {
+    static class CollapseNonEmpty implements DocumentFactoryBuilder.Handler {
         @Override
-        public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+        public Handled handle(Object value, String metadata, String tag, int position, Templater templater) {
             if (value instanceof ResultSet && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                 ResultSet rs = (ResultSet) value;
                 try {
@@ -214,7 +214,7 @@ public class WordTablesExample {
                                 if (position == -1) {
                                     templater.resize(new String[]{tag}, 0);
                                 } else {
-                                    templater.resize(new ITemplater.TagPosition[] { new ITemplater.TagPosition(tag, position)}, 0);
+                                    templater.resize(new Templater.TagPosition[] { new Templater.TagPosition(tag, position)}, 0);
                                 }
                             } else {
                                 //when position is -1 it means non sharing tag is being used, in which case we can just replace the first tag
@@ -230,7 +230,7 @@ public class WordTablesExample {
                                 if (position == -1) {
                                     templater.resize(new String[]{tag}, 0);
                                 } else {
-                                    templater.resize(new ITemplater.TagPosition[] { new ITemplater.TagPosition(tag, position)}, 0);
+                                    templater.resize(new Templater.TagPosition[] { new Templater.TagPosition(tag, position)}, 0);
                                 }
                             } else {
                                 if (position == -1) {

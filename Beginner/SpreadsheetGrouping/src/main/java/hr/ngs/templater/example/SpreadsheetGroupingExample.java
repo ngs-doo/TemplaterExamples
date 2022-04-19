@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.io.*;
 import java.util.*;
@@ -41,8 +41,8 @@ public class SpreadsheetGroupingExample {
             list.add(info);
         }
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(new HashMap<String, List<Info>>() {{
                 put("Simple", list);
                 put("Range", list);

@@ -43,8 +43,8 @@ public class SharedChartsExample {
             public final String[][] kind = {{"Web", "Desktop", "Mobile"}};
             public final Object[][] data = usage.stream().map(it -> new Object[]{it.language, it.web, it.desktop, it.mobile}).toArray(Object[][]::new);
         });
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos)) {
             tpl.process(data);
         }
         Desktop.getDesktop().open(tmp);

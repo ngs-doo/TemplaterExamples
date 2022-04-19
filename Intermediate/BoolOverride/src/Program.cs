@@ -6,7 +6,7 @@ namespace BoolOverride
 {
 	public class Program
 	{
-		class Bools
+		public class Bools
 		{
 			public bool game1;
 			public bool game2 = true;

@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
@@ -35,7 +35,7 @@ public class MailMergeExample {
         }
     }
 
-    static class ImageReferenceReplacer implements IDocumentFactoryBuilder.LowLevelReplacer {
+    static class ImageReferenceReplacer implements DocumentFactoryBuilder.LowLevelReplacer {
         @Override
         public Object replace(Object value, String tag, String[] metadata) {
             if (value instanceof ImageReference) {
@@ -66,8 +66,8 @@ public class MailMergeExample {
         }
         br.close();
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.builder().include(new ImageReferenceReplacer()).build().open(templateStream, "docx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.builder().include(new ImageReferenceReplacer()).build().open(templateStream, "docx", fos)) {
             tpl.process(data);
         }
         Desktop.getDesktop().open(tmp);

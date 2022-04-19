@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.io.*;
 import java.util.*;
@@ -33,8 +33,8 @@ public class WordChartExample {
                 new LinkedHashMap<String, Object>() {{ put("category", "cute"); put("ser1", 212); put("ser2", 15); put("ser3", 2); }}
         };
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+            TemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
             tpl.process(new Info[]{
                     new Info("first page", pie1, lines1),
                     new Info("second page", pie2, lines2)

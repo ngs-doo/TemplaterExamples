@@ -24,7 +24,7 @@ public class MissingPropertyExample {
         ));
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument doc = Configuration.builder().onUnprocessed((prefix, templater, tags, value) -> {
+        TemplateDocument doc = Configuration.builder().onUnprocessed((prefix, templater, tags, value) -> {
             for (String t : tags) {
                 String[] md = templater.getMetadata(t, false);
                 Optional<String> missing = Arrays.stream(md).filter(it -> it.startsWith("missing(")).findFirst();
@@ -38,7 +38,7 @@ public class MissingPropertyExample {
         Desktop.getDesktop().open(tmp);
     }
 
-    private static void removeTagsWithMissing(ITemplater templater) {
+    private static void removeTagsWithMissing(Templater templater) {
         for(String tag : templater.tags()) {
             int i = 0;
             String[] md;

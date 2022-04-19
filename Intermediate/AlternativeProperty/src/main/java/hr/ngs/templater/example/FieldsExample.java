@@ -19,7 +19,7 @@ public class FieldsExample {
         public MyObjectB objectB = new MyObjectB();
     }
 
-    static class MissingFormatter implements IDocumentFactoryBuilder.Formatter {
+    static class MissingFormatter implements DocumentFactoryBuilder.Formatter {
         private Callable<Object> getRoot;
         public MissingFormatter(Callable<Object> getRoot) {
             this.getRoot = getRoot;
@@ -50,20 +50,20 @@ public class FieldsExample {
         InputStream templateStream = FieldsExample.class.getResourceAsStream("/Fields.docx");
         File tmp = File.createTempFile("fields", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        IDocumentFactory factory = Configuration.builder().include(new MissingFormatter(new Callable<Object>() {
+        DocumentFactory factory = Configuration.builder().include(new MissingFormatter(new Callable<Object>() {
             @Override
             public Object call() {
                 return currentRoot.get();
             }
         })).build();
-        try(ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+        try (TemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
             process(tpl, new MyObject());
         }
         fos.close();
         Desktop.getDesktop().open(tmp);
     }
 
-    private static void process(ITemplateDocument doc, Object value) {
+    private static void process(TemplateDocument doc, Object value) {
         try {
             currentRoot.set(value);
             doc.process(value);

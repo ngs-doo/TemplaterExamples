@@ -54,7 +54,7 @@ public class SharedCollectionExample {
         }
     }
 
-    static class ImageWithDPI implements IDocumentFactoryBuilder.Formatter {
+    static class ImageWithDPI implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String md) {
@@ -122,8 +122,8 @@ public class SharedCollectionExample {
         keyStore.load(certStream, "templater".toCharArray());
         X509Certificate certificate = (X509Certificate)keyStore.getCertificate("templater.info");
         PrivateKey privateKey = (PrivateKey)keyStore.getKey("templater.info", "templater".toCharArray());
-        IDocumentFactory factory = Configuration.builder().include(new ImageWithDPI()).sign(certificate, privateKey).build();
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
+        DocumentFactory factory = Configuration.builder().include(new ImageWithDPI()).sign(certificate, privateKey).build();
+        TemplateDocument tpl = factory.open(templateStream, "docx", fos);
         HashMap<String, Object> data = new HashMap<String, Object>();
         data.put("analysis", "Patient info");
         List<Patient> patients = new ArrayList<Patient>();

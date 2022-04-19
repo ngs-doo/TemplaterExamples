@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -18,7 +18,7 @@ import java.util.zip.*;
 
 public class CsvStreamingExample {
 
-    static class Quoter implements IDocumentFactoryBuilder.LowLevelReplacer {
+    static class Quoter implements DocumentFactoryBuilder.LowLevelReplacer {
 
         @Override
         public Object replace(Object value, String tag, String[] metadata) {
@@ -32,7 +32,7 @@ public class CsvStreamingExample {
             return value;
         }
     }
-    static class NumberAsComma implements IDocumentFactoryBuilder.LowLevelReplacer {
+    static class NumberAsComma implements DocumentFactoryBuilder.LowLevelReplacer {
 
         @Override
         public Object replace(Object value, String tag, String[] metadata) {
@@ -115,7 +115,7 @@ public class CsvStreamingExample {
             ins.execute();
         }
         ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM csv_data");
-        IDocumentFactoryBuilder config = Configuration.builder().include(new Quoter());
+        DocumentFactoryBuilder config = Configuration.builder().include(new Quoter());
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.getDefault());
         //if we are using a culture which has comma as decimal separator, change the output to dot
         //we could apply this always, but it adds a bit of overhead, so let's apply it conditionally
@@ -125,7 +125,7 @@ public class CsvStreamingExample {
         //we can stream directly into a zipped stream/file
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(tmp));
         zos.putNextEntry(new ZipEntry("output.csv"));
-        ITemplateDocument doc = config.build().open(templateStream, "csv", zos);
+        TemplateDocument doc = config.build().open(templateStream, "csv", zos);
         //streaming processing assumes we have only a single collection, which means we first need to process all other tags
         doc.process(new Object() { public Object filter = new Object() { public String date = "All"; public String user = "All"; }; });
         //to do a streaming processing we need to process collection in chunks

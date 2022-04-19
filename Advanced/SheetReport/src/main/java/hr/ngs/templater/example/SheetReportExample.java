@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -17,19 +17,16 @@ import java.util.zip.ZipInputStream;
 public class SheetReportExample {
 
     public static void main(final String[] args) throws Exception {
-        DocumentBuilderFactory dbFactory  = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         InputStream templateStream = SheetReportExample.class.getResourceAsStream("/Report.xlsx");
         File tmp = File.createTempFile("table", ".xlsx");
 
-        FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos);
-
         InputData data = loadXml(dbFactory);
 
-        tpl.process(data);
-
-        tpl.close();
-        fos.close();
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+            tpl.process(data);
+        }
         Desktop.getDesktop().open(tmp);
     }
 

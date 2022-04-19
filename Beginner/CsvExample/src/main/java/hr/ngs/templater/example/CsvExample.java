@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.ZoneOffset;
@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 
 public class CsvExample {
 
-    static class Quoter implements IDocumentFactoryBuilder.Formatter {
+    static class Quoter implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -51,9 +51,9 @@ public class CsvExample {
                         "rolling_sum bigint, " +
                         "not_used varchar(10))");
 
-        String[] users = new String[] { null, "", "rick", "marty", "suzane", "eric", "mick", "admin" };
-        String[] notes = new String[] { null, null, "-", "...", "IMPORTANT", "REMINDER", "something to look into later", "special char;" };
-        String[] stats = new String[] { "", "APPROVED", "", "APPROVED", "", "APPROVED", "VERIFIED", "CANCELED" };
+        String[] users = new String[]{null, "", "rick", "marty", "suzane", "eric", "mick", "admin"};
+        String[] notes = new String[]{null, null, "-", "...", "IMPORTANT", "REMINDER", "something to look into later", "special char;"};
+        String[] stats = new String[]{"", "APPROVED", "", "APPROVED", "", "APPROVED", "VERIFIED", "CANCELED"};
         LocalDate startDate = LocalDate.now().minusDays(1000);
         OffsetDateTime startTimestamp = OffsetDateTime.now().minusDays(1000);
         PreparedStatement ins = conn.prepareStatement("INSERT INTO data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)");
@@ -76,8 +76,8 @@ public class CsvExample {
             ins.execute();
         }
         ResultSet table = conn.createStatement().executeQuery("SELECT * FROM data");
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.builder().include(new Quoter()).build().open(templateStream, "csv", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.builder().include(new Quoter()).build().open(templateStream, "csv", fos)) {
             tpl.process(table);
         }
         conn.close();

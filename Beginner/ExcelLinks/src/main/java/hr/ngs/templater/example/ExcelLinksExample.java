@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.io.*;
 import java.util.*;
@@ -17,8 +17,8 @@ public class ExcelLinksExample {
         favorites.add(create("The Viking at Stamford Bridge", "1066-11-25", "Badass of the week", "http://www.badassoftheweek.com/stamfordbridge.html"));
         favorites.add(create("World war I", "1914-6-28", "Wikipedia", "http://en.wikipedia.org/wiki/World_War_I"));
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(favorites);
         }
         java.awt.Desktop.getDesktop().open(tmp);

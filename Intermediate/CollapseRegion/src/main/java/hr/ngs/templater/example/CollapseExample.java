@@ -4,7 +4,7 @@ import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.ibm.icu.util.ULocale;
 import hr.ngs.templater.*;
-import hr.ngs.templater.ITemplater.TagPosition;
+import hr.ngs.templater.Templater.TagPosition;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -54,9 +54,9 @@ public class CollapseExample {
         final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         final Charset utf8 = Charset.forName("UTF-8");
         final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);
-        ITemplateDocument tpl = Configuration.builder().include(new IDocumentFactoryBuilder.IHandler() {
+        TemplateDocument tpl = Configuration.builder().include(new DocumentFactoryBuilder.Handler() {
             @Override
-            public Handled handle(Object value, String metadata, String path, int position, ITemplater templater) {
+            public Handled handle(Object value, String metadata, String path, int position, Templater templater) {
                 if (value instanceof String && metadata.startsWith("collapseIf(")) {
                     //Extract the matching expression
                     String expression = metadata.substring("collapseIf(".length(), metadata.length() - 1);
@@ -73,9 +73,9 @@ public class CollapseExample {
                 }
                 return Handled.NOTHING;
             }
-        }).include(new IDocumentFactoryBuilder.IHandler() {
+        }).include(new DocumentFactoryBuilder.Handler() {
             @Override
-            public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+            public Handled handle(Object value, String metadata, String tag, int position, Templater templater) {
                 if (value instanceof List && ("collapseNonEmpty".equals(metadata) || "collapseEmpty".equals(metadata))) {
                     List list = (List) value;
                     //loop until all tags with the same name are processed
@@ -124,7 +124,7 @@ public class CollapseExample {
                 }
                 return Handled.NOTHING;
             }
-        }).include(new IDocumentFactoryBuilder.ILowLevelReplacer() {
+        }).include(new DocumentFactoryBuilder.LowLevelReplacer() {
             @Override
             public Object replace(Object value, String tag, String[] metadata) {
                 if (value instanceof Color) {
@@ -140,9 +140,9 @@ public class CollapseExample {
                 }
                 return value;
             }
-        }).include(new IDocumentFactoryBuilder.IHandler() {
+        }).include(new DocumentFactoryBuilder.Handler() {
             @Override
-            public Handled handle(Object value, String metadata, String tag, int position, ITemplater templater) {
+            public Handled handle(Object value, String metadata, String tag, int position, Templater templater) {
                 if ("leaveIfEmpty".equals(metadata) && value instanceof List) {
                     List list = (List)value;
                     if (list.isEmpty()) {
@@ -158,7 +158,7 @@ public class CollapseExample {
                 }
                 return Handled.NOTHING;
             }
-        }).include(new IDocumentFactoryBuilder.IFormatter() {
+        }).include(new DocumentFactoryBuilder.Formatter() {
             @Override
             public Object format(Object value, String metadata) {
                 if ("verbalize".equals(metadata) && value instanceof BigDecimal) {

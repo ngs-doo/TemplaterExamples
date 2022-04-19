@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 import org.docx4j.XmlUtils;
 import org.docx4j.convert.in.xhtml.XHTMLImporterImpl;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -24,7 +24,7 @@ public class HtmlExcelExample {
         }
     }
 
-    private static class HtmlToOoxml implements IDocumentFactoryBuilder.Formatter {
+    private static class HtmlToOoxml implements DocumentFactoryBuilder.Formatter {
         DocumentBuilder dBuilder;
 
         HtmlToOoxml(DocumentBuilder dBuilder) {
@@ -103,8 +103,8 @@ public class HtmlExcelExample {
         map.put("html", "<p>My simple <b>bold</b> text in <span style=\"color:red\">red!</span></p>");
         map.put("numbers", Arrays.asList(new Number(100), new Number(-100), new Number(10)));
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos)) {
             tpl.process(map);
         }
         java.awt.Desktop.getDesktop().open(tmp);

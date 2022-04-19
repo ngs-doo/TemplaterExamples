@@ -36,7 +36,7 @@ public class PresentationTablesExample {
             {"Last row 1", "Last row 2", "Last row 3"},
         };
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos);
+        TemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos);
         tpl.process(new Object() {
             public final String title = "Tables";
             public final String subtitle = "Working with";

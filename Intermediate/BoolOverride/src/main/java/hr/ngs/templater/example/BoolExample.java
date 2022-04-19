@@ -6,12 +6,12 @@ import java.awt.*;
 import java.io.*;
 
 public class BoolExample {
-    static class Bools {
+    public static class Bools {
         public boolean game1;
         public boolean game2 = true;
     }
 
-    static class CustomBoolFormatter implements IDocumentFactoryBuilder.Formatter {
+    static class CustomBoolFormatter implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -30,9 +30,9 @@ public class BoolExample {
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = BoolExample.class.getResourceAsStream("/Bools.docx");
         File tmp = File.createTempFile("bool", ".docx");
-        IDocumentFactory factory = Configuration.builder().include(new CustomBoolFormatter()).build();
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+        DocumentFactory factory = Configuration.builder().include(new CustomBoolFormatter()).build();
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
             tpl.process(new Bools());
         }
         Desktop.getDesktop().open(tmp);

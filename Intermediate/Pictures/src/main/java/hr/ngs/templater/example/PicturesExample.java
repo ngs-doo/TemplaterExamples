@@ -61,7 +61,7 @@ public class PicturesExample {
         }
     }
 
-    static class MaxSizeBufferedImage implements IDocumentFactoryBuilder.Formatter {
+    static class MaxSizeBufferedImage implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -92,7 +92,7 @@ public class PicturesExample {
         }
     }
 
-    static class MaxSizeImageStream implements IDocumentFactoryBuilder.Formatter {
+    static class MaxSizeImageStream implements DocumentFactoryBuilder.Formatter {
 
         private float getPixelSizeMM(IIOMetadataNode dimension, String elementName) {
             NodeList pixelSizes = dimension.getElementsByTagName(elementName);
@@ -144,7 +144,7 @@ public class PicturesExample {
         }
     }
 
-    static class ImageLoader implements IDocumentFactoryBuilder.Formatter {
+    static class ImageLoader implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -179,7 +179,7 @@ public class PicturesExample {
         public int getHeight() { return (int)super.height; }
     }
 
-    static class BatikSvgConversion implements IDocumentFactoryBuilder.SvgConverter {
+    static class BatikSvgConversion implements DocumentFactoryBuilder.SvgConverter {
 
         @Override
         public ImageInfo convert(Document document) {
@@ -209,7 +209,7 @@ public class PicturesExample {
         return factory.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, Svg.class.getResourceAsStream(name));
     }
 
-    static class ConvertQR implements IDocumentFactoryBuilder.Formatter {
+    static class ConvertQR implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -230,7 +230,7 @@ public class PicturesExample {
         InputStream templateStream = PicturesExample.class.getResourceAsStream("/Pictures.docx");
         File tmp = File.createTempFile("picture", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        IDocumentFactory factory = Configuration
+        DocumentFactory factory = Configuration
                 .builder()
                 .include(new ImageLoader())//setup image loading via from-resource metadata
                 .include(new MaxSizeBufferedImage())//setup image resizing via maxSize(X, Y) metadata
@@ -239,7 +239,7 @@ public class PicturesExample {
                 .include(new ConvertQR())//setup QR code generation from text
                 .build();
         SAXSVGDocumentFactory svgFactory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
+        TemplateDocument tpl = factory.open(templateStream, "docx", fos);
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("cars", Arrays.asList(
                 new Car("Really fast car", "/car1.gif"),

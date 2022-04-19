@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.*;
 import java.io.*;
@@ -27,8 +27,8 @@ public class TableExample {
 
         Menu menu = new Menu("Bon voyage", specialMenu, dailyMenu);
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(menu);
         }
         Desktop.getDesktop().open(tmp);

@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.*;
 import java.io.*;
@@ -13,8 +13,8 @@ public class FormulaConversionExample {
         InputStream templateStream = FormulaConversionExample.class.getResourceAsStream("/SimpleConversion.xlsx");
         File tmp = File.createTempFile("formula", ".xlsx");
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(new HashMap<String, Object>() {{
                 put("aa", 100);
                 put("bb", 22.2);

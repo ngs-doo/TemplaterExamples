@@ -1,4 +1,4 @@
-package hr.ngs.templater;
+package hr.ngs.templater.json;
 
 import java.util.Locale;
 

@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 
 import javax.script.*;
 import java.awt.Desktop;
@@ -89,7 +89,7 @@ public class DepartmentReportExample {
 
         Company company = getCompany();
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl = Configuration
+        TemplateDocument tpl = Configuration
                 .builder()
                 .withMatcher("[\\w\\s \\.,:?!+\\*-<>=()]+")
                 .navigateSeparator(':', null)
@@ -119,7 +119,7 @@ public class DepartmentReportExample {
 
     //this is just a simplistic implementation
     //a better implementation would take care of methods, dictionaries and various other types
-    static class SortExpression implements IDocumentFactoryBuilder.Navigate {
+    static class SortExpression implements DocumentFactoryBuilder.Navigate {
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
             if (!metadata.startsWith("sort(") || value instanceof Object[] == false) return value;
@@ -149,9 +149,10 @@ public class DepartmentReportExample {
         }
     }
 
+    //Java 15 removed the support for Javascript, in which case explicit dependency needs to be taken: https://github.com/openjdk/nashorn
     private static final ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("JavaScript");
 
-    static class FilterExpression implements IDocumentFactoryBuilder.Navigate {
+    static class FilterExpression implements DocumentFactoryBuilder.Navigate {
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
             if (!metadata.startsWith("filter(") || value instanceof List == false) return value;

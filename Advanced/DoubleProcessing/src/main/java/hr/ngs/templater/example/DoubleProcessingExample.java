@@ -2,8 +2,8 @@ package hr.ngs.templater.example;
 
 import com.mockrunner.mock.jdbc.MockResultSet;
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactory;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactory;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -27,10 +27,10 @@ public class DoubleProcessingExample {
 
         ResultSet units = prepareStarcraftUnits();
 
-        IDocumentFactory factory = Configuration.factory();
+        DocumentFactory factory = Configuration.factory();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         //let's do a horizontal resize so document is prepared for second pass
-        ITemplateDocument doc1 = factory.open(templateStream, "xlsx", os);
+        TemplateDocument doc1 = factory.open(templateStream, "xlsx", os);
         //[[equals]] at the beginning of the cell causes conversion to formula
         //this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass
         doc1.process(new HashMap<String, Object>() {{ put("Person", person); put("formula", "[[equals]]"); }});
@@ -61,7 +61,7 @@ public class DoubleProcessingExample {
         ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
         FileOutputStream fos = new FileOutputStream(tmp);
         //let's do a second pass with our prepared object
-        ITemplateDocument doc2 = factory.open(is, "xlsx", fos);
+        TemplateDocument doc2 = factory.open(is, "xlsx", fos);
         doc2.process(complex);
         doc2.process(new HashMap<String, Object>() {{ put("starcraft", units); }});
         doc2.close();

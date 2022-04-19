@@ -15,7 +15,7 @@ import java.util.zip.ZipOutputStream;
 
 public class PowerQueryExample {
 
-    private static IDocumentFactory factory = Configuration.builder()
+    private static DocumentFactory factory = Configuration.builder()
             //Excel will complain about corrupted file unless Templater is initialized with a valid license
             .build("Customer email", "Customer license");
 
@@ -103,9 +103,9 @@ public class PowerQueryExample {
         data.csv = generateData(100_000);
         data.sheet = generateData(50_000);
 
-        try(InputStream is = PowerQueryExample.class.getResourceAsStream("/PowerQuery.xlsx");
-            OutputStream os = Files.newOutputStream(tmp.toPath());
-            ITemplateDocument tpl = factory.open(is, "xlsx", os)) {
+        try (InputStream is = PowerQueryExample.class.getResourceAsStream("/PowerQuery.xlsx");
+             OutputStream os = Files.newOutputStream(tmp.toPath());
+             TemplateDocument tpl = factory.open(is, "xlsx", os)) {
             tpl.process(data);
         }
 

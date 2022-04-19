@@ -55,7 +55,7 @@ public class ListsTablesExample {
         }
     }
 
-    static class LoadImage implements IDocumentFactoryBuilder.Formatter {
+    static class LoadImage implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -81,7 +81,7 @@ public class ListsTablesExample {
                         "apple.jpg",
                         Arrays.asList(
                                 new Coworker("Steve Jobs", "Employee #0", "he likes electronics\nand he also plays pranks"),
-                                new Coworker("Andy Hertzfeld", "Mr.",    "Mr. nice guy")
+                                new Coworker("Andy Hertzfeld", "Mr.", "Mr. nice guy")
                         ),
                         new Project(
                                 "Apple I",
@@ -115,16 +115,16 @@ public class ListsTablesExample {
                         "parc.png",
                         Arrays.asList(
                                 new Coworker("Douglas Engelbart", "Internet pioneer", "excellent interaction with computer"),
-                                new Coworker("Charles Thacker", "Designer",    "very good understanding of mouse")
+                                new Coworker("Charles Thacker", "Designer", "very good understanding of mouse")
                         ),
                         new Project(
                                 "Dynabook concept",
                                 "Research", "Development")
                 ));
 
-        IDocumentFactory factory = Configuration.builder().include(new LoadImage()).build();
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+        DocumentFactory factory = Configuration.builder().include(new LoadImage()).build();
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
             tpl.process(Arrays.asList(woz, kay));
         }
         java.awt.Desktop.getDesktop().open(tmp);

@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -17,7 +17,7 @@ public class XmlBindingExample {
         File tmp = File.createTempFile("bind", ".docx");
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument doc = Configuration.factory().open(templateStream, "docx", fos);
+        TemplateDocument doc = Configuration.factory().open(templateStream, "docx", fos);
 
         doc.process(Arrays.asList(
                 new Item("Templater", "TPL", "Reporting library", 3, "How many"),

@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.Desktop;
 import java.io.*;
@@ -30,8 +30,8 @@ public class LabelsExample {
             address.PostCode = "post " + i;
             addresses.add(address);
         }
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "docx", fos)) {
             tpl.process(addresses);
         }
         Desktop.getDesktop().open(tmp);

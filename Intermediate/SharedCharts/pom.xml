@@ -4,7 +4,7 @@
     <groupId>hr.ngs.templater.example</groupId>
     <artifactId>shared-charts</artifactId>
     <packaging>jar</packaging>
-    <version>6.2.0</version>
+    <version>7.0.0</version>
     <name>Labels</name>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 

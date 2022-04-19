@@ -35,9 +35,9 @@ public class ImportExample {
         Path embeddedDocx = Files.createTempFile("embed", ".docx");
         Files.copy(ImportExample.class.getResourceAsStream("/ToImport.docx"), embeddedDocx, StandardCopyOption.REPLACE_EXISTING);
 
-        IDocumentFactory factory = Configuration.factory();
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
+        DocumentFactory factory = Configuration.factory();
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
             tpl.templater().replace("imported_document1", elements.toArray(new Element[0]));//Templater will recognize XML and inject it directly into the document
             tpl.templater().replace("imported_document2", embeddedDocx.toFile());//Templater will recognize FileInfo type and add it as embedded document
         }

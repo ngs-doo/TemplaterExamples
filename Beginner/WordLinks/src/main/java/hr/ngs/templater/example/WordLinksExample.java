@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -17,7 +17,7 @@ import java.util.*;
 
 public class WordLinksExample {
 
-    private static class StringToUrl implements IDocumentFactoryBuilder.Formatter {
+    private static class StringToUrl implements DocumentFactoryBuilder.Formatter {
         @Override
         public Object format(Object value, String metadata) {
             if ("url".equals(metadata)) {
@@ -30,7 +30,7 @@ public class WordLinksExample {
         }
     }
 
-    private static class ToHyperlink implements IDocumentFactoryBuilder.Formatter {
+    private static class ToHyperlink implements DocumentFactoryBuilder.Formatter {
         DocumentBuilderFactory dbFactory;
         DocumentBuilder dBuilder;
 
@@ -88,8 +88,8 @@ public class WordLinksExample {
         hyperlink.put("url", "https://templater.info/demo");
         others.put("hyperlink", hyperlink);
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink(dbFactory)).build().open(templateStream, "docx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.builder().include(new StringToUrl()).include(new ToHyperlink(dbFactory)).build().open(templateStream, "docx", fos)) {
             tpl.process(favorites);
             tpl.process(others);
         }

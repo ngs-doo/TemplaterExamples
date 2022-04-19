@@ -1,8 +1,8 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.IDocumentFactoryBuilder;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.DocumentFactoryBuilder;
+import hr.ngs.templater.TemplateDocument;
 import org.docx4j.XmlUtils;
 import org.docx4j.convert.in.xhtml.XHTMLImporterImpl;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
@@ -39,7 +39,7 @@ public class HtmlWordExample {
         }
     }
 
-    private static class SimpleHtmlConverter implements IDocumentFactoryBuilder.Formatter {
+    private static class SimpleHtmlConverter implements DocumentFactoryBuilder.Formatter {
         private final DocumentBuilder dBuilder;
         public SimpleHtmlConverter(DocumentBuilder dBuilder) {
             this.dBuilder = dBuilder;
@@ -54,7 +54,7 @@ public class HtmlWordExample {
         }
     }
 
-    private static class ComplexHtmlConverter implements IDocumentFactoryBuilder.Formatter {
+    private static class ComplexHtmlConverter implements DocumentFactoryBuilder.Formatter {
         private final DocumentBuilder dBuilder;
         public ComplexHtmlConverter(DocumentBuilder dBuilder) {
             this.dBuilder = dBuilder;
@@ -83,7 +83,7 @@ public class HtmlWordExample {
         Files.copy(HtmlWordExample.class.getResourceAsStream("/example.html"), embeddedHtml, StandardCopyOption.REPLACE_EXISTING);
 
         FileOutputStream fos = new FileOutputStream(tmp);
-        ITemplateDocument tpl =
+        TemplateDocument tpl =
                 Configuration.builder()
                         .include(new SimpleHtmlConverter(dBuilder))
                         .include(new ComplexHtmlConverter(dBuilder))

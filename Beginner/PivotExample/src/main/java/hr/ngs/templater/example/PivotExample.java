@@ -1,7 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.awt.*;
 import java.io.*;
@@ -47,8 +47,8 @@ public class PivotExample {
         data.add(createItem("Mumbai (Bombay)", "India", 19.35, 209));
         data.add(createItem("Rio de Janeiro", "Brasil", 328.13, 201));
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(data);
         }
         Desktop.getDesktop().open(tmp);

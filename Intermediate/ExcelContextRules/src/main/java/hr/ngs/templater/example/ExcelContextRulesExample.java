@@ -32,14 +32,14 @@ public class ExcelContextRulesExample {
         InputStream templateStream = ExcelContextRulesExample.class.getResourceAsStream("/flattening.xlsx");
         File tmp = File.createTempFile("flat", ".xlsx");
 
-        final Person[] data = new Person[] {
+        final Person[] data = new Person[]{
                 new Person("Cristiano Ronaldo", "Real Madrid", "Manchester United"),
                 new Person("Lionel Messi", "Barcelona"),
                 new Person("Zlatan Ibrahimović", "Paris Saint-Germain", "Barcelona", "Inter Milan")
         };
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(new HashMap<String, Person[]>() {{
                 put("simple", data);
                 put("tables", data);

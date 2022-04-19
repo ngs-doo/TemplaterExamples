@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NGS.Templater">
-      <HintPath>..\..\packages\Templater.6.2.0\lib\Net40\NGS.Templater.dll</HintPath>
+      <HintPath>..\..\packages\Templater.7.0.0\lib\Net40\NGS.Templater.dll</HintPath>
     </Reference>
     <Reference Include="NReco.LambdaParser">
       <HintPath>..\..\packages\NReco.LambdaParser.1.0.10\lib\portable-net40+sl5+win8+wp8+wpa81\NReco.LambdaParser.dll</HintPath>

@@ -1,4 +1,4 @@
-import hr.ngs.templater.TemplaterJson;
+import hr.ngs.templater.json.TemplaterJson;
 import hr.ngs.templater.example.*;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class DemoTests {
         InputStream json = resource("/benchmark-data.json");
         InputStream template = resource("/benchmark-template.xlsx");
         File tmp = File.createTempFile("bench", ".xlsx");
-        try(OutputStream output = new FileOutputStream(tmp)) {
+        try (OutputStream output = new FileOutputStream(tmp)) {
             TemplaterJson.process("xlsx", template, json, output);
         }
         Desktop.getDesktop().open(tmp);
@@ -51,7 +51,7 @@ public class DemoTests {
         InputStream json = resource("/beers-data.json");
         InputStream template = resource("/beers-template.docx");
         File tmp = File.createTempFile("beers", ".docx");
-        try(OutputStream output = new FileOutputStream(tmp)) {
+        try (OutputStream output = new FileOutputStream(tmp)) {
             TemplaterJson.process("docx", template, json, output);
         }
         Desktop.getDesktop().open(tmp);

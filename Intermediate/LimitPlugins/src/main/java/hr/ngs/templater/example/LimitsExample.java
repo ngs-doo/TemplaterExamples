@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LimitsExample {
 
-    static class TopNElementsFormatting implements IDocumentFactoryBuilder.Formatter {
+    static class TopNElementsFormatting implements DocumentFactoryBuilder.Formatter {
 
         @Override
         public Object format(Object value, String metadata) {
@@ -20,9 +20,9 @@ public class LimitsExample {
         }
     }
 
-    static class TopNElementsProcessing implements IDocumentFactoryBuilder.Processor<List> {
+    static class TopNElementsProcessing implements DocumentFactoryBuilder.Processor<List> {
         @Override
-        public boolean tryProcess(String prefix, ITemplater templater, List list) {
+        public boolean tryProcess(String prefix, Templater templater, List list) {
             for (String t : templater.tags()) {
                 //if any of the tag metadata contain limit(X), apply limit on the provided list
                 Optional<String> limit = Arrays.stream(templater.getMetadata(t, true)).filter(it -> it.startsWith("limit(")).findAny();
@@ -42,7 +42,7 @@ public class LimitsExample {
         }
     }
 
-    static class TopNElementNavigation implements IDocumentFactoryBuilder.Navigate {
+    static class TopNElementNavigation implements DocumentFactoryBuilder.Navigate {
 
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
@@ -57,7 +57,7 @@ public class LimitsExample {
         }
     }
 
-    static class ListGrouping implements IDocumentFactoryBuilder.Navigate {
+    static class ListGrouping implements DocumentFactoryBuilder.Navigate {
 
         @Override
         public Object navigate(Object parent, Object value, String member, String metadata) {
@@ -112,7 +112,7 @@ public class LimitsExample {
         input.put("fixed", fixed);
         input.put("list", list);
         FileOutputStream fos = new FileOutputStream(tmp);
-        IDocumentFactory factory =
+        DocumentFactory factory =
                 Configuration.builder()
                         .include(new TopNElementsFormatting())
                         .include(List.class, new TopNElementsProcessing())
@@ -120,7 +120,7 @@ public class LimitsExample {
                         .include(new TopNElementNavigation())
                         .include(new ListGrouping())
                         .build();
-        ITemplateDocument tpl = factory.open(templateStream, "docx", fos);
+        TemplateDocument tpl = factory.open(templateStream, "docx", fos);
         tpl.process(input);
         tpl.close();
         fos.close();

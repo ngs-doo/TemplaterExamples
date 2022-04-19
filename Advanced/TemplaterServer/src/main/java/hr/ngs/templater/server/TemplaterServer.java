@@ -45,9 +45,9 @@ public class TemplaterServer implements AutoCloseable {
     }
 
     private final int timeoutLimit;
-    private final IDocumentFactory documentFactory;
-    private final IDocumentFactory debugFactory;
-    private final IDocumentFactory schemaFactory;
+    private final DocumentFactory documentFactory;
+    private final DocumentFactory debugFactory;
+    private final DocumentFactory schemaFactory;
     private final Logger logger;
     private final HttpServer server;
     private final Map<String, PdfConverter> pdfConverters;
@@ -271,8 +271,8 @@ public class TemplaterServer implements AutoCloseable {
             final InputStream is = new ByteArrayInputStream(templateBytes);
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             //we can process template regularly or just to embed schema inside
-            IDocumentFactory factory = asSchema ? schemaFactory : debugLog ? debugFactory : documentFactory;
-            IDocumentFactory.CancellationToken cancellationToken = new IDocumentFactory.CancellationToken() {
+            DocumentFactory factory = asSchema ? schemaFactory : debugLog ? debugFactory : documentFactory;
+            DocumentFactory.CancellationToken cancellationToken = new DocumentFactory.CancellationToken() {
                 private final long runUntil = System.currentTimeMillis() + timeoutLimit * 1000L;
 
                 @Override
@@ -282,7 +282,7 @@ public class TemplaterServer implements AutoCloseable {
                     return timeoutLimit > 0 && System.currentTimeMillis() > runUntil;
                 }
             };
-            try (ITemplateDocument doc = factory.open(is, ext, baos, cancellationToken)) {
+            try (TemplateDocument doc = factory.open(is, ext, baos, cancellationToken)) {
                 doc.process(data);
             }
             status = "success";

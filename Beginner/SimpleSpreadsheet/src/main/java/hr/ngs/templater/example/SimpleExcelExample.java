@@ -1,24 +1,25 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
-import hr.ngs.templater.ITemplateDocument;
+import hr.ngs.templater.TemplateDocument;
 
 import java.io.*;
+import java.time.LocalDate;
 
 public class SimpleExcelExample {
 
     static class MyClass {
         public String Name = "Marry";
         public Date BirthDay = new Date( 2005, 10, 10);
-        public Date Today = new Date(new java.util.Date());
+        public Date Today = new Date(LocalDate.now());
     }
 
     static class Date {
         public final int Year, Month, Day;
-        public Date(java.util.Date date) {
-            Year = date.getYear() + 1900;
-            Month = date.getMonth() + 1;
-            Day = date.getDay() + 1;
+        public Date(LocalDate date) {
+            Year = date.getYear();
+            Month = date.getMonthValue();
+            Day = date.getDayOfMonth();
         }
         public Date(int year, int month, int day) {
             this.Year = year;
@@ -33,8 +34,8 @@ public class SimpleExcelExample {
 
         MyClass data = new MyClass();
 
-        try(FileOutputStream fos = new FileOutputStream(tmp);
-            ITemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tmp);
+             TemplateDocument tpl = Configuration.factory().open(templateStream, "xlsx", fos)) {
             tpl.process(data);
         }
         java.awt.Desktop.getDesktop().open(tmp);
