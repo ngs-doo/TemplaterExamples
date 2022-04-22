@@ -6,7 +6,7 @@ ENV TZ=Europe/Zagreb
 
 RUN apt update && apt install openjdk-11-jre-headless libreoffice-common libreoffice-java-common libreoffice-writer libreoffice-calc wget -yq
 
-RUN wget -q https://github.com/ngs-doo/TemplaterExamples/releases/download/v6.1.0/templater-server.jar
+RUN wget -q https://github.com/ngs-doo/TemplaterExamples/releases/download/v7.0.0/templater-server.jar
 
 COPY templater.lic .
 

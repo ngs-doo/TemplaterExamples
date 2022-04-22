@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?><root>
+  <filter date="All" user="All"/>
+  <items>
+    <data id="1000000" status="">
+      <amount>260</amount>
+      <date>27. 07. 2019.</date>
+      <created on="2019-07-27 13:22:55.117"/>
+      <reference>reference0</reference>
+      <branch>branch0</branch>
+      <verified by="suzane" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000001" status="APPROVED">
+      <amount>260</amount>
+      <date>27. 07. 2019.</date>
+      <created by="" on="2019-07-27 13:22:55.117"/>
+      <reference>reference1</reference>
+      <branch>branch1</branch>
+      <verified by="eric" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000002" status="">
+      <amount>260</amount>
+      <date>27. 07. 2019.</date>
+      <created by="rick" on="2019-07-27 13:22:55.117"/>
+      <reference>reference2</reference>
+      <branch>branch2</branch>
+      <verified by="mick" on="2019-07-27 13:22:55.117"/>
+      -
+    </data><data id="1000003" status="APPROVED">
+      <amount>260</amount>
+      <date>27. 07. 2019.</date>
+      <created by="marty" on="2019-07-27 13:22:55.117"/>
+      <reference>reference3</reference>
+      <branch>branch3</branch>
+      <verified by="admin" on="2019-07-27 13:22:55.117"/>
+      ...
+    </data><data id="1000004" status="">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="suzane" on="2019-07-27 13:22:55.117"/>
+      <reference>reference4</reference>
+      <branch>branch4</branch>
+      <verified on="2019-07-27 13:22:55.117"/>
+      IMPORTANT
+    </data><data id="1000005" status="APPROVED">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="eric" on="2019-07-27 13:22:55.117"/>
+      <reference>reference5</reference>
+      <branch>branch5</branch>
+      <verified by="" on="2019-07-27 13:22:55.117"/>
+      REMINDER
+    </data><data id="1000006" status="VERIFIED">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="mick" on="2019-07-27 13:22:55.117"/>
+      <reference>reference6</reference>
+      <branch>branch6</branch>
+      <verified by="rick" on="2019-07-27 13:22:55.117"/>
+      something to look "into later
+    </data><data id="1000007" status="CANCELED">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="admin" on="2019-07-27 13:22:55.117"/>
+      <reference>reference7</reference>
+      <branch>branch7</branch>
+      <verified by="marty" on="2019-07-27 13:22:55.117"/>
+      special" char,
+    </data><data id="1000008" status="">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created on="2019-07-27 13:22:55.117"/>
+      <reference>reference8</reference>
+      <branch>branch8</branch>
+      <verified by="suzane" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000009" status="APPROVED">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="" on="2019-07-27 13:22:55.117"/>
+      <reference>reference9</reference>
+      <branch>branch9</branch>
+      <verified by="eric" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000010" status="">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="rick" on="2019-07-27 13:22:55.117"/>
+      <reference>reference10</reference>
+      <branch>branch10</branch>
+      <verified by="mick" on="2019-07-27 13:22:55.117"/>
+      -
+    </data><data id="1000011" status="APPROVED">
+      <amount>261</amount>
+      <date>27. 07. 2019.</date>
+      <created by="marty" on="2019-07-27 13:22:55.117"/>
+      <reference>reference11</reference>
+      <branch>branch11</branch>
+      <verified by="admin" on="2019-07-27 13:22:55.117"/>
+      ...
+    </data><data id="1000012" status="">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="suzane" on="2019-07-27 13:22:55.117"/>
+      <reference>reference12</reference>
+      <branch>branch12</branch>
+      <verified on="2019-07-27 13:22:55.117"/>
+      IMPORTANT
+    </data><data id="1000013" status="APPROVED">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="eric" on="2019-07-27 13:22:55.117"/>
+      <reference>reference13</reference>
+      <branch>branch13</branch>
+      <verified by="" on="2019-07-27 13:22:55.117"/>
+      REMINDER
+    </data><data id="1000014" status="VERIFIED">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="mick" on="2019-07-27 13:22:55.117"/>
+      <reference>reference14</reference>
+      <branch>branch14</branch>
+      <verified by="rick" on="2019-07-27 13:22:55.117"/>
+      something to look "into later
+    </data><data id="1000015" status="CANCELED">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="admin" on="2019-07-27 13:22:55.117"/>
+      <reference>reference15</reference>
+      <branch>branch15</branch>
+      <verified by="marty" on="2019-07-27 13:22:55.117"/>
+      special" char,
+    </data><data id="1000016" status="">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created on="2019-07-27 13:22:55.117"/>
+      <reference>reference16</reference>
+      <branch>branch16</branch>
+      <verified by="suzane" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000017" status="APPROVED">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="" on="2019-07-27 13:22:55.117"/>
+      <reference>reference17</reference>
+      <branch>branch17</branch>
+      <verified by="eric" on="2019-07-27 13:22:55.117"/>
+      
+    </data><data id="1000018" status="">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="rick" on="2019-07-27 13:22:55.117"/>
+      <reference>reference18</reference>
+      <branch>branch18</branch>
+      <verified by="mick" on="2019-07-27 13:22:55.117"/>
+      -
+    </data><data id="1000019" status="APPROVED">
+      <amount>262</amount>
+      <date>27. 07. 2019.</date>
+      <created by="marty" on="2019-07-27 13:22:55.117"/>
+      <reference>reference19</reference>
+      <branch>branch19</branch>
+      <verified by="admin" on="2019-07-27 13:22:55.117"/>
+      ...
+    </data>  
+</items></root>

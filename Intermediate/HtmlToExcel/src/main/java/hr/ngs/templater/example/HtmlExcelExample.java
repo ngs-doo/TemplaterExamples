@@ -93,6 +93,41 @@ public class HtmlExcelExample {
         }
     }
 
+    enum Color {
+        RED(0),
+        ORANGE(1),
+        YELLOW(2),
+        GREEN(3),
+        BLUE(4);
+
+        public final int value;
+
+        Color(int value) {
+            this.value = value;
+        }
+    }
+
+    private static class ColorToXML implements DocumentFactoryBuilder.LowLevelReplacer {
+        DocumentBuilder dBuilder;
+
+        ColorToXML(DocumentBuilder dBuilder) {
+            this.dBuilder = dBuilder;
+        }
+
+        @Override
+        public Object replace(Object value, String tag, String[] metadata) {
+            if (value instanceof Color) {
+                Color c = (Color) value;
+                //we need to know the location of conversion table in Excel (this could be provided as argument if needed)
+                Element t = dBuilder.newDocument().createElement("t");
+                t.setAttribute("templater-cell-style", "Colors!A" + (2 + c.value));
+                return t;
+            }
+            return value;
+        }
+    }
+
+
     public static void main(final String[] args) throws Exception {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
@@ -102,9 +137,13 @@ public class HtmlExcelExample {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("html", "<p>My simple <b>bold</b> text in <span style=\"color:red\">red!</span></p>");
         map.put("numbers", Arrays.asList(new Number(100), new Number(-100), new Number(10)));
+        map.put("background", Color.ORANGE);
 
         try (FileOutputStream fos = new FileOutputStream(tmp);
-             TemplateDocument tpl = Configuration.builder().include(new HtmlToOoxml(dBuilder)).build().open(templateStream, "xlsx", fos)) {
+             TemplateDocument tpl = Configuration.builder()
+                     .include(new HtmlToOoxml(dBuilder))
+                     .include(new ColorToXML(dBuilder))
+                     .build().open(templateStream, "xlsx", fos)) {
             tpl.process(map);
         }
         java.awt.Desktop.getDesktop().open(tmp);

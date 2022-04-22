@@ -1,6 +1,6 @@
 [documentation]: https://templater.info/
 
-# Reporting for JVM and .NET
+# Document generation from templates
 
 Templater is a **reporting library** which can be **easily integrated into third party apps** as advanced document generation engine.
 It works by binding provided data with specified template.
@@ -15,7 +15,7 @@ Additional [documentation] is available from the official website.
 
 ## How Templater works
 
-Templater works by analyzing provided *docx/xlsx/pptx/csv* document for **tags**. 
+Templater works by analyzing provided *docx/xlsx/pptx/csv/xml* document for **tags**. 
 Tags are snippets of text written in either **`[[tag]]`**, **`{{tag}}`** or a **`<<tag>>`** format. 
 Tags can have metadata which can be used for various customization purposes, such as formatting, verbalization and others.
 
@@ -67,6 +67,7 @@ It can work for simple cases, such as single row in a table, but can be used for
  * [pushdown/pushright](Beginner/PushDownExample) - elements bellow/right of tags area will be moved according to builtin rules
  * [merge cells/named ranges/tables](Beginner/NamedRange) - influence push rules by extending the affected region
  * [XML binding](Advanced/XmlBinding) - custom XML will be changed/updated when bound in Word
+ * [streaming](Advanced/Streaming) - streaming over collections is also supported
 
 ## Examples
 

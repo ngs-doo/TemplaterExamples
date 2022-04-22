@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <filter date="[[filter.date]]" user="[[filter.user]]" />
+  <items>
+    <data id="[[data.id]]" status="[[data.status]]">
+      <amount>[[data.amount]]</amount>
+      <date>[[data.date]:format]</date>
+      <created by="[[data.createdBy]]" on="[[data.createdOn]]" />
+      <reference>[[data.reference]]</reference>
+      <branch>[[data.branch]]</branch>
+      <verified by="[[data.verifiedBy]]" on="[[data.verifiedOn]]" />
+      [[data.note]]
+    </data>
+  </items>
+</root>

@@ -1,6 +1,7 @@
 package hr.ngs.templater.example;
 
 import hr.ngs.templater.Configuration;
+import hr.ngs.templater.DocumentFactory;
 import hr.ngs.templater.DocumentFactoryBuilder;
 import hr.ngs.templater.TemplateDocument;
 
@@ -13,10 +14,11 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.zip.*;
 
-public class CsvStreamingExample {
+public class StreamingExample {
 
     static class Quoter implements DocumentFactoryBuilder.LowLevelReplacer {
 
@@ -58,7 +60,7 @@ public class CsvStreamingExample {
         public String verifiedBy;
         public Timestamp verifiedOn;
 
-		public StreamingRow(ResultSet rs) throws SQLException {
+        public StreamingRow(ResultSet rs) throws SQLException {
             id = rs.getInt(1);
             amount = rs.getBigDecimal(2);
             date = rs.getDate(3);
@@ -71,10 +73,35 @@ public class CsvStreamingExample {
             verifiedBy = rs.getString(10);
             verifiedOn = rs.getTimestamp(11);
         }
+
+        public static class RsIterator implements Iterator<StreamingRow> {
+            private final ResultSet rs;
+            private boolean hasNext;
+
+            public RsIterator(ResultSet rs) throws SQLException {
+                this.rs = rs;
+                this.hasNext = rs.next();
+            }
+
+            @Override
+            public boolean hasNext() {
+                return hasNext;
+            }
+
+            @Override
+            public StreamingRow next() {
+                try {
+                    StreamingRow row = new StreamingRow(rs);
+                    hasNext = rs.next();
+                    return row;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     public static void main(final String[] args) throws Exception {
-        InputStream templateStream = CsvStreamingExample.class.getResourceAsStream("/input.csv");
         File tmp = File.createTempFile("output", ".zip");
 
         Class.forName("org.hsqldb.jdbcDriver");
@@ -114,41 +141,89 @@ public class CsvStreamingExample {
             ins.setTimestamp(11, new java.sql.Timestamp(startTimestamp.plusMinutes(i / 1000).toInstant().toEpochMilli()));
             ins.execute();
         }
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM csv_data");
-        DocumentFactoryBuilder config = Configuration.builder().include(new Quoter());
+        ResultSet rs1 = conn.createStatement().executeQuery("SELECT * FROM csv_data");
+        ResultSet rs2 = conn.createStatement().executeQuery("SELECT * FROM csv_data");
+        ResultSet rs3 = conn.createStatement().executeQuery("SELECT * FROM csv_data");
+        DocumentFactoryBuilder csvConfig = Configuration.builder().include(new Quoter());
+        DocumentFactoryBuilder xmlConfig = Configuration.builder();
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.getDefault());
         //if we are using a culture which has comma as decimal separator, change the output to dot
         //we could apply this always, but it adds a bit of overhead, so let's apply it conditionally
         if (dfs.getDecimalSeparator() == ',') {
-            config.include(new NumberAsComma());
+            csvConfig.include(new NumberAsComma());
+            xmlConfig.include(new NumberAsComma());
         }
+        csvConfig.streaming(50000);//by default streaming is 16k, lets leave the default for xml
+        DocumentFactory csvFactory = csvConfig.build();
+        DocumentFactory xmlFactory = xmlConfig.build();
         //we can stream directly into a zipped stream/file
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(tmp));
-        zos.putNextEntry(new ZipEntry("output.csv"));
-        TemplateDocument doc = config.build().open(templateStream, "csv", zos);
-        //streaming processing assumes we have only a single collection, which means we first need to process all other tags
-        doc.process(new Object() { public Object filter = new Object() { public String date = "All"; public String user = "All"; }; });
-        //to do a streaming processing we need to process collection in chunks
-        ArrayList<StreamingRow> chunk = new ArrayList<>(50000);
-        boolean hasData = rs.next();
-        while (hasData) {
-            //one way of doing streaming is first duplicating the template row (context)
-            doc.templater().resize(doc.templater().tags(), 2);
-            //and then process that row with all known data
-            //this way we will have additional row to process (or remove) later
-            do {
-                chunk.add(new StreamingRow(rs));
-                hasData = rs.next();
-            } while (chunk.size() < 50000 && hasData);
-            doc.process(new Object() { public ArrayList<StreamingRow> data = chunk; });
-            chunk.clear();
-        }
-        //remove remaining rows
-        doc.templater().resize(doc.templater().tags(), 0);
-        doc.close();
+        zos.putNextEntry(new ZipEntry("manual.csv"));
+        long start = System.currentTimeMillis();
+        manualStreaming(rs1, csvFactory, zos);
+        System.out.println("manual csv took: " + (System.currentTimeMillis() - start));
+        zos.putNextEntry(new ZipEntry("automatic.csv"));
+        start = System.currentTimeMillis();
+        automaticStreaming(rs2, csvFactory, "csv", zos);
+        System.out.println("automatic csv took: " + (System.currentTimeMillis() - start));
+        zos.putNextEntry(new ZipEntry("data.xml"));
+        start = System.currentTimeMillis();
+        //by default XML will do many small operations so its much faster to wrap the stream with a buffer
+        BufferedOutputStream bos = new BufferedOutputStream(zos);
+        automaticStreaming(rs3, xmlFactory, "xml", bos);
+        bos.flush();
+        System.out.println("automatic xml took: " + (System.currentTimeMillis() - start));
         conn.close();
-        zos.closeEntry();
         zos.close();
         Desktop.getDesktop().open(tmp);
+    }
+
+    private static void manualStreaming(ResultSet rs, DocumentFactory factory, OutputStream os) throws SQLException {
+        InputStream templateStream = StreamingExample.class.getResourceAsStream("/input.csv");
+        try (TemplateDocument doc = factory.open(templateStream, "csv", os)) {
+            //streaming processing assumes we have only a single collection, which means we first need to process all other tags
+            doc.process(new Object() {
+                public Object filter = new Object() {
+                    public String date = "All";
+                    public String user = "All";
+                };
+            });
+            //to do a streaming processing we need to process collection in chunks
+            ArrayList<StreamingRow> chunk = new ArrayList<>(50000);
+            boolean hasData = rs.next();
+            while (hasData) {
+                //one way of doing streaming is first duplicating the template row (context)
+                doc.templater().resize(doc.templater().tags(), 2);
+                //and then process that row with all known data
+                //this way we will have additional row to process (or remove) later
+                do {
+                    chunk.add(new StreamingRow(rs));
+                    hasData = rs.next();
+                } while (chunk.size() < 50000 && hasData);
+                doc.process(new Object() {
+                    public ArrayList<StreamingRow> data = chunk;
+                });
+                chunk.clear();
+            }
+            //remove remaining rows
+            doc.templater().resize(doc.templater().tags(), 0);
+        }
+    }
+
+    private static void automaticStreaming(ResultSet rs, DocumentFactory factory, String extension, OutputStream os) throws SQLException {
+        InputStream templateStream = StreamingExample.class.getResourceAsStream("/input." + extension);
+        try (TemplateDocument doc = factory.open(templateStream, extension, os)) {
+            //we still want to make sure all non collection tags are processed first (or they are at the end of document)
+            doc.process(new Object() {
+                public Object filter = new Object() {
+                    public String date = "All";
+                    public String user = "All";
+                };
+            });
+            //for streaming lets just pass iterator for processing
+            doc.process(new Object() {
+                public Iterator<StreamingRow> data = new StreamingRow.RsIterator(rs);
+            });
+        }
     }
 }

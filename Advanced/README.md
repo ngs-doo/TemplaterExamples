@@ -44,11 +44,12 @@ Consuming embedded CSV or Excel table via Power Query (Requires Excel 2010+)
 
 [template](PowerQuery/template/PowerQuery.xlsx?raw=true) - [result](PowerQuery/result.xlsx?raw=true)
 
-### [CSV streaming](CsvStreaming/Readme.md)
+### [CSV streaming](Streaming/Readme.md)
 
-Stream CSV while processing to support huge exports
+Stream CSV/XML while processing to support huge exports
 
-[template](CsvStreaming/template/input.csv) - [result](CsvStreaming/result.csv)
+[csv template](Streaming/template/input.csv) - [result](Streaming/result.csv)
+[xml template](Streaming/template/input.xml) - [result](Streaming/result.xml)
 
 ### [Various JSON examples](TemplaterServer/Readme.md)
 

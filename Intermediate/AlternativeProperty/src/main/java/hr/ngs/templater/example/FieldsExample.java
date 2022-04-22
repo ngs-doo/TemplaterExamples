@@ -11,18 +11,22 @@ public class FieldsExample {
     static class MyObjectA {
         public String fieldA = null;
     }
+
     static class MyObjectB {
         public String fieldB = "alternative value";
     }
+
     static class MyObject {
         public MyObjectA objectA = new MyObjectA();
         public MyObjectB objectB = new MyObjectB();
     }
 
     static class MissingFormatter implements DocumentFactoryBuilder.Formatter {
-        private Callable<Object> getRoot;
-        public MissingFormatter(Callable<Object> getRoot) {
-            this.getRoot = getRoot;
+        //to be able to navigate over non processed object, lets keep reference to entry point
+        private Object currentRootObject;
+
+        public void setRoot(Object root) {
+            this.currentRootObject = root;
         }
 
         @Override
@@ -31,8 +35,8 @@ public class FieldsExample {
                 try {
                     //path to appropriate field
                     String[] path = metadata.substring(8, metadata.length() - 1).split("\\.");
-                    Object current = getRoot.call();
-                    for(String p : path) {
+                    Object current = currentRootObject;
+                    for (String p : path) {
                         Field f = current.getClass().getField(p);
                         current = f.get(current);
                     }
@@ -44,31 +48,25 @@ public class FieldsExample {
         }
     }
 
-    private static final ThreadLocal<Object> currentRoot = new ThreadLocal<Object>();
-
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = FieldsExample.class.getResourceAsStream("/Fields.docx");
         File tmp = File.createTempFile("fields", ".docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        DocumentFactory factory = Configuration.builder().include(new MissingFormatter(new Callable<Object>() {
-            @Override
-            public Object call() {
-                return currentRoot.get();
-            }
-        })).build();
+        MissingFormatter formatter = new MissingFormatter();
+        DocumentFactory factory = Configuration.builder().include(formatter).build();
         try (TemplateDocument tpl = factory.open(templateStream, "docx", fos)) {
-            process(tpl, new MyObject());
+            process(formatter, tpl, new MyObject());
         }
         fos.close();
         Desktop.getDesktop().open(tmp);
     }
 
-    private static void process(TemplateDocument doc, Object value) {
+    private static void process(MissingFormatter formatter, TemplateDocument doc, Object value) {
         try {
-            currentRoot.set(value);
+            formatter.setRoot(value); // we can keep track of root object in a formatter plugin
             doc.process(value);
         } finally {
-            currentRoot.remove();
+            formatter.setRoot(null);
         }
     }
 }

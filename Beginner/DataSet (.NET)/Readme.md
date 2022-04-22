@@ -58,3 +58,11 @@ In this case to specify background color for a cell, Word uses properties such a
     </w:tc>
 
 As of v2.5 Templater can use merge-xml metadata as instruction to merge provided XML to the surrounding context. This way we can "append" color to the appropriate place.
+
+As of v7 this merge-xml can be passed directly through XML so there is no need for it in tag metadata. In that case XML would look like:
+
+    <w:tc templater-xml="merge-xml">
+      <w:tcPr>
+        <w:shd w:val="clear" w:color="auto" w:fill="COLOR" />
+      </w:tcPr>
+    </w:tc>

@@ -21,18 +21,18 @@ namespace AlternativeProperty
 			public MyObjectA objectA = new MyObjectA();
 			public MyObjectB objectB = new MyObjectB();
 		}
-		private static ThreadLocal<object> currentRoot = new ThreadLocal<object>();
 
 		public static void Main(string[] args)
 		{
 			File.Copy("template/Fields.docx", "Fields.docx", true);
+			object currentRoot = null;
 			Func<object, string, object> missingFormatter = (value, metadata) =>
 			{
 				if (metadata.StartsWith("missing(") && value == null)
 				{
 					//path to appropriate field
 					string[] path = metadata.Substring(8, metadata.Length - 9).Split('.');
-					object current = currentRoot.Value;
+					object current = currentRoot;
 					foreach (string p in path)
 					{
 						var f = current.GetType().GetField(p);
@@ -44,20 +44,20 @@ namespace AlternativeProperty
 			};
 			var factory = Configuration.Builder.Include(missingFormatter).Build();
 			using (var doc = factory.Open("Fields.docx"))
-				ProcessValue(doc, new MyObject());
+				ProcessValue(ref currentRoot, doc, new MyObject());
 			Process.Start(new ProcessStartInfo("Fields.docx") { UseShellExecute = true });
 		}
 
-		private static void ProcessValue(ITemplateDocument doc, object value)
+		private static void ProcessValue(ref object currentRoot, ITemplateDocument doc, object value)
 		{
 			try
 			{
-				currentRoot.Value = value;
+				currentRoot = value;
 				doc.Process(value);
 			}
 			finally
 			{
-				currentRoot.Value = null;
+				currentRoot = null;
 			}
 		}
 	}

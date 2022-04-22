@@ -63,10 +63,12 @@ public class HtmlWordExample {
         public Object format(Object value, String metadata) {
             if (metadata.equals("complex-html")) {
                 NodeList bodyNodes = convert(value.toString(), dBuilder).getChildNodes();
-                List<Element> elements = new ArrayList<Element>(bodyNodes.getLength());
+                List<Element> elements = new ArrayList<>(bodyNodes.getLength());
                 for (int i = 0; i < bodyNodes.getLength(); i++) {
                     elements.add((Element) bodyNodes.item(i));
                 }
+                //lets put special attribute directly on XML so we don't need to put it on tag
+                elements.get(0).setAttribute("templater-xml", "remove-old-xml");
                 return elements.toArray(new Element[0]);
             }
             return value;

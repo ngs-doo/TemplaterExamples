@@ -46,7 +46,7 @@
 			//TemplaterWeb // web app. run manually
 			DoubleProcessing.Program.Main(args);
 			SheetReport.Program.Main(args);
-			CsvStreaming.Program.Main(args);
+			Streaming.Program.Main(args);
 			XmlBinding.Program.Main(args);
 			DepartmentReport.Program.Main(args);
 			//PowerQuery.Program.Main(args);//requires license file to work properly

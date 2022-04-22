@@ -4,7 +4,7 @@ Learning how to extend Templater via plugins and create more complicated reports
 
 ### [Combining basics](FoodOrder%20(.NET)/Readme.md)
 
-The path to good looking reports is to create a good looking template.
+The path to pretty reports is to create a pretty template.
 
 [Word template](FoodOrder%20(.NET)/FoodOrder.Web/App_Data/Order.docx?raw=true) - [result](FoodOrder%20(.NET)/result.docx?raw=true)
 

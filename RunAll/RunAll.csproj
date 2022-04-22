@@ -52,10 +52,6 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Advanced\CsvStreaming\CsvStreaming.csproj">
-      <Project>{5BB2AABB-A28F-404F-8C37-DBE122E893F5}</Project>
-      <Name>CsvStreaming</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Advanced\DepartmentReport\DepartmentReport.csproj">
       <Project>{B7765E9A-952F-46C7-9E2A-4DB7A1A045F6}</Project>
       <Name>DepartmentReport</Name>
@@ -71,6 +67,10 @@
     <ProjectReference Include="..\Advanced\SheetReport\SheetReport.csproj">
       <Project>{B3457322-FDDB-46AC-B445-2887C27BC723}</Project>
       <Name>SheetReport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advanced\Streaming\Streaming.csproj">
+      <Project>{5BB2AABB-A28F-404F-8C37-DBE122E893F5}</Project>
+      <Name>Streaming</Name>
     </ProjectReference>
     <ProjectReference Include="..\Advanced\XmlBinding\XmlBinding.csproj">
       <Project>{716992A2-B22C-463B-9D33-78CDDFB8973E}</Project>

@@ -74,18 +74,42 @@ namespace HtmlToExcel
 			return value;
 		}
 
+		enum Color
+		{
+			RED = 0,
+			ORANGE = 1,
+			YELLOW = 2,
+			GREEN = 3,
+			BLUE = 4
+		}
+
+		static object ColorToXML(object value, string tag, string[] metadata)
+		{
+			if (value is Color)
+			{
+				var c = (Color)value;
+				//we need to know the location of conversion table in Excel (this could be provided as argument if needed)
+				var t = new XElement(XName.Get("t", "http://schemas.openxmlformats.org/spreadsheetml/2006/main"));
+				t.SetAttributeValue("templater-cell-style", "Colors!A" + (2 + (int)c));
+				return t;
+			}
+			return value;
+		}
+
 		public static void Main(string[] args)
 		{
 			File.Copy("template/Document.xlsx", "Html.xlsx", true);
 			var factory = Configuration.Builder
 				.Include(ConverterHtml)
+				.Include(ColorToXML)
 				.Build();
 			using (var doc = factory.Open("Html.xlsx"))
 			{
 				doc.Process(new
 				{
 					html = "<p>My simple <b>bold</b> text in <span style=\"color:red\">red!</span></p>",
-					numbers = new[] { new Number(100), new Number(-100), new Number(10) }
+					numbers = new[] { new Number(100), new Number(-100), new Number(10) },
+					background = Color.ORANGE
 				});
 			}
 			Process.Start(new ProcessStartInfo("Html.xlsx") { UseShellExecute = true });

@@ -239,10 +239,9 @@ public class DemoTests {
         SheetReportExample.main(null);
     }
 
-
     @Test
-    public void testCsvStreaming() throws Exception {
-        CsvStreamingExample.main(null);
+    public void testStreaming() throws Exception {
+        StreamingExample.main(null);
     }
 
     @Test

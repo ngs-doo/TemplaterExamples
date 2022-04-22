@@ -55,7 +55,7 @@
         <module>Intermediate/TemplaterJson</module>
         <module>Advanced/DoubleProcessing</module>
         <module>Advanced/SheetReport</module>
-        <module>Advanced/CsvStreaming</module>
+        <module>Advanced/Streaming</module>
         <module>Advanced/XmlBinding</module>
         <module>Advanced/PowerQuery</module>
         <module>Advanced/DepartmentReport</module>
@@ -271,7 +271,7 @@
         </dependency>
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
-            <artifactId>csv-streaming-example</artifactId>
+            <artifactId>streaming-example</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

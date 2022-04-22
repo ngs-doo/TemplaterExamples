@@ -35,7 +35,10 @@ namespace HtmlToWord
 			{
 				var paragraphs = Converter.Parse(value.ToString());
 				//return collection of XElement objects which will be inserted as is into document current tag
-				return paragraphs.Select(it => XElement.Parse(it.OuterXml));
+				var xmls = paragraphs.Select(it => XElement.Parse(it.OuterXml)).ToList();
+				//lets put special attribute directly on XML so we don't need to put it on tag
+				xmls[0].SetAttributeValue("templater-xml", "remove-old-xml");
+				return xmls;
 			}
 			return value;
 		}
