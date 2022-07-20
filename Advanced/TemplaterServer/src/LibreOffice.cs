@@ -25,6 +25,8 @@ namespace TemplaterServer.src
 			}
 			if (path.Length == 0)
 			{
+				var macFI = new FileInfo("/Applications/LibreOffice.app/Contents/MacOS/soffice");
+				var linuxFI = new FileInfo("/usr/bin/libreoffice");
 				if (Directory.Exists("C:/Program Files (x86)"))
 				{
 					var pf = Directory.GetDirectories("C:/Program Files (x86)");
@@ -38,6 +40,10 @@ namespace TemplaterServer.src
 								path = file;
 						}
 					}
+				} else if (macFI.Exists) {
+				    path = macFI.ToString();
+				} else if (linuxFI.Exists) {
+				    path = linuxFI.ToString();
 				}
 				if (path.Length == 0)
 					throw new ArgumentException("Unable to find LibreOffice on the system. Please explicitly specify it via: -libreoffice=C:/Program Files (x86)/LibreOffice 6.4/program/soffice.exe");

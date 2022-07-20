@@ -12,4 +12,4 @@ COPY templater.lic .
 
 EXPOSE 7777
 
-ENTRYPOINT ["java", "-jar", "templater-server.jar"]
+ENTRYPOINT ["java", "-jar", "templater-server.jar", "-address=0.0.0.0"]

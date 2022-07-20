@@ -35,9 +35,11 @@ public class LibreOffice implements PdfConverter {
 			}
 		}
 		if (path.length() == 0) {
-			File pf = new File("C:/Program Files (x86)");
-			if (pf.exists()) {
-				File[] files = pf.listFiles(f -> f.getName().startsWith("LibreOffice "));
+			File winPF = new File("C:/Program Files (x86)");
+			File macPF = new File("/Applications/LibreOffice.app/Contents/MacOS/soffice");
+			File linuxPF = new File("/usr/bin/libreoffice");
+			if (winPF.exists()) {
+				File[] files = winPF.listFiles(f -> f.getName().startsWith("LibreOffice "));
 				if (files != null && files.length > 0) {
 					File prog = new File(files[0], "program");
 					File soffice = new File(prog, "soffice.exe");
@@ -45,6 +47,10 @@ public class LibreOffice implements PdfConverter {
 						path = soffice.getAbsolutePath();
 					}
 				}
+			} else if (macPF.exists()) {
+				path = macPF.getAbsolutePath();
+			} else if (linuxPF.exists()) {
+				path = linuxPF.getAbsolutePath();
 			}
 			if (path.length() == 0) {
 				throw new RuntimeException(

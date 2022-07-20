@@ -74,7 +74,7 @@ public class TemplaterServer implements AutoCloseable {
         }
     }
 
-    public TemplaterServer(int port, File path, int timeoutLimit, Logger logger, LinkedHashMap<String, PdfConverter> pdfConverters) throws IOException {
+    public TemplaterServer(InetAddress address, int port, File path, int timeoutLimit, Logger logger, LinkedHashMap<String, PdfConverter> pdfConverters) throws IOException {
         this.timeoutLimit = timeoutLimit;
         this.logger = logger;
         this.pdfConverters = pdfConverters;
@@ -115,7 +115,7 @@ public class TemplaterServer implements AutoCloseable {
         schemaFactory = Configuration.builder().configureEditor().tagListing(true).configure(true).build();
         System.getProperties().remove("com.sun.net.httpserver.HttpServerProvider"); //disable custom http servers
         //TODO: disable custom HttpServerProvider
-        this.server = HttpServer.create(new InetSocketAddress(InetAddress.getLoopbackAddress(), port), 0);
+        this.server = HttpServer.create(new InetSocketAddress(address, port), 0);
         server.createContext("/", new IndexHandler());
         server.createContext("/content", new IndexHandler());
         server.createContext("/process", new ProcessHandler());
@@ -700,6 +700,7 @@ public class TemplaterServer implements AutoCloseable {
         try {
             int port = 7777;
             int timeoutLimit = 30;
+            InetAddress address = InetAddress.getLoopbackAddress();
             String pluginFolder = ".";
             Level logLevel = Level.OFF;
             String[] pdfs = {"LibreOffice", "Spire", "Aspose"};
@@ -709,6 +710,7 @@ public class TemplaterServer implements AutoCloseable {
             if (args.length == 0) {
                 System.out.println("Example arguments:");
                 System.out.println("    -port=8080");
+                System.out.println("    -address=0.0.0.0");
                 System.out.println("    -timeout=10");
                 System.out.println("    -tmp=/mnt/ramdisk");
                 System.out.println("    -log=INFO");
@@ -721,6 +723,8 @@ public class TemplaterServer implements AutoCloseable {
             for (String a : args) {
                 if (a.startsWith("-port=")) {
                     port = Integer.parseInt(a.substring("-port=".length()));
+                } else if (a.startsWith("-address=")) {
+                    address = InetAddress.getByName(a.substring("-address=".length()));
                 } else if (a.startsWith("-timeout=")) {
                     timeoutLimit = Integer.parseInt(a.substring("-timeout=".length()));
                 } else if (a.startsWith("-plugins=")) {
@@ -786,7 +790,7 @@ public class TemplaterServer implements AutoCloseable {
                     }
                 }
             }
-            TemplaterServer server = new TemplaterServer(port, path, timeoutLimit, logger, pdfConverters);
+            TemplaterServer server = new TemplaterServer(address, port, path, timeoutLimit, logger, pdfConverters);
             if (disableExit) {
                 System.out.println("Server started on port " + port);
             } else {
