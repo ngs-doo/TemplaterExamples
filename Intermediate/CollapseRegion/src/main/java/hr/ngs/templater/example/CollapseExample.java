@@ -129,7 +129,7 @@ public class CollapseExample {
             public Object replace(Object value, String tag, String[] metadata) {
                 if (value instanceof Color) {
                     String fillValue = Integer.toHexString(((Color) value).getRGB()).substring(2);
-                    String xml = "<w:tc><w:tcPr>\n" +
+                    String xml = "<w:tc xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:tcPr>\n" +
                             "<w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"" + fillValue + "\" />\n" +
                             "</w:tcPr></w:tc>";
                     try {
