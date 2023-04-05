@@ -34,6 +34,8 @@ namespace CollapseRegion
 							.setPaybackYears(10)
 							.setUcCheck(true).setUcCheckResponse("Ok")
 							.setApplicant(new Applicant("third applicant").setFrom("Microsoft", 2010, 1).addChild("Jack").addChild("Jane"));
+			var yes = XElement.Parse("<w:p xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">YES</w:p>");
+			var no = XElement.Parse("<w:p xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">NO</w:p>");
 			var factory = Configuration.Builder.Include((value, metadata, path, position, templater) =>
 			{
 				var str = value as string;
@@ -158,7 +160,14 @@ namespace CollapseRegion
 					return NumberToWordsExtension.ToWords((int)d, GrammaticalGender.Neuter, CultureInfo.CurrentUICulture);
 				}
 				return value;
-			}).Build();
+			}).Include((value, metadata) =>
+			{
+				if ("paragraph-removal" == metadata && value is bool)
+					return (bool)value ? yes : no;
+				return value;
+			}).XmlCombine("paragraph-removal", (location, xmls) =>
+				xmls[0].Value == "YES" ? new[] { location } : new XElement[0]
+			).Build();
 
 			using (var doc = factory.Open("Collapse.docx"))
 			{

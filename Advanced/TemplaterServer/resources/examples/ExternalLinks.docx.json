@@ -3,7 +3,7 @@
 		"event": "Egyptian pyramids",
 		"date": "2630 BC",
 		"link_name": "BBC",
-		"link_url": "http://www.bbc.co.uk/history/ancient/egyptians/",
+		"link_url": "https://www.bbc.co.uk/history/ancient/egyptians/",
 		"email_name": "Pyramids",
 		"email_address": "pyramids@egypt.com",
 		"email_subject": "Pyramids"
@@ -12,7 +12,7 @@
 		"event":"The Viking at Stamford Bridge",
 		"date": "1066-11-25",
 		"link_name": "Badass of the week",
-		"link_url": "http://www.badassoftheweek.com/stamfordbridge.html",
+		"link_url": "https://www.badassoftheweek.com/stamfordbridge.html",
 		"email_name": "Badass",
 		"email_address": "vikings@league.com",
 		"email_subject": "Viking"
@@ -21,7 +21,7 @@
 		"event": "World war I",
 		"date": "1914-6-28",
 		"link_name": "Wikipedia",
-		"link_url": "http://en.wikipedia.org/wiki/World_War_I",
+		"link_url": "https://en.wikipedia.org/wiki/World_War_I",
 		"email_name": "Historians",
 		"email_address": "history@world.com",
 		"email_subject": "WWI"

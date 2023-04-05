@@ -5,15 +5,18 @@ import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.ibm.icu.util.ULocale;
 import hr.ngs.templater.*;
 import hr.ngs.templater.Templater.TagPosition;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.*;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
 import java.util.*;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class CollapseExample {
 
@@ -23,10 +26,15 @@ public class CollapseExample {
         }
         return false;
     }
+    private static Element parseXml(DocumentBuilder dBuilder, String input) throws IOException, SAXException {
+        InputStream is = new ByteArrayInputStream(input.getBytes(UTF_8));
+        return dBuilder.parse(is).getDocumentElement();
+    }
 
     public static void main(final String[] args) throws Exception {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         File tmp = File.createTempFile("collapse", ".docx");
+        final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Application application1 =
                 new Application()
                         .setPaybackYears(20)
@@ -51,8 +59,9 @@ public class CollapseExample {
                         );
         InputStream templateStream = CollapseExample.class.getResourceAsStream("/Collapse.docx");
         FileOutputStream fos = new FileOutputStream(tmp);
-        final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        final Charset utf8 = Charset.forName("UTF-8");
+        final Element YES = parseXml(dBuilder, "<w:p xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">YES</w:p>");
+        final Element NO = parseXml(dBuilder, "<w:p xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">NO</w:p>");
+
         final NumberFormat formatter = new RuleBasedNumberFormat(ULocale.ENGLISH, RuleBasedNumberFormat.SPELLOUT);
         TemplateDocument tpl = Configuration.builder().include(new DocumentFactoryBuilder.Handler() {
             @Override
@@ -133,7 +142,7 @@ public class CollapseExample {
                             "<w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"" + fillValue + "\" />\n" +
                             "</w:tcPr></w:tc>";
                     try {
-                        return dBuilder.parse(new ByteArrayInputStream(xml.getBytes(utf8))).getDocumentElement();
+                        return parseXml(dBuilder, xml);
                     } catch (Exception e) {
                         return value;
                     }
@@ -167,7 +176,22 @@ public class CollapseExample {
                 }
                 return value;
             }
-        }).build().open(templateStream, "docx", fos);
+        }).include(new DocumentFactoryBuilder.Formatter() {
+            @Override
+            public Object format(Object value, String metadata) {
+                if ("paragraph-removal".equals(metadata) && value instanceof Boolean) {
+                    //if we decide to remove this paragraph even when there is no surrounding border we can use XML manipulation
+                    return Boolean.TRUE.equals(value) ? YES : NO;
+                }
+                return value;
+            }
+        }).xmlCombine("paragraph-removal", (location, xmls) ->
+                //to simplify processing we can hook into same metadata and based on the content of the XML
+                //either leave the paragraph (location) in or remove it (when result does not contain original location, it is removed from output)
+                "YES".equals(xmls[0].getTextContent())
+                        ? new Element[] {location}
+                        : new Element[0]
+        ).build().open(templateStream, "docx", fos);
         //manually invoke resize 0 on a tag. ideally this would be some boolean flag/empty collection
         tpl.templater().resize(new String[] { "remove_me" }, 0);
         tpl.process(Arrays.asList(application1, application2, application3));

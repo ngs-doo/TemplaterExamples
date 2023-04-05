@@ -56,6 +56,13 @@ resize(tags, 0) will invoke removal of document content between sections, so whe
 it can be used to conditionally remove several pages of document.
 Templater will skip over ordinary page break, but section page break will be used as starting or ending location.
 
+### XML combine plugin
+
+As of v7.3 Templater allows user defined plugins for XML manipulation which enables fine tuning of XML behavior.
+This can be used for simplistic cases such as removal of the paragraph in question without having border set-up in the template
+to various more complex ones. Returning XML will be injected into the document and by returning provided location
+the order can be defined (prior to this location/or after). When location is not returned, tag paragraph/element will be removed from the final document. 
+
 ### Collapse best practice
 
 While collapse can be used in various scenarios,
