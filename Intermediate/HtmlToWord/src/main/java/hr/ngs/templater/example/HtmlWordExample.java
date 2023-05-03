@@ -68,13 +68,16 @@ public class HtmlWordExample {
             this.dBuilder = dBuilder;
         }
 
-        private void rewriteHyperlinks(Element element, Map<String, String> links) {
-            if (element.getNodeName().equals("w:hyperlink")) {
+        private void adjustHyperlinksAndStyle(Element element, Map<String, String> links) {
+            String name = element.getNodeName();
+            Element parent = (Element) element.getParentNode();
+            if ("w:hyperlink".equals(name)) {
+                //if we detect hyperlink we want to convert it into a simpler form of fldSimple
+                //since that way we will not have reference to relationship and thus link will work as expected
                 String url = links.get(element.getAttribute("r:id"));
                 if (url == null) return;
-                Element parent = (Element) element.getParentNode();
                 Element fldSimple = element.getOwnerDocument().createElement("w:fldSimple");
-                fldSimple.setAttribute("w:instr", " HYPERLINK " + url +" ");
+                fldSimple.setAttribute("w:instr", " HYPERLINK " + url + " ");
                 Node child = element.getFirstChild();
                 while (child != null) {
                     element.removeChild(child);
@@ -82,13 +85,18 @@ public class HtmlWordExample {
                     child = child.getNextSibling();
                 }
                 parent.replaceChild(fldSimple, element);
+            } else if ("w:rFonts".equals(name) || "w:sz".equals(name)) {
+                //if we encounter fonts or size we will remove this element to keep style consistent with the document
+                parent.removeChild(element);
             } else {
-                Node next = element.getFirstChild();
-                while (next != null) {
-                    if (next instanceof Element) {
-                        rewriteHyperlinks((Element) next, links);
+                //otherwise iterate over all other elements
+                Node cur = element.getFirstChild();
+                while (cur != null) {
+                    Node next = cur.getNextSibling();
+                    if (cur instanceof Element) {
+                        adjustHyperlinksAndStyle((Element) cur, links);
                     }
-                    next = next.getNextSibling();
+                    cur = next;
                 }
             }
         }
@@ -101,9 +109,7 @@ public class HtmlWordExample {
                 List<Element> elements = new ArrayList<>(bodyNodes.getLength());
                 for (int i = 0; i < bodyNodes.getLength(); i++) {
                     Element element = (Element) bodyNodes.item(i);
-                    if (!links.isEmpty()) {
-                        rewriteHyperlinks(element, links);
-                    }
+                    adjustHyperlinksAndStyle(element, links);
                     elements.add(element);
                 }
                 //lets put special attribute directly on XML so we don't need to put it on tag

@@ -28,21 +28,32 @@ namespace HtmlToWord
 		private static readonly XName HyperlinkName = XName.Get("hyperlink", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
 		private static readonly XName FldSimpleName = XName.Get("fldSimple", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
 		private static readonly XName InstrName = XName.Get("instr", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+		private static readonly XName FontsName = XName.Get("rFonts", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+		private static readonly XName SizeName = XName.Get("sz", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
 		private static readonly XName RelIDName = XName.Get("id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
 
-		private static void RewriteHyperlinks(XElement element, Dictionary<string, string> links)
+		private static void AdjustHyperlinksAndStyle(XElement element, Dictionary<string, string> links)
 		{
 			string url;
-			if (element.Name == HyperlinkName && links.TryGetValue(element.Attribute(RelIDName).Value, out url))
+			if (element.Name == HyperlinkName)
 			{
+				//if we detect hyperlink we want to convert it into a simpler form of fldSimple
+				//since that way we will not have reference to relationship and thus link will work as expected
+				if (!links.TryGetValue(element.Attribute(RelIDName).Value, out url)) return;
 				element.RemoveAttributes();
 				element.Name = FldSimpleName;
 				element.SetAttributeValue(InstrName, " HYPERLINK " + url + " ");
 			}
+			else if (element.Name == FontsName || element.Name == SizeName)
+			{
+				//if we encounter fonts or size we will remove this element to keep style consistent with the document
+				element.Remove();
+			}
 			else
 			{
-				foreach (var el in element.Elements())
-					RewriteHyperlinks(el, links);
+				var elements = element.Elements().ToList();
+				foreach (var el in elements)
+					AdjustHyperlinksAndStyle(el, links);
 			}
 		}
 
@@ -60,8 +71,7 @@ namespace HtmlToWord
 				var xmls = paragraphs.Select(it =>
 				{
 					var element = XElement.Parse(it.OuterXml);
-					if (links.Count > 0)
-						RewriteHyperlinks(element, links);
+					AdjustHyperlinksAndStyle(element, links);
 					return element;
 				}).ToList();
 				//lets put special attribute directly on XML so we don't need to put it on tag

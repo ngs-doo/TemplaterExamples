@@ -22,6 +22,11 @@ This will leave old paragraph empty, which might lead to whitespace bloat. To de
 
 To ease the usage, instead of specifying this through tag metadata, they can be sent in XML via templater-xml attribute, e.g. templater-xml="merge-xml"
 
+Its common to adjust the XML before inserting, especially when dealing with HTML, which can be used to:
+
+  * rewrite hyperlinks into alternative form
+  * keep style consistent with the document
+
 ### Document merging
 With version 6.1 Templater also supports document embedding in Word. This can be used for document merging, HTML/RTF import and similar purposes. To import embedded document, special type must be used:
 
