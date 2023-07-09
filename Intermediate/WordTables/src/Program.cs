@@ -118,6 +118,21 @@ namespace WordDataTable
 			return dt;
 		}
 
+		static object SumExpression(object parent, object value, string member, string metadata)
+		{
+			var arr = value as object[];
+			//check if plugin is applicable
+			if (arr == null || !metadata.StartsWith("Sum(")) return value;
+			if (arr.Length == 0 || arr.Contains(null)) return 0;
+			var signature = arr[0].GetType();
+			var propertyName = metadata.Substring(4, metadata.Length - 5);
+			var property = signature.GetField(propertyName);
+			var result = (decimal)0;
+			foreach (var el in arr)
+				result += (decimal)property.GetValue(el);
+			return result;
+		}
+
 		public static void Main(string[] args)
 		{
 			File.Copy("template/Tables.docx", "WordTables.docx", true);
@@ -139,6 +154,7 @@ namespace WordDataTable
 				.NavigateSeparator(':', null)
 				.Include(LimitDataTable)
 				.Include(CollapseNonEmpty)
+				.Include(SumExpression)
 				.Build();
 			var dynamicResize1 = new object[7, 3]{
 				{"a", "b", "c"},

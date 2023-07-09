@@ -34,7 +34,7 @@ alias can be defined like products = groups:sort(usage).products:filter(active)
 
 and tag can look like `[[products.name]]` with all the behavior which was implicitly defined
 
-Here, navigation was used to take top N elements from the result set in an idiomatic way. 
+Here, navigation was used to take top N elements from the result set in an idiomatic way and for implementing Sum over existing field as `[[Fixed:Sum(Price)]]`
 
 ### merge-nulls/span-nulls metadata
 

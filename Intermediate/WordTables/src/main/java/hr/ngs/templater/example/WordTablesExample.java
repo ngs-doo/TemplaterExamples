@@ -5,6 +5,7 @@ import com.mockrunner.mock.jdbc.MockResultSet;
 
 import java.awt.Desktop;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -88,6 +89,7 @@ public class WordTablesExample {
                         .navigateSeparator(':', null)
                         .include(new LimitResultSet())
                         .include(new CollapseNonEmpty())
+                        .include(new SumExpression())
                         .build().open(templateStream, "docx", fos);
         tpl.process(arguments);
         tpl.close();
@@ -152,6 +154,29 @@ public class WordTablesExample {
             }
             //return different object which will be used further in the processing
             return dt;
+        }
+    }
+
+    static class SumExpression implements DocumentFactoryBuilder.Navigate {
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            //check if plugin is applicable
+            if (value instanceof List == false || !metadata.startsWith("Sum(")) return value;
+            List arr = (List) value;
+            if (arr.isEmpty() || arr.contains(null)) return 0;
+            String propertyName = metadata.substring(4, metadata.length() - 1);
+            Class<?> signature = arr.get(0).getClass();
+            BigDecimal result = BigDecimal.ZERO;
+            try {
+                Field property = signature.getField(propertyName);
+                for (Object el : arr) {
+                    BigDecimal f = (BigDecimal) property.get(el);
+                    result = result.add(f);
+                }
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+            return result;
         }
     }
 
