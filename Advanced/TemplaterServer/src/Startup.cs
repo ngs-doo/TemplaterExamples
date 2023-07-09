@@ -22,7 +22,7 @@ namespace TemplaterServer
                      policy =>
                      {
                          policy
-                         .WithOrigins("http://localhost:3000", "http://localhost:3001")
+                         .WithOrigins("http://localhost:5000", "http://localhost:5001")
                          .AllowAnyHeader()
                          .AllowAnyMethod();
                      });

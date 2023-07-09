@@ -29,10 +29,17 @@ namespace TemplaterServer
 		}
 
 		private readonly SharedResource SharedResource;
+		private readonly Dictionary<string, FileInfo> ResourceFiles = new Dictionary<string, FileInfo>();
 
 		public TemplaterController(SharedResource sharedResource)
 		{
 			this.SharedResource = sharedResource;
+			var resourcesPath = new DirectoryInfo("resources");
+			foreach(var d in resourcesPath.GetDirectories())
+			{
+				foreach (var f in d.GetFiles())
+					ResourceFiles[d.Name.ToLowerInvariant() + "/" + f.Name.ToLowerInvariant()] = f;
+			}
 		}
 
 		static object JavaFormat(object value, string metadata)
@@ -74,36 +81,41 @@ namespace TemplaterServer
 		[HttpGet("static/{file}")]
 		public IActionResult Static(string file)
 		{
-			var fi = new FileInfo("resources/static/" + file);
-			if (!fi.Exists) return NotFound();
+			var name = "static/" + file.ToLowerInvariant().Trim();
+			FileInfo fi;
+			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
 			return PhysicalFile(fi.FullName, file.EndsWith(".css") ? "text/css" : "application/javascript");
 		}
 
 		[HttpGet("js/{file}")]
 		public IActionResult JS(string file)
 		{
-			var fi = new FileInfo("resources/js/" + file);
-			if (!fi.Exists) return NotFound();
+
+			var name = "js/" + file.ToLowerInvariant().Trim();
+			FileInfo fi;
+			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
 			return PhysicalFile(fi.FullName, "application/javascript");
 		}
 
 		[HttpGet("examples/{file}")]
 		public IActionResult Examples(string file)
 		{
-			var fi = new FileInfo("resources/examples/" + file);
-			if (!fi.Exists) return NotFound();
+			var name = "examples/" + file.ToLowerInvariant().Trim();
+			FileInfo fi;
+			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
 			return PhysicalFile(fi.FullName, "text/json");
 		}
 
 		[HttpGet("templates/{file}")]
 		public IActionResult Templates(string file, [FromQuery] string withSchema)
 		{
-			var fi = new FileInfo("resources/templates/" + file);
-			if (!fi.Exists) return NotFound();
+			var templateName = "templates/" + file.ToLowerInvariant().Trim();
+			var jsonName = "examples/" + file.ToLowerInvariant().Trim() + ".json";
+			FileInfo fi, jfi;
+			if (!ResourceFiles.TryGetValue(templateName, out fi) || !fi.Exists) return NotFound();
+			if (!ResourceFiles.TryGetValue(jsonName, out jfi) || !jfi.Exists) return NotFound();
 			if ("true".Equals(withSchema, StringComparison.OrdinalIgnoreCase)) 
 			{
-				var jfi = new FileInfo("resources/examples/" + file + ".json");
-				if (!jfi.Exists) return NotFound();
 				string jsonString = System.IO.File.ReadAllText(jfi.FullName);
 				MemoryStream ms;
 				try 
@@ -163,9 +175,10 @@ namespace TemplaterServer
 		[HttpPost("process")]
         public IActionResult Post(Argument arg)
         {
-			if (arg == null) return NotFound();
-			var fi = new FileInfo("resources/templates/" + arg.template);
-			if (!fi.Exists) return NotFound();
+			if (arg == null || string.IsNullOrEmpty(arg.template)) return NotFound();
+			var name = "templates/" + arg.template.ToLowerInvariant().Trim();
+			FileInfo fi;
+			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
 			MemoryStream ms;
 			try
 			{
