@@ -39,6 +39,7 @@
         <module>Intermediate/AlternativeProperty</module>
         <module>Intermediate/MissingProperty</module>
         <module>Intermediate/HtmlToWord</module>
+        <module>Intermediate/HtmlAsXml</module>
         <module>Intermediate/HtmlToExcel</module>
         <module>Intermediate/SharedCollection</module>
         <module>Intermediate/ChartExample</module>

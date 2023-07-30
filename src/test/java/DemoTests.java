@@ -125,6 +125,11 @@ public class DemoTests {
     }
 
     @Test
+    public void testHtmlAsXml() throws Exception {
+        HtmlXmlExample.main(null);
+    }
+
+    @Test
     public void testPushdown() throws Exception {
         TableExample.main(null);
     }

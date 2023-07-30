@@ -41,6 +41,7 @@
 			//FoodOrder // web app. run manually
 			HtmlToExcel.Program.Main(args);
 			HtmlToWord.Program.Main(args);
+			HtmlAsXml.Program.Main(args);
 			ChartExample.Program.Main(args);
 			QuestionnairePlugin.Program.Main(args);
 			//TemplaterWeb // web app. run manually

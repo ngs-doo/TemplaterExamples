@@ -184,6 +184,10 @@
       <Project>{210CEFEB-A80D-4958-B83E-09930BDA3711}</Project>
       <Name>HtmlToExcel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Intermediate\HtmlAsXml\HtmlAsXml.csproj">
+      <Project>{210CEFEB-A80D-4958-B83E-09930BDA3722}</Project>
+      <Name>HtmlAsXml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intermediate\HtmlToWord\HtmlToWord.csproj">
       <Project>{3DED053C-9B71-4CD7-BEA2-1CA9963D9C78}</Project>
       <Name>HtmlToWord</Name>

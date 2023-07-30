@@ -108,6 +108,12 @@ HTML can be imported via external library which knows how to do HTML -> OOXML co
 
 [template](https://github.com/ngs-doo/TemplaterExamples/raw/master/Intermediate/HtmlToExcel/template/Document.xlsx) - [result](https://github.com/ngs-doo/TemplaterExamples/raw/master/Intermediate/HtmlToExcel/result.xlsx)
 
+### [HTML generation](HtmlAsXml/Readme.md)
+
+HTML can be processed as long as it was converted into valid XML.
+
+[template](HtmlAsXml/template/document.html) - [result](HtmlAsXml/result.html)
+
 ### [Nesting lists and tables](ListsAndTables/Readme.md)
 
 Deep nesting in practice.

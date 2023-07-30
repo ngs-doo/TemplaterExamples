@@ -26,7 +26,7 @@ namespace DoubleProcessing
 			var units = PrepareStarcraftUnits();
 
 			//let's do a horizontal resize so document is prepared for second pass
-			using (var doc = Configuration.Factory.Open(ms, "xlsx"))
+			using (var doc = Configuration.Factory.Open(ms, "xlsx", ms))
 			{
 				//[[equals]] at the beginning of the cell causes conversion to formula
 				//this is processed at the end of processing, but since this tag is newly introduced, it's processed at the second pass

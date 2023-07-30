@@ -13,9 +13,14 @@
     </properties>
     <repositories>
         <repository>
+            <id>Default</id>
+            <name>Maven</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
             <id>com.e-iceblue</id>
             <name>e-iceblue</name>
-            <url>http://repo.e-iceblue.com/nexus/content/groups/public</url>
+            <url>https://repo.e-iceblue.com/nexus/content/groups/public</url>
         </repository>
         <repository>
             <id>AsposeJavaAPI</id>
