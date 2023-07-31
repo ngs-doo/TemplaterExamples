@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\packages\HtmlAgilityPack.1.11.50\lib\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="NGS.Templater">
       <HintPath>..\..\packages\Templater.7.3.0\lib\Net40\NGS.Templater.dll</HintPath>
