@@ -36,6 +36,8 @@ and tag can look like `[[products.name]]` with all the behavior which was implic
 
 Here, navigation was used to take top N elements from the result set in an idiomatic way and for implementing Sum over existing field as `[[Fixed:Sum(Price)]]`
 
+Its also used to read a different property and use it for coloring purpose: `[[Combined.Beers.Name:color]]`
+
 ### merge-nulls/span-nulls metadata
 
 Specific internal metadata (meaning it can't be implemented as a simple plugin) are **merge-nulls** and **span-nulls**.

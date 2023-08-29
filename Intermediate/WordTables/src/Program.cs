@@ -4,7 +4,9 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using NGS.Templater;
+using System.Drawing;
 
 namespace WordDataTable
 {
@@ -133,6 +135,20 @@ namespace WordDataTable
 			return result;
 		}
 
+		static object BeerColor(object parent, object value, string member, string metadata)
+		{
+			var beer = parent as Beer;
+			//check if plugin is applicable
+			if (beer == null || metadata != "color") return value;
+			var color = beer.Color;
+			var colorValue = beer.Color.R.ToString("X2") + beer.Color.G.ToString("X2") + beer.Color.B.ToString("X2");
+			return XElement.Parse(@"
+<w:r xmlns:w=""http://schemas.openxmlformats.org/wordprocessingml/2006/main"">
+<w:rPr><w:color w:val=""" + colorValue + @"""/></w:rPr>
+<w:t>" + beer.Name + @"</w:t>
+</w:r>");
+		}
+
 		public static void Main(string[] args)
 		{
 			File.Copy("template/Tables.docx", "WordTables.docx", true);
@@ -155,6 +171,7 @@ namespace WordDataTable
 				.Include(LimitDataTable)
 				.Include(CollapseNonEmpty)
 				.Include(SumExpression)
+				.Include(BeerColor)
 				.Build();
 			var dynamicResize1 = new object[7, 3]{
 				{"a", "b", "c"},
@@ -187,8 +204,8 @@ namespace WordDataTable
 			{
 				Beers = new[] 
 				{ 
-					new Beer { Name = "Heineken", Description = "Green and cold", Columns = new [,] { {"Light", "International"} }},
-					new Beer { Name = "Leila", Description = "Blueish", Columns = new [,] { {"Blue", "Domestic"} }}
+					new Beer { Name = "Heineken", Color = Color.Green, Description = "Green and cold", Columns = new [,] { {"Light", "International"} }},
+					new Beer { Name = "Leila", Color = Color.Blue, Description = "Blueish", Columns = new [,] { {"Blue", "Domestic"} }}
 				},
 				Headers = new[,] { { "Bottle", "Where" } }
 			};
@@ -228,6 +245,7 @@ namespace WordDataTable
 		class Beer
 		{
 			public string Name;
+			public Color Color;
 			public string Description;
 			public string[,] Columns;
 		}

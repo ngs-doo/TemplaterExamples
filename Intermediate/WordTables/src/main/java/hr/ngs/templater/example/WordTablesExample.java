@@ -3,7 +3,10 @@ package hr.ngs.templater.example;
 import hr.ngs.templater.*;
 import com.mockrunner.mock.jdbc.MockResultSet;
 
-import java.awt.Desktop;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -11,6 +14,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WordTablesExample {
     public static void main(final String[] args) throws Exception {
@@ -76,8 +82,8 @@ public class WordTablesExample {
         arguments.Table5 = dtEmpty;
         arguments.Combined = Arguments.combined(
                 new String[]{"Bottle", "Where"},
-                Arguments.beer("Heineken", "Green and cold", "Light", "International"),
-                Arguments.beer("Leila", "Blueish", "Blue", "Domestic"));
+                Arguments.beer("Heineken", Color.GREEN, "Green and cold", "Light", "International"),
+                Arguments.beer("Leila", Color.BLUE, "Blueish", "Blue", "Domestic"));
         arguments.Fixed = fixedItems;
 
         FileOutputStream fos = new FileOutputStream(tmp);
@@ -90,6 +96,7 @@ public class WordTablesExample {
                         .include(new LimitResultSet())
                         .include(new CollapseNonEmpty())
                         .include(new SumExpression())
+                        .include(new BeerColor())
                         .build().open(templateStream, "docx", fos);
         tpl.process(arguments);
         tpl.close();
@@ -105,7 +112,7 @@ public class WordTablesExample {
                 MockResultSet newRs = new MockResultSet("copy");
                 try {
                     ResultSetMetaData rsMD = oldRs.getMetaData();
-                    for (int i = 0; i < rsMD.getColumnCount(); i++) {
+                    for (int i = 0; i <= rsMD.getColumnCount(); i++) {
                         newRs.addColumn(rsMD.getColumnName(i + 1));
                     }
                     for (int i = 0; i < 10 && oldRs.next(); i++) {
@@ -177,6 +184,34 @@ public class WordTablesExample {
                 throw new RuntimeException(e);
             }
             return result;
+        }
+    }
+
+    static class BeerColor implements DocumentFactoryBuilder.Navigate {
+        private final DocumentBuilder dBuilder;
+
+        public BeerColor() throws ParserConfigurationException {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            dBuilder = dbFactory.newDocumentBuilder();
+        }
+
+        @Override
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            //check if plugin is applicable
+            if (parent instanceof Arguments.Beer == false || !metadata.equals("color")) return value;
+            Arguments.Beer beer = (Arguments.Beer) parent;
+            String colorValue = Integer.toHexString(beer.Color.getRGB()).substring(2);
+            String xml = "<w:r>" +
+                    "        <w:rPr><w:color w:val=\"" + colorValue + "\"/></w:rPr>" +
+                    "        <w:t>" + beer.Name + "</w:t>" +
+                    "    </w:r>";
+            try {
+                InputStream is = new ByteArrayInputStream(xml.getBytes(UTF_8));
+                return dBuilder.parse(is).getDocumentElement();
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+                return value;
+            }
         }
     }
 
