@@ -6,7 +6,7 @@
 
     <groupId>hr.ngs.templater.examples</groupId>
     <artifactId>templater-examples</artifactId>
-    <version>7.3.0</version>
+    <version>8.0.0</version>
     <packaging>pom</packaging>
     <url>https://github.com/ngs-doo/TemplaterExamples</url>
 
@@ -188,6 +188,11 @@
         <dependency>
             <groupId>hr.ngs.templater.example</groupId>
             <artifactId>missing-property-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hr.ngs.templater.example</groupId>
+            <artifactId>html-xml-example</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

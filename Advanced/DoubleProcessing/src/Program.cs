@@ -57,7 +57,7 @@ namespace DoubleProcessing
 			var complex = BuildComplexObject(totalPeople);
 
 			//let's do a second pass with our prepared object
-			using (var doc = Configuration.Factory.Open(ms, "xlsx"))
+			using (var doc = Configuration.Factory.Open(ms, "xlsx", ms))
 			{
 				doc.Process(complex);
 				doc.Process(new { starcraft = units });

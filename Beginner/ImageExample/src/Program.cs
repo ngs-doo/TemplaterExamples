@@ -11,7 +11,9 @@ namespace ImageExample
 		{
 			File.Copy("template/Picture.docx", "Image.docx", true);
 			var image = Image.FromFile("template/Chuck_Norris.jpg");
-			using (var doc = Configuration.Factory.Open("Image.docx"))
+			//On modern .NET Images are not supported out of the box, so we need to manually activate image plugin.
+			//Otherwise we would need to use ImageInfo type from Templater
+			using (var doc = Configuration.Builder.BuiltInLowLevelPlugins(true).Build().Open("Image.docx"))
 			{
 				//we can even use low level API to change tags directly
 				doc.Templater.Replace("picture", image);

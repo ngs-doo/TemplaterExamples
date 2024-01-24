@@ -126,6 +126,7 @@ namespace Pictures
 			data["placeholder"] = Image.FromFile("template/unicorn.jpg");
 			data["qr-tag"] = "https://templater.info/";
 			var factory = Configuration.Builder
+				.BuiltInLowLevelPlugins(true)//always activate Image -> ImageInfo conversion (disabled on .NET standard version by default)
 				.Include(ImageLoader)//setup image loading via from-resource metadata
 				.Include(ImageMaxSize)//setup image resizing via maxSize(X, Y) metadata
 				.SvgConverter(ConvertSvg)
