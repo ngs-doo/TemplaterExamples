@@ -37,6 +37,11 @@ This works for non-trivial cases, as images, tables and other objects can be imp
 
 Templater will recognize tags inside embedded documents, so this will work seamlessly in various use cases.
 
+#### Special support for HTML extensions
+
+By default embedding is added as a new paragraph after the tag location. In cases when HTML is embedded, Templater will try to add it at the tag location,
+which enables its uses as tag inside a table and regular resize behavior.
+
 ### Plugin example
 
 String is usually pasted as-is into the document (except in case when it contains newlines, in which case it must be slightly modified during insert). This example shows how metadata can be used to specify string -> XElement conversion. For this external HTML -> DOCX library is used.

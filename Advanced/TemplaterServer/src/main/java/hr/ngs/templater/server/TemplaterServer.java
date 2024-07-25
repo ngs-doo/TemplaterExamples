@@ -414,7 +414,7 @@ public class TemplaterServer implements AutoCloseable {
                    }
                }
                String templateName = params.get("template");
-               if (templateName == null || templateName.length() == 0 || templateName.indexOf('.') == -1) {
+               if (templateName == null || templateName.indexOf('.') == -1) {
                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.", start);
                    return;
                }
@@ -540,7 +540,7 @@ public class TemplaterServer implements AutoCloseable {
             try {
                 Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
                 String templateName = params.get("template");
-                if (templateName == null || templateName.length() == 0 || templateName.indexOf('.') == -1) {
+                if (templateName == null || templateName.indexOf('.') == -1) {
                     sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad template name.", start);
                     return;
                 }
@@ -648,7 +648,7 @@ public class TemplaterServer implements AutoCloseable {
            try {
                Map<String, String> params = splitQuery(httpExchange.getRequestURI().getQuery());
                String file = params.get("file");
-               if (file == null || file.length() == 0 || file.indexOf('.') == -1) {
+               if (file == null || file.indexOf('.') == -1) {
                    sendResponse(httpExchange, 400, MIME_PLAINTEXT, "Missing or bad file name.", start);
                    return;
                }

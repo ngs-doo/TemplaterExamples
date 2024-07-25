@@ -165,7 +165,7 @@ namespace CollapseRegion
 				if ("paragraph-removal" == metadata && value is bool)
 					return (bool)value ? yes : no;
 				return value;
-			}).XmlCombine("paragraph-removal", (location, xmls) =>
+			}).XmlCombine("paragraph-removal", RemovalOption.BEFORE, (location, xmls, tag, metadata) =>
 				xmls[0].Value == "YES" ? new[] { location } : new XElement[0]
 			).Build();
 

@@ -27,30 +27,35 @@ namespace TemplaterServer.src
 			{
 				var macFI = new FileInfo("/Applications/LibreOffice.app/Contents/MacOS/soffice");
 				var linuxFI = new FileInfo("/usr/bin/libreoffice");
-				if (Directory.Exists("C:/Program Files (x86)"))
-				{
-					var pf = Directory.GetDirectories("C:/Program Files (x86)");
-					if (pf != null && pf.Length > 0)
-					{
-						var lo = pf.FirstOrDefault(it => it.Contains("LibreOffice ", StringComparison.OrdinalIgnoreCase));
-						if (lo != null)
-						{
-							var file = lo.Replace('\\', '/') + "/program/soffice.exe";
-							if (File.Exists(file))
-								path = file;
-						}
-					}
-				} else if (macFI.Exists) {
-				    path = macFI.ToString();
-				} else if (linuxFI.Exists) {
-				    path = linuxFI.ToString();
-				}
-				if (path.Length == 0)
+				var win32 = new DirectoryInfo("C:/Program Files (x86)");
+				var win64 = new DirectoryInfo("C:/Program Files");
+				if (macFI.Exists)
+					path = macFI.ToString();
+				else if (linuxFI.Exists)
+					path = linuxFI.ToString();
+				else 
+					path = FindWindows(win32) ?? FindWindows(win64);
+				if (string.IsNullOrEmpty(path))
 					throw new ArgumentException("Unable to find LibreOffice on the system. Please explicitly specify it via: -libreoffice=C:/Program Files (x86)/LibreOffice 6.4/program/soffice.exe");
 			}
 			this.Timeout = timeout * 1000;
 			this.LibreOfficePath = path;
 		}
+		
+		private static string FindWindows(DirectoryInfo folder)
+		{
+			if (!folder.Exists) return null;
+			var nested = folder.GetDirectories();
+			if (nested == null || nested.Length == 0) return null;
+			foreach (var lo in nested)
+			{
+				if (!lo.FullName.Contains("LibreOffice", StringComparison.OrdinalIgnoreCase)) continue;
+				var file = lo.FullName.Replace('\\', '/') + "/program/soffice.exe";
+				if (File.Exists(file))
+					return file;
+			}
+			return null;
+		}		
 
 		private int FileCounter;
 
