@@ -25,6 +25,17 @@ public class SharedChartsExample {
         }
     }
 
+    public static class TableData {
+        public final String A;
+        public final String B;
+        public final String C;
+        public TableData(int i) {
+            this.A = "A - " + i;
+            this.B = "B - " + i;
+            this.C = "C - " + i;
+        }
+    }
+
     public static void main(final String[] args) throws Exception {
         InputStream templateStream = SharedChartsExample.class.getResourceAsStream("/charts.pptx");
         File tmp = File.createTempFile("chart", ".pptx");
@@ -35,6 +46,10 @@ public class SharedChartsExample {
         usage.add(new LanguageUsage("C++", 15.6, 32.6, 27.04));
         usage.add(new LanguageUsage("Python", 40.22, 33.36, 20.41));
         usage.add(new LanguageUsage("Javascript", 92.54, 42.67, 38.78));
+        List<TableData> tableData = new ArrayList<>();
+        for (int i = 1; i <= 15; i++) {
+            tableData.add(new TableData(i));
+        }
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("title", "Languages");
         data.put("subtitle", "Usage analysis");
@@ -43,10 +58,32 @@ public class SharedChartsExample {
             public final String[][] kind = {{"Web", "Desktop", "Mobile"}};
             public final Object[][] data = usage.stream().map(it -> new Object[]{it.language, it.web, it.desktop, it.mobile}).toArray(Object[][]::new);
         });
+        data.put("table", tableData);
+        DocumentFactory factory = Configuration.builder().navigateSeparator(':', null).include(new SplitRows()).build();
         try (FileOutputStream fos = new FileOutputStream(tmp);
-             TemplateDocument tpl = Configuration.factory().open(templateStream, "pptx", fos)) {
+             TemplateDocument tpl = factory.open(templateStream, "pptx", fos)) {
             tpl.process(data);
         }
         Desktop.getDesktop().open(tmp);
+    }
+
+    static class SplitRows implements DocumentFactoryBuilder.Navigate {
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (value instanceof List == false) return value;
+            //check if plugin is applicable
+            if (!metadata.startsWith("split(")) return value;
+            final List list = (List) value;
+            int limit = Integer.parseInt(metadata.substring(6, metadata.length() - 1));
+            List<Object> result = new ArrayList<>();
+            final int size = list.size() / limit;
+            for (int i = 0; i <= size; i++) {
+                final int ii = i;
+                result.add(new Object() {
+                    public final int index = ii;
+                    public final List value = list.subList(ii * limit, Math.min((ii + 1) * limit, list.size()));
+                });
+            }
+            return result;
+        }
     }
 }
