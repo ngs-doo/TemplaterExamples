@@ -40,7 +40,8 @@ Therefore another tag (`[[formula]]` is used, and at the end of first processing
  * Templater doesn't analyze values after replace (only after resize)
  * second processing will pick up inserted tag and will do formula replacement at the end
 
-### Merge cell stretching
+### Merge cell stretching with drawings
 
 Merge cell require at least two cells to be defined. 
-Therefore template contains tag `[[Groups.Definition]]` across two cells so that it's not duplicated on resize, but rather stretched.
+When drawing is placed inside merge cell, it will be stretched with the merge cell. If this is not expected behavior, Lock aspect ratio option can be checked.
+Template contains tag `[[Groups.Definition]]` within shape, which is across two cells so that it's not duplicated on nested resize, but rather stretched.
