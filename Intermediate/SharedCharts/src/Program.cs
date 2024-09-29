@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -28,12 +29,12 @@ namespace SharedCharts
 		public class TableData
 		{
 			public readonly string A;
-			public readonly string B;
+			public readonly int B;
 			public readonly string C;
 			public TableData(int i)
 			{
 				this.A = "A - " + i;
-				this.B = "B - " + i;
+				this.B = i;
 				this.C = "C - " + i;
 			}
 		}
@@ -50,7 +51,11 @@ namespace SharedCharts
 			var tableData = new List<TableData>();
 			for (int i = 1; i <= 15; i++)
 				tableData.Add(new TableData(i));
-			var factory = Configuration.Builder.NavigateSeparator(':', null).Include(SplitRows).Build();
+			var factory = Configuration.Builder
+				.NavigateSeparator(':', null)
+				.Include(SplitRows)
+				.Include(SumEntries)
+				.Build();
 			using (var doc = factory.Open("charts.pptx"))
 			{
 				doc.Process(new
@@ -71,15 +76,42 @@ namespace SharedCharts
 
 		static object SplitRows(object parent, object value, string member, string metadata)
 		{
-			var list = value as List<TableData>;
+			var list = value as IList;
 			//check if plugin is applicable
 			if (list == null || !metadata.StartsWith("split(")) return value;
 			var limit = int.Parse(metadata.Substring(6, metadata.Length - 7));
 			var result = new List<object>();
 			var size = list.Count / limit;
+			//copy to new list so we can use GetRange
+			var items = new List<object>(list.Count);
+			foreach (var it in list)
+				items.Add(it);
 			for (int i = 0; i <= size; i++)
-				result.Add(new { index = i, value = list.GetRange(i * limit, Math.Min(limit, list.Count - i * limit)) });
+				result.Add(new
+				{
+					index = i,
+					isNotLast = i < size,
+					value = items.GetRange(i * limit, Math.Min(limit, list.Count - i * limit))
+				});
 			return result;
+		}
+
+		static object SumEntries(object parent, object value, string member, string metadata)
+		{
+			var list = value as IList;
+			//check if plugin is applicable
+			if (list == null || !metadata.StartsWith("sum(")) return value;
+			//lets sum values across all table rows for specified property in metadata
+			var propertyName = metadata.Substring(4, metadata.Length - 5);
+			int sum = 0;
+			if (list.Count > 0)
+			{
+				var field = list[0].GetType().GetField(propertyName);
+				foreach (var it in list)
+					//for simplification assume its of expected type
+					sum += (int)field.GetValue(it);
+			}
+			return sum;
 		}
 	}
 }

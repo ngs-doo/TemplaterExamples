@@ -4,6 +4,7 @@ import hr.ngs.templater.*;
 
 import java.awt.Desktop;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -27,11 +28,11 @@ public class SharedChartsExample {
 
     public static class TableData {
         public final String A;
-        public final String B;
+        public final int B;
         public final String C;
         public TableData(int i) {
             this.A = "A - " + i;
-            this.B = "B - " + i;
+            this.B = i;
             this.C = "C - " + i;
         }
     }
@@ -50,7 +51,7 @@ public class SharedChartsExample {
         for (int i = 1; i <= 15; i++) {
             tableData.add(new TableData(i));
         }
-        Map<String, Object> data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put("title", "Languages");
         data.put("subtitle", "Usage analysis");
         data.put("data", usage);
@@ -59,7 +60,11 @@ public class SharedChartsExample {
             public final Object[][] data = usage.stream().map(it -> new Object[]{it.language, it.web, it.desktop, it.mobile}).toArray(Object[][]::new);
         });
         data.put("table", tableData);
-        DocumentFactory factory = Configuration.builder().navigateSeparator(':', null).include(new SplitRows()).build();
+        DocumentFactory factory = Configuration.builder()
+                .navigateSeparator(':', null)
+                .include(new SplitRows())
+                .include(new SumEntries())
+                .build();
         try (FileOutputStream fos = new FileOutputStream(tmp);
              TemplateDocument tpl = factory.open(templateStream, "pptx", fos)) {
             tpl.process(data);
@@ -80,10 +85,34 @@ public class SharedChartsExample {
                 final int ii = i;
                 result.add(new Object() {
                     public final int index = ii;
+                    public final boolean isNotLast = ii < size;
                     public final List value = list.subList(ii * limit, Math.min((ii + 1) * limit, list.size()));
                 });
             }
             return result;
+        }
+    }
+    static class SumEntries implements DocumentFactoryBuilder.Navigate {
+        public Object navigate(Object parent, Object value, String member, String metadata) {
+            if (value instanceof List == false) return value;
+            //check if plugin is applicable
+            if (!metadata.startsWith("sum(")) return value;
+            final List list = (List) value;
+            //lets sum values across all table rows for specified property in metadata
+            String propertyName = metadata.substring(4, metadata.length() - 1);
+            int sum = 0;
+            if (list.size() > 0) {
+                try {
+                    Field field = list.get(0).getClass().getField(propertyName);
+                    for (Object it : list) {
+                        //for simplification assume its of expected type
+                        sum += (int) field.get(it);
+                    }
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return sum;
         }
     }
 }
