@@ -129,6 +129,7 @@ Different parts of same collection can be used in different tables. Digital sign
 ### [Shared charts](SharedCharts/Readme.md)
 
 Data source can be repeated even in the embedded Excels within PowerPoint files.
+Its common to split large table across multiple slides.
 
 [template](https://github.com/ngs-doo/TemplaterExamples/raw/master/Intermediate/SharedCharts/template/charts.pptx) - [result](https://github.com/ngs-doo/TemplaterExamples/raw/master/Intermediate/SharedCharts/result.pptx)
 
