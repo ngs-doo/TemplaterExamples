@@ -76,6 +76,7 @@ public class TemplaterJson {
 
         TemplateDocument tpl = Configuration.builder()
                 .include(IMAGE_DECODER)
+                .navigateSeparator(':', null)
                 .build().open(templateStream, extension, outputStream);
         tpl.process(data);
         tpl.close();
