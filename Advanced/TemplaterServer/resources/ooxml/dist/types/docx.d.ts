@@ -1,0 +1,2559 @@
+//#region dist/.types-work/chart-CX4ml5hj.d.ts
+type DecodedImageBudgetStrategy = 'adaptive' | 'strict';
+interface ImageResourceOptions {
+  decodedByteBudget?: number;
+  strategy?: DecodedImageBudgetStrategy;
+  resolution?: 'native-if-fit' | 'display';
+}
+type MathStyle = 'roman' | 'italic' | 'bold' | 'boldItalic';
+interface MathRun {
+  kind: 'run';
+  text: string;
+  style: MathStyle;
+}
+interface MathFraction {
+  kind: 'fraction';
+  num: MathNode[];
+  den: MathNode[];
+  bar?: boolean;
+}
+interface MathScript {
+  kind: 'sup' | 'sub' | 'subSup';
+  base: MathNode[];
+  sup?: MathNode[];
+  sub?: MathNode[];
+}
+interface MathNary {
+  kind: 'nary';
+  op: string;
+  limLoc?: string;
+  sub?: MathNode[];
+  sup?: MathNode[];
+  body: MathNode[];
+}
+interface MathDelimiter {
+  kind: 'delimiter';
+  begChar: string;
+  endChar: string;
+  items: MathNode[][];
+}
+interface MathRadical {
+  kind: 'radical';
+  index?: MathNode[];
+  radicand: MathNode[];
+}
+interface MathLimit {
+  kind: 'limit';
+  base: MathNode[];
+  lower?: MathNode[];
+  upper?: MathNode[];
+}
+interface MathArray {
+  kind: 'array';
+  rows: MathNode[][][];
+  align: 'eq' | 'center' | 'left';
+}
+interface MathGroupChr {
+  kind: 'groupChr';
+  char: string;
+  pos: 'top' | 'bot';
+  base: MathNode[];
+}
+interface MathBar {
+  kind: 'bar';
+  pos: 'top' | 'bot';
+  base: MathNode[];
+}
+interface MathAccent {
+  kind: 'accent';
+  char: string;
+  base: MathNode[];
+}
+interface MathFunc {
+  kind: 'func';
+  name: MathNode[];
+  arg: MathNode[];
+}
+interface MathGroup {
+  kind: 'group';
+  items: MathNode[];
+}
+interface MathPhant {
+  kind: 'phant';
+  show: boolean;
+  zeroWid?: boolean;
+  zeroAsc?: boolean;
+  zeroDesc?: boolean;
+  base: MathNode[];
+}
+interface MathSPre {
+  kind: 'sPre';
+  sub: MathNode[];
+  sup: MathNode[];
+  base: MathNode[];
+}
+interface MathBox {
+  kind: 'box';
+  base: MathNode[];
+}
+interface MathBorderBox {
+  kind: 'borderBox';
+  hideTop?: boolean;
+  hideBot?: boolean;
+  hideLeft?: boolean;
+  hideRight?: boolean;
+  strikeH?: boolean;
+  strikeV?: boolean;
+  strikeBltr?: boolean;
+  strikeTlbr?: boolean;
+  base: MathNode[];
+}
+type MathNode = MathRun | MathFraction | MathScript | MathNary | MathDelimiter | MathRadical | MathLimit | MathArray | MathGroupChr | MathBar | MathAccent | MathFunc | MathGroup | MathPhant | MathSPre | MathBox | MathBorderBox;
+interface Duotone {
+  clr1: string;
+  clr2: string;
+}
+interface SrcRect {
+  l: number;
+  t: number;
+  r: number;
+  b: number;
+}
+type Fill = SolidFill | NoFill | GradientFill | PatternFill | ImageFill;
+interface SolidFill {
+  fillType: 'solid';
+  color: string;
+}
+interface NoFill {
+  fillType: 'none';
+}
+interface GradientStop$1 {
+  position: number;
+  color: string;
+}
+interface GradientFill {
+  fillType: 'gradient';
+  stops: GradientStop$1[];
+  angle: number;
+  gradType: string;
+  scaled?: boolean;
+  path?: 'shape' | 'circle' | 'rect' | string;
+  fillToRect?: FillRect;
+  tileRect?: FillRect;
+  flip?: 'none' | 'x' | 'y' | 'xy' | string;
+  rotWithShape?: boolean;
+}
+interface PatternFill {
+  fillType: 'pattern';
+  fg: string;
+  bg: string;
+  preset: string;
+}
+interface FillRect {
+  l?: number;
+  t?: number;
+  r?: number;
+  b?: number;
+}
+interface TileInfo {
+  tx?: number;
+  ty?: number;
+  sx?: number;
+  sy?: number;
+  flip?: string;
+  algn?: string;
+}
+interface ImageFill {
+  fillType: 'image';
+  imagePath: string;
+  svgImagePath?: string;
+  mimeType: string;
+  dpi?: number;
+  rotWithShape?: boolean;
+  srcRect?: SrcRect;
+  fillRect?: FillRect;
+  stretch?: boolean;
+  tile?: TileInfo;
+  alpha?: number;
+  duotone?: Duotone;
+}
+interface DrawingMLCustomDashSegment {
+  dash: number;
+  space: number;
+}
+interface ChartSeries {
+  name: string;
+  chartexFormatIdx?: number | null;
+  color: string | null;
+  fillPattern?: PatternFill | null;
+  invertIfNegative?: boolean | null;
+  automaticNegativeStyle?: boolean | null;
+  invertedFill?: SolidFill | GradientFill | PatternFill | null;
+  invertedFillHidden?: boolean | null;
+  invertedFillAuthored?: boolean | null;
+  invertedLineColor?: string | null;
+  invertedLineWidthEmu?: number | null;
+  invertedLineHidden?: boolean | null;
+  invertedLineAuthored?: boolean | null;
+  chartexStyle?: ChartExElementStyle | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  threeDShape?: 'box' | 'cylinder' | 'cone' | 'coneToMax' | 'pyramid' | 'pyramidToMax' | string | null;
+  values: (number | null)[];
+  sourceHidden?: boolean[] | null;
+  dataPointColors?: (string | null)[] | null;
+  explosion?: number | null;
+  dataLabelColors?: (string | null)[] | null;
+  labelColor?: string | null;
+  seriesType?: string | null;
+  lineGroupIndex?: number | null;
+  areaGroupIndex?: number | null;
+  barGroupIndex?: number | null;
+  barGroupDirection?: 'bar' | 'col' | string | null;
+  barGroupGrouping?: 'standard' | 'clustered' | 'stacked' | 'percentStacked' | string | null;
+  barGroupGapWidth?: number | null;
+  barGroupOverlap?: number | null;
+  useSecondaryAxis?: boolean | null;
+  categories?: string[] | null;
+  bubbleXSourceIsString?: boolean | null;
+  showMarker?: boolean | null;
+  valFormatCode?: string | null;
+  catFormatCode?: string | null;
+  catFormatBuiltinId?: number | null;
+  catFormatCodes?: (string | null)[] | null;
+  markerSymbol?: string | null;
+  automaticMarkerSymbol?: string | null;
+  markerSize?: number | null;
+  markerFill?: string | null;
+  markerFillPaint?: Fill | null;
+  markerFillPaintAuthored?: boolean | null;
+  markerLine?: string | null;
+  markerLineWidthEmu?: number | null;
+  dataPointOverrides?: ChartDataPointOverride[] | null;
+  dataLabelOverrides?: ChartDataLabelOverride[] | null;
+  seriesDataLabels?: ChartSeriesDataLabels | null;
+  errBars?: ChartErrBars[] | null;
+  bubbleSizes?: (number | null)[] | null;
+  bubble3DGroupDefault?: boolean | null;
+  bubble3D?: boolean | null;
+  smooth?: boolean | null;
+  trendLines?: ChartTrendline[] | null;
+  lineHidden?: boolean | null;
+}
+interface ChartTrendline {
+  name?: string | null;
+  trendlineType: string;
+  order?: number | null;
+  period?: number | null;
+  forward?: number | null;
+  backward?: number | null;
+  intercept?: number | null;
+  dispRSqr?: boolean | null;
+  dispEq?: boolean | null;
+  labelManualLayout?: ChartManualLayout | null;
+  labelText?: string | null;
+  labelRichRuns?: ChartTextRun[] | null;
+  labelFormatCode?: string | null;
+  labelFormatSourceLinked?: boolean | null;
+  labelFontSizeHpt?: number | null;
+  labelFontBold?: boolean | null;
+  labelFontItalic?: boolean | null;
+  labelFontColor?: string | null;
+  labelFontPaintAuthored?: boolean | null;
+  labelFontHidden?: boolean | null;
+  labelFontFace?: string | null;
+  labelFontLanguage?: string | null;
+  labelFontBaseline?: number | null;
+  labelTextRotation?: number | null;
+  labelTextWrap?: string | null;
+  labelTextVerticalAnchor?: string | null;
+  labelTextVerticalMode?: string | null;
+  labelTextLInsEmu?: number | null;
+  labelTextTInsEmu?: number | null;
+  labelTextRInsEmu?: number | null;
+  labelTextBInsEmu?: number | null;
+  labelTextBodyAuthored?: boolean | null;
+  labelBox?: ChartLabelBox | null;
+  labelTextAlign?: string | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  lineHidden?: boolean | null;
+}
+interface ChartDataPointOverride {
+  idx: number;
+  color?: string;
+  fillHidden?: boolean;
+  chartexStyle?: ChartExElementStyle | null;
+  lineColor?: string;
+  lineWidthEmu?: number;
+  lineDash?: string;
+  lineHidden?: boolean;
+  markerSymbol?: string;
+  markerSize?: number;
+  markerFill?: string;
+  markerFillPaint?: Fill | null;
+  markerFillPaintAuthored?: boolean | null;
+  markerLine?: string;
+  markerLineWidthEmu?: number;
+  bubble3D?: boolean | null;
+  explosion?: number;
+}
+interface ChartDataLabelOverride {
+  idx: number;
+  text: string;
+  richRuns?: ChartTextRun[];
+  position?: string;
+  fontColor?: string;
+  fontPaintAuthored?: boolean;
+  fontHidden?: boolean;
+  fontSizeHpt?: number;
+  fontFace?: string;
+  fontBold?: boolean;
+  fontItalic?: boolean;
+  fontLanguage?: string;
+  fontBaseline?: number;
+  textRotation?: number;
+  textWrap?: string;
+  textVerticalAnchor?: string;
+  textVerticalMode?: string;
+  textLInsEmu?: number;
+  textTInsEmu?: number;
+  textRInsEmu?: number;
+  textBInsEmu?: number;
+  textBodyAuthored?: boolean;
+  textAlign?: 'l' | 'ctr' | 'r' | 'just' | 'dist' | string;
+  formatCode?: string;
+  separator?: string;
+  manualLayout?: ChartManualLayout;
+  labelBox?: ChartLabelBox;
+  showVal?: boolean;
+  showCatName?: boolean;
+  showSerName?: boolean;
+  showPercent?: boolean;
+  showBubbleSize?: boolean;
+  showLegendKey?: boolean;
+  deleted?: boolean;
+}
+interface ChartLabelBox {
+  fill?: string;
+  fillPaint?: SolidFill | GradientFill | PatternFill | null;
+  fillHidden?: boolean | null;
+  fillPaintAuthored?: boolean | null;
+  borderColor?: string;
+  borderFill?: SolidFill | GradientFill | PatternFill | null;
+  borderWidthEmu?: number;
+  borderHidden?: boolean | null;
+  borderPaintAuthored?: boolean | null;
+  borderDash?: string | null;
+  borderDashAuthored?: boolean | null;
+  borderCustomDash?: ChartLineDashSegment[] | null;
+  borderCap?: string | null;
+  borderJoin?: string | null;
+  borderCompound?: string | null;
+}
+interface ChartSeriesDataLabels {
+  deleted?: boolean | null;
+  showVal: boolean;
+  showCatName: boolean;
+  showSerName: boolean;
+  showPercent: boolean;
+  showBubbleSize?: boolean;
+  showLegendKey?: boolean;
+  position?: string;
+  fontColor?: string;
+  fontPaintAuthored?: boolean;
+  fontHidden?: boolean;
+  formatCode?: string;
+  separator?: string;
+  fontBold?: boolean;
+  fontItalic?: boolean;
+  fontLanguage?: string;
+  fontBaseline?: number;
+  fontSizeHpt?: number;
+  fontFace?: string;
+  textRotation?: number;
+  textWrap?: string;
+  textVerticalAnchor?: string;
+  textVerticalMode?: string;
+  textLInsEmu?: number;
+  textTInsEmu?: number;
+  textRInsEmu?: number;
+  textBInsEmu?: number;
+  textBodyAuthored?: boolean;
+  textAlign?: 'l' | 'ctr' | 'r' | 'just' | 'dist' | string;
+  labelBox?: ChartLabelBox;
+  showLeaderLines?: boolean;
+  leaderLineColor?: string;
+  leaderLineWidthEmu?: number;
+  leaderLineHidden?: boolean;
+  leaderLineDash?: string;
+}
+interface ChartErrBars {
+  dir: string;
+  barType: string;
+  plus: (number | null)[];
+  minus: (number | null)[];
+  noEndCap: boolean;
+  color?: string;
+  lineWidthEmu?: number;
+  dash?: string;
+  hidden?: boolean;
+}
+type ChartType = 'line' | 'stackedLine' | 'stackedLinePct' | 'clusteredBar' | 'clusteredBarH' | 'stackedBar' | 'stackedBarH' | 'stackedBarPct' | 'stackedBarHPct' | 'area' | 'stackedArea' | 'stackedAreaPct' | 'pie' | 'doughnut' | 'scatter' | 'bubble' | 'radar' | 'waterfall' | 'stock' | 'surface' | 'surface3D' | 'boxWhisker' | 'sunburst' | 'treemap' | string;
+type ChartPlotGroupKind = 'area' | 'area3D' | 'line' | 'line3D' | 'stock' | 'radar' | 'scatter' | 'pie' | 'pie3D' | 'doughnut' | 'bar' | 'bar3D' | 'ofPie' | 'surface' | 'surface3D' | 'bubble';
+type ChartPlotGroupAxisSlot = 'primary' | 'secondary' | 'none' | 'unresolved';
+interface ChartPlotGroup {
+  kind: ChartPlotGroupKind;
+  seriesStart: number;
+  seriesCount: number;
+  categoryAxis: ChartPlotGroupAxisSlot;
+  valueAxis: ChartPlotGroupAxisSlot;
+  seriesAxis: ChartPlotGroupAxisSlot;
+  axisIds?: string[] | null;
+  grouping?: string | null;
+  barDirection?: string | null;
+  scatterStyle?: string | null;
+  radarStyle?: string | null;
+  gapWidth?: number | null;
+  overlap?: number | null;
+  bubbleScale?: number | null;
+  bubbleSizeRepresents?: 'area' | 'w' | null;
+  showNegativeBubbles?: boolean | null;
+}
+type ChartLineDashSegment = DrawingMLCustomDashSegment;
+interface ChartExElementStyle {
+  fontSizeHpt?: number | null;
+  fontBold?: boolean | null;
+  fontItalic?: boolean | null;
+  fontColor?: string | null;
+  fontPaintAuthored?: boolean | null;
+  fontHidden?: boolean | null;
+  fontFace?: string | null;
+  fontLanguage?: string | null;
+  fontBaseline?: number | null;
+  textRotation?: number | null;
+  textWrap?: string | null;
+  textVerticalAnchor?: string | null;
+  textVerticalMode?: string | null;
+  textLInsEmu?: number | null;
+  textTInsEmu?: number | null;
+  textRInsEmu?: number | null;
+  textBInsEmu?: number | null;
+  textBodyAuthored?: boolean | null;
+  fillPaints?: Array<Fill | null> | null;
+  fillColors?: Array<string | null> | null;
+  fillHidden?: boolean | null;
+  fillPaintAuthored?: boolean | null;
+  fillNoStyle?: boolean | null;
+  lineColors?: Array<string | null> | null;
+  linePaints?: Array<SolidFill | GradientFill | PatternFill | null> | null;
+  linePaintAuthored?: boolean | null;
+  lineWidthEmu?: number | null;
+  lineHidden?: boolean | null;
+  lineNoStyle?: boolean | null;
+  lineDash?: string | null;
+  lineDashAuthored?: boolean | null;
+  lineCustomDash?: ChartLineDashSegment[] | null;
+  lineCap?: string | null;
+  lineJoin?: string | null;
+  lineCompound?: string | null;
+  fillColorIndex?: number | null;
+  lineColorIndex?: number | null;
+}
+type ChartStyleRole = 'axisTitle' | 'categoryAxis' | 'chartArea' | 'dataLabel' | 'dataLabelCallout' | 'dataPoint' | 'dataPoint3D' | 'dataPointLine' | 'dataPointMarker' | 'dataPointWireframe' | 'dataTable' | 'downBar' | 'dropLine' | 'errorBar' | 'floor' | 'gridlineMajor' | 'gridlineMinor' | 'hiLoLine' | 'leaderLine' | 'legend' | 'plotArea' | 'plotArea3D' | 'seriesAxis' | 'seriesLine' | 'title' | 'trendline' | 'trendlineLabel' | 'upBar' | 'valueAxis' | 'wall';
+interface ChartSurfaceBandFormat {
+  idx: number;
+  style?: ChartExElementStyle | null;
+  fill?: SolidFill | GradientFill | PatternFill | null;
+  fillHidden?: boolean | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineHidden?: boolean | null;
+}
+interface ChartDataTable {
+  showHorizontalBorder: boolean;
+  showVerticalBorder: boolean;
+  showOutline: boolean;
+  showKeys: boolean;
+  fontSizeHpt?: number | null;
+  fontFace?: string | null;
+  fontColor?: string | null;
+  fontBold?: boolean | null;
+  fontItalic?: boolean | null;
+  fillColor?: string | null;
+  fill?: SolidFill | GradientFill | PatternFill | null;
+  fillHidden?: boolean | null;
+  fillPaintAuthored?: boolean | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  lineHidden?: boolean | null;
+}
+interface ChartModel {
+  chartType: ChartType;
+  title: string | null;
+  titleRichRuns?: ChartTextRun[] | null;
+  titlePresent?: boolean;
+  categories: string[];
+  categorySourceHidden?: boolean[] | null;
+  categoryLevels?: string[][] | null;
+  series: ChartSeries[];
+  plotGroups?: ChartPlotGroup[] | null;
+  chartTextBoxes?: ChartTextBox[] | null;
+  varyColors?: boolean | null;
+  showDataLabels: boolean;
+  valMin: number | null;
+  valMax: number | null;
+  catAxisTitle: string | null;
+  valAxisTitle: string | null;
+  catAxisHidden: boolean;
+  valAxisHidden: boolean;
+  catAxisLineHidden: boolean;
+  valAxisLineHidden: boolean;
+  plotAreaBg: string | null;
+  plotAreaFill?: Fill | null;
+  plotAreaFillHidden?: boolean | null;
+  plotAreaFillPaintAuthored?: boolean | null;
+  plotAreaFillAutomatic?: boolean | null;
+  plotAreaLineColor?: string | null;
+  plotAreaLineFill?: SolidFill | GradientFill | PatternFill | null;
+  plotAreaLineWidthEmu?: number | null;
+  plotAreaLineDash?: string | null;
+  plotAreaLineDashAuthored?: boolean | null;
+  plotAreaLineCustomDash?: ChartLineDashSegment[] | null;
+  plotAreaLineCap?: string | null;
+  plotAreaLineJoin?: string | null;
+  plotAreaLineCompound?: string | null;
+  plotAreaLineHidden?: boolean | null;
+  plotAreaLinePaintAuthored?: boolean | null;
+  chartBg: string | null;
+  chartFill?: Fill | null;
+  chartFillHidden?: boolean | null;
+  chartFillPaintAuthored?: boolean | null;
+  roundedCorners?: boolean | null;
+  plotVisibleOnly?: boolean | null;
+  showLegend: boolean;
+  dataTable?: ChartDataTable | null;
+  legendPos: 'r' | 'l' | 't' | 'b' | 'tr' | null;
+  legendOverlay?: boolean | null;
+  legendEntries?: ChartLegendEntryOverride[] | null;
+  catAxisCrossBetween: 'between' | 'midCat' | string;
+  valAxisMajorTickMark: 'cross' | 'out' | 'in' | 'none' | string;
+  catAxisMajorTickMark: 'cross' | 'out' | 'in' | 'none' | string;
+  valAxisMinorTickMark?: 'cross' | 'out' | 'in' | 'none' | string | null;
+  catAxisMinorTickMark?: 'cross' | 'out' | 'in' | 'none' | string | null;
+  titleFontSizeHpt: number | null;
+  titleFontColor: string | null;
+  titleFontFace: string | null;
+  catAxisFontSizeHpt: number | null;
+  valAxisFontSizeHpt: number | null;
+  catAxisFontColor?: string | null;
+  valAxisFontColor?: string | null;
+  dataLabelFontSizeHpt: number | null;
+  dataLabelFontBold?: boolean | null;
+  subtotalIndices: number[];
+  legendManualLayout?: LegendManualLayout | null;
+  valAxisFormatCode?: string | null;
+  valAxisDisplayUnits?: ChartDisplayUnits | null;
+  catAxisDisplayUnits?: ChartDisplayUnits | null;
+  barGapWidth?: number | null;
+  barOverlap?: number | null;
+  dataLabelPosition?: string | null;
+  dataLabelFontColor?: string | null;
+  dataLabelFormatCode?: string | null;
+  titleFontBold?: boolean | null;
+  catAxisFontBold?: boolean | null;
+  catAxisFontItalic?: boolean | null;
+  valAxisFontBold?: boolean | null;
+  valAxisFontItalic?: boolean | null;
+  catAxisTitleFontSizeHpt?: number | null;
+  catAxisTitleFontBold?: boolean | null;
+  catAxisTitleFontItalic?: boolean | null;
+  catAxisTitleFontColor?: string | null;
+  catAxisTitleRotation?: number | null;
+  catAxisTitleVerticalMode?: 'horz' | 'vert' | 'vert270' | 'wordArtVert' | 'eaVert' | 'mongolianVert' | 'wordArtVertRtl' | null;
+  catAxisTitleManualLayout?: ChartManualLayout | null;
+  catAxisTitleTextVerticalInsetEmu?: number | null;
+  valAxisTitleFontSizeHpt?: number | null;
+  valAxisTitleFontBold?: boolean | null;
+  valAxisTitleFontItalic?: boolean | null;
+  valAxisTitleFontColor?: string | null;
+  valAxisTitleRotation?: number | null;
+  valAxisTitleVerticalMode?: 'horz' | 'vert' | 'vert270' | 'wordArtVert' | 'eaVert' | 'mongolianVert' | 'wordArtVertRtl' | null;
+  valAxisTitleManualLayout?: ChartManualLayout | null;
+  valAxisTitleTextVerticalInsetEmu?: number | null;
+  catAxisFontFace?: string | null;
+  valAxisFontFace?: string | null;
+  catAxisTitleFontFace?: string | null;
+  valAxisTitleFontFace?: string | null;
+  dataLabelFontFace?: string | null;
+  legendFontFace?: string | null;
+  legendFontColor?: string | null;
+  legendFontSizeHpt?: number | null;
+  legendFontBold?: boolean | null;
+  legendFillColor?: string | null;
+  legendFill?: Fill | null;
+  legendFillHidden?: boolean | null;
+  legendFillPaintAuthored?: boolean | null;
+  legendLineColor?: string | null;
+  legendLineFill?: SolidFill | GradientFill | PatternFill | null;
+  legendLineWidthEmu?: number | null;
+  legendLineDash?: string | null;
+  legendLineDashAuthored?: boolean | null;
+  legendLineCustomDash?: ChartLineDashSegment[] | null;
+  legendLineCap?: string | null;
+  legendLineJoin?: string | null;
+  legendLineCompound?: string | null;
+  legendLineHidden?: boolean | null;
+  legendLinePaintAuthored?: boolean | null;
+  themeMajorFontLatin?: string | null;
+  themeMinorFontLatin?: string | null;
+  chartBorderColor?: string | null;
+  chartBorderLineFill?: SolidFill | GradientFill | PatternFill | null;
+  chartBorderWidthEmu?: number | null;
+  chartBorderDash?: string | null;
+  chartBorderDashAuthored?: boolean | null;
+  chartBorderCustomDash?: ChartLineDashSegment[] | null;
+  chartBorderCap?: string | null;
+  chartBorderJoin?: string | null;
+  chartBorderCompound?: string | null;
+  chartBorderHidden?: boolean | null;
+  chartBorderPaintAuthored?: boolean | null;
+  catAxisCrosses?: string | null;
+  catAxisCrossesAt?: number | null;
+  valAxisCrosses?: string | null;
+  valAxisCrossesAt?: number | null;
+  catAxisLineColor?: string | null;
+  catAxisLineWidthEmu?: number | null;
+  catAxisLineDash?: string | null;
+  catAxisLinePaintAuthored?: boolean | null;
+  valAxisLineColor?: string | null;
+  valAxisLineWidthEmu?: number | null;
+  valAxisLineDash?: string | null;
+  valAxisLinePaintAuthored?: boolean | null;
+  catAxisFormatCode?: string | null;
+  catAxisMin?: number | null;
+  catAxisMax?: number | null;
+  titleManualLayout?: ChartManualLayout | null;
+  plotAreaManualLayout?: ChartManualLayout | null;
+  scatterStyle?: string | null;
+  bubbleScale?: number | null;
+  bubbleSizeRepresents?: 'area' | 'w' | null;
+  showNegativeBubbles?: boolean | null;
+  radarStyle?: string | null;
+  secondaryValAxis?: SecondaryValueAxis | null;
+  secondaryCatAxis?: SecondaryValueAxis | null;
+  date1904?: boolean;
+  holeSize?: number | null;
+  firstSliceAngle?: number | null;
+  dispBlanksAs?: string | null;
+  showDataLabelsOverMax?: boolean | null;
+  valAxisMajorGridlines?: boolean | null;
+  catAxisMajorGridlines?: boolean | null;
+  valAxisGridlineColor?: string | null;
+  valAxisGridlineWidthEmu?: number | null;
+  valAxisGridlineDash?: string | null;
+  catAxisGridlineColor?: string | null;
+  catAxisGridlineWidthEmu?: number | null;
+  catAxisGridlineDash?: string | null;
+  valAxisMinorGridlines?: boolean | null;
+  valAxisMinorGridlineColor?: string | null;
+  valAxisMinorGridlineWidthEmu?: number | null;
+  valAxisMinorGridlineDash?: string | null;
+  catAxisMinorGridlines?: boolean | null;
+  catAxisMinorGridlineColor?: string | null;
+  catAxisMinorGridlineWidthEmu?: number | null;
+  catAxisMinorGridlineDash?: string | null;
+  valAxisMajorUnit?: number | null;
+  valAxisMinorUnit?: number | null;
+  catAxisMajorUnit?: number | null;
+  catAxisMinorUnit?: number | null;
+  catAxisIsDate?: boolean | null;
+  catAxisBaseTimeUnit?: 'days' | 'months' | 'years' | string | null;
+  catAxisMajorTimeUnit?: 'days' | 'months' | 'years' | string | null;
+  catAxisMinorTimeUnit?: 'days' | 'months' | 'years' | string | null;
+  catAxisNoMultiLevelLabels?: boolean | null;
+  valAxisLogBase?: number | null;
+  catAxisLogBase?: number | null;
+  valAxisOrientation?: 'minMax' | 'maxMin' | string | null;
+  catAxisOrientation?: 'minMax' | 'maxMin' | string | null;
+  catAxisTickLabelPos?: string | null;
+  catAxisTickLabelSkip?: number | null;
+  catAxisTickMarkSkip?: number | null;
+  catAxisLabelAlignment?: 'l' | 'ctr' | 'r' | string | null;
+  catAxisLabelOffsetPercent?: number | null;
+  valAxisTickLabelPos?: string | null;
+  catAxisLabelRotation?: number | null;
+  lineGroupDecorations?: ChartLineGroupDecorations[] | null;
+  areaGroupDecorations?: ChartAreaGroupDecorations[] | null;
+  barGroupDecorations?: ChartBarGroupDecorations[] | null;
+  stockDropLines?: ChartDecorationLineStyle | null;
+  stockHiLowLineStyle?: ChartDecorationLineStyle | null;
+  stockHiLowLines?: boolean | null;
+  stockHiLowLineColor?: string | null;
+  stockUpDownBars?: boolean | null;
+  stockUpDownBarStyle?: ChartStockUpDownBarStyle | null;
+  stockAutomaticStyle?: {
+    lineColor: string;
+    lineWidthEmu: number;
+    upFillColor: string;
+    downFillColor: string;
+  } | null;
+  surfaceWireframe?: boolean | null;
+  surfaceBandFormats?: ChartSurfaceBandFormat[] | null;
+  legacyChartStyle?: number | null;
+  themeAccentColors?: string[] | null;
+  ofPie?: ChartOfPie | null;
+  threeD?: ChartThreeD | null;
+  chartexBox?: ChartexBoxWhisker | null;
+  chartexSunburst?: ChartexSunburst | null;
+  chartexTreemap?: ChartexTreemap | null;
+  chartexRegionMap?: ChartexRegionMap | null;
+  chartexHistogramBinning?: ChartexHistogramBinning | null;
+  chartexAccents?: string[] | null;
+  chartexColorPalette?: Array<string | null> | null;
+  chartexColorStyleMethod?: string | null;
+  chartStyleRoles?: Partial<Record<ChartStyleRole, ChartExElementStyle>> | null;
+  chartStyleColorPalette?: Array<string | null> | null;
+  chartStyleColorMethod?: string | null;
+  chartStyleMarkerSizePt?: number | null;
+  chartStyleMarkerSymbol?: string | null;
+  chartexDataPointStyle?: ChartExElementStyle | null;
+  chartexDataPointLineStyle?: ChartExElementStyle | null;
+  chartexSeriesLineStyle?: ChartExElementStyle | null;
+  chartexDataPointMarkerStyle?: ChartExElementStyle | null;
+  chartexMarkerSizePt?: number | null;
+  chartexMarkerSymbol?: string | null;
+  chartexConnectorLines?: boolean | null;
+}
+interface ChartStockBarPaint {
+  fillColor?: string | null;
+  fill?: SolidFill | GradientFill | PatternFill | null;
+  fillPaintAuthored?: boolean | null;
+  fillHidden?: boolean | null;
+  lineColor?: string | null;
+  linePaintAuthored?: boolean | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  lineCap?: string | null;
+  lineJoin?: string | null;
+  lineHidden?: boolean | null;
+}
+interface ChartStockUpDownBarStyle {
+  gapWidthPercent: number;
+  up: ChartStockBarPaint;
+  down: ChartStockBarPaint;
+}
+interface ChartDecorationLineStyle {
+  color?: string | null;
+  paintAuthored?: boolean | null;
+  widthEmu?: number | null;
+  dash?: string | null;
+  cap?: string | null;
+  join?: string | null;
+  hidden?: boolean | null;
+}
+interface ChartLineGroupDecorations {
+  groupIndex: number;
+  dropLines?: ChartDecorationLineStyle | null;
+  hiLowLines?: ChartDecorationLineStyle | null;
+  upDownBars?: ChartStockUpDownBarStyle | null;
+}
+interface ChartAreaGroupDecorations {
+  groupIndex: number;
+  dropLines?: ChartDecorationLineStyle | null;
+}
+interface ChartBarGroupDecorations {
+  groupIndex: number;
+  seriesLines?: ChartDecorationLineStyle[] | null;
+}
+interface ChartOfPie {
+  type: 'pie' | 'bar';
+  splitType: 'auto' | 'cust' | 'percent' | 'pos' | 'val';
+  splitTypeAuthored?: boolean | null;
+  splitPos?: number | null;
+  splitPosAuthored?: boolean | null;
+  customSplitIndices?: number[] | null;
+  secondPieSizePercent: number;
+  gapWidthPercent: number;
+  seriesLines: boolean;
+}
+interface ChartThreeDSurface {
+  style?: ChartExElementStyle | null;
+  fillColor?: string | null;
+  fillHidden?: boolean | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  lineHidden?: boolean | null;
+  thicknessPercent?: number | null;
+  pictureOptions?: ChartThreeDPictureOptions | null;
+}
+interface ChartThreeDPictureOptions {
+  applyToFront?: boolean | null;
+  applyToSides?: boolean | null;
+  applyToEnd?: boolean | null;
+  pictureFormat?: 'stretch' | 'stack' | 'stackScale' | string | null;
+  pictureFormatAuthored?: boolean | null;
+  pictureStackUnit?: number | null;
+  pictureStackUnitAuthored?: boolean | null;
+}
+interface ChartThreeD {
+  view3DPresent?: boolean | null;
+  rotationX?: number | null;
+  rotationXAuthored?: boolean | null;
+  rotationY?: number | null;
+  rotationYAuthored?: boolean | null;
+  heightPercent?: number | null;
+  heightPercentAuthored?: boolean | null;
+  depthPercent?: number | null;
+  depthPercentAuthored?: boolean | null;
+  perspective?: number | null;
+  perspectiveAuthored?: boolean | null;
+  rightAngleAxes?: boolean | null;
+  rightAngleAxesAuthored?: boolean | null;
+  gapDepthPercent?: number | null;
+  gapDepthPercentAuthored?: boolean | null;
+  shape?: string | null;
+  barGrouping?: 'standard' | 'clustered' | 'stacked' | 'percentStacked' | string | null;
+  seriesAxis?: ChartThreeDSeriesAxis | null;
+  floor?: ChartThreeDSurface | null;
+  sideWall?: ChartThreeDSurface | null;
+  backWall?: ChartThreeDSurface | null;
+}
+interface ChartThreeDSeriesAxis {
+  title?: string | null;
+  hidden: boolean;
+  orientation?: 'minMax' | 'maxMin' | string | null;
+  tickLabelPos?: string | null;
+  tickLabelSkip?: number | null;
+  tickMarkSkip?: number | null;
+  majorTickMark: string;
+  minorTickMark?: string | null;
+  fontColor?: string | null;
+  fontSizeHpt?: number | null;
+  fontBold?: boolean | null;
+  fontItalic?: boolean | null;
+  fontFace?: string | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  linePaintAuthored?: boolean | null;
+  lineHidden: boolean;
+  titleFontSizeHpt?: number | null;
+  titleFontBold?: boolean | null;
+  titleFontItalic?: boolean | null;
+  titleFontColor?: string | null;
+  titleFontFace?: string | null;
+  titleRotation?: number | null;
+  titleVerticalMode?: ChartModel['catAxisTitleVerticalMode'];
+  titleManualLayout?: ChartManualLayout | null;
+}
+interface ChartTextRun {
+  text: string;
+  fontSizeHpt?: number | null;
+  bold?: boolean | null;
+  italic?: boolean | null;
+  color?: string | null;
+  colorPaintAuthored?: boolean | null;
+  colorHidden?: boolean | null;
+  fontFace?: string | null;
+  language?: string | null;
+  baseline?: number | null;
+  paragraphAlign?: 'l' | 'ctr' | 'r' | 'just' | 'dist' | string | null;
+}
+interface ChartTextParagraph {
+  runs: ChartTextRun[];
+  align?: 'l' | 'ctr' | 'r' | 'just' | 'dist' | string | null;
+}
+interface ChartTextBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  paragraphs: ChartTextParagraph[];
+  verticalAnchor?: 't' | 'ctr' | 'b' | 'just' | 'dist' | string | null;
+  wrap?: 'none' | 'square' | string | null;
+  lIns?: number;
+  tIns?: number;
+  rIns?: number;
+  bIns?: number;
+}
+interface ChartexBoxSeries {
+  name: string;
+  chartexFormatIdx?: number | null;
+  color?: string | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  chartexStyle?: ChartExElementStyle | null;
+  valuesByCategory: number[][];
+  meanMarker: boolean;
+  meanLine: boolean;
+  showOutliers: boolean;
+  showNonoutliers: boolean;
+  quartileMethod: string;
+}
+interface ChartexBoxWhisker {
+  oneBoxPerSeries?: boolean;
+  categories: string[];
+  series: ChartexBoxSeries[];
+}
+interface ChartexSunburstRow {
+  path: string[];
+  size: number;
+}
+interface ChartexSunburst {
+  rows: ChartexSunburstRow[];
+}
+interface ChartexTreemap {
+  rows: ChartexSunburstRow[];
+  parentLabelLayout?: string | null;
+}
+interface ChartexRegionMapRow {
+  label: string;
+  entityId?: string | null;
+  value?: number | null;
+}
+interface ChartexGeography {
+  projectionType?: 'mercator' | 'miller' | 'robinson' | 'albers' | string | null;
+  viewedRegionType?: string | null;
+  cultureLanguage?: string | null;
+  cultureRegion?: string | null;
+  attribution?: string | null;
+  cacheProvider?: string | null;
+  cachePresent: boolean;
+}
+interface ChartexValueColorStop {
+  kind: 'extremeValue' | 'number' | 'percent' | string;
+  value?: number | null;
+}
+interface ChartexRegionMapColors {
+  stopCount?: 2 | 3 | null;
+  minColor?: string | null;
+  midColor?: string | null;
+  maxColor?: string | null;
+  minPosition?: ChartexValueColorStop | null;
+  midPosition?: ChartexValueColorStop | null;
+  maxPosition?: ChartexValueColorStop | null;
+}
+interface ChartexRegionMap {
+  rows: ChartexRegionMapRow[];
+  regionLabelLayout?: 'none' | 'bestFitOnly' | 'showAll' | null;
+  geography?: ChartexGeography | null;
+  colors?: ChartexRegionMapColors | null;
+}
+interface ChartexHistogramBinning {
+  binSize?: number | null;
+  binCount?: number | null;
+  intervalClosed?: 'l' | 'r' | null;
+  underflow?: number | null;
+  overflow?: number | null;
+}
+interface SecondaryValueAxis {
+  min: number | null;
+  max: number | null;
+  title: string | null;
+  hidden: boolean;
+  formatCode?: string | null;
+  displayUnits?: ChartDisplayUnits | null;
+  fontColor?: string | null;
+  fontSizeHpt?: number | null;
+  fontItalic?: boolean | null;
+  fontBold?: boolean | null;
+  fontFace?: string | null;
+  lineColor?: string | null;
+  lineWidthEmu?: number | null;
+  lineDash?: string | null;
+  lineHidden: boolean;
+  majorTickMark: string;
+  minorTickMark?: string | null;
+  minorGridlines?: boolean;
+  minorGridlineColor?: string | null;
+  minorGridlineWidthEmu?: number | null;
+  minorGridlineDash?: string | null;
+  majorGridlines?: boolean;
+  majorGridlineColor?: string | null;
+  majorGridlineWidthEmu?: number | null;
+  majorGridlineDash?: string | null;
+  majorUnit?: number | null;
+  minorUnit?: number | null;
+  logBase?: number | null;
+  orientation?: 'minMax' | 'maxMin' | string | null;
+  tickLabelPos?: string | null;
+  labelAlignment?: 'l' | 'ctr' | 'r' | null;
+  labelOffsetPercent?: number | null;
+  tickLabelSkip?: number | null;
+  tickMarkSkip?: number | null;
+  crosses?: string | null;
+  crossesAt?: number | null;
+  titleFontSizeHpt?: number | null;
+  titleFontBold?: boolean | null;
+  titleFontItalic?: boolean | null;
+  titleFontColor?: string | null;
+  titleFontFace?: string | null;
+  titleRotation?: number | null;
+  titleVerticalMode?: 'horz' | 'vert' | 'vert270' | 'wordArtVert' | 'eaVert' | 'mongolianVert' | 'wordArtVertRtl' | null;
+  titleManualLayout?: ChartManualLayout | null;
+}
+interface ChartDisplayUnits {
+  divisor: number;
+  builtInUnit?: string | null;
+  label?: ChartDisplayUnitsLabel | null;
+}
+interface ChartDisplayUnitsLabel {
+  text?: string | null;
+  manualLayout?: ChartManualLayout | null;
+  fontSizeHpt?: number | null;
+  fontBold?: boolean | null;
+  fontItalic?: boolean | null;
+  fontColor?: string | null;
+  fontFace?: string | null;
+  rotation?: number | null;
+  boxStyle?: ChartLabelBox | null;
+}
+interface ChartManualLayout {
+  xMode?: string;
+  yMode?: string;
+  wMode?: string;
+  hMode?: string;
+  layoutTarget?: string;
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
+}
+interface LegendManualLayout {
+  xMode?: string;
+  yMode?: string;
+  wMode?: string;
+  hMode?: string;
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
+}
+interface ChartLegendEntryOverride {
+  idx: number;
+  deleted?: boolean | null;
+  fontFace?: string | null;
+  fontColor?: string | null;
+  fontSizeHpt?: number | null;
+  fontBold?: boolean | null;
+}
+interface ChartRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+//#endregion
+//#region dist/.types-work/chart-ex-contract-D-MROxI4.d.ts
+interface ChartExRenderer {
+  render(ctx: CanvasRenderingContext2D, chart: ChartModel, rect: ChartRect, ptToPx: number, shapeRotationDeg?: number): boolean;
+}
+//#endregion
+//#region dist/.types-work/mathjax-emiLk9eb.d.ts
+interface MathSvg {
+  svg: string;
+  widthEm: number;
+  ascentEm: number;
+  descentEm: number;
+}
+interface MathRenderer {
+  loadMathJax(): Promise<void>;
+  mathMLToSvg(mathml: string): Promise<MathSvg>;
+}
+//#endregion
+//#region dist/.types-work/three-d-contract-2IUr35q1.d.ts
+interface ChartThreeDRenderer {
+  render(ctx: CanvasRenderingContext2D, chart: ChartModel, rect: ChartRect, ptToPx: number, shapeRotationDeg?: number): boolean;
+}
+//#endregion
+//#region dist/.types-work/region-map-contract-CtuTzdmN.d.ts
+interface ChartRegionMapRenderer {
+  render(ctx: CanvasRenderingContext2D, chart: ChartModel, rect: ChartRect, ptToPx: number, shapeRotationDeg?: number): boolean;
+}
+//#endregion
+//#region dist/.types-work/tiff-contract-DJ3gpIhe.d.ts
+interface TiffRenderOptions {
+  targetWidthPx?: number;
+  targetHeightPx?: number;
+  maxRetainedPixels?: number;
+}
+declare class TiffDecodeError extends Error {
+  readonly code: 'ooxml-tiff-decode';
+  constructor(message: string, options?: ErrorOptions);
+}
+declare function isTiffDecodeError(error: unknown): error is TiffDecodeError;
+interface TiffRenderer {
+  render(bytes: Uint8Array, options?: Readonly<TiffRenderOptions>): Promise<ImageBitmap | null>;
+}
+//#endregion
+//#region dist/.types-work/hyperlink-92bQUogu.d.ts
+type OoxmlErrorCode = 'encrypted' | 'invalid-password' | 'unsupported-encryption' | 'legacy-binary-format' | 'not-ooxml';
+type OoxmlErrorStage = 'container' | 'decompression' | 'parsing' | 'serialization' | 'layout' | 'rendering' | 'worker';
+declare class OoxmlError extends Error {
+  readonly code: OoxmlErrorCode;
+  constructor(code: OoxmlErrorCode, message: string);
+}
+type OoxmlFormat = 'docx' | 'xlsx' | 'pptx';
+interface OoxmlResourceUsageSnapshot {
+  readonly archiveEntryCount: number;
+  readonly declaredInflatedBytes: number;
+  readonly largestInflatedEntryBytes?: number;
+  readonly distinctInflatedBytes: number;
+  readonly operationInflatedBytes: number;
+}
+type ExtensibleLiteral<Known extends string> = Known | (string & Record<never, never>);
+type OoxmlResourceName = ExtensibleLiteral<'archive' | 'archive-entry' | 'xml-event' | 'xml-context' | 'xml-tree' | 'worksheet-row' | 'worksheet-shell'>;
+type OoxmlResourceMetric = ExtensibleLiteral<'declared-inflated-bytes' | 'actual-inflated-bytes' | 'entry-count' | 'central-directory-bytes' | 'distinct-inflated-bytes' | 'bytes' | 'depth' | 'projected-bytes'>;
+interface OoxmlResourceViolation {
+  readonly format: OoxmlFormat;
+  readonly operation: string;
+  readonly resource: OoxmlResourceName;
+  readonly metric: OoxmlResourceMetric;
+  readonly part?: string;
+  readonly limit: number;
+  readonly observed: number;
+  readonly configurable: boolean;
+  readonly usage: OoxmlResourceUsageSnapshot;
+}
+interface OoxmlResourceLimitErrorDetails {
+  readonly stage: OoxmlErrorStage;
+  readonly violation: OoxmlResourceViolation;
+}
+declare class OoxmlResourceLimitError extends Error {
+  readonly code: 'ooxml-resource-limit';
+  readonly details: OoxmlResourceLimitErrorDetails;
+  constructor(message: string, details: OoxmlResourceLimitErrorDetails);
+}
+interface OoxmlResourcePolicySnapshot {
+  readonly maxArchiveEntryBytes: number | null;
+  readonly maxTotalInflatedBytes: number | null;
+  readonly maxArchiveEntries: number | null;
+}
+interface OoxmlResourceMetricsCheckpoint {
+  readonly name: string;
+  readonly elapsedMs: number;
+  readonly usage?: OoxmlResourceUsageSnapshot;
+}
+interface OoxmlResourceMetrics {
+  readonly schemaVersion: 1;
+  readonly scope: 'load' | 'session';
+  readonly format: OoxmlFormat;
+  readonly mode: 'main' | 'worker' | 'node';
+  readonly status: 'ok' | 'error';
+  readonly sourceBytes?: number;
+  readonly elapsedMs: number;
+  readonly policy: Readonly<OoxmlResourcePolicySnapshot>;
+  readonly usage?: OoxmlResourceUsageSnapshot;
+  readonly checkpoints: readonly OoxmlResourceMetricsCheckpoint[];
+  readonly outcome?: Readonly<Record<string, number>>;
+  readonly error?: Readonly<{
+    readonly code?: string;
+    readonly stage?: string;
+    readonly resource?: string;
+    readonly metric?: string;
+  }>;
+}
+type OoxmlResourceLimit = number | null;
+interface OoxmlResourceLimits {
+  maxArchiveEntryBytes?: OoxmlResourceLimit;
+  maxTotalInflatedBytes?: OoxmlResourceLimit;
+  maxArchiveEntries?: OoxmlResourceLimit;
+}
+interface ProgressiveLayoutProgress {
+  committedUnits: number;
+}
+interface ProgressiveLayoutPartial {
+  availableUnits: number;
+  totalUnits?: number;
+  exact: boolean;
+}
+interface LoadOptions$1 {
+  useGoogleFonts?: boolean;
+  password?: string;
+  wasmUrl?: string | URL;
+  maxZipEntryBytes?: number;
+  resourceLimits?: OoxmlResourceLimits;
+  debug?: boolean;
+  onResourceMetrics?: (metrics: OoxmlResourceMetrics) => void;
+  workerTimeoutMs?: number;
+  math?: MathRenderer;
+  threeD?: ChartThreeDRenderer;
+  regionMap?: ChartRegionMapRenderer;
+  chartEx?: ChartExRenderer;
+  tiff?: TiffRenderer;
+}
+type OoxmlDecodedImageLimitMetric = 'image-dimension' | 'image-pixels' | 'active-decoded-bytes';
+declare class OoxmlDecodedImageLimitError extends RangeError {
+  readonly metric: OoxmlDecodedImageLimitMetric;
+  readonly limit: number;
+  readonly observed: number;
+  readonly code: 'ooxml-decoded-image-limit';
+  constructor(metric: OoxmlDecodedImageLimitMetric, limit: number, observed: number);
+}
+declare function isOoxmlDecodedImageLimitError(error: unknown): error is OoxmlDecodedImageLimitError;
+type HyperlinkTarget = {
+  kind: 'external';
+  url: string;
+} | {
+  kind: 'internal';
+  ref: string;
+  slideIndex?: number;
+};
+declare function openExternalHyperlink(url: string, allowed?: readonly string[], win?: Pick<Window, 'open'> | undefined): boolean;
+//#endregion
+//#region dist/.types-work/find-highlight-CEEVmKfp.d.ts
+interface TextSelectionContextOptions {
+  readonly maxTextCharacters?: number;
+  readonly maxRunLocators?: number;
+}
+interface ViewerContextMenuEvent<TContext> {
+  readonly originalEvent: MouseEvent;
+  getContext(): Promise<TContext | null>;
+}
+interface ViewerCommentsOptions {
+  readonly includeResolved?: boolean;
+}
+type ViewerCommentConnectorRoute = 'bezier' | 'orthogonal';
+type ViewerCommentConnectorStroke = 'solid' | 'dashed';
+interface ViewerCommentConnectorOptions {
+  readonly route?: ViewerCommentConnectorRoute;
+  readonly stroke?: ViewerCommentConnectorStroke;
+  readonly color?: string;
+  readonly activeColor?: string;
+}
+interface ViewerCommentMessageContext {
+  readonly id?: string;
+  readonly author?: string;
+  readonly date?: string;
+  readonly text: string;
+  readonly status?: 'active' | 'resolved' | 'closed';
+}
+interface ViewerCommentThreadContext {
+  readonly root: ViewerCommentMessageContext;
+  readonly replies: readonly ViewerCommentMessageContext[];
+}
+interface AutoResizeOptions {
+  pauseWhenHidden?: boolean;
+}
+declare function autoResize(render: (width: number, height: number) => void | Promise<void>, element: Element, opts?: AutoResizeOptions): () => void;
+interface ZoomableViewer {
+  getScale(): number;
+  setScale(scale: number): void | Promise<void>;
+  zoomIn(): void | Promise<void>;
+  zoomOut(): void | Promise<void>;
+  fitWidth(): void | Promise<void>;
+  fitPage(): void | Promise<void>;
+}
+interface MatchRunSlice {
+  runIndex: number;
+  start: number;
+  end: number;
+}
+interface FindMatchesOptions {
+  caseSensitive?: boolean;
+}
+interface FindMatch<Loc = unknown> {
+  matchIndex: number;
+  text: string;
+  location: Loc;
+}
+interface FindHighlightColors {
+  match?: string;
+  active?: string;
+}
+//#endregion
+//#region dist/.types-work/types-CKbbBm9J.d.ts
+interface DocxDocumentModel {
+  section: SectionProps;
+  body: BodyElement[];
+  headers: HeadersFooters;
+  footers: HeadersFooters;
+  majorFont?: string;
+  minorFont?: string;
+  fontFamilyClasses?: Record<string, string>;
+  fontFamilyPitches?: Record<string, string>;
+  embeddedFonts?: EmbeddedFontRef[];
+  revisions?: DocRevision[];
+  comments?: DocComment[];
+  footnotes?: DocNote[];
+  endnotes?: DocNote[];
+  settings?: DocSettings;
+  parseError?: string;
+}
+interface EmbeddedFontRef {
+  fontName: string;
+  style: 'regular' | 'bold' | 'italic' | 'boldItalic';
+  partPath: string;
+  fontKey: string;
+}
+interface DocSettings {
+  kinsoku?: boolean;
+  noLineBreaksBefore?: string;
+  noLineBreaksAfter?: string;
+  mathDefJc?: string;
+  defaultTabStop?: number;
+  characterSpacingControl?: string;
+  useFeLayout?: boolean;
+  balanceSingleByteDoubleByteWidth?: boolean;
+  adjustLineHeightInTable?: boolean;
+}
+interface DocRevision {
+  kind: 'insertion' | 'deletion' | 'moveFrom' | 'moveTo' | string;
+  id?: string;
+  author?: string;
+  date?: string;
+  text: string;
+}
+interface DocComment {
+  id: string;
+  author?: string;
+  initials?: string;
+  date?: string;
+  text: string;
+  parentId?: string;
+  resolved?: boolean;
+  paragraphs?: string[];
+}
+interface DocxCommentMark {
+  id: string;
+  kind: 'rangeStart' | 'rangeEnd' | 'reference' | string;
+  runIndex: number;
+}
+interface DocNote {
+  id: string;
+  content: BodyElement[];
+}
+declare function noteText(note: DocNote): string;
+interface HeadersFooters {
+  default: HeaderFooter | null;
+  first: HeaderFooter | null;
+  even: HeaderFooter | null;
+}
+interface HeaderFooter {
+  body: BodyElement[];
+}
+interface PageNumType {
+  start?: number;
+  fmt?: string;
+}
+interface PageBorders {
+  offsetFrom: string;
+  display: string;
+  zOrder: string;
+  top?: PageBorderEdge;
+  bottom?: PageBorderEdge;
+  left?: PageBorderEdge;
+  right?: PageBorderEdge;
+}
+interface PageBorderEdge {
+  style: string;
+  color?: string;
+  width: number;
+  space: number;
+}
+interface LineNumbering {
+  countBy: number;
+  start: number;
+  distance?: number;
+  restart: string;
+}
+interface SectionGeom {
+  pageWidth: number;
+  pageHeight: number;
+  marginTop: number;
+  marginRight: number;
+  marginBottom: number;
+  marginLeft: number;
+  headerDistance: number;
+  footerDistance: number;
+}
+interface SectionProps {
+  pageWidth: number;
+  pageHeight: number;
+  marginTop: number;
+  marginRight: number;
+  marginBottom: number;
+  marginLeft: number;
+  headerDistance: number;
+  footerDistance: number;
+  titlePage: boolean;
+  evenAndOddHeaders: boolean;
+  sectionStart?: string | null;
+  textDirection?: string | null;
+  docGridType?: string | null;
+  docGridLinePitch?: number | null;
+  docGridCharSpace?: number | null;
+  columns?: ColumnsSpec | null;
+  pageNumType?: PageNumType | null;
+  pageBorders?: PageBorders | null;
+  lineNumbering?: LineNumbering | null;
+  vAlign?: string | null;
+}
+interface ColumnsSpec {
+  count: number;
+  spacePt: number;
+  equalWidth: boolean;
+  sep: boolean;
+  cols: ColSpec[];
+}
+interface ColSpec {
+  widthPt: number;
+  spacePt: number;
+}
+type BodyElement = ({
+  type: 'paragraph';
+} & DocParagraph) | ({
+  type: 'table';
+} & DocTable) | {
+  type: 'pageBreak';
+  parity?: 'odd' | 'even';
+  sameParagraphAsPrevious?: boolean;
+} | {
+  type: 'columnBreak';
+} | {
+  type: 'sectionBreak';
+  kind: 'continuous' | 'nextPage' | 'oddPage' | 'evenPage' | string;
+  columns?: ColumnsSpec | null;
+  headers?: HeadersFooters;
+  footers?: HeadersFooters;
+  titlePage?: boolean;
+  geom?: SectionGeom;
+  pageNumType?: PageNumType | null;
+  textDirection?: string | null;
+};
+interface DocParagraph {
+  paragraphId?: string;
+  alignment: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | 'both' | 'distribute' | 'lowKashida' | 'mediumKashida' | 'highKashida' | 'thaiDistribute' | string;
+  indentLeft: number;
+  indentRight: number;
+  indentFirst: number;
+  spaceBefore: number;
+  spaceAfter: number;
+  lineSpacing: LineSpacing | null;
+  numbering: NumberingInfo | null;
+  tabStops: TabStop[];
+  runs: DocRun[];
+  bookmarks?: string[];
+  commentMarks?: DocxCommentMark[];
+  shading?: string | null;
+  pageBreakBefore?: boolean;
+  contextualSpacing?: boolean;
+  keepNext?: boolean;
+  keepLines?: boolean;
+  markVanish?: boolean;
+  widowControl?: boolean;
+  overflowPunct?: boolean;
+  adjustRightInd?: boolean;
+  borders?: ParagraphBorders | null;
+  styleId?: string | null;
+  defaultFontSize?: number;
+  defaultFontFamily?: string | null;
+  defaultFontFamilyEastAsia?: string | null;
+  paragraphMarkColor?: string | null;
+  bidi?: boolean;
+  snapToGrid?: boolean;
+  framePr?: FramePr;
+}
+interface FramePr {
+  dropCap: 'none' | 'drop' | 'margin' | string;
+  lines: number;
+  wrap: 'around' | 'auto' | 'none' | 'notBeside' | 'through' | 'tight' | string;
+  hAnchor: 'text' | 'margin' | 'page' | string;
+  vAnchor: 'text' | 'margin' | 'page' | string;
+  hRule: 'auto' | 'atLeast' | 'exact' | string;
+  hSpace: number;
+  vSpace: number;
+  w?: number;
+  h?: number;
+  x?: number;
+  y?: number;
+  xAlign?: 'left' | 'center' | 'right' | 'inside' | 'outside' | string;
+  yAlign?: 'inline' | 'top' | 'center' | 'bottom' | 'inside' | 'outside' | string;
+}
+interface ParagraphBorders {
+  top: ParaBorderEdge | null;
+  bottom: ParaBorderEdge | null;
+  left: ParaBorderEdge | null;
+  right: ParaBorderEdge | null;
+  between: ParaBorderEdge | null;
+}
+interface ParaBorderEdge {
+  style: string;
+  color: string | null;
+  width: number;
+  space: number;
+}
+interface DocxRunBorder {
+  style: string;
+  color?: string | null;
+  width: number;
+  space: number;
+}
+interface TabStop {
+  pos: number;
+  alignment: 'left' | 'start' | 'center' | 'right' | 'end' | 'decimal' | 'bar' | 'clear' | 'num';
+  leader: 'none' | 'dot' | 'hyphen' | 'underscore' | 'heavy' | 'middleDot';
+}
+interface LineSpacing {
+  value: number;
+  rule: 'auto' | 'exact' | 'atLeast';
+  explicit?: boolean;
+}
+interface NumberingInfo {
+  numId: number;
+  level: number;
+  format: string;
+  text: string;
+  indentLeft: number;
+  tab: number;
+  suff: string;
+  jc?: string;
+  fontFamily?: string | null;
+  fontFamilyEastAsia?: string | null;
+  color?: string | null;
+  colorAuto?: boolean;
+  picBulletImagePath?: string;
+  picBulletMimeType?: string;
+  picBulletWidthPt?: number;
+  picBulletHeightPt?: number;
+}
+type DocRunContent = ({
+  type: 'text';
+} & DocxTextRun) | ({
+  type: 'anchorHost';
+} & AnchorHostMetrics) | ({
+  type: 'image';
+} & ImageRun) | ({
+  type: 'chart';
+} & ChartRun) | {
+  type: 'break';
+  breakType: 'line' | 'page' | 'column';
+} | ({
+  type: 'field';
+} & FieldRun) | ({
+  type: 'shape';
+} & ShapeRun) | {
+  type: 'math';
+  nodes: MathNode[];
+  display: boolean;
+  fontSize: number;
+  jc?: string;
+} | ({
+  type: 'ptab';
+} & PTabRun);
+type DocRun = DocRunContent & {
+  revision?: RunRevision;
+};
+interface ChartRun {
+  chart: ChartModel;
+  widthPt: number;
+  heightPt: number;
+  anchor: boolean;
+  anchorXPt?: number;
+  anchorYPt?: number;
+  anchorXFromMargin?: boolean;
+  anchorYFromPara?: boolean;
+  wrapMode?: string;
+  distTop?: number;
+  distBottom?: number;
+  distLeft?: number;
+  distRight?: number;
+  wrapSide?: string;
+  allowOverlap?: boolean;
+  anchorXAlign?: string | null;
+  anchorYAlign?: string | null;
+  anchorXRelativeFrom?: string | null;
+  anchorYRelativeFrom?: string | null;
+}
+interface PTabRun {
+  alignment: 'left' | 'center' | 'right';
+  relativeTo: 'margin' | 'indent';
+  leader: 'none' | 'dot' | 'hyphen' | 'underscore' | 'middleDot';
+  fontSize: number;
+}
+type PathCmd = {
+  cmd: 'moveTo';
+  x: number;
+  y: number;
+} | {
+  cmd: 'lineTo';
+  x: number;
+  y: number;
+} | {
+  cmd: 'cubicBezTo';
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  x: number;
+  y: number;
+} | {
+  cmd: 'quadBezTo';
+  x1: number;
+  y1: number;
+  x: number;
+  y: number;
+} | {
+  cmd: 'arcTo';
+  wr: number;
+  hr: number;
+  stAng: number;
+  swAng: number;
+} | {
+  cmd: 'close';
+};
+interface AnchorHostMetrics {
+  fontSize: number;
+  fontFamily?: string | null;
+  fontFamilyEastAsia?: string | null;
+  bold?: boolean;
+  italic?: boolean;
+}
+interface ShapeRun {
+  inline?: boolean;
+  widthPt: number;
+  heightPt: number;
+  anchorXPt: number;
+  anchorYPt: number;
+  anchorXFromMargin: boolean;
+  anchorYFromPara: boolean;
+  anchorXAlign?: string | null;
+  anchorYAlign?: string | null;
+  pctPosH?: number | null;
+  pctPosV?: number | null;
+  anchorXRelativeFrom?: string | null;
+  anchorYRelativeFrom?: string | null;
+  widthPct?: number | null;
+  heightPct?: number | null;
+  widthRelativeFrom?: string | null;
+  heightRelativeFrom?: string | null;
+  groupWidthPt?: number | null;
+  groupHeightPt?: number | null;
+  behindDoc?: boolean;
+  zOrder: number;
+  subpaths: PathCmd[][];
+  presetGeometry?: string | null;
+  adjValues?: Array<number | null>;
+  fill: ShapeFill | null;
+  stroke: string | null;
+  strokeWidth?: number;
+  strokeFill?: ShapeStrokeFill | null;
+  strokeDash?: string | null;
+  strokeCustomDash?: Array<{
+    dash: number;
+    space: number;
+  }>;
+  strokeCap?: 'butt' | 'round' | 'square' | null;
+  strokeJoin?: 'round' | 'bevel' | 'miter' | null;
+  strokeMiterLimit?: number | null;
+  strokeAlignment?: 'ctr' | 'in' | null;
+  strokeCompound?: string | null;
+  headEnd?: LineEnd | null;
+  tailEnd?: LineEnd | null;
+  rotation?: number;
+  flipH?: boolean;
+  flipV?: boolean;
+  wrapMode?: string | null;
+  distTop?: number;
+  distBottom?: number;
+  distLeft?: number;
+  distRight?: number;
+  wrapSide?: string | null;
+  textBlocks?: ShapeText[];
+  defaultTextColor?: string | null;
+  textAnchor?: string | null;
+  textAutofit?: string | null;
+  textInsetL?: number;
+  textInsetT?: number;
+  textInsetR?: number;
+  textInsetB?: number;
+  textVert?: string | null;
+  textPath?: TextPath | null;
+  fillOpacity?: number | null;
+}
+interface TextPath {
+  string: string;
+  fontFamily?: string | null;
+  bold?: boolean;
+  italic?: boolean;
+}
+interface LineEnd {
+  type: string;
+  w: string;
+  len: string;
+}
+interface ShapeTextRun {
+  text: string;
+  fontSizePt: number;
+  color?: string | null;
+  fontFamily?: string | null;
+  fontFamilyEastAsia?: string | null;
+  bold?: boolean;
+  italic?: boolean;
+  ruby?: RubyAnnotation | null;
+}
+interface ShapeText {
+  text: string;
+  fontSizePt: number;
+  color?: string | null;
+  paragraphMarkColor?: string | null;
+  fontFamily?: string | null;
+  bold?: boolean;
+  italic?: boolean;
+  runs?: ShapeTextRun[];
+  numbering?: NumberingInfo | null;
+  alignment: string;
+  spaceBefore?: number;
+  spaceAfter?: number;
+  lineSpacingVal?: number;
+  lineSpacingRule?: string;
+  indentLeft?: number;
+  indentRight?: number;
+  indentFirst?: number;
+  tabStops?: TabStop[];
+  bidi?: boolean;
+  contextualSpacing?: boolean;
+  styleId?: string | null;
+  imagePath?: string;
+  mimeType?: string;
+  svgImagePath?: string;
+  imageWidthPt?: number;
+  imageHeightPt?: number;
+}
+type ShapeFill = {
+  fillType: 'solid';
+  color: string;
+} | {
+  fillType: 'gradient';
+  stops: GradientStop[];
+  angle: number;
+  gradType: string;
+  scaled?: boolean;
+  path?: string;
+  fillToRect?: FillRect;
+  tileRect?: FillRect;
+  flip?: string;
+  rotWithShape?: boolean;
+} | {
+  fillType: 'pattern';
+  fg: string;
+  bg: string;
+  preset: string;
+} | {
+  fillType: 'image';
+  imagePath: string;
+  mimeType: string;
+  svgImagePath?: string;
+  srcRect?: {
+    l: number;
+    t: number;
+    r: number;
+    b: number;
+  };
+  fillRect?: FillRect;
+  tile?: TileInfo;
+  alpha?: number;
+  duotone?: Duotone;
+};
+type ShapeStrokeFill = {
+  fillType: 'gradient';
+  stops: GradientStop[];
+  angle: number;
+  gradType: string;
+  scaled?: boolean;
+  path?: string;
+  fillToRect?: FillRect;
+  tileRect?: FillRect;
+  flip?: string;
+  rotWithShape?: boolean;
+} | {
+  fillType: 'pattern';
+  fg: string;
+  bg: string;
+  preset: string;
+};
+interface GradientStop {
+  position: number;
+  color: string;
+}
+interface FieldRun {
+  fieldType: string;
+  instruction: string;
+  fallbackText: string;
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
+  strikethrough: boolean;
+  fontSize: number;
+  color: string | null;
+  fontFamily: string | null;
+  background: string | null;
+  vertAlign: 'super' | 'sub' | null;
+  allCaps?: boolean;
+  smallCaps?: boolean;
+  doubleStrikethrough?: boolean;
+  highlight?: string | null;
+  emphasisMark?: EmphasisMark;
+}
+interface DocxTextRun {
+  text: string;
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
+  underlineStyle?: string;
+  underlineColor?: string;
+  strikethrough: boolean;
+  fontSize: number;
+  color: string | null;
+  fontFamily: string | null;
+  fontFamilyEastAsia?: string | null;
+  isLink: boolean;
+  background: string | null;
+  colorAuto?: boolean | null;
+  border?: DocxRunBorder | null;
+  vertAlign: 'super' | 'sub' | null;
+  hyperlink: string | null;
+  hyperlinkAnchor?: string | null;
+  allCaps?: boolean;
+  smallCaps?: boolean;
+  doubleStrikethrough?: boolean;
+  highlight?: string | null;
+  emphasisMark?: EmphasisMark;
+  ruby?: RubyAnnotation;
+  revision?: RunRevision;
+  rtl?: boolean;
+  cs?: boolean;
+  fontFamilyCs?: string;
+  fontSizeCs?: number;
+  boldCs?: boolean;
+  italicCs?: boolean;
+  langBidi?: string;
+  snapToGrid?: boolean;
+  charSpacing?: number;
+  fitTextVal?: number;
+  fitTextId?: string | number;
+  charScale?: number;
+  position?: number;
+  kerning?: number;
+  eastAsianVert?: boolean;
+  eastAsianVertCompress?: boolean;
+  eastAsianCombine?: boolean;
+  eastAsianCombineBrackets?: string;
+  noteRef?: NoteRef;
+}
+interface NoteRef {
+  kind: 'footnote' | 'endnote' | string;
+  id: string;
+}
+interface RunRevision {
+  kind: 'insertion' | 'deletion' | 'moveFrom' | 'moveTo' | string;
+  id?: string;
+  author?: string;
+  date?: string;
+}
+interface RubyAnnotation {
+  text: string;
+  fontSizePt: number;
+  hpsRaisePt?: number;
+}
+type EmphasisMark = 'dot' | 'comma' | 'circle' | 'underDot';
+interface ImageRun {
+  imagePath: string;
+  mimeType: string;
+  svgImagePath?: string;
+  srcRect?: {
+    l: number;
+    t: number;
+    r: number;
+    b: number;
+  } | null;
+  widthPt: number;
+  heightPt: number;
+  rotation?: number;
+  flipH?: boolean;
+  flipV?: boolean;
+  anchor?: boolean;
+  anchorXPt?: number;
+  anchorYPt?: number;
+  anchorXFromMargin?: boolean;
+  anchorYFromPara?: boolean;
+  colorReplaceFrom?: string;
+  duotone?: Duotone;
+  alpha?: number;
+  wrapMode?: string;
+  distTop?: number;
+  distBottom?: number;
+  distLeft?: number;
+  distRight?: number;
+  wrapSide?: string;
+  allowOverlap?: boolean;
+  anchorXAlign?: string | null;
+  anchorYAlign?: string | null;
+  anchorXRelativeFrom?: string | null;
+  anchorYRelativeFrom?: string | null;
+}
+interface TblpPr {
+  leftFromText: number;
+  rightFromText: number;
+  topFromText: number;
+  bottomFromText: number;
+  horzAnchor: 'text' | 'margin' | 'page' | string;
+  horzSpecified: boolean;
+  vertAnchor: 'text' | 'margin' | 'page' | string;
+  tblpX: number;
+  tblpY: number;
+  tblpXSpec?: 'left' | 'center' | 'right' | 'inside' | 'outside' | string;
+  tblpYSpec?: 'inline' | 'top' | 'center' | 'bottom' | 'inside' | 'outside' | string;
+}
+interface DocTable {
+  colWidths: number[];
+  rows: DocTableRow[];
+  borders: TableBorders;
+  cellMarginTop: number;
+  cellMarginBottom: number;
+  cellMarginLeft: number;
+  cellMarginRight: number;
+  jc: string;
+  tblInd?: number;
+  layout?: string;
+  widthPt?: number;
+  widthPct?: number;
+  bidiVisual?: boolean;
+  tblpPr?: TblpPr;
+  overlap?: string;
+}
+interface TableBorders {
+  top: BorderSpec | null;
+  bottom: BorderSpec | null;
+  left: BorderSpec | null;
+  right: BorderSpec | null;
+  insideH: BorderSpec | null;
+  insideV: BorderSpec | null;
+}
+interface BorderSpec {
+  width: number;
+  color: string | null;
+  style: string;
+}
+interface DocTableRow {
+  cells: DocTableCell[];
+  gridBefore?: number;
+  gridAfter?: number;
+  rowHeight: number | null;
+  rowHeightRule: 'auto' | 'atLeast' | 'exact' | string;
+  isHeader: boolean;
+  cantSplit?: boolean;
+}
+type CellElement = ({
+  type: 'paragraph';
+} & DocParagraph) | ({
+  type: 'table';
+} & DocTable);
+interface DocTableCell {
+  content: CellElement[];
+  colSpan: number;
+  vMerge: boolean | null;
+  borders: CellBorders;
+  background: string | null;
+  vAlign: 'top' | 'center' | 'bottom';
+  widthPt: number | null;
+  widthPct?: number;
+  marginTop?: number | null;
+  marginBottom?: number | null;
+  marginLeft?: number | null;
+  marginRight?: number | null;
+}
+interface CellBorders {
+  top: BorderSpec | null;
+  bottom: BorderSpec | null;
+  left: BorderSpec | null;
+  right: BorderSpec | null;
+  insideH: BorderSpec | null;
+  insideV: BorderSpec | null;
+}
+interface DocxStorySource {
+  story: 'body' | 'header' | 'footer' | 'footnote' | 'endnote' | 'textbox';
+  storyInstance: string;
+  path: readonly number[];
+}
+interface DocxTextRunInfo {
+  source?: Readonly<DocxStorySource>;
+  paragraphId?: string;
+  sourceRunIndex?: number;
+  direction?: 'ltr' | 'rtl';
+  text: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  highlightBounds?: Readonly<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }>;
+  fontSize: number;
+  font: string;
+  letterSpacingPx?: number;
+  transform?: string;
+  hyperlink?: HyperlinkTarget;
+  eastAsianVert?: boolean;
+}
+interface RenderPageOptions {
+  width?: number;
+  dpr?: number;
+  defaultTextColor?: string;
+  imageResources?: ImageResourceOptions;
+  onTextRun?: (run: DocxTextRunInfo) => void;
+  currentDate?: Date | number;
+  showTrackedChanges?: boolean;
+}
+//#endregion
+//#region dist/.types-work/docx-8nLAF_CE.d.ts
+interface CommentAnchorRange {
+  readonly commentId: string;
+  readonly source: Readonly<DocxStorySource>;
+  readonly startRunIndex: number;
+  readonly endRunIndex: number;
+  readonly reference: CommentAnchorPoint;
+  readonly geometryFallback?: CommentAnchorGeometryFallback;
+}
+interface CommentAnchorPoint {
+  readonly source: Readonly<DocxStorySource>;
+  readonly runIndex: number;
+  readonly affinity: 'following' | 'preceding';
+}
+interface CommentAnchorGeometryFallback {
+  readonly source: Readonly<DocxStorySource>;
+  readonly sourceRunIndex: number;
+}
+type DocxCommentAnchorKind = 'range' | 'point' | 'fallback';
+interface DocxCommentHighlightRect {
+  readonly x: number;
+  readonly y: number;
+  readonly width: number;
+  readonly height: number;
+  readonly transform?: string;
+}
+interface ResolvedDocxCommentAnchor {
+  readonly anchor: Readonly<CommentAnchorRange>;
+  readonly kind: DocxCommentAnchorKind;
+  readonly rects: readonly Readonly<DocxCommentHighlightRect>[];
+}
+interface ResolvedDocxCommentThread {
+  readonly root: Readonly<DocComment>;
+  readonly replies: readonly Readonly<DocComment>[];
+  readonly anchors: readonly Readonly<ResolvedDocxCommentAnchor>[];
+}
+interface ResolveDocxCommentThreadsOptions {
+  readonly includeResolved?: boolean;
+}
+declare function resolveCommentAnchorRuns(anchor: Readonly<CommentAnchorRange>, runs: readonly Readonly<DocxTextRunInfo>[]): readonly Readonly<DocxTextRunInfo>[];
+declare function resolveDocxCommentThreads(comments: readonly Readonly<DocComment>[], anchors: readonly Readonly<CommentAnchorRange>[], runs: readonly Readonly<DocxTextRunInfo>[], options?: ResolveDocxCommentThreadsOptions): readonly Readonly<ResolvedDocxCommentThread>[];
+type DocxSelectionContextOptions = TextSelectionContextOptions;
+interface DocxSelectionSourceLocator {
+  readonly story: 'body' | 'header' | 'footer' | 'footnote' | 'endnote' | 'textbox';
+  readonly storyInstance: string;
+  readonly path: readonly number[];
+}
+interface DocxSelectionRunLocator {
+  readonly pageIndex: number;
+  readonly runIndex: number;
+  readonly paragraphId?: string;
+  readonly source?: DocxSelectionSourceLocator;
+}
+interface DocxTextSelectionContext {
+  readonly format: 'docx';
+  readonly kind: 'text';
+  readonly text: string;
+  readonly pageIndexes: readonly number[];
+  readonly paragraphIds: readonly string[];
+  readonly runs: readonly DocxSelectionRunLocator[];
+  readonly truncated: boolean;
+  readonly truncationReasons: readonly ('text' | 'runs')[];
+  readonly textCharacters: number;
+  readonly maxTextCharacters: number;
+  readonly maxRunLocators: number;
+}
+interface DocxPagePoint {
+  readonly xPt: number;
+  readonly yPt: number;
+}
+interface DocxElementContext {
+  readonly format: 'docx';
+  readonly kind: 'element';
+  readonly pageIndex: number;
+  readonly elementIndex: number;
+  readonly elementType: 'chart' | 'image' | 'shape';
+  readonly point: DocxPagePoint;
+  readonly bounds: Readonly<DocxPagePoint & {
+    widthPt: number;
+    heightPt: number;
+  }>;
+  readonly source: DocxSelectionSourceLocator;
+  readonly text?: string;
+  readonly mimeType?: string;
+  readonly seriesCount?: number;
+  readonly truncated: boolean;
+  readonly truncationReasons: readonly ('text')[];
+  readonly textCharacters: number;
+  readonly maxTextCharacters: number;
+}
+interface DocxCommentSelectionContext {
+  readonly format: 'docx';
+  readonly kind: 'comment';
+  readonly pageIndex: number;
+  readonly commentId: string;
+  readonly source?: DocxSelectionSourceLocator;
+  readonly thread: ViewerCommentThreadContext;
+  readonly truncated: boolean;
+  readonly truncationReasons: readonly ('text')[];
+  readonly textCharacters: number;
+  readonly maxTextCharacters: number;
+}
+type DocxSelectionContext = DocxTextSelectionContext | DocxElementContext | DocxCommentSelectionContext;
+declare function readDocxTextSelectionContext(root: HTMLElement, selection: Selection | null, options?: DocxSelectionContextOptions): DocxTextSelectionContext | null;
+interface DocxElementContextOptions {
+  readonly maxTextCharacters?: number;
+  readonly currentDate?: Date | number;
+  readonly showTrackedChanges?: boolean;
+}
+interface RevisionAnchorRange {
+  readonly revisionIndex: number;
+  readonly source: Readonly<DocxStorySource>;
+  readonly startRunIndex: number;
+  readonly endRunIndex: number;
+  readonly geometryFallback?: RevisionAnchorGeometryFallback;
+}
+interface RevisionAnchorGeometryFallback {
+  readonly source: Readonly<DocxStorySource>;
+  readonly sourceRunIndex: number;
+}
+declare function resolveRevisionAnchorRuns(anchor: Readonly<RevisionAnchorRange>, runs: readonly Readonly<DocxTextRunInfo>[]): readonly Readonly<DocxTextRunInfo>[];
+interface LoadOptions extends LoadOptions$1 {
+  math?: MathRenderer;
+  mode?: 'main' | 'worker';
+  sliceLayout?: boolean;
+  onLayoutProgress?: (progress: Readonly<ProgressiveLayoutProgress>) => void;
+  progressiveLayout?: boolean;
+  onLayoutComplete?: (error?: unknown) => void;
+  onLayoutPartial?: (progress: Readonly<ProgressiveLayoutPartial>) => void;
+  showTrackedChanges?: boolean;
+  currentDate?: Date | number;
+}
+type CollectPageRunsOptions = Pick<RenderPageOptions, 'width' | 'currentDate' | 'showTrackedChanges'>;
+interface DocxPageCommentThreadsOptions extends CollectPageRunsOptions, ResolveDocxCommentThreadsOptions {}
+type RenderPageToBitmapOptions = Omit<RenderPageOptions, 'onTextRun'> & {
+  onTextRun?: (run: DocxTextRunInfo) => void;
+};
+declare class DocxDocument {
+  private _metrics;
+  private _document;
+  private _source;
+  private _meta;
+  private _review;
+  private readonly _layoutLifecycle;
+  private readonly _layoutObservers;
+  private _layoutCompletion;
+  private _layoutAbort;
+  private _bookmarkPages;
+  private _commentAnchorRanges;
+  private _revisionAnchorRanges;
+  private _reviewProjectionIndex;
+  private _parseRequestId;
+  private _progressive;
+  private _parseWatchdog;
+  private _parseWatchdogMs;
+  private _layoutViewGeneration;
+  private _mode;
+  private _threeD;
+  private _regionMap;
+  private _chartEx;
+  private _tiff;
+  private _worker;
+  private _bridge;
+  private readonly _rawParts;
+  private _embeddedFontFaces;
+  private _googleFontFaces;
+  private _localMetricFontFaces;
+  private readonly _fetchImage;
+  private constructor();
+  static load(source: string | ArrayBuffer, opts?: LoadOptions): Promise<DocxDocument>;
+  private _parse;
+  private _onWorkerLayoutPush;
+  private _applyLayoutPartial;
+  private _onAuthoritativeMeta;
+  private _invalidateLayoutDerivedCaches;
+  private _replaceMainLayoutPublication;
+  private _isLayoutViewActive;
+  private _rearmParseWatchdog;
+  private _clearParseWatchdog;
+  private _onParseWentSilent;
+  private _failWorkerProgressive;
+  private _parseViewFields;
+  private _parseProgressively;
+  destroy(): void;
+  getImage(imagePath: string, mimeType: string): Promise<Blob>;
+  getFontBytes(partPath: string): Promise<Uint8Array>;
+  private _resourceUsage;
+  getResourceMetrics(): Promise<OoxmlResourceMetrics>;
+  toMarkdown(): Promise<string>;
+  get pageCount(): number;
+  get layoutComplete(): boolean;
+  waitUntilLayoutComplete(): Promise<void>;
+  get mode(): 'main' | 'worker';
+  get document(): DocxDocumentModel;
+  get comments(): readonly Readonly<DocComment>[];
+  get revisions(): readonly Readonly<DocRevision>[];
+  commentAnchorRanges(): readonly CommentAnchorRange[];
+  revisionAnchorRanges(): readonly RevisionAnchorRange[];
+  private _reviewSnapshot;
+  get footnotes(): DocNote[];
+  get endnotes(): DocNote[];
+  private _getLayout;
+  setLayoutView(view?: Readonly<{
+    showTrackedChanges?: boolean;
+    currentDate?: Date | number;
+  }>): Promise<void>;
+  private _getBookmarkPages;
+  getBookmarkPage(bookmarkName: string): number | undefined;
+  pageSize(pageIndex: number): {
+    widthPt: number;
+    heightPt: number;
+  };
+  private _withActiveView;
+  renderPage(target: HTMLCanvasElement | OffscreenCanvas, pageIndex: number, opts?: RenderPageOptions): Promise<void>;
+  renderPageToBitmap(pageIndex: number, opts?: RenderPageToBitmapOptions): Promise<ImageBitmap>;
+  collectPageRuns(pageIndex: number, opts?: CollectPageRunsOptions): Promise<DocxTextRunInfo[]>;
+  getCommentThreads(pageIndex: number, options?: DocxPageCommentThreadsOptions): Promise<readonly Readonly<ResolvedDocxCommentThread>[]>;
+  getElementContextAt(pageIndex: number, point: DocxPagePoint, opts?: DocxElementContextOptions): Promise<DocxElementContext | null>;
+}
+interface DocxMatchLocation {
+  page: number;
+}
+interface DocxViewerOptions extends Omit<RenderPageOptions, 'onTextRun'>, LoadOptions {
+  container?: HTMLElement;
+  enableTextSelection?: boolean;
+  enableElementSelection?: boolean;
+  onSelectionContextChange?: (context: DocxSelectionContext | null) => void;
+  onContextMenu?: (event: ViewerContextMenuEvent<DocxSelectionContext>) => void;
+  findHighlightColors?: FindHighlightColors;
+  onPageChange?: (index: number, total: number, layoutComplete: boolean) => void;
+  zoomMin?: number;
+  zoomMax?: number;
+  onScaleChange?: (scale: number) => void;
+  onHyperlinkClick?: (target: HyperlinkTarget) => void;
+  enableHyperlinks?: boolean;
+  onError?: (err: Error) => void;
+}
+declare class DocxViewer implements ZoomableViewer {
+  private readonly _documentOwner;
+  private get _doc();
+  private readonly _borrowed;
+  private readonly _hostWindow;
+  private _currentPage;
+  private _scale;
+  private _canvas;
+  private _wrapper;
+  private readonly _canvasMount;
+  private _textLayer;
+  private _highlightLayer;
+  private _elementLayer;
+  private _find;
+  private _findRequestGeneration;
+  private _measureCtx;
+  private _opts;
+  private readonly _mode;
+  private readonly _renderDispatcher;
+  private readonly _errorRouter;
+  private _destroyed;
+  private _selectionChangeListener;
+  private _selectionContextKey;
+  private _elementContext;
+  private _elementHitGeneration;
+  private _layoutViewGeneration;
+  private _layoutViewPublicationGeneration;
+  private _navigationGeneration;
+  private _layoutUnsubscribe;
+  private _internalHyperlinkGeneration;
+  private readonly _layoutWaiters;
+  private _layoutFailed;
+  private readonly _loadingLayer;
+  private _elementClickListener;
+  private _contextMenuListener;
+  static fromDocument(canvas: HTMLCanvasElement, document: DocxDocument, opts?: Omit<DocxViewerOptions, keyof LoadOptions>): Omit<DocxViewer, 'load'>;
+  constructor(canvas: HTMLCanvasElement, opts?: DocxViewerOptions);
+  load(source: string | ArrayBuffer): Promise<void>;
+  get pageCount(): number;
+  get currentPage(): number;
+  get layoutComplete(): boolean;
+  waitUntilLayoutComplete(): Promise<void>;
+  get canvasElement(): HTMLCanvasElement;
+  goToPage(index: number): Promise<void>;
+  nextPage(): Promise<void>;
+  prevPage(): Promise<void>;
+  private _naturalWidthPx;
+  private _renderWidth;
+  getScale(): number;
+  private _zoomMin;
+  private _zoomMax;
+  setScale(scale: number): Promise<void>;
+  zoomIn(): Promise<void>;
+  zoomOut(): Promise<void>;
+  fitWidth(): Promise<void>;
+  fitPage(): Promise<void>;
+  private _fit;
+  private _fitContainer;
+  findText(query: string, opts?: FindMatchesOptions): Promise<FindMatch<DocxMatchLocation>[]>;
+  findNext(): Promise<FindMatch<DocxMatchLocation> | null>;
+  findPrev(): Promise<FindMatch<DocxMatchLocation> | null>;
+  clearFind(): void;
+  private _activateMatch;
+  private _redrawHighlights;
+  getResourceMetrics(): Promise<OoxmlResourceMetrics>;
+  getSelectionContext(options?: DocxSelectionContextOptions): DocxSelectionContext | null;
+  private _emitSelectionContextChange;
+  private _setElementContext;
+  private _invalidateElementContext;
+  private _redrawElementOutline;
+  private _onElementClick;
+  private _onContextMenu;
+  private _resolveContextAt;
+  destroy(): void;
+  private _render;
+  private _reportRenderError;
+  private _renderPage;
+  private _bindLayoutDocument;
+  private _unbindLayoutDocument;
+  private _onLayoutPublication;
+  private _onLayoutViewPublication;
+  private _waitForPage;
+  private _wakeLayoutWaiters;
+  private _cancelPendingNavigation;
+  private _setLoading;
+  setShowTrackedChanges(value: boolean): Promise<void>;
+  private _buildHighlightLayer;
+  private _canvasCssPx;
+  private _measureForFont;
+  private _collectPageRuns;
+  private _buildTextLayer;
+  private _hyperlinkHandler;
+  private _navigateInternalHyperlink;
+}
+interface DocxCommentsOptions extends ViewerCommentsOptions {
+  readonly cards?: boolean;
+  readonly side?: 'auto' | 'left' | 'right';
+  readonly markers?: boolean;
+  readonly connectors?: ViewerCommentConnectorOptions;
+}
+interface DocxScrollViewerOptions extends Omit<RenderPageOptions, 'onTextRun'>, LoadOptions {
+  width?: number;
+  gap?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  overscan?: number;
+  progressiveLayout?: boolean;
+  sliceLayout?: boolean;
+  enableTextSelection?: boolean;
+  comments?: boolean | DocxCommentsOptions;
+  enableElementSelection?: boolean;
+  onSelectionContextChange?: (context: DocxSelectionContext | null) => void;
+  onContextMenu?: (event: ViewerContextMenuEvent<DocxSelectionContext>) => void;
+  findHighlightColors?: FindHighlightColors;
+  zoomMin?: number;
+  zoomMax?: number;
+  enableZoom?: boolean;
+  refitOnResize?: boolean;
+  background?: string;
+  pageShadow?: string | false;
+  onVisiblePageChange?: (topIndex: number, total: number, layoutComplete: boolean) => void;
+  onScaleChange?: (scale: number) => void;
+  onHyperlinkClick?: (target: HyperlinkTarget) => void;
+  enableHyperlinks?: boolean;
+  onError?: (err: Error) => void;
+}
+declare class DocxScrollViewer implements ZoomableViewer {
+  private readonly _documentOwner;
+  private get _doc();
+  private readonly _borrowed;
+  private readonly _opts;
+  private readonly _errorRouter;
+  private readonly _container;
+  private readonly _wrapper;
+  private readonly _scrollHost;
+  private readonly _spacer;
+  private _mode;
+  private _scale;
+  private _scaleEstablished;
+  private _pendingScale;
+  private readonly _slots;
+  private readonly _free;
+  private _heights;
+  private _scrollGeometry;
+  private _lastRange;
+  private _lastTopIndex;
+  private _lastReportedTotal;
+  private _lastReportedLayoutComplete;
+  private _layoutUnsubscribe;
+  private _presentedPageCount;
+  private _scrollListener;
+  private _selectionChangeListener;
+  private _selectionContextKey;
+  private _elementClickListener;
+  private _contextMenuListener;
+  private _commentOutsidePointerListener;
+  private _elementContext;
+  private _activeCommentId;
+  private _activeCommentPage;
+  private _commentUi;
+  private readonly _commentPageById;
+  private readonly _commentRunsByPage;
+  private readonly _commentIndexedPages;
+  private _commentScanFrontier;
+  private _commentNavigationGeneration;
+  private _internalHyperlinkGeneration;
+  private _commentAnchorRangesForMargin;
+  private _commentAnchorIds;
+  private _reviewOriginPx;
+  private _commentGeometryScheduled;
+  private _commentGeometryFrame;
+  private readonly _pendingCommentGeometry;
+  private _elementHitGeneration;
+  private _destroyed;
+  private _measureCtx;
+  private readonly _bitmapInFlight;
+  private _renderEpoch;
+  private _settleTimer;
+  private _wheelListener;
+  private _pendingZoomAnchor;
+  private _resizeObserver;
+  private _prevBase;
+  private _lastFitWidth;
+  private readonly _pageShadow;
+  private readonly _find;
+  private _findActive;
+  private _findRequestGeneration;
+  private _showTrackedChanges;
+  private _currentDate;
+  private _layoutViewGeneration;
+  private _layoutViewPublicationGeneration;
+  static fromDocument(container: HTMLElement, document: DocxDocument, opts?: Omit<DocxScrollViewerOptions, keyof LoadOptions>): Omit<DocxScrollViewer, 'load'>;
+  constructor(container: HTMLElement, opts?: DocxScrollViewerOptions);
+  load(source: string | ArrayBuffer): Promise<void>;
+  get pageCount(): number;
+  get layoutComplete(): boolean;
+  waitUntilLayoutComplete(): Promise<void>;
+  private _bindLayoutDocument;
+  private _unbindLayoutDocument;
+  private _onLayoutPublication;
+  private _onLayoutViewPublication;
+  private _refreshCommentSurface;
+  private _applyLayoutPublication;
+  private _pageWidthPx;
+  private _pageHeightPx;
+  private _fitWidthPx;
+  private _hasCommentMargin;
+  private _hasDisplayableComments;
+  private _commentMarginExtent;
+  private _commentZoom;
+  private _commentsEnabled;
+  private _commentsOptions;
+  private _commentSide;
+  private _syncCommentMarginGeometry;
+  private _widestPageWidthPt;
+  private _baseScale;
+  relayout(): void;
+  private _relayout;
+  private _recomputeHeights;
+  private _gap;
+  private _overscan;
+  private _pad;
+  private _padH;
+  private _pageIndexAtOffset;
+  private _range;
+  private _syncSpacer;
+  private _syncSpacerWidth;
+  private _onScroll;
+  private _mountVisible;
+  private _emitVisiblePageChange;
+  private _applyPageShadow;
+  private _acquireSlot;
+  private _recycleSlot;
+  private _positionSlot;
+  private _dpr;
+  private _renderSlot;
+  private _hyperlinkHandler;
+  private _navigateInternalHyperlink;
+  private _measureForFont;
+  private _canvasCssPx;
+  private _reportRenderError;
+  private _renderSlotBitmap;
+  setScale(scale: number): void;
+  getScale(): number;
+  zoomIn(): void;
+  zoomOut(): void;
+  private _effectiveZoomMin;
+  fitWidth(): void;
+  fitPage(): void;
+  private _fit;
+  private _previewVisible;
+  private _previewSlot;
+  private _clearTextLayerPreview;
+  private _scheduleSettle;
+  private _settleRender;
+  private _refreshSlotAtomically;
+  setShowTrackedChanges(value: boolean): Promise<void>;
+  scrollToPage(index: number, opts?: {
+    behavior?: 'auto' | 'smooth';
+  }): void;
+  private _scrollToPageTarget;
+  private _resetCommentNavigation;
+  private _advanceCommentScanFrontier;
+  private _indexCommentPages;
+  private _commentRunsForPage;
+  goToComment(commentId: string, opts?: {
+    pageIndex?: number;
+    behavior?: 'auto' | 'smooth';
+  }): Promise<boolean>;
+  findText(query: string, opts?: FindMatchesOptions): Promise<FindMatch<DocxMatchLocation>[]>;
+  findNext(): Promise<FindMatch<DocxMatchLocation> | null>;
+  findPrev(): Promise<FindMatch<DocxMatchLocation> | null>;
+  clearFind(): void;
+  private _activateMatch;
+  private _collectPageRuns;
+  private _redrawHighlights;
+  private _refreshFindRuns;
+  private _commitCommentRuns;
+  private _redrawSlotComments;
+  private _redrawSlotCommentConnectors;
+  private _scheduleCommentGeometry;
+  private _redrawSlotHighlights;
+  private _onResize;
+  get topVisiblePage(): number;
+  getResourceMetrics(): Promise<OoxmlResourceMetrics>;
+  getSelectionContext(options?: DocxSelectionContextOptions): DocxSelectionContext | null;
+  private _emitSelectionContextChange;
+  private _setElementContext;
+  private _invalidateElementContext;
+  private _redrawElementOutlines;
+  private _redrawElementOutlineForSlot;
+  private _onElementClick;
+  private _onContextMenu;
+  private _resolveContextAt;
+  destroy(): void;
+}
+declare function buildDocxTextLayer(layer: HTMLDivElement, runs: DocxTextRunInfo[], cssWidth: number, cssHeight: number, onHyperlinkClick?: (target: HyperlinkTarget) => void, measureForFont?: (font: string) => (s: string) => number, pageIndex?: number): void;
+interface DocxHighlightMatch {
+  slices: MatchRunSlice[];
+  active: boolean;
+}
+type DocxHighlightColors = FindHighlightColors;
+declare function buildDocxHighlightLayer(layer: HTMLDivElement, runs: DocxTextRunInfo[], matches: DocxHighlightMatch[], cssWidth: number, cssHeight: number, measureForFont: (font: string) => (s: string) => number, colors?: DocxHighlightColors): void;
+//#endregion
+export { type AnchorHostMetrics, type AutoResizeOptions, type BodyElement, type BorderSpec, type CellBorders, type CellElement, type ChartAreaGroupDecorations, type ChartBarGroupDecorations, type ChartDataLabelOverride, type ChartDataPointOverride, type ChartDataTable, type ChartDecorationLineStyle, type ChartDisplayUnits, type ChartDisplayUnitsLabel, type ChartErrBars, type ChartExElementStyle, type ChartExRenderer, type ChartLabelBox, type ChartLegendEntryOverride, type ChartLineDashSegment, type ChartLineGroupDecorations, type ChartManualLayout, type ChartModel, type ChartOfPie, type ChartPlotGroup, type ChartPlotGroupAxisSlot, type ChartPlotGroupKind, type ChartRect, type ChartRegionMapRenderer, type ChartRun, type ChartSeries, type ChartSeriesDataLabels, type ChartStockBarPaint, type ChartStockUpDownBarStyle, type ChartSurfaceBandFormat, type ChartTextBox, type ChartTextParagraph, type ChartTextRun, type ChartThreeD, type ChartThreeDPictureOptions, type ChartThreeDRenderer, type ChartThreeDSeriesAxis, type ChartThreeDSurface, type ChartTrendline, type ChartType, type ChartexBoxSeries, type ChartexBoxWhisker, type ChartexGeography, type ChartexHistogramBinning, type ChartexRegionMap, type ChartexRegionMapColors, type ChartexRegionMapRow, type ChartexSunburst, type ChartexSunburstRow, type ChartexTreemap, type ChartexValueColorStop, type ColSpec, type CollectPageRunsOptions, type ColumnsSpec, type CommentAnchorGeometryFallback, type CommentAnchorPoint, type CommentAnchorRange, type DecodedImageBudgetStrategy, type DocComment, type DocNote, type DocParagraph, type DocRevision, type DocRun, type DocSettings, type DocTable, type DocTableCell, type DocTableRow, type DocxCommentAnchorKind, type DocxCommentHighlightRect, type DocxCommentMark, type DocxCommentSelectionContext, type DocxCommentsOptions, DocxDocument, type DocxDocumentModel, type DocxElementContext, type DocxElementContextOptions, type DocxHighlightColors, type DocxHighlightMatch, type DocxMatchLocation, type DocxPageCommentThreadsOptions, type DocxPagePoint, type DocxRunBorder, DocxScrollViewer, type DocxScrollViewerOptions, type DocxSelectionContext, type DocxSelectionContextOptions, type DocxSelectionRunLocator, type DocxSelectionSourceLocator, type DocxStorySource, type DocxTextRun, type DocxTextRunInfo, type DocxTextSelectionContext, DocxViewer, type DocxViewerOptions, type DrawingMLCustomDashSegment, type Duotone, type EmbeddedFontRef, type FieldRun, type FillRect, type FindHighlightColors, type FindMatch, type FindMatchesOptions, type FramePr, type GradientFill, type GradientStop, type HeaderFooter, type HeadersFooters, type HyperlinkTarget, type ImageFill, type ImageResourceOptions, type ImageRun, type LegendManualLayout, type LineEnd, type LineNumbering, type LineSpacing, type LoadOptions, type MatchRunSlice, type MathAccent, type MathArray, type MathBar, type MathBorderBox, type MathBox, type MathDelimiter, type MathFraction, type MathFunc, type MathGroup, type MathGroupChr, type MathLimit, type MathNary, type MathNode, type MathPhant, type MathRadical, type MathRenderer, type MathRun, type MathSPre, type MathScript, type MathStyle, type MathSvg, type NoFill, type NoteRef, type NumberingInfo, OoxmlDecodedImageLimitError, type OoxmlDecodedImageLimitMetric, OoxmlError, type OoxmlErrorCode, type OoxmlErrorStage, type OoxmlFormat, type OoxmlResourceLimit, OoxmlResourceLimitError, type OoxmlResourceLimitErrorDetails, type OoxmlResourceLimits, type OoxmlResourceMetric, type OoxmlResourceMetrics, type OoxmlResourceMetricsCheckpoint, type OoxmlResourceName, type OoxmlResourcePolicySnapshot, type OoxmlResourceUsageSnapshot, type OoxmlResourceViolation, type PTabRun, type PageBorderEdge, type PageBorders, type PageNumType, type ParaBorderEdge, type ParagraphBorders, type PathCmd, type PatternFill, type RenderPageOptions, type RenderPageToBitmapOptions, type ResolveDocxCommentThreadsOptions, type ResolvedDocxCommentAnchor, type ResolvedDocxCommentThread, type RevisionAnchorGeometryFallback, type RevisionAnchorRange, type RubyAnnotation, type RunRevision, type SecondaryValueAxis, type SectionGeom, type SectionProps, type ShapeFill, type ShapeRun, type ShapeStrokeFill, type ShapeText, type ShapeTextRun, type SolidFill, type SrcRect, type TabStop, type TableBorders, type TblpPr, type TextPath, type TextSelectionContextOptions, TiffDecodeError, type TiffRenderOptions, type TiffRenderer, type TileInfo, type ViewerCommentConnectorOptions, type ViewerCommentConnectorRoute, type ViewerCommentConnectorStroke, type ViewerCommentMessageContext, type ViewerCommentThreadContext, type ViewerContextMenuEvent, type ZoomableViewer, autoResize, buildDocxHighlightLayer, buildDocxTextLayer, isOoxmlDecodedImageLimitError, isTiffDecodeError, noteText, openExternalHyperlink, readDocxTextSelectionContext, resolveCommentAnchorRuns, resolveDocxCommentThreads, resolveRevisionAnchorRuns };

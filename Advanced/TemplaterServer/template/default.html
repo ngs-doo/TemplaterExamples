@@ -1,28 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Templater Server Example</title>
     <link href="static/bootstrap-custom.min.css" rel="stylesheet" />
+    <link href="static/style.css" rel="stylesheet" />
     <script src='js/app.js'></script>
 
     <style type="text/css" media="screen">
         .ace_editor {
-            height: 400px;
+          height : 400px;
         }
-
         .text_editor {
-            height: 400px;
-            width: 100%;
-            font-size: 10px;
-            font-family: monospace;
+          height: 400px;
+          width: 100%;
+          font-size: 10px;
+          font-family: monospace;
         }
-
         .feat-box {
-            margin-top: 20px;
+          margin-top: 20px;
         }
-
         .append-bottom {
-            margin-top: 10px;
+          margin-top: 10px;
+        }
+        .preview-card {
+          border: 1px solid #e3e3e3;
+          border-radius: 6px;
+          padding: 16px 18px;
+          background: #f7f7f9;
+        }
+        .preview-tabs {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          border-bottom: 2px solid #e3e3e3;
+          margin-bottom: 14px;
+        }
+        .preview-tabs-left {
+          display: flex;
+        }
+        .preview-toolbar {
+          display: flex;
+          align-items: center;
+          margin-bottom: -2px;
+        }
+        .preview-toolbar .btn {
+          margin-left: 6px;
+        }
+        .preview-tab {
+          background: none;
+          border: none;
+          border-bottom: 2px solid transparent;
+          margin-bottom: -2px;
+          padding: 8px 16px;
+          font-size: 15px;
+          color: #777;
+          cursor: pointer;
+        }
+        .preview-tab:hover {
+          color: #333;
+        }
+        .preview-tab.active {
+          color: #2c6ecb;
+          border-bottom-color: #2c6ecb;
+          font-weight: 600;
+        }
+        .preview-status {
+          min-height: 20px;
+          margin-bottom: 10px;
+        }
+        .preview-container {
+          display: flex;
+          justify-content: center;
+          background: #808080;
+          border-radius: 4px;
+          padding: 12px;
+          min-height: 120px;
+        }
+        .preview-container canvas {
+          max-width: 100%;
+          height: auto;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+          background: #fff;
+        }
+        .preview-pdf {
+          background: #fff;
+          border-radius: 4px;
+        }
+        .preview-nav {
+          margin-top: 12px;
+          text-align: center;
+        }
+        .preview-page {
+          display: inline-block;
+          margin: 0 12px;
+          min-width: 60px;
+          color: #555;
+        }
+        .preview-nav .btn[disabled] {
+          opacity: 0.4;
+          cursor: not-allowed;
         }
     </style>
 </head>

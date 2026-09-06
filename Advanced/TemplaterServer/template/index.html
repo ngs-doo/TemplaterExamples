@@ -40,14 +40,21 @@
               <button type="button" class="btn btn-primary btn-switch append-bottom" id="toggle-pdf" style="display:none">
                 PDF conversion OFF
               </button>
-              <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-debug" style="display:none">
-                Templater Editor Debug log OFF
-              </button>
               <small class="text-muted" id="toggle-helper" style="display:none;">(toggle for docx and pptx)</small>
               <input type="hidden" name="toPdf" value="false"/>
               <input type="hidden" name="debugLog" value="false"/>
               <input type="hidden" name="pdf" value=""/>
               <input type="hidden" name="template" value="${defaultFilename}"/>
+            </p>
+          </div>
+          <div>
+            <p>
+              <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-debug" style="display:none">
+                Templater Editor Debug log OFF
+              </button>
+              <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-schema" style="display:none">
+                Templater Editor Schema OFF
+              </button>
             </p>
           </div>
           <div>
@@ -70,14 +77,54 @@
         </ul>
         <form id="download_action" action="${downloadUrl}" method="get" accept-charset="UTF-8">
           <input type="hidden" name="withSchema" value="false"/>
-          <button type="button" class="btn btn-danger btn-switch append-bottom" id="toggle-schema" style="display:none; margin-bottom: 6px">
-            Templater Editor Schema OFF
-          </button>
           <button type="submit" class="btn btn-success btn-lg">
             <span id="download-template" class="has-active-template">Download ${defaultFilename}</span>
             <span class="btn-icon"> <i class="fa fa-download"></i></span>
           </button>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="preview-ooxml" style="display:none">
+    <div class="col-sm-12">
+      <div class="preview-card append-top">
+        <div class="preview-tabs" role="tablist">
+          <div class="preview-tabs-left">
+            <button type="button" class="preview-tab active" id="tab-template" data-tab="template">Template</button>
+            <button type="button" class="preview-tab" id="tab-result" data-tab="result" style="display:none">Result</button>
+            <button type="button" class="preview-tab" id="tab-pdf" data-tab="pdf" style="display:none">PDF</button>
+          </div>
+          <div class="preview-toolbar">
+            <button type="button" class="btn btn-sm btn-primary" id="toolbar-download">Download</button>
+            <button type="button" class="btn btn-sm" id="toolbar-print">Print Preview</button>
+          </div>
+        </div>
+
+        <div class="preview-pane" id="pane-template">
+          <div id="template-status" class="preview-status text-muted">Select a template to preview it here.</div>
+          <div id="template-container" class="preview-container"></div>
+          <div id="template-nav" class="preview-nav" style="display:none">
+            <button type="button" class="btn btn-sm" id="template-prev">&larr; Prev</button>
+            <span id="template-page" class="preview-page">1 / 1</span>
+            <button type="button" class="btn btn-sm" id="template-next">Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="preview-pane" id="pane-result" style="display:none">
+          <div id="result-status" class="preview-status text-muted">The created document will appear here.</div>
+          <div id="result-container" class="preview-container"></div>
+          <div id="result-nav" class="preview-nav" style="display:none">
+            <button type="button" class="btn btn-sm" id="result-prev">&larr; Prev</button>
+            <span id="result-page" class="preview-page">1 / 1</span>
+            <button type="button" class="btn btn-sm" id="result-next">Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="preview-pane" id="pane-pdf" style="display:none">
+          <div id="pdf-status" class="preview-status text-muted">The server-side generated PDF will appear here.</div>
+          <div id="pdf-container" class="preview-container"></div>
+        </div>
       </div>
     </div>
   </div>

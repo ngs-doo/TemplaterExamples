@@ -1,0 +1,155 @@
+{
+  "name": "@silurus/ooxml",
+  "version": "0.85.2",
+  "description": "Browser-based OOXML viewer (docx/xlsx/pptx) — Rust/WASM parser + Canvas renderer",
+  "license": "MIT",
+  "author": "Yuki Yokotani <silurus.dev@gmail.com>",
+  "keywords": [
+    "ooxml",
+    "docx",
+    "xlsx",
+    "pptx",
+    "word",
+    "excel",
+    "powerpoint",
+    "office-viewer",
+    "office",
+    "viewer",
+    "canvas",
+    "wasm",
+    "rust"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukiyokotani/office-open-xml-viewer.git"
+  },
+  "homepage": "https://ooxml.silurus.dev",
+  "bugs": {
+    "url": "https://github.com/yukiyokotani/office-open-xml-viewer/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./docx": {
+      "types": "./dist/types/docx.d.ts",
+      "import": "./dist/docx.mjs",
+      "default": "./dist/docx.mjs"
+    },
+    "./xlsx": {
+      "types": "./dist/types/xlsx.d.ts",
+      "import": "./dist/xlsx.mjs",
+      "default": "./dist/xlsx.mjs"
+    },
+    "./pptx": {
+      "types": "./dist/types/pptx.d.ts",
+      "import": "./dist/pptx.mjs",
+      "default": "./dist/pptx.mjs"
+    },
+    "./math": {
+      "types": "./dist/types/math.d.ts",
+      "import": "./dist/math.mjs",
+      "default": "./dist/math.mjs"
+    },
+    "./three-d": {
+      "types": "./dist/types/three-d.d.ts",
+      "import": "./dist/three-d.mjs",
+      "default": "./dist/three-d.mjs"
+    },
+    "./region-map": {
+      "types": "./dist/types/region-map.d.ts",
+      "import": "./dist/region-map.mjs",
+      "default": "./dist/region-map.mjs"
+    },
+    "./chart-ex": {
+      "types": "./dist/types/chart-ex.d.ts",
+      "import": "./dist/chart-ex.mjs",
+      "default": "./dist/chart-ex.mjs"
+    },
+    "./tiff": {
+      "types": "./dist/types/tiff.d.ts",
+      "import": "./dist/tiff.mjs",
+      "default": "./dist/tiff.mjs"
+    },
+    "./node": {
+      "types": "./dist/types/node.d.ts",
+      "import": "./dist/node.mjs",
+      "default": "./dist/node.mjs"
+    }
+  },
+  "devDependencies": {
+    "@ast-grep/cli": "^0.43.0",
+    "@playwright/test": "^1.59.1",
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/html-vite": "^10.3.5",
+    "@types/node": "^25.6.0",
+    "mathjax": "^3.2.2",
+    "pngjs": "^7.0.0",
+    "rolldown-plugin-dts": "^0.28.0",
+    "rolldown": "^1.2.0",
+    "storybook": "^10.3.5",
+    "typescript": "^7.0.2",
+    "typescript-compiler-api": "npm:@typescript/typescript6@^6.0.2",
+    "vite": "^8.0.8",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
+    "vitest": "^4.1.4"
+  },
+  "scripts": {
+    "build": "vite build && node scripts/bundle-declarations.mjs",
+    "build:runtime": "vite build --mode runtime",
+    "build:packages": "pnpm -r build",
+    "build:packages:ci": "pnpm --filter @silurus/ooxml-docx --filter @silurus/ooxml-pptx --filter @silurus/ooxml-xlsx --filter @silurus/ooxml-markdown --filter @silurus/ooxml-site -r --workspace-concurrency=1 build:ci",
+    "typecheck": "tsc --build && pnpm --filter @silurus/ooxml-markdown --filter @silurus/ooxml-node --filter ./packages/vscode-extension typecheck",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build:wasm": "pnpm --filter @silurus/ooxml-docx wasm && pnpm --filter @silurus/ooxml-xlsx wasm && pnpm --filter @silurus/ooxml-pptx wasm",
+    "vrt": "pnpm -r --workspace-concurrency=1 vrt",
+    "vrt:snapshot": "pnpm -r --workspace-concurrency=1 vrt:snapshot",
+    "vrt:private": "pnpm -r --workspace-concurrency=1 --if-present vrt:private",
+    "vrt:private:snapshot": "pnpm -r --workspace-concurrency=1 --if-present vrt:private:snapshot",
+    "vrt:fidelity": "pnpm -r --workspace-concurrency=1 vrt:fidelity",
+    "vrt:worker": "pnpm --workspace-concurrency=1 --filter @silurus/ooxml-pptx --filter @silurus/ooxml-docx --filter @silurus/ooxml-xlsx vrt:worker",
+    "smoke": "playwright test --config tests/smoke/playwright.config.ts layouts raster-decode",
+    "test:site-runtime": "playwright test --config tests/site-dist/playwright.config.ts",
+    "test": "vitest run && node --test tests/visual/private-corpus.test.mjs",
+    "bench:layout": "vitest bench --run packages/docx/src/layout/layout.bench.ts",
+    "bench:progressive": "OOXML_DOCX_PROGRESSIVE_BENCH=1 vitest run --disableConsoleIntercept packages/docx/src/layout/progressive-timing.test.ts",
+    "check:no-inline-wasm": "node scripts/check-no-inline-wasm.mjs dist",
+    "check:production-render-workers": "node scripts/check-production-render-workers.mjs dist",
+    "test:production-render-workers": "playwright test --config tests/worker-dist/playwright.config.ts",
+    "check:optional-three-d": "node scripts/check-optional-three-d.mjs dist",
+    "check:optional-region-map": "node scripts/check-optional-region-map.mjs dist",
+    "check:optional-chart-ex": "node scripts/check-optional-chart-ex.mjs dist",
+    "check:optional-tiff": "node scripts/check-optional-tiff.mjs dist",
+    "lint": "ast-grep scan",
+    "lint:test": "ast-grep test --skip-snapshot-tests",
+    "test:docx-boundaries": "node --test scripts/check-docx-layout-boundaries.test.mjs",
+    "test:docx-compatibility": "node --test scripts/check-docx-compatibility-evidence.test.mjs",
+    "test:docx-public-api": "node --test scripts/check-public-api.test.mjs",
+    "generate:resource-policy": "node scripts/generate-ooxml-resource-policy.mjs --write",
+    "check:resource-policy": "node scripts/generate-ooxml-resource-policy.mjs",
+    "test:resource-policy": "node --test scripts/generate-ooxml-resource-policy.test.mjs",
+    "measure:archive-entries": "node scripts/measure-ooxml-archive-entries.mjs",
+    "check:public-api": "pnpm build && pnpm check:public-api:built",
+    "check:public-api:built": "node scripts/check-public-api.mjs && node scripts/check-public-api.mjs --entry xlsx.d.ts --baseline packages/xlsx/api/public-api-baseline.d.ts --label XLSX && node scripts/check-public-api.mjs --entry pptx.d.ts --baseline packages/pptx/api/public-api-baseline.d.ts --label PPTX && pnpm check:viewer-api-symmetry",
+    "check:viewer-api-symmetry": "node scripts/check-viewer-api-symmetry.mjs",
+    "check:public-type-exports": "node scripts/check-public-type-exports.mjs",
+    "check:docx-compatibility": "node scripts/check-docx-compatibility-evidence.mjs",
+    "test:docx-package-build": "node --test scripts/check-docx-package-build.test.mjs"
+  }
+}

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NGS.Templater;
@@ -30,16 +31,19 @@ namespace TemplaterServer
 
 		private readonly SharedResource SharedResource;
 		private readonly Dictionary<string, FileInfo> ResourceFiles = new Dictionary<string, FileInfo>();
+		private readonly DirectoryInfo OoxmlPath;
 
 		public TemplaterController(SharedResource sharedResource)
 		{
 			this.SharedResource = sharedResource;
 			var resourcesPath = new DirectoryInfo("resources");
+			var startPathLen = resourcesPath.FullName.Length + 1;
 			foreach(var d in resourcesPath.GetDirectories())
 			{
-				foreach (var f in d.GetFiles())
-					ResourceFiles[d.Name.ToLowerInvariant() + "/" + f.Name.ToLowerInvariant()] = f;
+				foreach (var f in d.GetFiles("*.*", SearchOption.AllDirectories))
+					ResourceFiles[f.FullName.Substring(startPathLen).Replace('\\', '/').ToLowerInvariant()] = f;
 			}
+			OoxmlPath = new DirectoryInfo(resourcesPath.FullName + "/ooxml");
 		}
 
 		static object JavaFormat(object value, string metadata)
@@ -78,13 +82,35 @@ namespace TemplaterServer
 			return File(Encoding.UTF8.GetBytes(index), "text/html;charset=UTF-8");
 		}
 
+		private IActionResult ReturnFile(HttpRequest request, FileInfo file)
+		{
+			var etag = "\"" + file.LastWriteTime.Ticks.ToString() + "\"";
+			if (Request.Headers.IfNoneMatch == etag)
+    			return StatusCode(304);
+			Response.Headers.CacheControl = "private, no-cache";
+			Response.Headers.ETag = etag;
+			return PhysicalFile(file.FullName, MimeType(file.Name));
+		}
+
 		[HttpGet("static/{file}")]
 		public IActionResult Static(string file)
 		{
 			var name = "static/" + file.ToLowerInvariant().Trim();
 			FileInfo fi;
 			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
-			return PhysicalFile(fi.FullName, file.EndsWith(".css") ? "text/css" : "application/javascript");
+			return ReturnFile(Request, fi);
+		}
+
+		[HttpGet("ooxml/{**file}")]
+		public IActionResult Ooxml(string file)
+		{
+			if (string.IsNullOrWhiteSpace(file) || file.Contains(".."))
+				return BadRequest();
+			var name = "ooxml/" + file.ToLowerInvariant().Trim();
+			FileInfo fi;
+			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
+			if (!fi.FullName.StartsWith(OoxmlPath.FullName)) return BadRequest();
+			return ReturnFile(Request, fi);
 		}
 
 		[HttpGet("js/{file}")]
@@ -94,7 +120,7 @@ namespace TemplaterServer
 			var name = "js/" + file.ToLowerInvariant().Trim();
 			FileInfo fi;
 			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
-			return PhysicalFile(fi.FullName, "application/javascript");
+			return ReturnFile(Request, fi);
 		}
 
 		[HttpGet("examples/{file}")]
@@ -103,7 +129,7 @@ namespace TemplaterServer
 			var name = "examples/" + file.ToLowerInvariant().Trim();
 			FileInfo fi;
 			if (!ResourceFiles.TryGetValue(name, out fi) || !fi.Exists) return NotFound();
-			return PhysicalFile(fi.FullName, "text/json");
+			return ReturnFile(Request, fi);
 		}
 
 		[HttpGet("templates/{file}")]
@@ -128,11 +154,25 @@ namespace TemplaterServer
 				}
 				return File(ms, MimeType(file), file);
 			}
-			return PhysicalFile(fi.FullName, MimeType(file));
+			return ReturnFile(Request, fi);
 		}
 
 		private static string MimeType(string file)
 		{
+			if (file.EndsWith(".css"))
+				return "text/css";
+			if (file.EndsWith(".mjs"))
+				return "text/javascript";
+			if (file.EndsWith(".wasm"))
+				return "application/wasm";
+			if (file.EndsWith(".html"))
+				return "text/html;charset=UTF-8";
+			if (file.EndsWith(".js"))
+				return "application/javascript";
+			if (file.EndsWith(".json"))
+				return "text/json";
+			if (file.EndsWith(".pdf"))
+			    return "application/pdf";
 			if (file.EndsWith(".docx"))
 			    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 			if (file.EndsWith(".xlsx"))
