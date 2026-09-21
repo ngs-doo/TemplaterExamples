@@ -85,10 +85,10 @@ namespace TemplaterServer
 		private IActionResult ReturnFile(HttpRequest request, FileInfo file)
 		{
 			var etag = "\"" + file.LastWriteTime.Ticks.ToString() + "\"";
-			if (Request.Headers.IfNoneMatch == etag)
-    			return StatusCode(304);
-			Response.Headers.CacheControl = "private, no-cache";
-			Response.Headers.ETag = etag;
+			if (Request.Headers.ContainsKey("If-None-Match") && Request.Headers["If-None-Match"].ToString() == etag)
+				return StatusCode(304);
+			Response.Headers["Cache-Control"] = "private, no-cache";
+			Response.Headers["ETag"] = etag;
 			return PhysicalFile(file.FullName, MimeType(file.Name));
 		}
 
